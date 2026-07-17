@@ -1,0 +1,100 @@
+{%- comment -%}
+  S3 — Transformation carousel. Square before/after photo per slide with
+  a short quote overlaid (reference: PDF p.2, "Get the highlights.").
+  Blocks are duplicable for as many transformations as exist; images
+  ship as labeled placeholders until real UGC lands.
+{%- endcomment -%}
+
+<section class="section section--flush section--scheme-white" style="padding-block: var(--section-pad);">
+  <div class="container section-header" data-reveal>
+    <h2 class="h2">{{ section.settings.headline }}</h2>
+  </div>
+
+  {%- capture slides -%}
+    {%- for block in section.blocks -%}
+      <div class="carousel__slide" {{ block.shopify_attributes }}>
+        <figure class="testimonial-card">
+          {%- render 'media-placeholder',
+            label: 'transformation_photo_before_after',
+            aspect_mobile: '1 / 1',
+            image: block.settings.image
+          -%}
+          <figcaption class="testimonial-card__overlay">
+            <blockquote class="testimonial-card__quote">&ldquo;{{ block.settings.quote }}&rdquo;</blockquote>
+            <p class="testimonial-card__author">{{ block.settings.author }}</p>
+          </figcaption>
+        </figure>
+      </div>
+    {%- endfor -%}
+  {%- endcapture -%}
+
+  {%- render 'carousel', slides: slides, id: section.id, label: section.settings.headline -%}
+</section>
+
+{% schema %}
+{
+  "name": "Testimonial carousel",
+  "settings": [
+    {
+      "type": "text",
+      "id": "headline",
+      "label": "Headline",
+      "default": "Real routines. Real results."
+    }
+  ],
+  "blocks": [
+    {
+      "type": "slide",
+      "name": "Testimonial",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Before/after photo (square)"
+        },
+        {
+          "type": "text",
+          "id": "quote",
+          "label": "Quote",
+          "default": "I stopped snacking without even trying."
+        },
+        {
+          "type": "text",
+          "id": "author",
+          "label": "Attribution",
+          "default": "Placeholder, 34"
+        }
+      ]
+    }
+  ],
+  "max_blocks": 12,
+  "presets": [
+    {
+      "name": "Testimonial carousel",
+      "blocks": [
+        {
+          "type": "slide",
+          "settings": {
+            "quote": "I stopped snacking without even trying.",
+            "author": "Placeholder, 34"
+          }
+        },
+        {
+          "type": "slide",
+          "settings": {
+            "quote": "Two drops in my coffee and the cravings just... quiet down.",
+            "author": "Placeholder, 41"
+          }
+        },
+        {
+          "type": "slide",
+          "settings": {
+            "quote": "Didn't change anything else. Just added this.",
+            "author": "Placeholder, 29"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

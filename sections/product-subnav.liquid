@@ -1,0 +1,46 @@
+{%- comment -%}
+  Apple-style scroll-aware local nav: hidden over the hero, slides in
+  once the hero scrolls away (scroll-fx.js watches the hero sentinel).
+  Gold button anchors back to the native buy box.
+{%- endcomment -%}
+
+{%- liquid
+  if section.settings.product != blank
+    assign product = section.settings.product
+  endif
+-%}
+
+<nav class="product-subnav" data-subnav aria-label="Product">
+  <div class="container product-subnav__inner">
+    <span class="product-subnav__title">
+      {%- if product != blank -%}{{ product.title }}{%- else -%}{{ shop.name }}{%- endif -%}
+    </span>
+    <span class="product-subnav__meta">
+      {%- if product != blank -%}
+        <span class="product-subnav__price">{{ product.selected_or_first_available_variant.price | money }}</span>
+      {%- endif -%}
+      <a class="btn btn--gold" href="#offer">{{ section.settings.cta_label }}</a>
+    </span>
+  </div>
+</nav>
+
+{% schema %}
+{
+  "name": "Product subnav",
+  "settings": [
+    {
+      "type": "product",
+      "id": "product",
+      "label": "Product",
+      "info": "On product pages this defaults to the current product."
+    },
+    {
+      "type": "text",
+      "id": "cta_label",
+      "label": "Button label",
+      "default": "Buy"
+    }
+  ],
+  "presets": [{ "name": "Product subnav" }]
+}
+{% endschema %}

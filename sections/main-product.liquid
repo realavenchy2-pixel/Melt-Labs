@@ -1,0 +1,61 @@
+{%- comment -%}
+  Default product template body: title, price, native buy form.
+  The Special Water lander uses templates/product.lander.json instead.
+{%- endcomment -%}
+
+<div class="page-shell">
+  <div class="container">
+    <div class="buy-box__grid">
+      <div class="buy-box__media">
+        {%- if product.featured_image -%}
+          {%- render 'responsive-image', image: product.featured_image, sizes: '(min-width: 900px) 50vw, 100vw', class: 'media-slot--rounded' -%}
+        {%- else -%}
+          {%- render 'media-placeholder', label: 'product_photo', aspect_mobile: '1 / 1' -%}
+        {%- endif -%}
+      </div>
+
+      <div>
+        <h1 class="buy-box__title">{{ product.title }}</h1>
+        <div class="buy-box__price">
+          <span>{{ product.selected_or_first_available_variant.price | money }}</span>
+          {%- if product.selected_or_first_available_variant.compare_at_price > product.selected_or_first_available_variant.price -%}
+            <s>{{ product.selected_or_first_available_variant.compare_at_price | money }}</s>
+          {%- endif -%}
+        </div>
+
+        {%- form 'product', product, class: 'buy-box__form' -%}
+          {%- unless product.has_only_default_variant -%}
+            {%- for option in product.options_with_values -%}
+              <div class="buy-box__field">
+                <label for="opt-{{ section.id }}-{{ forloop.index0 }}">{{ option.name }}</label>
+                <select id="opt-{{ section.id }}-{{ forloop.index0 }}" name="options[{{ option.name | escape }}]">
+                  {%- for value in option.values -%}
+                    <option value="{{ value | escape }}" {% if option.selected_value == value %}selected{% endif %}>{{ value }}</option>
+                  {%- endfor -%}
+                </select>
+              </div>
+            {%- endfor -%}
+          {%- endunless -%}
+
+          <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
+
+          <div class="buy-box__actions">
+            <button type="submit" name="add" class="btn btn--gold btn--full" {% unless product.selected_or_first_available_variant.available %}disabled{% endunless %}>
+              {%- if product.selected_or_first_available_variant.available %}Add to cart{% else %}Sold out{% endif -%}
+            </button>
+            {{ form | payment_button }}
+          </div>
+        {%- endform -%}
+
+        <div class="rte" style="margin-top: 1.5rem;">{{ product.description }}</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Product",
+  "settings": []
+}
+{% endschema %}

@@ -1,0 +1,107 @@
+{%- comment -%}
+  S10 — Purity & testing headline plus About Us card carousel
+  (reference: PDF p.20-21, Apple's "Our values lead the way." cards).
+{%- endcomment -%}
+
+<section class="section section--flush section--scheme-tint" style="padding-block: var(--section-pad);">
+  <div class="container section-header" data-reveal>
+    <h2 class="h2">{{ section.settings.headline }}</h2>
+    {%- if section.settings.body != blank -%}
+      <p class="lead">{{ section.settings.body }}</p>
+    {%- endif -%}
+  </div>
+
+  {%- capture slides -%}
+    {%- for block in section.blocks -%}
+      <div class="carousel__slide" {{ block.shopify_attributes }}>
+        <article class="value-card">
+          <span class="value-card__icon">{%- render 'icon', name: block.settings.icon -%}</span>
+          <h3 class="value-card__title">{{ block.settings.title }}</h3>
+          <p class="value-card__text">{{ block.settings.text }}</p>
+        </article>
+      </div>
+    {%- endfor -%}
+  {%- endcapture -%}
+
+  {%- render 'carousel', slides: slides, id: section.id, label: section.settings.headline -%}
+</section>
+
+{% schema %}
+{
+  "name": "Values carousel",
+  "settings": [
+    {
+      "type": "text",
+      "id": "headline",
+      "label": "Headline",
+      "default": "Tested. Verified. Trusted."
+    },
+    {
+      "type": "textarea",
+      "id": "body",
+      "label": "Body",
+      "default": "Every batch is third-party tested for purity and potency before it ships."
+    }
+  ],
+  "blocks": [
+    {
+      "type": "card",
+      "name": "Value card",
+      "settings": [
+        {
+          "type": "select",
+          "id": "icon",
+          "label": "Icon",
+          "options": [
+            { "value": "flask", "label": "Flask" },
+            { "value": "shield", "label": "Shield" },
+            { "value": "heart", "label": "Heart" },
+            { "value": "leaf", "label": "Leaf" },
+            { "value": "sparkle", "label": "Sparkle" }
+          ],
+          "default": "shield"
+        },
+        { "type": "text", "id": "title", "label": "Title", "default": "Our Standards" },
+        {
+          "type": "textarea",
+          "id": "text",
+          "label": "Text",
+          "default": "Sourcing and testing commitments we hold every batch to."
+        }
+      ]
+    }
+  ],
+  "max_blocks": 6,
+  "presets": [
+    {
+      "name": "Values carousel",
+      "blocks": [
+        {
+          "type": "card",
+          "settings": {
+            "icon": "flask",
+            "title": "Our Standards",
+            "text": "Botanicals sourced for potency, then third-party tested before a single bottle is filled."
+          }
+        },
+        {
+          "type": "card",
+          "settings": {
+            "icon": "heart",
+            "title": "Our Mission",
+            "text": "Melt Labs exists to make sustainable weight control feel effortless, not clinical."
+          }
+        },
+        {
+          "type": "card",
+          "settings": {
+            "icon": "shield",
+            "title": "Our Promise",
+            "text": "Full transparency in formulation. Every ingredient and its job, on the label and on this page."
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,91 @@
+{%- comment -%}
+  S7 — Who this is for (reference: PDF p.13, dark icon + short-line
+  stack). Icon plus one line per block, no paragraphs.
+{%- endcomment -%}
+
+{%- assign scheme = section.settings.scheme | default: 'ink' -%}
+
+<section class="section section--scheme-{{ scheme }}">
+  <div class="container">
+    <div class="section-header section-header--center" data-reveal>
+      <h2 class="h2">{{ section.settings.headline }}</h2>
+    </div>
+
+    <ul class="icon-list">
+      {%- for block in section.blocks -%}
+        <li class="icon-list__item" data-reveal style="--reveal-i: {{ forloop.index0 | modulo: 6 }};" {{ block.shopify_attributes }}>
+          <span class="icon-list__icon">{%- render 'icon', name: block.settings.icon -%}</span>
+          <span class="icon-list__text">{{ block.settings.text }}</span>
+        </li>
+      {%- endfor -%}
+    </ul>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Icon list",
+  "settings": [
+    {
+      "type": "text",
+      "id": "headline",
+      "label": "Headline",
+      "default": "Who this is for"
+    },
+    {
+      "type": "select",
+      "id": "scheme",
+      "label": "Color scheme",
+      "options": [
+        { "value": "white", "label": "White" },
+        { "value": "tint", "label": "Pale blue" },
+        { "value": "ink", "label": "Near-black" }
+      ],
+      "default": "ink"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "item",
+      "name": "Item",
+      "settings": [
+        {
+          "type": "select",
+          "id": "icon",
+          "label": "Icon",
+          "options": [
+            { "value": "scale", "label": "Scale" },
+            { "value": "leaf", "label": "Leaf" },
+            { "value": "muscle", "label": "Muscle" },
+            { "value": "clock", "label": "Clock" },
+            { "value": "droplet", "label": "Droplet" },
+            { "value": "shield", "label": "Shield" },
+            { "value": "heart", "label": "Heart" },
+            { "value": "check", "label": "Check" },
+            { "value": "sparkle", "label": "Sparkle" }
+          ],
+          "default": "check"
+        },
+        { "type": "text", "id": "text", "label": "Text", "default": "People trying to lose weight" }
+      ]
+    }
+  ],
+  "max_blocks": 8,
+  "presets": [
+    {
+      "name": "Icon list",
+      "blocks": [
+        { "type": "item", "settings": { "icon": "scale", "text": "People trying to lose weight" } },
+        {
+          "type": "item",
+          "settings": { "icon": "clock", "text": "People looking for a long-term solution, not a quick fix" }
+        },
+        { "type": "item", "settings": { "icon": "leaf", "text": "Natural weight loss, no injections" } },
+        { "type": "item", "settings": { "icon": "muscle", "text": "Sustainable, steady, muscle-preserving" } },
+        { "type": "item", "settings": { "icon": "droplet", "text": "Easy, low-effort weight control" } },
+        { "type": "item", "settings": { "icon": "check", "text": "People who don't want to worry about it" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

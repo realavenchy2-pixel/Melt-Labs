@@ -1,0 +1,11 @@
+<div class="page-shell"><div class="container container--narrow">
+  <h1 class="h2 page-shell__title">Addresses</h1>
+  {% paginate customer.addresses by 10 %}
+    {% for address in customer.addresses %}
+      <div class="cart-line"><span>{{ address | format_address }}</span></div>
+    {% else %}
+      <p>No saved addresses.</p>
+    {% endfor %}
+  {% endpaginate %}
+  <p style="margin-top: 1.5rem;"><a href="{{ routes.account_url }}">Back to account</a></p>
+</div></div>

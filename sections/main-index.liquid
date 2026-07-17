@@ -1,0 +1,35 @@
+{%- comment -%}
+  Homepage placeholder. The real Apple-style brand hub (brief §3) is a
+  later phase; this keeps the theme valid and points visitors at the
+  lander in the meantime.
+{%- endcomment -%}
+
+<div class="page-shell" style="min-height: 60svh; display: flex; align-items: center;">
+  <div class="container" style="text-align: center;">
+    <h1 class="h1">{{ section.settings.headline }}</h1>
+    {%- if section.settings.subhead != blank -%}
+      <p class="lead" style="margin: 1.25rem auto 2rem;">{{ section.settings.subhead }}</p>
+    {%- endif -%}
+    {%- if section.settings.cta_link != blank -%}
+      <a class="btn btn--gold" href="{{ section.settings.cta_link }}">{{ section.settings.cta_label }}</a>
+    {%- endif -%}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Index placeholder",
+  "settings": [
+    { "type": "text", "id": "headline", "label": "Headline", "default": "Melt Labs" },
+    {
+      "type": "text",
+      "id": "subhead",
+      "label": "Subhead",
+      "default": "Botanical formulas for effortless, sustainable weight control."
+    },
+    { "type": "url", "id": "cta_link", "label": "Button link" },
+    { "type": "text", "id": "cta_label", "label": "Button label", "default": "Shop Special Water" }
+  ],
+  "presets": [{ "name": "Index placeholder" }]
+}
+{% endschema %}

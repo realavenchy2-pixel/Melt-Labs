@@ -1,0 +1,21 @@
+<div class="page-shell"><div class="container container--narrow">
+  <h1 class="h2 page-shell__title">Log in</h1>
+  {% form 'customer_login', class: 'form-stack' %}
+    {{ form.errors | default_errors }}
+    <label for="customer-email">Email</label>
+    <input type="email" id="customer-email" name="customer[email]" autocomplete="email" required>
+    <label for="customer-password">Password</label>
+    <input type="password" id="customer-password" name="customer[password]" autocomplete="current-password" required>
+    <button type="submit" class="btn btn--gold">Log in</button>
+    <p><a href="{{ routes.account_register_url }}">Create account</a> &middot; <a href="#recover">Forgot password?</a></p>
+  {% endform %}
+  <div id="recover" style="margin-top: 3rem;">
+    <h2 class="h3" style="margin-bottom: 1rem;">Reset password</h2>
+    {% form 'recover_customer_password', class: 'form-stack' %}
+      {{ form.errors | default_errors }}
+      <label for="recover-email">Email</label>
+      <input type="email" id="recover-email" name="email" autocomplete="email" required>
+      <button type="submit" class="btn btn--ink">Send reset link</button>
+    {% endform %}
+  </div>
+</div></div>

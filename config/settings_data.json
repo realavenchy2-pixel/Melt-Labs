@@ -1,0 +1,15 @@
+{
+  "current": {
+    "color_primary": "#00AEEF",
+    "color_gradient_start": "#00AEEF",
+    "color_gradient_end": "#0095D9",
+    "color_ink": "#161616",
+    "color_tint": "#EAF7FC",
+    "color_bg": "#FFFFFF",
+    "color_cta": "#FBB81C",
+    "color_cta_hover": "#E9A912",
+    "font_heading": "poppins_n8",
+    "font_body": "poppins_n4",
+    "logo_width": 120
+  }
+}

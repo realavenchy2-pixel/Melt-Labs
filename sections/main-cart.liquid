@@ -1,0 +1,44 @@
+<div class="page-shell">
+  <div class="container container--narrow">
+    <h1 class="h2 page-shell__title">Your cart</h1>
+
+    {%- if cart.item_count > 0 -%}
+      {%- form 'cart', cart -%}
+        {%- for item in cart.items -%}
+          <div class="cart-line">
+            <div>
+              <p><strong>{{ item.product.title }}</strong></p>
+              {%- unless item.product.has_only_default_variant -%}
+                <p>{{ item.variant.title }}</p>
+              {%- endunless -%}
+              <p>
+                Qty: {{ item.quantity }} &middot;
+                <a href="{{ item.url_to_remove }}">Remove</a>
+              </p>
+            </div>
+            <p>{{ item.final_line_price | money }}</p>
+          </div>
+        {%- endfor -%}
+
+        <div class="cart-line">
+          <p><strong>Subtotal</strong></p>
+          <p><strong>{{ cart.total_price | money }}</strong></p>
+        </div>
+
+        <div class="buy-box__actions" style="margin-top: 1.5rem;">
+          <button type="submit" name="checkout" class="btn btn--gold btn--full">Check out</button>
+        </div>
+      {%- endform -%}
+    {%- else -%}
+      <p class="lead">Your cart is empty.</p>
+      <p style="margin-top: 1.5rem;"><a class="btn btn--ink" href="{{ routes.all_products_collection_url }}">Continue shopping</a></p>
+    {%- endif -%}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Cart",
+  "settings": []
+}
+{% endschema %}

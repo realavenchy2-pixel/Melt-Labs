@@ -259,6 +259,9 @@ h1, h2, h3, .h1, .h2, .h3 {
 .hero__media video, .hero__media img {
   position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover;
 }
+/* Placeholder label sits in the hero's upper half so it never collides
+   with the copy anchored to the bottom */
+.hero__media .media-slot__label { justify-content: flex-start; padding-top: 22svh; border: 0; }
 .hero__scrim {
   position: absolute;
   inset: 0;

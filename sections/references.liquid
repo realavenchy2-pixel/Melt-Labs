@@ -1,0 +1,132 @@
+{%- comment -%}
+  S11 — Scientific references, organized by ingredient (reference: PDF
+  p.22 fine-print treatment). Honest-framing intro is a setting; groups
+  are blocks with one citation per line. In-house stats are attributed
+  separately and never to third-party sources.
+{%- endcomment -%}
+
+<section class="section section--scheme-white references">
+  <div class="container container--narrow">
+    <div class="section-header">
+      <h2 class="h3">{{ section.settings.headline }}</h2>
+    </div>
+
+    {%- if section.settings.intro != blank -%}
+      <p class="references__intro">{{ section.settings.intro }}</p>
+    {%- endif -%}
+
+    {%- for block in section.blocks -%}
+      <div class="references__group" {{ block.shopify_attributes }}>
+        <h3 class="references__group-title">{{ block.settings.title }}</h3>
+        <ul class="references__list">
+          {%- assign citations = block.settings.citations | newline_to_br | split: '<br />' -%}
+          {%- for citation in citations -%}
+            {%- assign trimmed = citation | strip -%}
+            {%- if trimmed != blank -%}
+              <li>{{ trimmed }}</li>
+            {%- endif -%}
+          {%- endfor -%}
+        </ul>
+      </div>
+    {%- endfor -%}
+
+    {%- if section.settings.disclaimer != blank -%}
+      <p class="references__disclaimer">{{ section.settings.disclaimer }}</p>
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "References",
+  "settings": [
+    {
+      "type": "text",
+      "id": "headline",
+      "label": "Headline",
+      "default": "Scientific references"
+    },
+    {
+      "type": "textarea",
+      "id": "intro",
+      "label": "Honest-framing intro",
+      "default": "Research strength varies by ingredient. Cinnamomum cassia and green tea catechins carry the strongest human clinical support; bitter melon evidence is mixed across trials. Claims on this page are calibrated to what the research supports."
+    },
+    {
+      "type": "textarea",
+      "id": "disclaimer",
+      "label": "Disclaimer",
+      "default": "In-house study statistics are based on our own study; individual results may vary. These statements have not been evaluated by the Food and Drug Administration. This product is not intended to diagnose, treat, cure, or prevent any disease."
+    }
+  ],
+  "blocks": [
+    {
+      "type": "group",
+      "name": "Ingredient group",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Group title",
+          "default": "Cinnamomum cassia: blood sugar and insulin sensitivity"
+        },
+        {
+          "type": "textarea",
+          "id": "citations",
+          "label": "Citations (one per line)"
+        }
+      ]
+    }
+  ],
+  "max_blocks": 10,
+  "presets": [
+    {
+      "name": "References",
+      "blocks": [
+        {
+          "type": "group",
+          "settings": {
+            "title": "Cinnamomum cassia: blood sugar and insulin sensitivity",
+            "citations": "Wickenberg J, et al. \"Cassia cinnamon does not change the insulin sensitivity or the liver enzymes in subjects with impaired glucose tolerance.\" Nutrition Journal, 2014.\nAnderson RA, et al. \"Cassia Cinnamon Supplementation Reduces Peak Blood Glucose Responses.\" Journal of the American College of Nutrition, 2015. Found reduced peak post-meal glucose response.\n\"Mechanistic and clinical insights into the antidiabetic potential of Cinnamomum cassia.\" ScienceDirect review, 2025. Mechanism review on insulin secretion and sensitivity via cinnamaldehyde."
+          }
+        },
+        {
+          "type": "group",
+          "settings": {
+            "title": "Japanese Knotweed (Polygonum cuspidatum): resveratrol and metabolic health",
+            "citations": "\"Resveratrol and cardiovascular health.\" ScienceDirect, 2014. Trans-resveratrol sourced from P. cuspidatum; cardiovascular and metabolic risk reduction.\n\"A Comparative Evaluation of the Antioxidant Ability of Polygonum cuspidatum Extracts with That of Resveratrol Itself.\" MDPI, 2024. Antioxidant activity confirmation."
+          }
+        },
+        {
+          "type": "group",
+          "settings": {
+            "title": "Bitter Melon (Momordica charantia): glucose metabolism",
+            "citations": "Kosin University (Korea): 12-week randomized controlled trial on prediabetic participants. Bitter melon extract reduced post-OGTT blood glucose via suppressed glucagon response. NCBI/PMC, 2023.\nNote: a 2024 Frontiers in Nutrition systematic review and meta-analysis of 9 pooled RCTs found mixed, non-significant results; the literature is genuinely contradictory, so on-page claims stay measured."
+          }
+        },
+        {
+          "type": "group",
+          "settings": {
+            "title": "Turmeric (Curcuma longa): inflammation and metabolic support",
+            "citations": "\"Effects of dietary polyphenol curcumin supplementation on metabolic, inflammatory, and oxidative stress indices.\" Frontiers in Endocrinology, systematic review and meta-analysis, 2023.\n\"Targeting Inflammation-Induced Obesity and Metabolic Diseases by Curcumin and Other Nutraceuticals.\" PMC. Mechanism review on adipocyte and pancreatic interaction."
+          }
+        },
+        {
+          "type": "group",
+          "settings": {
+            "title": "Licorice Root: cortisol and adrenal support",
+            "citations": "Restorative Medicine Journal: review on Glycyrrhiza's inhibition of 11-beta-hydroxysteroid dehydrogenase, the enzyme that breaks down active cortisol. Mechanism for supporting cortisol availability."
+          }
+        },
+        {
+          "type": "group",
+          "settings": {
+            "title": "Matcha (EGCG): thermogenesis",
+            "citations": "Hursel R, et al. \"The effects of catechin rich teas and caffeine on energy expenditure and fat oxidation: a meta-analysis.\" Obesity Reviews, 2011.\n\"Effect of Acute and Chronic Dietary Supplementation with Green Tea Catechins on Resting Metabolic Rate, Energy Expenditure and Respiratory Quotient.\" PMC systematic review, 2021. 15 studies, 499 participants."
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

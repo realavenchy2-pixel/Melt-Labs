@@ -1,0 +1,79 @@
+{%- comment -%}
+  S1 — Hero. Full-bleed autoplay video (placeholder until final asset),
+  scrim for legibility, gold CTA anchors to the offer block below.
+  The sentinel div lets scroll-fx.js show the product subnav once the
+  hero scrolls away.
+{%- endcomment -%}
+
+<div data-subnav-sentinel></div>
+
+<section class="hero">
+  <div class="hero__media">
+    {%- render 'media-placeholder',
+      label: 'hero_autoplay_video',
+      aspect_mobile: '9 / 16',
+      aspect_desktop: '16 / 9',
+      video: section.settings.video,
+      image: section.settings.fallback_image,
+      eager: true
+    -%}
+    <div class="hero__scrim" aria-hidden="true"></div>
+  </div>
+
+  <div class="container hero__content">
+    {%- if section.settings.eyebrow != blank -%}
+      <span class="eyebrow">{{ section.settings.eyebrow }}</span>
+    {%- endif -%}
+
+    <h1 class="hero__headline">{{ section.settings.headline }}</h1>
+
+    {%- if section.settings.subhead != blank -%}
+      <p class="hero__subhead">{{ section.settings.subhead }}</p>
+    {%- endif -%}
+
+    <a class="btn btn--gold" href="#offer">{{ section.settings.cta_label }}</a>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Hero video",
+  "settings": [
+    {
+      "type": "video",
+      "id": "video",
+      "label": "Autoplay video (muted loop)"
+    },
+    {
+      "type": "image_picker",
+      "id": "fallback_image",
+      "label": "Fallback image (shown until video is set)"
+    },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "MELT LABS"
+    },
+    {
+      "type": "text",
+      "id": "headline",
+      "label": "Headline",
+      "default": "Two drops. Quiet the cravings. Steady your sugar."
+    },
+    {
+      "type": "text",
+      "id": "subhead",
+      "label": "Subhead",
+      "default": "A Japanese botanical serum designed to work with your body, not against your routine."
+    },
+    {
+      "type": "text",
+      "id": "cta_label",
+      "label": "Button label",
+      "default": "See the protocol"
+    }
+  ],
+  "presets": [{ "name": "Hero video" }]
+}
+{% endschema %}

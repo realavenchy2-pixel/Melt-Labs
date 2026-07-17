@@ -1,0 +1,70 @@
+{%- comment -%}
+  Shared body for utility templates: 404, search, blog, article,
+  list-collections. Keeps the skeleton templates tiny; the lander is
+  the product of this theme, these pages just need to work.
+{%- endcomment -%}
+
+<div class="page-shell">
+  <div class="container container--narrow">
+    {%- case request.page_type -%}
+      {%- when '404' -%}
+        <h1 class="h2 page-shell__title">Page not found</h1>
+        <p class="lead">The page you're looking for doesn't exist.</p>
+        <p style="margin-top: 1.5rem;"><a class="btn btn--gold" href="{{ routes.root_url }}">Back to home</a></p>
+
+      {%- when 'search' -%}
+        <h1 class="h2 page-shell__title">Search</h1>
+        <form action="{{ routes.search_url }}" method="get" class="form-stack" role="search">
+          <label for="search-q">Search</label>
+          <input type="search" id="search-q" name="q" value="{{ search.terms | escape }}">
+          <button type="submit" class="btn btn--gold">Search</button>
+        </form>
+        {%- if search.performed -%}
+          <div style="margin-top: 2.5rem;">
+            {%- for item in search.results -%}
+              <div class="cart-line">
+                <a href="{{ item.url }}">{{ item.title }}</a>
+              </div>
+            {%- else -%}
+              <p class="lead">No results for &ldquo;{{ search.terms }}&rdquo;.</p>
+            {%- endfor -%}
+          </div>
+        {%- endif -%}
+
+      {%- when 'blog' -%}
+        <h1 class="h2 page-shell__title">{{ blog.title }}</h1>
+        {%- for article in blog.articles -%}
+          <div class="cart-line">
+            <div>
+              <a href="{{ article.url }}"><strong>{{ article.title }}</strong></a>
+              <p>{{ article.published_at | date: '%B %-d, %Y' }}</p>
+            </div>
+          </div>
+        {%- else -%}
+          <p class="lead">No posts yet.</p>
+        {%- endfor -%}
+
+      {%- when 'article' -%}
+        <article>
+          <h1 class="h2 page-shell__title">{{ article.title }}</h1>
+          <p style="margin-bottom: 1.5rem;">{{ article.published_at | date: '%B %-d, %Y' }}</p>
+          <div class="rte">{{ article.content }}</div>
+        </article>
+
+      {%- when 'list-collections' -%}
+        <h1 class="h2 page-shell__title">Collections</h1>
+        {%- for collection in collections -%}
+          <div class="cart-line">
+            <a href="{{ collection.url }}">{{ collection.title }}</a>
+          </div>
+        {%- endfor -%}
+    {%- endcase -%}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Utility page",
+  "settings": []
+}
+{% endschema %}

@@ -23,8 +23,8 @@
     assign font_body = settings.font_body
     assign font_body_medium = font_body | font_modify: 'weight', '500'
   -%}
-  <link rel="preload" as="font" href="{{ font_heading | font_url }}" type="font/woff2" crossorigin>
-  <link rel="preload" as="font" href="{{ font_body | font_url }}" type="font/woff2" crossorigin>
+  {{ font_heading | font_url | preload_tag: as: 'font' }}
+  {{ font_body | font_url | preload_tag: as: 'font' }}
 
   <style>
     {{ font_heading | font_face: font_display: 'swap' }}

@@ -1,0 +1,16 @@
+<div class="page-shell"><div class="container container--narrow">
+  <h1 class="h2 page-shell__title">Account</h1>
+  <p>{{ customer.email }}</p>
+  <p style="margin: 1rem 0;"><a href="{{ routes.account_addresses_url }}">Addresses</a> &middot; <a href="{{ routes.account_logout_url }}">Log out</a></p>
+  <h2 class="h3" style="margin: 2rem 0 1rem;">Order history</h2>
+  {% paginate customer.orders by 20 %}
+    {% for order in customer.orders %}
+      <div class="cart-line">
+        <a href="{{ order.customer_url }}">{{ order.name }}</a>
+        <span>{{ order.total_price | money }}</span>
+      </div>
+    {% else %}
+      <p>No orders yet.</p>
+    {% endfor %}
+  {% endpaginate %}
+</div></div>

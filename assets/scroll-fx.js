@@ -38,10 +38,12 @@
     var frames = scroller.querySelectorAll('.science__frame');
     if (!frames.length) return;
 
+    /* Sections render static-first (no-JS fallback); scrub opts back in */
     if (reduceMotion || frames.length === 1) {
       scroller.classList.add('is-static');
       return;
     }
+    scroller.classList.remove('is-static');
 
     var active = -1;
     var ticking = false;

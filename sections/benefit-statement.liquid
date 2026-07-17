@@ -1,0 +1,152 @@
+{%- comment -%}
+  S5 and S8 — bold benefit statement(s) followed by an angle carousel
+  (reference: PDF p.4 "The best thing you've never heard", p.14-16).
+  One section type used twice: S5 passes one statement + 4 slides,
+  S8 passes two statements + 4 slides.
+{%- endcomment -%}
+
+{%- assign scheme = section.settings.scheme | default: 'white' -%}
+
+<section class="section section--flush section--scheme-{{ scheme }}" style="padding-block: var(--section-pad);">
+  <div class="container">
+    {%- for block in section.blocks -%}
+      {%- if block.type == 'statement' -%}
+        <header class="benefit-statement" data-reveal {{ block.shopify_attributes }}>
+          <h2 class="benefit-statement__headline">{{ block.settings.headline }}</h2>
+          {%- if block.settings.subhead != blank -%}
+            <p class="lead benefit-statement__subhead" style="margin-inline: auto;">{{ block.settings.subhead }}</p>
+          {%- endif -%}
+        </header>
+      {%- endif -%}
+    {%- endfor -%}
+  </div>
+
+  {%- capture slides -%}
+    {%- for block in section.blocks -%}
+      {%- if block.type == 'slide' -%}
+        <div class="carousel__slide" {{ block.shopify_attributes }}>
+          <article class="angle-card {% if block.settings.accent %}angle-card--accent{% endif %}">
+            {%- if block.settings.image or block.settings.show_media_slot -%}
+              {%- render 'media-placeholder',
+                label: 'benefit_angle_visual',
+                aspect_mobile: '4 / 3',
+                image: block.settings.image
+              -%}
+            {%- endif -%}
+            <h3 class="angle-card__title">{{ block.settings.title }}</h3>
+            <p class="angle-card__text">{{ block.settings.text }}</p>
+          </article>
+        </div>
+      {%- endif -%}
+    {%- endfor -%}
+  {%- endcapture -%}
+
+  {%- if slides contains 'carousel__slide' -%}
+    <div class="benefit-statement__carousel" data-reveal>
+      {%- render 'carousel', slides: slides, id: section.id, label: 'Benefits' -%}
+    </div>
+  {%- endif -%}
+</section>
+
+{% schema %}
+{
+  "name": "Benefit statement",
+  "settings": [
+    {
+      "type": "select",
+      "id": "scheme",
+      "label": "Color scheme",
+      "options": [
+        { "value": "white", "label": "White" },
+        { "value": "tint", "label": "Pale blue" },
+        { "value": "ink", "label": "Near-black" }
+      ],
+      "default": "white"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "statement",
+      "name": "Bold statement",
+      "settings": [
+        {
+          "type": "text",
+          "id": "headline",
+          "label": "Headline",
+          "default": "Drink what you already drink. Lose weight seamlessly doing it."
+        },
+        { "type": "text", "id": "subhead", "label": "Subhead" }
+      ]
+    },
+    {
+      "type": "slide",
+      "name": "Angle slide",
+      "settings": [
+        { "type": "text", "id": "title", "label": "Title", "default": "Cravings" },
+        {
+          "type": "textarea",
+          "id": "text",
+          "label": "Text",
+          "default": "Two drops quiet the noise around food. No willpower required."
+        },
+        { "type": "image_picker", "id": "image", "label": "Visual (optional)" },
+        {
+          "type": "checkbox",
+          "id": "show_media_slot",
+          "label": "Show placeholder slot when no image is set",
+          "default": false
+        },
+        {
+          "type": "checkbox",
+          "id": "accent",
+          "label": "Brand gradient card",
+          "default": false
+        }
+      ]
+    }
+  ],
+  "max_blocks": 10,
+  "presets": [
+    {
+      "name": "Benefit statement",
+      "blocks": [
+        {
+          "type": "statement",
+          "settings": {
+            "headline": "Drink what you already drink. Lose weight seamlessly doing it."
+          }
+        },
+        {
+          "type": "slide",
+          "settings": {
+            "title": "Cravings",
+            "text": "Two drops quiet the noise around food. No willpower required.",
+            "accent": true
+          }
+        },
+        {
+          "type": "slide",
+          "settings": {
+            "title": "Blood sugar",
+            "text": "Steadier glucose means fewer spikes, fewer crashes, fewer cravings."
+          }
+        },
+        {
+          "type": "slide",
+          "settings": {
+            "title": "Metabolism",
+            "text": "Support your body's natural fat-burning response, daily."
+          }
+        },
+        {
+          "type": "slide",
+          "settings": {
+            "title": "Zero routine change",
+            "text": "No pills to remember, no shots, no taste. Just add it to what you're already drinking."
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

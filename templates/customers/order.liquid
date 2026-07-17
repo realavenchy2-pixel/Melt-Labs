@@ -1,0 +1,11 @@
+<div class="page-shell"><div class="container container--narrow">
+  <h1 class="h2 page-shell__title">Order {{ order.name }}</h1>
+  <p>{{ order.created_at | date: '%B %-d, %Y' }}</p>
+  {% for line_item in order.line_items %}
+    <div class="cart-line">
+      <span>{{ line_item.title }} &times; {{ line_item.quantity }}</span>
+      <span>{{ line_item.final_line_price | money }}</span>
+    </div>
+  {% endfor %}
+  <div class="cart-line"><strong>Total</strong><strong>{{ order.total_price | money }}</strong></div>
+</div></div>

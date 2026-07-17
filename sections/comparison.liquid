@@ -1,0 +1,155 @@
+{%- comment -%}
+  Comparison — Special Water vs GLP-1 injections (added per client
+  direction; structural nod to PDF p.18's compare grid). Framing:
+  Special Water is the practical long-term lifestyle tool for keeping
+  blood sugar and cravings low; GLP-1s deliver fast results without a
+  lifestyle change. Measured, non-disparaging language; row copy is
+  fully schema-driven.
+{%- endcomment -%}
+
+<section class="section section--scheme-white">
+  <div class="container">
+    <div class="section-header section-header--center" data-reveal>
+      <h2 class="h2">{{ section.settings.headline }}</h2>
+      {%- if section.settings.subhead != blank -%}
+        <p class="lead" style="margin-inline: auto;">{{ section.settings.subhead }}</p>
+      {%- endif -%}
+    </div>
+
+    <div class="compare__table">
+      <div class="compare__col compare__col--featured" data-reveal>
+        <h3 class="compare__col-title">{{ section.settings.col_a_title }}</h3>
+        <p class="compare__col-sub">{{ section.settings.col_a_sub }}</p>
+        <ul class="compare__rows">
+          {%- for block in section.blocks -%}
+            <li class="compare__row" {{ block.shopify_attributes }}>
+              <p class="compare__row-label">{{ block.settings.label }}</p>
+              <p class="compare__row-value">{{ block.settings.value_a }}</p>
+            </li>
+          {%- endfor -%}
+        </ul>
+      </div>
+
+      <div class="compare__col" data-reveal style="--reveal-i: 1;">
+        <h3 class="compare__col-title">{{ section.settings.col_b_title }}</h3>
+        <p class="compare__col-sub">{{ section.settings.col_b_sub }}</p>
+        <ul class="compare__rows">
+          {%- for block in section.blocks -%}
+            <li class="compare__row">
+              <p class="compare__row-label">{{ block.settings.label }}</p>
+              <p class="compare__row-value">{{ block.settings.value_b }}</p>
+            </li>
+          {%- endfor -%}
+        </ul>
+      </div>
+    </div>
+
+    {%- if section.settings.note != blank -%}
+      <p class="compare__note">{{ section.settings.note }}</p>
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Comparison",
+  "settings": [
+    {
+      "type": "text",
+      "id": "headline",
+      "label": "Headline",
+      "default": "Built for the long run."
+    },
+    {
+      "type": "textarea",
+      "id": "subhead",
+      "label": "Subhead",
+      "default": "Fast results and lasting results are different goals. Here's how the daily-drops approach compares."
+    },
+    { "type": "text", "id": "col_a_title", "label": "Column A title", "default": "Special Water" },
+    {
+      "type": "text",
+      "id": "col_a_sub",
+      "label": "Column A subtitle",
+      "default": "A daily habit for long-term control"
+    },
+    { "type": "text", "id": "col_b_title", "label": "Column B title", "default": "GLP-1 injections" },
+    {
+      "type": "text",
+      "id": "col_b_sub",
+      "label": "Column B subtitle",
+      "default": "Fast results, prescription required"
+    },
+    {
+      "type": "textarea",
+      "id": "note",
+      "label": "Footnote",
+      "default": "Special Water is a dietary supplement, not a medication, and is not a substitute for care from your doctor. If you're considering or taking a GLP-1, talk to your physician."
+    }
+  ],
+  "blocks": [
+    {
+      "type": "row",
+      "name": "Comparison row",
+      "settings": [
+        { "type": "text", "id": "label", "label": "Row label", "default": "Approach" },
+        {
+          "type": "text",
+          "id": "value_a",
+          "label": "Column A value",
+          "default": "Two drops in what you already drink"
+        },
+        { "type": "text", "id": "value_b", "label": "Column B value", "default": "Weekly injections" }
+      ]
+    }
+  ],
+  "max_blocks": 8,
+  "presets": [
+    {
+      "name": "Comparison",
+      "blocks": [
+        {
+          "type": "row",
+          "settings": {
+            "label": "Approach",
+            "value_a": "Two drops in what you already drink",
+            "value_b": "Weekly injections"
+          }
+        },
+        {
+          "type": "row",
+          "settings": {
+            "label": "How it works",
+            "value_a": "Supports steady blood sugar so cravings stay quiet",
+            "value_b": "Suppresses appetite while the medication is active"
+          }
+        },
+        {
+          "type": "row",
+          "settings": {
+            "label": "Built for",
+            "value_a": "Sustainable, muscle-preserving weight control",
+            "value_b": "Rapid weight loss under medical supervision"
+          }
+        },
+        {
+          "type": "row",
+          "settings": {
+            "label": "Your routine",
+            "value_a": "Nothing changes. It fits the coffee you already pour",
+            "value_b": "Prescription, injections, and ongoing clinical visits"
+          }
+        },
+        {
+          "type": "row",
+          "settings": {
+            "label": "When you stop",
+            "value_a": "The habits it supports are yours to keep",
+            "value_b": "Appetite often returns once treatment ends"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

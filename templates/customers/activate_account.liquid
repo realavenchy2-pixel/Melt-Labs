@@ -1,0 +1,11 @@
+<div class="page-shell"><div class="container container--narrow">
+  <h1 class="h2 page-shell__title">Activate account</h1>
+  {% form 'activate_customer_password', class: 'form-stack' %}
+    {{ form.errors | default_errors }}
+    <label for="act-password">Password</label>
+    <input type="password" id="act-password" name="customer[password]" autocomplete="new-password" required>
+    <label for="act-password-confirm">Confirm password</label>
+    <input type="password" id="act-password-confirm" name="customer[password_confirmation]" autocomplete="new-password" required>
+    <button type="submit" class="btn btn--gold">Activate</button>
+  {% endform %}
+</div></div>

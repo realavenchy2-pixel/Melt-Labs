@@ -1,0 +1,34 @@
+<div class="page-shell">
+  <div class="container">
+    <h1 class="h2 page-shell__title">{{ collection.title }}</h1>
+
+    {%- paginate collection.products by 24 -%}
+      <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 1.5rem;">
+        {%- for product in collection.products -%}
+          <a href="{{ product.url }}" style="text-decoration: none;">
+            {%- if product.featured_image -%}
+              {%- render 'responsive-image', image: product.featured_image, sizes: '(min-width: 768px) 25vw, 50vw', class: 'media-slot--rounded' -%}
+            {%- else -%}
+              {%- render 'media-placeholder', label: 'product_photo', aspect_mobile: '1 / 1', class: 'media-slot--rounded' -%}
+            {%- endif -%}
+            <p style="margin-top: 0.75rem; font-weight: 500;">{{ product.title }}</p>
+            <p>{{ product.price_min | money }}</p>
+          </a>
+        {%- else -%}
+          <p class="lead">No products yet.</p>
+        {%- endfor -%}
+      </div>
+
+      {%- if paginate.pages > 1 -%}
+        <nav style="margin-top: 2.5rem;" aria-label="Pagination">{{ paginate | default_pagination }}</nav>
+      {%- endif -%}
+    {%- endpaginate -%}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Collection",
+  "settings": []
+}
+{% endschema %}

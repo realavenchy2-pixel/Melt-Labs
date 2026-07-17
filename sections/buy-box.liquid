@@ -1,0 +1,139 @@
+{%- comment -%}
+  S2 — Offer / purchase block. Native Shopify buy-box only: standard
+  {% form 'product' %}, variant + quantity selectors, Add to Cart and
+  dynamic Buy Now. No tier markup — Kaching injects its three-tier
+  offer UI into this standard form on install.
+{%- endcomment -%}
+
+{%- liquid
+  # On product templates the global product object is the default;
+  # the picker setting lets this section work on any other template.
+  if section.settings.product != blank
+    assign product = section.settings.product
+  endif
+-%}
+
+<section id="offer" class="section section--scheme-tint">
+  <div class="container">
+    <div class="buy-box__grid">
+      <div class="buy-box__media" data-reveal>
+        {%- render 'media-placeholder',
+          label: 'product_bottle_photo',
+          aspect_mobile: '1 / 1',
+          image: section.settings.image
+        -%}
+      </div>
+
+      <div data-reveal style="--reveal-i: 1;">
+        {%- if product != blank -%}
+          <h2 class="buy-box__title">{{ product.title }}</h2>
+          {%- if section.settings.tagline != blank -%}
+            <p class="lead buy-box__tagline">{{ section.settings.tagline }}</p>
+          {%- endif -%}
+
+          <div class="buy-box__price">
+            <span id="buy-box-price-{{ section.id }}">{{ product.selected_or_first_available_variant.price | money }}</span>
+            {%- if product.selected_or_first_available_variant.compare_at_price > product.selected_or_first_available_variant.price -%}
+              <s>{{ product.selected_or_first_available_variant.compare_at_price | money }}</s>
+            {%- endif -%}
+          </div>
+
+          {%- form 'product', product, class: 'buy-box__form' -%}
+            {%- unless product.has_only_default_variant -%}
+              {%- for option in product.options_with_values -%}
+                <div class="buy-box__field">
+                  <label for="option-{{ section.id }}-{{ forloop.index0 }}">{{ option.name }}</label>
+                  <select
+                    id="option-{{ section.id }}-{{ forloop.index0 }}"
+                    name="options[{{ option.name | escape }}]"
+                  >
+                    {%- for value in option.values -%}
+                      <option value="{{ value | escape }}" {% if option.selected_value == value %}selected{% endif %}>{{ value }}</option>
+                    {%- endfor -%}
+                  </select>
+                </div>
+              {%- endfor -%}
+            {%- endunless -%}
+
+            <div class="buy-box__row">
+              <div class="buy-box__field">
+                <label for="quantity-{{ section.id }}">Qty</label>
+                <input type="number" id="quantity-{{ section.id }}" name="quantity" value="1" min="1">
+              </div>
+              <div class="buy-box__field" aria-hidden="true"></div>
+            </div>
+
+            <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
+
+            <div class="buy-box__actions">
+              <button
+                type="submit"
+                name="add"
+                class="btn btn--gold btn--full"
+                {% unless product.selected_or_first_available_variant.available %}disabled{% endunless %}
+              >
+                {%- if product.selected_or_first_available_variant.available -%}
+                  Add to cart
+                {%- else -%}
+                  Sold out
+                {%- endif -%}
+              </button>
+              {{ form | payment_button }}
+            </div>
+          {%- endform -%}
+
+          <ul class="buy-box__reassure">
+            {%- assign reassure_items = section.settings.reassurance | newline_to_br | split: '<br />' -%}
+            {%- for item in reassure_items -%}
+              {%- assign trimmed = item | strip -%}
+              {%- if trimmed != blank -%}
+                <li>{% render 'icon', name: 'check' %}{{ trimmed }}</li>
+              {%- endif -%}
+            {%- endfor -%}
+          </ul>
+        {%- else -%}
+          <h2 class="buy-box__title">{{ section.settings.placeholder_title }}</h2>
+          <p class="lead buy-box__tagline">Select a product for this section in the theme editor to activate the buy box.</p>
+        {%- endif -%}
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Buy box",
+  "settings": [
+    {
+      "type": "product",
+      "id": "product",
+      "label": "Product",
+      "info": "On product pages this defaults to the current product."
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Product photo"
+    },
+    {
+      "type": "text",
+      "id": "tagline",
+      "label": "Tagline",
+      "default": "The daily protocol for quieter cravings and steadier blood sugar."
+    },
+    {
+      "type": "textarea",
+      "id": "reassurance",
+      "label": "Reassurance points (one per line)",
+      "default": "60-day supply\nShips in 2 to 4 days\nNo stimulants"
+    },
+    {
+      "type": "text",
+      "id": "placeholder_title",
+      "label": "Placeholder title (no product selected)",
+      "default": "Special Water"
+    }
+  ],
+  "presets": [{ "name": "Buy box" }]
+}
+{% endschema %}
