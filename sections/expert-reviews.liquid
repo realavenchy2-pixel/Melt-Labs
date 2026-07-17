@@ -1,0 +1,126 @@
+{%- comment -%}
+  "What experts are saying" — authority/social-proof row. Three slots,
+  each accepts an image OR a video (video wins if both are set). Videos
+  play on tap with native controls and a poster frame, since these are
+  watch-me expert clips, not muted ambient loops. Empty slots render a
+  labeled placeholder at the correct aspect ratio for zero-CLS swap.
+{%- endcomment -%}
+
+{%- assign scheme = section.settings.scheme | default: 'tint' -%}
+
+<section class="section section--scheme-{{ scheme }}">
+  <div class="container">
+    <div class="section-header section-header--center" data-reveal>
+      <h2 class="h2">{% render 'accent-text', text: section.settings.headline, color: 'blue' %}</h2>
+      {%- if section.settings.subhead != blank -%}
+        <p class="lead" style="margin-inline: auto;">{{ section.settings.subhead }}</p>
+      {%- endif -%}
+    </div>
+
+    <div class="expert-grid">
+      {%- for block in section.blocks -%}
+        <figure class="expert-card" data-reveal style="--reveal-i: {{ forloop.index0 }};" {{ block.shopify_attributes }}>
+          <div class="expert-card__media">
+            {%- if block.settings.video != blank -%}
+              <video
+                class="expert-card__video"
+                controls
+                playsinline
+                webkit-playsinline
+                preload="none"
+                {% if block.settings.poster != blank %}poster="{{ block.settings.poster | image_url: width: 800 }}"{% endif %}
+              >
+                {%- for source in block.settings.video.sources -%}
+                  <source src="{{ source.url }}" type="{{ source.mime_type }}">
+                {%- endfor -%}
+              </video>
+            {%- elsif block.settings.image != blank -%}
+              <div class="media-slot media-slot--rounded" style="--aspect-mobile: 4 / 5;">
+                <div class="media-slot__frame"></div>
+                {%- render 'responsive-image', image: block.settings.image, sizes: '(min-width: 768px) 33vw, 100vw' -%}
+              </div>
+            {%- else -%}
+              {%- assign slot_label = 'expert_review_' | append: forloop.index | append: '_image_or_video' -%}
+              {%- render 'media-placeholder', label: slot_label, aspect_mobile: '4 / 5', class: 'media-slot--rounded' -%}
+            {%- endif -%}
+          </div>
+          {%- if block.settings.name != blank or block.settings.title != blank or block.settings.quote != blank -%}
+            <figcaption class="expert-card__caption">
+              {%- if block.settings.quote != blank -%}
+                <p class="expert-card__quote">&ldquo;{{ block.settings.quote }}&rdquo;</p>
+              {%- endif -%}
+              {%- if block.settings.name != blank -%}
+                <p class="expert-card__name">{{ block.settings.name }}</p>
+              {%- endif -%}
+              {%- if block.settings.title != blank -%}
+                <p class="expert-card__title">{{ block.settings.title }}</p>
+              {%- endif -%}
+            </figcaption>
+          {%- endif -%}
+        </figure>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Expert reviews",
+  "settings": [
+    {
+      "type": "text",
+      "id": "headline",
+      "label": "Headline",
+      "info": "Wrap a word in *asterisks* to accent it.",
+      "default": "What *experts* are saying"
+    },
+    {
+      "type": "text",
+      "id": "subhead",
+      "label": "Subhead",
+      "default": "Practitioners and researchers on the mechanism behind Special Water."
+    },
+    {
+      "type": "select",
+      "id": "scheme",
+      "label": "Color scheme",
+      "options": [
+        { "value": "white", "label": "White" },
+        { "value": "tint", "label": "Pale blue" },
+        { "value": "ink", "label": "Near-black" }
+      ],
+      "default": "tint"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "expert",
+      "name": "Expert slot",
+      "settings": [
+        {
+          "type": "video",
+          "id": "video",
+          "label": "Video",
+          "info": "Takes priority over the image if both are set."
+        },
+        { "type": "image_picker", "id": "poster", "label": "Video poster frame" },
+        { "type": "image_picker", "id": "image", "label": "Image (used if no video)" },
+        { "type": "text", "id": "quote", "label": "Short quote" },
+        { "type": "text", "id": "name", "label": "Name", "default": "Dr. Placeholder" },
+        { "type": "text", "id": "title", "label": "Credential / title", "default": "Integrative Medicine" }
+      ]
+    }
+  ],
+  "max_blocks": 3,
+  "presets": [
+    {
+      "name": "Expert reviews",
+      "blocks": [
+        { "type": "expert" },
+        { "type": "expert" },
+        { "type": "expert" }
+      ]
+    }
+  ]
+}
+{% endschema %}

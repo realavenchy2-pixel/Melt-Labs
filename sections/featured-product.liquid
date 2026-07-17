@@ -1,0 +1,127 @@
+{%- comment -%}
+  Homepage featured-product spotlight. Pulls a real product (image,
+  title, price) and links to its page. Split layout, image can sit on
+  either side. The KAMI re-skin just points this at a different product.
+{%- endcomment -%}
+
+{%- assign product = section.settings.product -%}
+
+<section class="section section--flush section--scheme-{{ section.settings.scheme | default: 'white' }}" style="padding-block: var(--section-pad);">
+  <div class="container">
+    <div class="featured {% if section.settings.image_side == 'right' %}featured--image-right{% endif %}">
+      <div class="featured__media" data-reveal>
+        {%- if section.settings.image != blank -%}
+          <div class="media-slot media-slot--rounded" style="--aspect-mobile: 1 / 1;">
+            <div class="media-slot__frame"></div>
+            {%- render 'responsive-image', image: section.settings.image, sizes: '(min-width: 900px) 50vw, 100vw' -%}
+          </div>
+        {%- elsif product != blank and product.featured_image != blank -%}
+          <div class="media-slot media-slot--rounded" style="--aspect-mobile: 1 / 1;">
+            <div class="media-slot__frame"></div>
+            {%- render 'responsive-image', image: product.featured_image, sizes: '(min-width: 900px) 50vw, 100vw' -%}
+          </div>
+        {%- else -%}
+          {%- render 'media-placeholder', label: 'featured_product_photo', aspect_mobile: '1 / 1', class: 'media-slot--rounded' -%}
+        {%- endif -%}
+      </div>
+
+      <div class="featured__body" data-reveal style="--reveal-i: 1;">
+        {%- if section.settings.eyebrow != blank -%}
+          <span class="eyebrow">{{ section.settings.eyebrow }}</span>
+        {%- endif -%}
+        <h2 class="featured__title h2">
+          {%- if section.settings.title != blank -%}
+            {% render 'accent-text', text: section.settings.title, color: 'blue' %}
+          {%- elsif product != blank -%}
+            {{ product.title }}
+          {%- endif -%}
+        </h2>
+        {%- if section.settings.body != blank -%}
+          <p class="lead featured__text">{{ section.settings.body }}</p>
+        {%- endif -%}
+
+        {%- if product != blank and section.settings.show_price -%}
+          <p class="featured__price">
+            {{ product.price_min | money }}
+            {%- if product.compare_at_price_max > product.price_min %} <s>{{ product.compare_at_price_max | money }}</s>{% endif -%}
+          </p>
+        {%- endif -%}
+
+        <div class="featured__actions">
+          {%- if product != blank -%}
+            <a class="btn btn--gold" href="{{ product.url }}">{{ section.settings.cta_label }}</a>
+          {%- elsif section.settings.cta_link != blank -%}
+            <a class="btn btn--gold" href="{{ section.settings.cta_link }}">{{ section.settings.cta_label }}</a>
+          {%- endif -%}
+        </div>
+
+        {%- if section.settings.reassurance != blank -%}
+          <ul class="buy-box__reassure featured__reassure">
+            {%- assign items = section.settings.reassurance | newline_to_br | split: '<br />' -%}
+            {%- for item in items -%}
+              {%- assign trimmed = item | strip -%}
+              {%- if trimmed != blank -%}
+                <li>{% render 'icon', name: 'check' %}{{ trimmed }}</li>
+              {%- endif -%}
+            {%- endfor -%}
+          </ul>
+        {%- endif -%}
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Featured product",
+  "settings": [
+    { "type": "product", "id": "product", "label": "Product" },
+    {
+      "type": "select",
+      "id": "scheme",
+      "label": "Color scheme",
+      "options": [
+        { "value": "white", "label": "White" },
+        { "value": "tint", "label": "Pale blue" },
+        { "value": "ink", "label": "Near-black" }
+      ],
+      "default": "white"
+    },
+    {
+      "type": "select",
+      "id": "image_side",
+      "label": "Image side (desktop)",
+      "options": [
+        { "value": "left", "label": "Left" },
+        { "value": "right", "label": "Right" }
+      ],
+      "default": "left"
+    },
+    { "type": "image_picker", "id": "image", "label": "Image (overrides product photo)" },
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "THE FLAGSHIP" },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title (overrides product title)",
+      "info": "Wrap a word in *asterisks* to accent it.",
+      "default": "*Special Water*"
+    },
+    {
+      "type": "textarea",
+      "id": "body",
+      "label": "Body",
+      "default": "Two drops in whatever you already drink. Quieter cravings, steadier blood sugar, no routine to change."
+    },
+    { "type": "checkbox", "id": "show_price", "label": "Show price", "default": true },
+    { "type": "text", "id": "cta_label", "label": "Button label", "default": "Shop Special Water" },
+    { "type": "url", "id": "cta_link", "label": "Button link (used if no product)" },
+    {
+      "type": "textarea",
+      "id": "reassurance",
+      "label": "Reassurance points (one per line)",
+      "default": "60-day supply\nThird-party tested\nNo stimulants"
+    }
+  ],
+  "presets": [{ "name": "Featured product" }]
+}
+{% endschema %}

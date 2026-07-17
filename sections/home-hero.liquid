@@ -1,0 +1,79 @@
+{%- comment -%}
+  Homepage brand hero (brief §3: Apple.com-style brand hub, not a sales
+  page). One clean statement, optional background image/video, primary
+  CTA into the lineup. Deliberately calmer than the product hero.
+{%- endcomment -%}
+
+<section class="home-hero home-hero--{{ section.settings.scheme | default: 'tint' }}">
+  {%- if section.settings.image != blank or section.settings.video != blank -%}
+    <div class="home-hero__media">
+      {%- render 'media-placeholder',
+        label: 'home_hero_background',
+        aspect_mobile: '3 / 4',
+        aspect_desktop: '16 / 9',
+        image: section.settings.image,
+        video: section.settings.video,
+        eager: true
+      -%}
+      <div class="home-hero__scrim" aria-hidden="true"></div>
+    </div>
+  {%- endif -%}
+
+  <div class="container home-hero__content {% if section.settings.image != blank or section.settings.video != blank %}home-hero__content--over-media{% endif %}">
+    {%- if section.settings.eyebrow != blank -%}
+      <span class="eyebrow">{{ section.settings.eyebrow }}</span>
+    {%- endif -%}
+    <h1 class="home-hero__headline">{% render 'accent-text', text: section.settings.headline, color: 'blue' %}</h1>
+    {%- if section.settings.subhead != blank -%}
+      <p class="home-hero__subhead">{{ section.settings.subhead }}</p>
+    {%- endif -%}
+    {%- if section.settings.cta_label != blank -%}
+      <div class="home-hero__actions">
+        <a class="btn btn--gold" href="{{ section.settings.cta_link | default: '#' }}">{{ section.settings.cta_label }}</a>
+        {%- if section.settings.cta2_label != blank -%}
+          <a class="btn btn--outline" href="{{ section.settings.cta2_link | default: '#' }}">{{ section.settings.cta2_label }}</a>
+        {%- endif -%}
+      </div>
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Home hero",
+  "settings": [
+    {
+      "type": "select",
+      "id": "scheme",
+      "label": "Color scheme (when no background media)",
+      "options": [
+        { "value": "white", "label": "White" },
+        { "value": "tint", "label": "Pale blue" },
+        { "value": "ink", "label": "Near-black" }
+      ],
+      "default": "tint"
+    },
+    { "type": "image_picker", "id": "image", "label": "Background image (optional)" },
+    { "type": "video", "id": "video", "label": "Background video (optional)" },
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "MELT LABS" },
+    {
+      "type": "text",
+      "id": "headline",
+      "label": "Headline",
+      "info": "Wrap a word in *asterisks* to accent it.",
+      "default": "Weight control, *made effortless.*"
+    },
+    {
+      "type": "textarea",
+      "id": "subhead",
+      "label": "Subhead",
+      "default": "Japanese botanical formulas that work with your body, not against your routine."
+    },
+    { "type": "text", "id": "cta_label", "label": "Primary button label", "default": "Shop Special Water" },
+    { "type": "url", "id": "cta_link", "label": "Primary button link" },
+    { "type": "text", "id": "cta2_label", "label": "Secondary button label", "default": "Explore the science" },
+    { "type": "url", "id": "cta2_link", "label": "Secondary button link" }
+  ],
+  "presets": [{ "name": "Home hero" }]
+}
+{% endschema %}

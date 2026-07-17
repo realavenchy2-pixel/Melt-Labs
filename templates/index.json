@@ -1,8 +1,95 @@
 {
   "sections": {
-    "main": {
-      "type": "main-index"
+    "hero": {
+      "type": "home-hero",
+      "settings": {
+        "scheme": "tint",
+        "eyebrow": "MELT LABS",
+        "headline": "Weight control, *made effortless.*",
+        "subhead": "Japanese botanical formulas that work with your body, not against your routine.",
+        "cta_label": "Shop Special Water",
+        "cta2_label": "Explore the science"
+      }
+    },
+    "featured": {
+      "type": "featured-product",
+      "settings": {
+        "scheme": "white",
+        "image_side": "left",
+        "eyebrow": "THE FLAGSHIP",
+        "title": "*Special Water*",
+        "body": "Two drops in whatever you already drink. Quieter cravings, steadier blood sugar, no routine to change.",
+        "show_price": true,
+        "cta_label": "Shop Special Water",
+        "reassurance": "60-day supply\nThird-party tested\nNo stimulants"
+      }
+    },
+    "experts": {
+      "type": "expert-reviews",
+      "settings": {
+        "scheme": "tint",
+        "headline": "What *experts* are saying",
+        "subhead": "Practitioners and researchers on the mechanism behind Special Water."
+      },
+      "blocks": {
+        "e1": {
+          "type": "expert",
+          "settings": { "name": "Dr. Placeholder", "title": "Integrative Medicine", "quote": "Blood-sugar stability is the lever most people miss." }
+        },
+        "e2": {
+          "type": "expert",
+          "settings": { "name": "Placeholder, RD", "title": "Registered Dietitian", "quote": "The appeal is that it fits a routine people already have." }
+        },
+        "e3": {
+          "type": "expert",
+          "settings": { "name": "Dr. Placeholder", "title": "Metabolic Researcher", "quote": "The botanical stack targets the right pathways." }
+        }
+      },
+      "block_order": ["e1", "e2", "e3"]
+    },
+    "values": {
+      "type": "values-carousel",
+      "settings": {
+        "headline": "Our values lead the way.",
+        "body": "Every batch is third-party tested for purity and potency before it ships."
+      },
+      "blocks": {
+        "v1": {
+          "type": "card",
+          "settings": {
+            "icon": "flask",
+            "title": "Our Standards",
+            "text": "Botanicals sourced for potency, then third-party tested before a single bottle is filled."
+          }
+        },
+        "v2": {
+          "type": "card",
+          "settings": {
+            "icon": "heart",
+            "title": "Our Mission",
+            "text": "Melt Labs exists to make sustainable weight control feel effortless, not clinical."
+          }
+        },
+        "v3": {
+          "type": "card",
+          "settings": {
+            "icon": "shield",
+            "title": "Our Promise",
+            "text": "Full transparency in formulation. Every ingredient and its job, on the label and on this page."
+          }
+        }
+      },
+      "block_order": ["v1", "v2", "v3"]
+    },
+    "newsletter": {
+      "type": "newsletter",
+      "settings": {
+        "scheme": "ink",
+        "headline": "Join the *Melt Labs* list.",
+        "body": "Early access, restock alerts, and the occasional note on the science. No spam.",
+        "button_label": "Sign up"
+      }
     }
   },
-  "order": ["main"]
+  "order": ["hero", "featured", "experts", "values", "newsletter"]
 }

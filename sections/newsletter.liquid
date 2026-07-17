@@ -1,0 +1,80 @@
+{%- comment -%}
+  Email capture using Shopify's native customer form (adds the email as
+  a customer with the "newsletter" tag / accepts marketing). No third-
+  party app needed. Success and error states handled inline.
+{%- endcomment -%}
+
+<section class="section section--scheme-{{ section.settings.scheme | default: 'ink' }}">
+  <div class="container container--narrow" style="text-align: center;">
+    <div data-reveal>
+      <h2 class="h2">{% render 'accent-text', text: section.settings.headline, color: 'gold' %}</h2>
+      {%- if section.settings.body != blank -%}
+        <p class="lead" style="margin: 1rem auto 2rem;">{{ section.settings.body }}</p>
+      {%- endif -%}
+
+      {%- form 'customer', class: 'newsletter-form' -%}
+        <input type="hidden" name="contact[tags]" value="newsletter">
+        {%- if form.posted_successfully? -%}
+          <p class="newsletter-form__success">{{ section.settings.success_text }}</p>
+        {%- else -%}
+          <div class="newsletter-form__row">
+            <label class="visually-hidden" for="newsletter-email-{{ section.id }}">Email</label>
+            <input
+              type="email"
+              id="newsletter-email-{{ section.id }}"
+              name="contact[email]"
+              placeholder="{{ section.settings.placeholder }}"
+              autocomplete="email"
+              required
+            >
+            <button type="submit" class="btn btn--gold">{{ section.settings.button_label }}</button>
+          </div>
+          {%- if form.errors -%}
+            <p class="newsletter-form__error">{{ form.errors | default_errors }}</p>
+          {%- endif -%}
+        {%- endif -%}
+      {%- endform -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Newsletter",
+  "settings": [
+    {
+      "type": "select",
+      "id": "scheme",
+      "label": "Color scheme",
+      "options": [
+        { "value": "white", "label": "White" },
+        { "value": "tint", "label": "Pale blue" },
+        { "value": "ink", "label": "Near-black" }
+      ],
+      "default": "ink"
+    },
+    {
+      "type": "text",
+      "id": "headline",
+      "label": "Headline",
+      "info": "Wrap a word in *asterisks* to accent it.",
+      "default": "Join the *Melt Labs* list."
+    },
+    {
+      "type": "textarea",
+      "id": "body",
+      "label": "Body",
+      "default": "Early access, restock alerts, and the occasional note on the science. No spam."
+    },
+    { "type": "text", "id": "placeholder", "label": "Input placeholder", "default": "Your email" },
+    { "type": "text", "id": "button_label", "label": "Button label", "default": "Sign up" },
+    {
+      "type": "text",
+      "id": "success_text",
+      "label": "Success message",
+      "default": "You're in. Watch your inbox."
+    }
+  ],
+  "presets": [{ "name": "Newsletter" }]
+}
+{% endschema %}

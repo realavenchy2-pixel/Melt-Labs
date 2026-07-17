@@ -486,6 +486,45 @@
         "r5",
         "r6"
       ]
+    },
+    "experts": {
+      "type": "expert-reviews",
+      "settings": {
+        "scheme": "white",
+        "headline": "What *experts* are saying",
+        "subhead": "Practitioners and researchers on the mechanism behind Special Water."
+      },
+      "blocks": {
+        "e1": {
+          "type": "expert",
+          "settings": {
+            "name": "Dr. Placeholder",
+            "title": "Integrative Medicine",
+            "quote": "Blood-sugar stability is the lever most people miss."
+          }
+        },
+        "e2": {
+          "type": "expert",
+          "settings": {
+            "name": "Placeholder, RD",
+            "title": "Registered Dietitian",
+            "quote": "The appeal is that it fits a routine people already have."
+          }
+        },
+        "e3": {
+          "type": "expert",
+          "settings": {
+            "name": "Dr. Placeholder",
+            "title": "Metabolic Researcher",
+            "quote": "The botanical stack targets the right pathways."
+          }
+        }
+      },
+      "block_order": [
+        "e1",
+        "e2",
+        "e3"
+      ]
     }
   },
   "order": [
@@ -501,6 +540,7 @@
     "potency",
     "compare",
     "values",
+    "experts",
     "refs"
   ]
 }
