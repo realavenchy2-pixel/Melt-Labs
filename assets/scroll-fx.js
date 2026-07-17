@@ -5,9 +5,7 @@
       autoplay attribute under some network/battery conditions.
    4. Stat count-up: locked percentages animate from 0 when scrolled
       into view, once.
-   5. Science section scroll-scrub: a single video's currentTime is
-      driven directly by scroll position through the sticky stage,
-      forward on scroll-down, backward on scroll-up.
+   5. FAQ accordion: smooth open/close height animation.
    All of the above collapse to static under prefers-reduced-motion. */
 (function () {
   'use strict';
@@ -154,80 +152,37 @@
     countEls.forEach(function (el) { countObserver.observe(el); });
   }
 
-  /* 5. Science video: scroll-only scrub. The video never autoplays; its
-     currentTime is driven entirely by scroll position through the sticky
-     stage (down = forward, up = rewind). A continuous rAF loop eases the
-     playhead toward the scroll-derived target while the section is in
-     view, so seeking feels smooth rather than stepwise. Under reduced
-     motion / no-JS the poster/first frame simply holds. */
-  document.querySelectorAll('[data-scrub]').forEach(function (scroller) {
-    var video = scroller.querySelector('[data-scrub-video]');
-    if (!video) return;
+  /* 5. FAQ accordion: native <details>/<summary> works without JS; this
+     enhancement smooth-animates the open/close height with WAAPI. */
+  document.querySelectorAll('[data-faq-item]').forEach(function (item) {
+    var summary = item.querySelector('summary');
+    var content = item.querySelector('[data-faq-content]');
+    if (!summary || !content || reduceMotion) return;
 
-    if (reduceMotion) return; /* hold on poster/first frame, no scrub */
+    var animating = false;
+    summary.addEventListener('click', function (e) {
+      e.preventDefault();
+      if (animating) return;
+      animating = true;
 
-    var scrubVh = parseFloat(scroller.getAttribute('data-scrub-vh')) || 350;
-    var duration = 0;
-    var targetTime = 0;
-    var inView = false;
-    var rafId = null;
-
-    function targetFromScroll() {
-      var rect = scroller.getBoundingClientRect();
-      var total = rect.height - window.innerHeight;
-      if (total <= 0) return 0;
-      var progress = Math.min(1, Math.max(0, -rect.top / total));
-      return progress * duration;
-    }
-
-    function tick() {
-      /* Ease currentTime toward the target so scrubbing glides. */
-      var current = video.currentTime;
-      var diff = targetTime - current;
-      if (Math.abs(diff) > 0.01) {
-        var nextTime = current + diff * 0.18;
-        if (video.seeking === false) {
-          try { video.currentTime = nextTime; } catch (e) {}
-        }
-        rafId = requestAnimationFrame(tick);
+      if (item.open) {
+        var closeAnim = content.animate(
+          [{ height: content.offsetHeight + 'px', opacity: 1 }, { height: '0px', opacity: 0 }],
+          { duration: 260, easing: 'cubic-bezier(0.23, 1, 0.32, 1)' }
+        );
+        closeAnim.onfinish = function () {
+          item.open = false;
+          animating = false;
+        };
       } else {
-        rafId = null;
+        item.open = true;
+        var target = content.offsetHeight;
+        var openAnim = content.animate(
+          [{ height: '0px', opacity: 0 }, { height: target + 'px', opacity: 1 }],
+          { duration: 300, easing: 'cubic-bezier(0.23, 1, 0.32, 1)' }
+        );
+        openAnim.onfinish = function () { animating = false; };
       }
-    }
-
-    function requestTick() {
-      if (rafId === null) rafId = requestAnimationFrame(tick);
-    }
-
-    function onScroll() {
-      if (!inView || !duration) return;
-      targetTime = targetFromScroll();
-      requestTick();
-    }
-
-    function enableScrub() {
-      duration = video.duration || 0;
-      if (!duration) return;
-      video.pause();
-      scroller.classList.remove('is-static');
-      scroller.style.height = scrubVh + 'vh';
-      /* Paint the first frame immediately so the stage is never blank. */
-      try { video.currentTime = 0.001; } catch (e) {}
-      targetTime = targetFromScroll();
-      requestTick();
-    }
-
-    if (video.readyState >= 1 && video.duration) {
-      enableScrub();
-    } else {
-      video.addEventListener('loadedmetadata', enableScrub, { once: true });
-    }
-
-    new IntersectionObserver(function (entries) {
-      inView = entries[0].isIntersecting;
-      if (inView) onScroll();
-    }).observe(scroller);
-
-    window.addEventListener('scroll', onScroll, { passive: true });
+    });
   });
 })();

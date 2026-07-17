@@ -197,8 +197,7 @@
         "stat_2_caption": "lost 10+ lbs",
         "stat_3_value": "90%",
         "stat_3_caption": "saw blood sugar stabilize",
-        "attribution": "Based on our in-house study. Individual results may vary.",
-        "scrub_length": 350
+        "attribution": "Based on our in-house study. Individual results may vary."
       }
     },
     "who": {
@@ -525,6 +524,65 @@
         "e2",
         "e3"
       ]
+    },
+    "faq": {
+      "type": "faq",
+      "settings": {
+        "scheme": "tint",
+        "headline": "Questions, *answered.*"
+      },
+      "blocks": {
+        "q1": {
+          "type": "qa",
+          "settings": {
+            "question": "How do I use Special Water?",
+            "answer": "Two drops in whatever you're already drinking, once or twice a day. Coffee, water, juice, tea. No taste, no prep, no routine to change."
+          }
+        },
+        "q2": {
+          "type": "qa",
+          "settings": {
+            "question": "What does it taste like?",
+            "answer": "Nothing. The serum is designed to be undetectable in any drink, hot or cold."
+          }
+        },
+        "q3": {
+          "type": "qa",
+          "settings": {
+            "question": "Does it contain stimulants or caffeine?",
+            "answer": "No stimulants. The formula works through blood sugar support, not stimulation, so there are no jitters and no crash."
+          }
+        },
+        "q4": {
+          "type": "qa",
+          "settings": {
+            "question": "How long until I notice a difference?",
+            "answer": "Everyone is different. Most people describe cravings quieting first, with steadier energy following as daily use continues over the first few weeks. Consistency matters more than dose."
+          }
+        },
+        "q5": {
+          "type": "qa",
+          "settings": {
+            "question": "Is it safe to take with my medication?",
+            "answer": "Special Water is a dietary supplement, not a medication. If you are pregnant, nursing, have a medical condition, or take prescription medication (including GLP-1s), talk with your doctor before starting any supplement."
+          }
+        },
+        "q6": {
+          "type": "qa",
+          "settings": {
+            "question": "What is your return policy?",
+            "answer": "If it's not for you, reach out to our support team within 30 days of delivery and we'll make it right."
+          }
+        }
+      },
+      "block_order": [
+        "q1",
+        "q2",
+        "q3",
+        "q4",
+        "q5",
+        "q6"
+      ]
     }
   },
   "order": [
@@ -541,6 +599,7 @@
     "compare",
     "values",
     "experts",
+    "faq",
     "refs"
   ]
 }

@@ -1,0 +1,144 @@
+{%- comment -%}
+  FAQ accordion. Native <details>/<summary> so it works without JS;
+  scroll-fx.js smooth-animates open/close and the chevron rotates via
+  the [open] attribute. Emits FAQPage JSON-LD so the questions are
+  eligible for rich results in search.
+{%- endcomment -%}
+
+{%- assign scheme = section.settings.scheme | default: 'tint' -%}
+
+<section class="section section--scheme-{{ scheme }} faq" id="faq">
+  <div class="container container--narrow">
+    <div class="section-header section-header--center" data-reveal>
+      <h2 class="h2">{% render 'accent-text', text: section.settings.headline, color: 'blue' %}</h2>
+      {%- if section.settings.subhead != blank -%}
+        <p class="lead" style="margin-inline: auto;">{{ section.settings.subhead }}</p>
+      {%- endif -%}
+    </div>
+
+    <div class="faq__list" data-reveal>
+      {%- for block in section.blocks -%}
+        <details class="faq__item" data-faq-item {{ block.shopify_attributes }}>
+          <summary class="faq__q">
+            <span>{{ block.settings.question }}</span>
+            <span class="faq__chevron" aria-hidden="true">{% render 'icon', name: 'chevron-right' %}</span>
+          </summary>
+          <div class="faq__a" data-faq-content>
+            <p>{{ block.settings.answer }}</p>
+          </div>
+        </details>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {%- for block in section.blocks -%}
+    {
+      "@type": "Question",
+      "name": {{ block.settings.question | json }},
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": {{ block.settings.answer | json }}
+      }
+    }{%- unless forloop.last -%},{%- endunless -%}
+    {%- endfor -%}
+  ]
+}
+</script>
+
+{% schema %}
+{
+  "name": "FAQ",
+  "settings": [
+    {
+      "type": "text",
+      "id": "headline",
+      "label": "Headline",
+      "info": "Wrap a word in *asterisks* to accent it.",
+      "default": "Questions, *answered.*"
+    },
+    { "type": "text", "id": "subhead", "label": "Subhead" },
+    {
+      "type": "select",
+      "id": "scheme",
+      "label": "Color scheme",
+      "options": [
+        { "value": "white", "label": "White" },
+        { "value": "tint", "label": "Pale blue" },
+        { "value": "ink", "label": "Near-black" }
+      ],
+      "default": "tint"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "qa",
+      "name": "Question",
+      "settings": [
+        { "type": "text", "id": "question", "label": "Question", "default": "How do I use Special Water?" },
+        {
+          "type": "textarea",
+          "id": "answer",
+          "label": "Answer",
+          "default": "Two drops in whatever you're already drinking, once or twice a day. No taste, no prep, no routine to change."
+        }
+      ]
+    }
+  ],
+  "max_blocks": 12,
+  "presets": [
+    {
+      "name": "FAQ",
+      "blocks": [
+        {
+          "type": "qa",
+          "settings": {
+            "question": "How do I use Special Water?",
+            "answer": "Two drops in whatever you're already drinking, once or twice a day. Coffee, water, juice, tea. No taste, no prep, no routine to change."
+          }
+        },
+        {
+          "type": "qa",
+          "settings": {
+            "question": "What does it taste like?",
+            "answer": "Nothing. The serum is designed to be undetectable in any drink, hot or cold."
+          }
+        },
+        {
+          "type": "qa",
+          "settings": {
+            "question": "Does it contain stimulants or caffeine?",
+            "answer": "No stimulants. The formula works through blood sugar support, not stimulation, so there are no jitters and no crash."
+          }
+        },
+        {
+          "type": "qa",
+          "settings": {
+            "question": "How long until I notice a difference?",
+            "answer": "Everyone is different. Most people describe cravings quieting first, with steadier energy following as daily use continues over the first few weeks. Consistency matters more than dose."
+          }
+        },
+        {
+          "type": "qa",
+          "settings": {
+            "question": "Is it safe to take with my medication?",
+            "answer": "Special Water is a dietary supplement, not a medication. If you are pregnant, nursing, have a medical condition, or take prescription medication (including GLP-1s), talk with your doctor before starting any supplement."
+          }
+        },
+        {
+          "type": "qa",
+          "settings": {
+            "question": "What is your return policy?",
+            "answer": "If it's not for you, reach out to our support team within 30 days of delivery and we'll make it right."
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
