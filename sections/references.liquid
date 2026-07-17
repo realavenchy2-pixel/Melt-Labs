@@ -15,20 +15,22 @@
       <p class="references__intro">{{ section.settings.intro }}</p>
     {%- endif -%}
 
-    {%- for block in section.blocks -%}
-      <div class="references__group" {{ block.shopify_attributes }}>
-        <h3 class="references__group-title">{{ block.settings.title }}</h3>
-        <ul class="references__list">
-          {%- assign citations = block.settings.citations | newline_to_br | split: '<br />' -%}
-          {%- for citation in citations -%}
-            {%- assign trimmed = citation | strip -%}
-            {%- if trimmed != blank -%}
-              <li>{{ trimmed }}</li>
-            {%- endif -%}
-          {%- endfor -%}
-        </ul>
-      </div>
-    {%- endfor -%}
+    <div class="references__groups">
+      {%- for block in section.blocks -%}
+        <div class="references__group" {{ block.shopify_attributes }}>
+          <h3 class="references__group-title">{{ block.settings.title }}</h3>
+          <ol class="references__list">
+            {%- assign citations = block.settings.citations | newline_to_br | split: '<br />' -%}
+            {%- for citation in citations -%}
+              {%- assign trimmed = citation | strip -%}
+              {%- if trimmed != blank -%}
+                <li class="references__item">{{ trimmed }}</li>
+              {%- endif -%}
+            {%- endfor -%}
+          </ol>
+        </div>
+      {%- endfor -%}
+    </div>
 
     {%- if section.settings.disclaimer != blank -%}
       <p class="references__disclaimer">{{ section.settings.disclaimer }}</p>

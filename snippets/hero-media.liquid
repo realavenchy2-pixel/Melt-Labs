@@ -39,18 +39,30 @@
     if video_desktop != blank and video_mobile != blank
       assign two_videos = true
     endif
+    # Poster frames make first paint instant while the video buffers.
+    # Re-use the matching still image if one was uploaded.
+    assign poster_desktop = image_desktop | default: image_mobile
+    assign poster_mobile = image_mobile | default: image_desktop
+    assign poster_d = ''
+    assign poster_m = ''
+    if poster_desktop != blank
+      assign poster_d = poster_desktop | image_url: width: 1200
+    endif
+    if poster_mobile != blank
+      assign poster_m = poster_mobile | image_url: width: 900
+    endif
   -%}
 
   {%- if vd != blank -%}
     {%- if two_videos -%}
-      <video class="hero-vid hero-vid--desktop" data-autoplay-video data-hero-breakpoint="desktop" muted loop playsinline webkit-playsinline disablepictureinpicture preload="none" aria-hidden="true" tabindex="-1">
+      <video class="hero-vid hero-vid--desktop" data-autoplay-video data-hero-breakpoint="desktop" muted loop playsinline webkit-playsinline disablepictureinpicture preload="metadata"{% if poster_d != blank %} poster="{{ poster_d }}"{% endif %} aria-hidden="true" tabindex="-1">
         {%- for s in vd.sources -%}<source src="{{ s.url }}" type="{{ s.mime_type }}">{%- endfor -%}
       </video>
-      <video class="hero-vid hero-vid--mobile" data-autoplay-video data-hero-breakpoint="mobile" muted loop playsinline webkit-playsinline disablepictureinpicture preload="none" aria-hidden="true" tabindex="-1">
+      <video class="hero-vid hero-vid--mobile" data-autoplay-video data-hero-breakpoint="mobile" muted loop playsinline webkit-playsinline disablepictureinpicture preload="metadata"{% if poster_m != blank %} poster="{{ poster_m }}"{% endif %} aria-hidden="true" tabindex="-1">
         {%- for s in vm.sources -%}<source src="{{ s.url }}" type="{{ s.mime_type }}">{%- endfor -%}
       </video>
     {%- else -%}
-      <video class="hero-vid" data-autoplay-video muted loop playsinline webkit-playsinline disablepictureinpicture preload="auto" autoplay aria-hidden="true" tabindex="-1">
+      <video class="hero-vid" data-autoplay-video muted loop playsinline webkit-playsinline disablepictureinpicture preload="auto" autoplay{% if poster_d != blank %} poster="{{ poster_d }}"{% endif %} aria-hidden="true" tabindex="-1">
         {%- for s in vd.sources -%}<source src="{{ s.url }}" type="{{ s.mime_type }}">{%- endfor -%}
       </video>
     {%- endif -%}

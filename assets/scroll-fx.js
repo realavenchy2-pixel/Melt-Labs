@@ -30,6 +30,40 @@
     revealEls.forEach(function (el) { revealObserver.observe(el); });
   }
 
+  /* 1b. Mobile menu (hamburger). Toggles the panel, morphs the icon to
+     an X, locks body scroll while open, and closes on link tap, Escape,
+     or resize up to desktop. */
+  var menuToggle = document.querySelector('[data-menu-toggle]');
+  var mobileMenu = document.querySelector('[data-mobile-menu]');
+  if (menuToggle && mobileMenu) {
+    function openMenu() {
+      mobileMenu.hidden = false;
+      /* next frame so the unhide paints before the open animation */
+      requestAnimationFrame(function () { mobileMenu.classList.add('is-open'); });
+      menuToggle.setAttribute('aria-expanded', 'true');
+      document.body.style.overflow = 'hidden';
+    }
+    function closeMenu() {
+      mobileMenu.classList.remove('is-open');
+      mobileMenu.hidden = true;
+      menuToggle.setAttribute('aria-expanded', 'false');
+      document.body.style.overflow = '';
+    }
+    menuToggle.addEventListener('click', function () {
+      if (menuToggle.getAttribute('aria-expanded') === 'true') closeMenu();
+      else openMenu();
+    });
+    mobileMenu.addEventListener('click', function (e) {
+      if (e.target.closest('a')) closeMenu();
+    });
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape' && menuToggle.getAttribute('aria-expanded') === 'true') closeMenu();
+    });
+    window.addEventListener('resize', function () {
+      if (window.innerWidth >= 900 && menuToggle.getAttribute('aria-expanded') === 'true') closeMenu();
+    });
+  }
+
   /* 2. Scroll-aware product subnav. The site header and this subnav
      both pin to the top of the viewport (sticky vs. fixed), so only one
      may be visible at a time - hide the header the moment the subnav
@@ -60,6 +94,9 @@
     function syncHeroVideos() {
       heroVideos.forEach(function (video) {
         if (isVisible(video)) {
+          /* Upgrade the visible one to eager buffering so it starts as
+             fast as possible; the hidden breakpoint stays light. */
+          if (video.preload !== 'auto') video.preload = 'auto';
           var p = video.play();
           if (p && typeof p.catch === 'function') p.catch(function () {});
         } else if (!video.paused) {
@@ -117,23 +154,38 @@
     countEls.forEach(function (el) { countObserver.observe(el); });
   }
 
-  /* 5. Science scrub: video.currentTime tracks scroll progress through
-     the sticky stage. Scroll down plays forward, scroll up rewinds -
-     no autoplay, no loop, purely position-driven like Apple's exploded
-     product views. Falls back to a static poster frame under reduced
-     motion, no video, or before metadata (duration) is known. */
+  /* 5. Science video. Baseline: the video just autoplays muted+looped
+     (markup handles that), so the section is never blank. On a desktop
+     pointer with motion enabled we UPGRADE to a scroll-scrub: pause the
+     loop, size the scroller tall, pin the stage, and drive currentTime
+     from scroll position (down = forward, up = rewind). Mobile, reduced
+     motion, and no-JS all keep the plain autoplay loop. */
+  var desktopScrub = window.matchMedia('(min-width: 768px) and (pointer: fine)').matches;
   document.querySelectorAll('[data-scrub]').forEach(function (scroller) {
     var video = scroller.querySelector('[data-scrub-video]');
-    if (!video) return; /* no video set yet - placeholder markup handles itself */
+    if (!video) return;
 
-    if (reduceMotion) {
-      scroller.classList.add('is-static');
-      return;
-    }
+    /* Nudge autoplay for browsers that ignore the attribute. */
+    var kick = video.play();
+    if (kick && typeof kick.catch === 'function') kick.catch(function () {});
 
+    if (reduceMotion || !desktopScrub) return; /* keep plain autoplay loop */
+
+    var scrubVh = parseFloat(scroller.getAttribute('data-scrub-vh')) || 350;
     var duration = 0;
     var ticking = false;
     var inView = false;
+
+    function enableScrub() {
+      duration = video.duration || 0;
+      if (!duration) return;
+      video.pause();
+      video.loop = false;
+      video.removeAttribute('autoplay');
+      scroller.classList.remove('is-static');
+      scroller.style.height = scrubVh + 'vh';
+      update();
+    }
 
     function update() {
       ticking = false;
@@ -154,16 +206,10 @@
       requestAnimationFrame(update);
     }
 
-    function onMetadata() {
-      duration = video.duration || 0;
-      scroller.classList.remove('is-static');
-      update();
-    }
-
     if (video.readyState >= 1 && video.duration) {
-      onMetadata();
+      enableScrub();
     } else {
-      video.addEventListener('loadedmetadata', onMetadata, { once: true });
+      video.addEventListener('loadedmetadata', enableScrub, { once: true });
     }
 
     new IntersectionObserver(function (entries) {

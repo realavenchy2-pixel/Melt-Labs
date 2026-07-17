@@ -1,15 +1,13 @@
 {%- comment -%}
   S6 — "The Science Behind Special Water" (reference: PDF p.7-10,
-  Apple's scroll-scrubbed exploded view). A sticky stage holds a single
-  video whose currentTime is driven directly by scroll position: scroll
-  down plays forward, scroll up rewinds. scroll-fx.js reads
-  data-scrub-vh to convert the section's scroll range into a 0-1
-  progress value, then sets video.currentTime = progress * duration.
+  Apple's scroll-scrubbed exploded view).
 
-  Falls back to a static poster frame under reduced motion or when no
-  video is set yet (labeled placeholder names the encoding requirement,
-  since scroll-scrub needs a keyframe-dense/frame-seekable export -
-  a long-GOP video will stutter when seeking backward on scroll-up).
+  Robust playback model: the video ALWAYS autoplays muted+looped, so the
+  section is never blank. On desktop with motion enabled, scroll-fx.js
+  upgrades it to a scroll-scrubbed experience (pauses the loop, sizes the
+  sticky scroller tall, and drives currentTime from scroll position). On
+  mobile / reduced-motion / no-JS, it simply plays in place. The media
+  backdrop is ink so any buffering moment reads as dark, not light blue.
 {%- endcomment -%}
 
 <section class="section section--scheme-ink">
@@ -22,22 +20,23 @@
     class="science__scroller is-static"
     data-scrub
     data-scrub-vh="{{ section.settings.scrub_length }}"
-    style="height: {{ section.settings.scrub_length }}vh;"
   >
     <div class="science__stage">
       <div class="science__frame">
         {%- if section.settings.video -%}
-          <div class="media-slot media-slot--rounded" style="--aspect-mobile: 4 / 5; --aspect-desktop: 1 / 1;">
+          <div class="media-slot media-slot--rounded science__media" style="--aspect-mobile: 4 / 5; --aspect-desktop: 1 / 1;">
             <div class="media-slot__frame"></div>
             <video
               class="science__video"
               data-scrub-video
+              autoplay
               muted
+              loop
               playsinline
               webkit-playsinline
               disablepictureinpicture
               preload="auto"
-              poster="{{ section.settings.poster | image_url: width: 1200 }}"
+              {% if section.settings.poster != blank %}poster="{{ section.settings.poster | image_url: width: 1200 }}"{% endif %}
               aria-hidden="true"
               tabindex="-1"
             >
@@ -48,17 +47,16 @@
           </div>
         {%- else -%}
           <!-- SWAP: science_scrollable_scrub_video, 4:5 mobile / 1:1 desktop.
-               Export frame-seekable / keyframe-dense (short GOP, ideally
-               all-intra or a keyframe every 1-2 frames): scroll-scrub reads
-               currentTime on every scroll tick in both directions, and a
-               long-GOP encode will stutter or blank out when seeking
-               backward (scroll-up / rewind). -->
-          <div class="media-slot media-slot--rounded" style="--aspect-mobile: 4 / 5; --aspect-desktop: 1 / 1;">
+               For the desktop scroll-scrub to look smooth in both
+               directions, export frame-seekable / keyframe-dense (short
+               GOP). Until a video is set this placeholder shows; on
+               mobile the video simply autoplays. -->
+          <div class="media-slot media-slot--rounded science__media" style="--aspect-mobile: 4 / 5; --aspect-desktop: 1 / 1;">
             <div class="media-slot__frame"></div>
             <div class="media-slot__label" aria-hidden="true">
-              <strong>science_scrollable_scrub_video</strong>
+              <strong>science_video</strong>
               <span>4 / 5 mobile &middot; 1 / 1 desktop</span>
-              <span>Export frame-seekable / keyframe-dense (short GOP) for smooth scroll-scrub in both directions</span>
+              <span>Autoplays on mobile; scroll-scrubs on desktop. Export keyframe-dense for smoothest desktop scrubbing.</span>
             </div>
           </div>
         {%- endif -%}

@@ -29,6 +29,11 @@ a { color: inherit; }
   --gutter: clamp(1.25rem, 5vw, 2.5rem);
   --content-max: 1200px;
   --copy-max: 34em;
+  /* Semantic accents, tuned to sit beside the cyan/gold brand: a
+     teal-leaning green and a warm coral red rather than default UI
+     green/red, so the thumbs read on-brand. */
+  --color-success: #12b886;
+  --color-danger: #e5533d;
 }
 
 .skip-link {
@@ -230,9 +235,91 @@ h1, h2, h3, .h1, .h2, .h3 {
 }
 .site-header__cart { display: inline-flex; padding: 0.5rem; border-radius: 999px; }
 
+/* Hamburger: three lines built from one element + pseudo-elements, and
+   they morph into an X when the menu is open. Hidden at >= 900px where
+   the inline nav takes over. */
+.site-header__burger {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px; height: 40px;
+  margin-left: -0.5rem;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+}
+.site-header__burger-lines,
+.site-header__burger-lines::before,
+.site-header__burger-lines::after {
+  content: "";
+  display: block;
+  width: 20px;
+  height: 2px;
+  border-radius: 2px;
+  background: var(--color-ink);
+  transition: transform 240ms var(--ease-out), opacity 160ms var(--ease-out);
+}
+.site-header__burger-lines { position: relative; }
+.site-header__burger-lines::before { position: absolute; top: -6px; left: 0; }
+.site-header__burger-lines::after { position: absolute; top: 6px; left: 0; }
+.site-header__burger[aria-expanded="true"] .site-header__burger-lines { background: transparent; }
+.site-header__burger[aria-expanded="true"] .site-header__burger-lines::before { transform: translateY(6px) rotate(45deg); }
+.site-header__burger[aria-expanded="true"] .site-header__burger-lines::after { transform: translateY(-6px) rotate(-45deg); }
+@media (min-width: 900px) {
+  .site-header__burger { display: none; }
+}
+
 .site-header__nav { display: none; }
 @media (min-width: 900px) {
   .site-header__nav { display: block; }
+}
+
+/* Mobile menu panel: slides down under the header, links stagger in. */
+.mobile-menu {
+  border-top: 1px solid color-mix(in srgb, var(--color-ink) 8%, transparent);
+  background: color-mix(in srgb, var(--color-bg) 96%, transparent);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  overflow: hidden;
+}
+.mobile-menu[hidden] { display: none; }
+.mobile-menu__list {
+  list-style: none;
+  margin: 0;
+  padding: 0.5rem var(--gutter) 1.25rem;
+  display: grid;
+  gap: 0.25rem;
+}
+.mobile-menu__list a {
+  display: block;
+  padding: 0.85rem 0.25rem;
+  font-family: var(--font-heading);
+  font-weight: var(--weight-heading);
+  font-size: 1.25rem;
+  letter-spacing: -0.01em;
+  text-decoration: none;
+  color: var(--color-ink);
+  border-bottom: 1px solid color-mix(in srgb, var(--color-ink) 7%, transparent);
+}
+.mobile-menu__list a[aria-current="page"] { color: var(--color-primary); }
+.mobile-menu.is-open .mobile-menu__list a {
+  opacity: 0;
+  transform: translateY(8px);
+  animation: menuLinkIn 320ms var(--ease-out) forwards;
+}
+.mobile-menu.is-open .mobile-menu__list li:nth-child(1) a { animation-delay: 40ms; }
+.mobile-menu.is-open .mobile-menu__list li:nth-child(2) a { animation-delay: 80ms; }
+.mobile-menu.is-open .mobile-menu__list li:nth-child(3) a { animation-delay: 120ms; }
+.mobile-menu.is-open .mobile-menu__list li:nth-child(4) a { animation-delay: 160ms; }
+.mobile-menu.is-open .mobile-menu__list li:nth-child(5) a { animation-delay: 200ms; }
+.mobile-menu.is-open .mobile-menu__list li:nth-child(n+6) a { animation-delay: 240ms; }
+@keyframes menuLinkIn { to { opacity: 1; transform: none; } }
+@media (min-width: 900px) {
+  .mobile-menu { display: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .mobile-menu.is-open .mobile-menu__list a { opacity: 1; transform: none; animation: none; }
 }
 .site-header__nav-list {
   display: flex;
@@ -418,6 +505,30 @@ h1, h2, h3, .h1, .h2, .h3 {
   max-width: 420px;
   scroll-snap-align: start;
 }
+/* Smooth, immersive slide transitions: inactive slides sit slightly
+   smaller and dimmer, the centered one stretches to full size. Only
+   applied once JS has enhanced the carousel, so no-JS shows all slides
+   at full clarity. transform-origin centers the scale so it "breathes"
+   rather than snapping. */
+.carousel--enhanced .carousel__slide {
+  transform: scale(0.93);
+  opacity: 0.55;
+  transform-origin: center;
+  transition: transform 450ms var(--ease-out), opacity 450ms var(--ease-out);
+  will-change: transform;
+}
+.carousel--enhanced .carousel__slide.is-active {
+  transform: scale(1);
+  opacity: 1;
+}
+@media (prefers-reduced-motion: reduce) {
+  .carousel--enhanced .carousel__slide {
+    transform: none;
+    opacity: 1;
+    transition: opacity 200ms var(--ease-out);
+  }
+  .carousel--enhanced .carousel__slide:not(.is-active) { opacity: 0.7; }
+}
 @media (min-width: 768px) {
   .carousel__track { gap: 1.25rem; }
   .carousel__slide { flex-basis: 44%; }
@@ -513,9 +624,13 @@ h1, h2, h3, .h1, .h2, .h3 {
   flex-direction: column;
   justify-content: flex-end;
   padding: 1.75rem;
-  background: linear-gradient(180deg, rgba(22,22,22,0) 38%, rgba(22,22,22,0.72) 100%);
+  /* Stronger, two-stop wash so the white text stays legible over any
+     ingredient photo (or the placeholder) without washing the image. */
+  background: linear-gradient(180deg, rgba(22,22,22,0) 30%, rgba(22,22,22,0.55) 62%, rgba(22,22,22,0.86) 100%);
   color: #fff;
 }
+.ingredient-slide__name,
+.ingredient-slide__role { color: #fff; text-shadow: 0 1px 12px rgba(0,0,0,0.35); }
 .ingredient-slide__name {
   font-family: var(--font-heading);
   font-weight: var(--weight-heading);
@@ -632,12 +747,17 @@ h1, h2, h3, .h1, .h2, .h3 {
 }
 .science__frame { position: relative; width: min(92vw, 640px); }
 .science__frame .media-slot { border-radius: var(--radius-card); }
+/* Ink backdrop so a buffering frame reads as dark, never light blue. */
+.science__media { background: var(--color-ink); }
+.science__media .media-slot__label { color: rgba(255,255,255,0.6); border-color: rgba(255,255,255,0.22); }
+.science__media .media-slot__label strong { color: #fff; }
 .science__video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
 .science__spacer { height: 60svh; }
 .science__stats { padding-top: clamp(2rem, 5vw, 3rem); }
 
-/* Reduced-motion / no video yet: single static poster frame, no
-   scroll-scrub height reserved (overrides the inline scrub_length vh). */
+/* Baseline (autoplay loop, mobile, reduced-motion, no-JS): plain block
+   flow, no tall scroll reserved. JS adds the tall height + sticky stage
+   only when it upgrades to the desktop scroll-scrub. */
 .science__scroller.is-static { height: auto !important; }
 .science__scroller.is-static .science__stage { position: static; height: auto; }
 .science__scroller.is-static .science__spacer { display: none; }
@@ -698,12 +818,14 @@ h1, h2, h3, .h1, .h2, .h3 {
 }
 .compare__badge svg { width: 18px; height: 18px; }
 .compare__badge--up {
-  background: rgba(255, 255, 255, 0.22);
+  background: var(--color-success);
   color: #fff;
+  box-shadow: 0 4px 14px color-mix(in srgb, var(--color-success) 45%, transparent);
 }
 .compare__badge--down {
-  background: color-mix(in srgb, var(--color-ink) 8%, transparent);
-  color: color-mix(in srgb, var(--color-ink) 45%, transparent);
+  background: var(--color-danger);
+  color: #fff;
+  box-shadow: 0 4px 14px color-mix(in srgb, var(--color-danger) 30%, transparent);
 }
 .compare__col-title { font-size: 1.3rem; margin-bottom: 0.25rem; }
 .compare__col--featured .compare__col-title { color: #fff; }
@@ -755,20 +877,55 @@ h1, h2, h3, .h1, .h2, .h3 {
 .value-card__title { font-size: 1.2rem; }
 .value-card__text { color: color-mix(in srgb, var(--color-ink) 70%, transparent); }
 
-/* ---- References ---- */
+/* ---- References (styled as a real academic reference list) ---- */
 .references { font-size: 0.85rem; }
-.references__intro { max-width: 62ch; color: color-mix(in srgb, var(--color-ink) 65%, transparent); margin-bottom: 2.5rem; }
-.references__group { padding: 1.25rem 0; border-top: 1px solid color-mix(in srgb, var(--color-ink) 10%, transparent); }
-.references__group-title { font-size: 0.95rem; margin-bottom: 0.6rem; }
-.references__list { list-style: none; padding: 0; display: grid; gap: 0.5rem; }
-.references__list li { color: color-mix(in srgb, var(--color-ink) 60%, transparent); line-height: 1.5; }
+.references__intro {
+  max-width: 64ch;
+  color: color-mix(in srgb, var(--color-ink) 65%, transparent);
+  margin-bottom: 2.5rem;
+  padding-left: 1rem;
+  border-left: 2px solid var(--color-primary);
+  font-style: italic;
+}
+/* Continuous [1]..[n] numbering across every ingredient group. */
+.references__groups { counter-reset: ref; }
+.references__group { padding: 1.5rem 0; border-top: 1px solid color-mix(in srgb, var(--color-ink) 12%, transparent); }
+.references__group:last-of-type { border-bottom: 1px solid color-mix(in srgb, var(--color-ink) 12%, transparent); }
+.references__group-title {
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--color-primary);
+  margin-bottom: 1rem;
+}
+.references__list { list-style: none; padding: 0; margin: 0; display: grid; gap: 0.9rem; }
+.references__item {
+  position: relative;
+  counter-increment: ref;
+  padding-left: 2.6rem;
+  color: color-mix(in srgb, var(--color-ink) 72%, transparent);
+  line-height: 1.55;
+  font-variant-numeric: tabular-nums;
+}
+.references__item::before {
+  content: "[" counter(ref) "]";
+  position: absolute;
+  left: 0;
+  top: 0;
+  min-width: 2rem;
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  color: color-mix(in srgb, var(--color-ink) 42%, transparent);
+}
 .references__disclaimer {
   margin-top: 2.5rem;
   padding-top: 1.25rem;
   border-top: 1px solid color-mix(in srgb, var(--color-ink) 10%, transparent);
   font-size: 0.78rem;
   color: color-mix(in srgb, var(--color-ink) 50%, transparent);
-  max-width: 70ch;
+  max-width: 72ch;
 }
 
 /* ---- Home hero ---- */

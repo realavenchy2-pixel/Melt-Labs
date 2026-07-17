@@ -1,5 +1,18 @@
 <header class="site-header">
   <div class="container site-header__inner">
+    {%- if section.settings.menu != blank -%}
+      <button
+        class="site-header__burger"
+        type="button"
+        data-menu-toggle
+        aria-label="Menu"
+        aria-expanded="false"
+        aria-controls="mobile-menu"
+      >
+        <span class="site-header__burger-lines" aria-hidden="true"></span>
+      </button>
+    {%- endif -%}
+
     <a class="site-header__logo" href="{{ routes.root_url }}">
       {%- if settings.logo -%}
         {{
@@ -33,6 +46,20 @@
       {%- render 'icon', name: 'cart' -%}
     </a>
   </div>
+
+  {%- if section.settings.menu != blank -%}
+    <div class="mobile-menu" id="mobile-menu" data-mobile-menu hidden>
+      <nav aria-label="Mobile">
+        <ul class="mobile-menu__list">
+          {%- for link in section.settings.menu.links -%}
+            <li>
+              <a href="{{ link.url }}" {% if link.active %}aria-current="page"{% endif %}>{{ link.title }}</a>
+            </li>
+          {%- endfor -%}
+        </ul>
+      </nav>
+    </div>
+  {%- endif -%}
 </header>
 
 {% schema %}
