@@ -156,6 +156,18 @@
     },
     "science": {
       "type": "science-scroll",
+      "settings": {
+        "headline": "The Science Behind Special Water",
+        "body": "Special Water was built around one mechanism: stabilizing blood sugar to shut off the cravings that sabotage weight loss.",
+        "stat_intro": "In an in-house study",
+        "stat_1_value": "93%",
+        "stat_1_caption": "reported fewer cravings",
+        "stat_2_value": "90%",
+        "stat_2_caption": "lost 10+ lbs",
+        "stat_3_value": "90%",
+        "stat_3_caption": "saw blood sugar stabilize",
+        "attribution": "Based on our in-house study. Individual results may vary."
+      },
       "blocks": {
         "f1": { "type": "frame" },
         "f2": { "type": "frame" },
