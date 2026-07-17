@@ -1,0 +1,97 @@
+{%- comment -%}
+  Responsive hero media: separate mobile and desktop assets for both
+  video and image, so the 9:16 mobile crop and 16:9 desktop crop each
+  get a purpose-built file. Used by the product hero and the home hero.
+
+  To avoid downloading both breakpoints, videos use preload="none" and
+  scroll-fx.js only plays whichever one is visible at the current
+  breakpoint (re-checked on resize). Images use a native <picture> so
+  the browser fetches only the matching source.
+
+  Params:
+    media_type     — 'video' | 'image'
+    video_desktop  — Shopify video object (desktop / default)
+    video_mobile   — Shopify video object (mobile; falls back to desktop)
+    image_desktop  — image object (desktop / default)
+    image_mobile   — image object (mobile; falls back to desktop)
+    label          — placeholder label when nothing is set
+    aspect_mobile  — e.g. '9 / 16'
+    aspect_desktop — e.g. '16 / 9'
+    eager          — true above the fold
+{%- endcomment -%}
+
+{%- liquid
+  assign aspect_desktop = aspect_desktop | default: aspect_mobile
+  assign sizes = '100vw'
+-%}
+
+{%- if media_type == 'video' -%}
+  {%- liquid
+    assign vd = video_desktop
+    assign vm = video_mobile
+    if vd == blank
+      assign vd = vm
+    endif
+    if vm == blank
+      assign vm = vd
+    endif
+    assign two_videos = false
+    if video_desktop != blank and video_mobile != blank
+      assign two_videos = true
+    endif
+  -%}
+
+  {%- if vd != blank -%}
+    {%- if two_videos -%}
+      <video class="hero-vid hero-vid--desktop" data-autoplay-video data-hero-breakpoint="desktop" muted loop playsinline webkit-playsinline disablepictureinpicture preload="none" aria-hidden="true" tabindex="-1">
+        {%- for s in vd.sources -%}<source src="{{ s.url }}" type="{{ s.mime_type }}">{%- endfor -%}
+      </video>
+      <video class="hero-vid hero-vid--mobile" data-autoplay-video data-hero-breakpoint="mobile" muted loop playsinline webkit-playsinline disablepictureinpicture preload="none" aria-hidden="true" tabindex="-1">
+        {%- for s in vm.sources -%}<source src="{{ s.url }}" type="{{ s.mime_type }}">{%- endfor -%}
+      </video>
+    {%- else -%}
+      <video class="hero-vid" data-autoplay-video muted loop playsinline webkit-playsinline disablepictureinpicture preload="auto" autoplay aria-hidden="true" tabindex="-1">
+        {%- for s in vd.sources -%}<source src="{{ s.url }}" type="{{ s.mime_type }}">{%- endfor -%}
+      </video>
+    {%- endif -%}
+  {%- else -%}
+    {%- render 'media-placeholder', label: label, aspect_mobile: aspect_mobile, aspect_desktop: aspect_desktop -%}
+  {%- endif -%}
+
+{%- elsif media_type == 'image' -%}
+  {%- liquid
+    assign imd = image_desktop
+    assign imm = image_mobile
+    if imd == blank
+      assign imd = imm
+    endif
+    if imm == blank
+      assign imm = imd
+    endif
+  -%}
+
+  {%- if imd != blank -%}
+    <picture>
+      {%- if image_desktop != blank and image_mobile != blank -%}
+        <source media="(min-width: 768px)" srcset="{{ imd | image_url: width: 2000 }}">
+        <img
+          src="{{ imm | image_url: width: 1200 }}"
+          srcset="{{ imm | image_url: width: 600 }} 600w, {{ imm | image_url: width: 900 }} 900w, {{ imm | image_url: width: 1200 }} 1200w"
+          sizes="{{ sizes }}"
+          width="{{ imm.width }}"
+          height="{{ imm.height }}"
+          alt=""
+          {% if eager %}loading="eager" fetchpriority="high"{% else %}loading="lazy"{% endif %}
+          decoding="async"
+        >
+      {%- else -%}
+        {%- render 'responsive-image', image: imd, sizes: sizes, eager: eager -%}
+      {%- endif -%}
+    </picture>
+  {%- else -%}
+    {%- render 'media-placeholder', label: label, aspect_mobile: aspect_mobile, aspect_desktop: aspect_desktop -%}
+  {%- endif -%}
+
+{%- else -%}
+  {%- render 'media-placeholder', label: label, aspect_mobile: aspect_mobile, aspect_desktop: aspect_desktop -%}
+{%- endif -%}

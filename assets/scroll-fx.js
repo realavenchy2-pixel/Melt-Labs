@@ -45,19 +45,35 @@
     }).observe(sentinel);
   }
 
-  /* 3. Hero video autoplay safety-net. The markup already carries the
-     literal autoplay/muted/playsinline attributes iOS requires; this
-     just nudges playback for browsers/situations that ignore autoplay
-     (low-power mode, some in-app webviews). Silently ignored if it
-     fails - the poster/fallback image still shows. */
-  document.querySelectorAll('[data-autoplay-video]').forEach(function (video) {
-    var tryPlay = function () {
-      var p = video.play();
-      if (p && typeof p.catch === 'function') p.catch(function () {});
-    };
-    if (video.readyState >= 2) tryPlay();
-    else video.addEventListener('loadeddata', tryPlay, { once: true });
-  });
+  /* 3. Hero video autoplay. Plays only the video that is actually
+     visible at the current breakpoint (the responsive mobile/desktop
+     pair hides one via CSS), so the hidden file - which uses
+     preload="none" - never downloads. Re-checked on resize so crossing
+     the breakpoint starts the newly-shown video. Safe on browsers/
+     situations that ignore the autoplay attribute (low-power mode,
+     in-app webviews); failures are ignored and the poster still shows. */
+  var heroVideos = document.querySelectorAll('[data-autoplay-video]');
+  if (heroVideos.length) {
+    function isVisible(el) {
+      return el.getClientRects().length > 0;
+    }
+    function syncHeroVideos() {
+      heroVideos.forEach(function (video) {
+        if (isVisible(video)) {
+          var p = video.play();
+          if (p && typeof p.catch === 'function') p.catch(function () {});
+        } else if (!video.paused) {
+          video.pause();
+        }
+      });
+    }
+    syncHeroVideos();
+    var heroResizeTimer;
+    window.addEventListener('resize', function () {
+      clearTimeout(heroResizeTimer);
+      heroResizeTimer = setTimeout(syncHeroVideos, 200);
+    });
+  }
 
   /* 4. Stat count-up: animate the locked percentage values from 0 the
      first time they scroll into view. Values/copy are never invented

@@ -6,33 +6,36 @@
 {%- endcomment -%}
 
 {%- liquid
-  # Resolve the chosen background asset. "None" keeps the flat brand
-  # scheme; "Video"/"Image" show that asset over a scrim.
-  assign bg_video = nil
-  assign bg_image = nil
-  if section.settings.media_type == 'video'
-    assign bg_video = section.settings.video
-  elsif section.settings.media_type == 'image'
-    assign bg_image = section.settings.image
-  endif
+  # Decide whether any background media is in play. "None" keeps the
+  # flat brand scheme; otherwise hero-media resolves the mobile/desktop
+  # asset for the chosen type.
   assign has_media = false
-  if bg_video != blank or bg_image != blank
-    assign has_media = true
+  if section.settings.media_type == 'video'
+    if section.settings.video != blank or section.settings.video_mobile != blank
+      assign has_media = true
+    endif
+  elsif section.settings.media_type == 'image'
+    if section.settings.image != blank or section.settings.image_mobile != blank
+      assign has_media = true
+    endif
   endif
 -%}
 
 <section class="home-hero home-hero--{{ section.settings.scheme | default: 'tint' }}">
   {%- if has_media -%}
     <div class="home-hero__media">
-      {%- render 'media-placeholder',
+      {%- render 'hero-media',
+        media_type: section.settings.media_type,
+        video_desktop: section.settings.video,
+        video_mobile: section.settings.video_mobile,
+        image_desktop: section.settings.image,
+        image_mobile: section.settings.image_mobile,
         label: 'home_hero_background',
         aspect_mobile: '3 / 4',
         aspect_desktop: '16 / 9',
-        image: bg_image,
-        video: bg_video,
         eager: true
       -%}
-      <div class="home-hero__scrim" aria-hidden="true"></div>
+      <div class="home-hero__scrim" aria-hidden="true" style="--scrim-opacity: {{ section.settings.overlay_darkness }};"></div>
     </div>
   {%- endif -%}
 
@@ -82,8 +85,31 @@
       ],
       "default": "none"
     },
-    { "type": "image_picker", "id": "image", "label": "Background image" },
-    { "type": "video", "id": "video", "label": "Background video" },
+    { "type": "video", "id": "video", "label": "Desktop background video" },
+    {
+      "type": "video",
+      "id": "video_mobile",
+      "label": "Mobile background video",
+      "info": "Optional. Falls back to the desktop video if empty."
+    },
+    { "type": "image_picker", "id": "image", "label": "Desktop background image" },
+    {
+      "type": "image_picker",
+      "id": "image_mobile",
+      "label": "Mobile background image",
+      "info": "Optional. Falls back to the desktop image if empty."
+    },
+    {
+      "type": "range",
+      "id": "overlay_darkness",
+      "label": "Overlay darkness",
+      "info": "Darkens the background so the headline pops. Only applies when a background image or video is set.",
+      "min": 0,
+      "max": 90,
+      "step": 5,
+      "unit": "%",
+      "default": 45
+    },
     { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "MELT LABS" },
     {
       "type": "text",
