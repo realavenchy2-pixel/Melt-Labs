@@ -1,20 +1,31 @@
 {%- comment -%}
-  S1 — Hero. Full-bleed autoplay video (placeholder until final asset),
-  scrim for legibility, gold CTA anchors to the offer block below.
-  The sentinel div lets scroll-fx.js show the product subnav once the
-  hero scrolls away.
+  S1 — Hero. Full-bleed autoplay video OR a static image, chosen with
+  the "Hero media" toggle so both assets can stay loaded while you pick.
+  Scrim for legibility, gold CTA anchors to the offer block below. The
+  sentinel div lets scroll-fx.js show the product subnav once the hero
+  scrolls away.
 {%- endcomment -%}
+
+{%- liquid
+  # Only feed the video into the media slot when the merchant picked
+  # "Video"; on "Image" the slot renders the image instead. Either way
+  # an empty slot falls back to the labeled placeholder.
+  assign hero_video = nil
+  if section.settings.media_type == 'video'
+    assign hero_video = section.settings.video
+  endif
+-%}
 
 <div data-subnav-sentinel></div>
 
 <section class="hero">
   <div class="hero__media">
     {%- render 'media-placeholder',
-      label: 'hero_autoplay_video',
+      label: 'hero_autoplay_video_or_image',
       aspect_mobile: '9 / 16',
       aspect_desktop: '16 / 9',
-      video: section.settings.video,
-      image: section.settings.fallback_image,
+      video: hero_video,
+      image: section.settings.image,
       eager: true
     -%}
     <div class="hero__scrim" aria-hidden="true"></div>
@@ -40,14 +51,25 @@
   "name": "Hero video",
   "settings": [
     {
+      "type": "select",
+      "id": "media_type",
+      "label": "Hero media",
+      "info": "Switch between the autoplay video and a static image. Both assets can stay uploaded while you decide.",
+      "options": [
+        { "value": "video", "label": "Autoplay video" },
+        { "value": "image", "label": "Image" }
+      ],
+      "default": "video"
+    },
+    {
       "type": "video",
       "id": "video",
       "label": "Autoplay video (muted loop)"
     },
     {
       "type": "image_picker",
-      "id": "fallback_image",
-      "label": "Fallback image (shown until video is set)"
+      "id": "image",
+      "label": "Hero image"
     },
     {
       "type": "text",

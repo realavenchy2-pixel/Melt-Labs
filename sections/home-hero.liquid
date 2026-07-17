@@ -1,25 +1,42 @@
 {%- comment -%}
   Homepage brand hero (brief §3: Apple.com-style brand hub, not a sales
-  page). One clean statement, optional background image/video, primary
-  CTA into the lineup. Deliberately calmer than the product hero.
+  page). One clean statement, optional background image OR video chosen
+  with the "Background media" toggle, primary CTA into the lineup.
+  Deliberately calmer than the product hero.
 {%- endcomment -%}
 
+{%- liquid
+  # Resolve the chosen background asset. "None" keeps the flat brand
+  # scheme; "Video"/"Image" show that asset over a scrim.
+  assign bg_video = nil
+  assign bg_image = nil
+  if section.settings.media_type == 'video'
+    assign bg_video = section.settings.video
+  elsif section.settings.media_type == 'image'
+    assign bg_image = section.settings.image
+  endif
+  assign has_media = false
+  if bg_video != blank or bg_image != blank
+    assign has_media = true
+  endif
+-%}
+
 <section class="home-hero home-hero--{{ section.settings.scheme | default: 'tint' }}">
-  {%- if section.settings.image != blank or section.settings.video != blank -%}
+  {%- if has_media -%}
     <div class="home-hero__media">
       {%- render 'media-placeholder',
         label: 'home_hero_background',
         aspect_mobile: '3 / 4',
         aspect_desktop: '16 / 9',
-        image: section.settings.image,
-        video: section.settings.video,
+        image: bg_image,
+        video: bg_video,
         eager: true
       -%}
       <div class="home-hero__scrim" aria-hidden="true"></div>
     </div>
   {%- endif -%}
 
-  <div class="container home-hero__content {% if section.settings.image != blank or section.settings.video != blank %}home-hero__content--over-media{% endif %}">
+  <div class="container home-hero__content {% if has_media %}home-hero__content--over-media{% endif %}">
     {%- if section.settings.eyebrow != blank -%}
       <span class="eyebrow">{{ section.settings.eyebrow }}</span>
     {%- endif -%}
@@ -53,8 +70,20 @@
       ],
       "default": "tint"
     },
-    { "type": "image_picker", "id": "image", "label": "Background image (optional)" },
-    { "type": "video", "id": "video", "label": "Background video (optional)" },
+    {
+      "type": "select",
+      "id": "media_type",
+      "label": "Background media",
+      "info": "None keeps a flat brand background. Both assets can stay uploaded while you decide.",
+      "options": [
+        { "value": "none", "label": "None (flat color)" },
+        { "value": "video", "label": "Video" },
+        { "value": "image", "label": "Image" }
+      ],
+      "default": "none"
+    },
+    { "type": "image_picker", "id": "image", "label": "Background image" },
+    { "type": "video", "id": "video", "label": "Background video" },
     { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "MELT LABS" },
     {
       "type": "text",
