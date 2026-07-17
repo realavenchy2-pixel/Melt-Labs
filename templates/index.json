@@ -12,17 +12,38 @@
       }
     },
     "featured": {
-      "type": "featured-product",
+      "type": "featured-products",
       "settings": {
         "scheme": "white",
-        "image_side": "left",
-        "eyebrow": "THE FLAGSHIP",
-        "title": "*Special Water*",
-        "body": "Two drops in whatever you already drink. Quieter cravings, steadier blood sugar, no routine to change.",
+        "eyebrow": "SHOP THE LINEUP",
+        "heading": "The *lineup.*",
+        "subhead": "Botanical formulas built to fit the routine you already have.",
+        "center_header": true,
+        "card_min": 300,
         "show_price": true,
-        "cta_label": "Shop Special Water",
-        "reassurance": "60-day supply\nThird-party tested\nNo stimulants"
-      }
+        "show_button": true,
+        "button_label": "Shop now"
+      },
+      "blocks": {
+        "p1": {
+          "type": "product",
+          "settings": {
+            "title": "Special Water",
+            "subtitle": "Quiet cravings, steady blood sugar.",
+            "badge": "Bestseller",
+            "button_label": "Shop Special Water"
+          }
+        },
+        "p2": {
+          "type": "product",
+          "settings": {
+            "title": "KAMI",
+            "subtitle": "Coming soon.",
+            "button_label": "Notify me"
+          }
+        }
+      },
+      "block_order": ["p1", "p2"]
     },
     "experts": {
       "type": "expert-reviews",

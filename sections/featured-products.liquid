@@ -1,0 +1,142 @@
+{%- comment -%}
+  Homepage featured-products grid. Each block is a product card pulling
+  a real product's image, title, and price and linking to its page.
+  Scales from one product to the full lineup (Special Water + KAMI + …)
+  without rebuilding; columns adjust to how many cards you add.
+{%- endcomment -%}
+
+<section class="section section--scheme-{{ section.settings.scheme | default: 'white' }}">
+  <div class="container">
+    {%- if section.settings.heading != blank or section.settings.subhead != blank -%}
+      <div class="section-header {% if section.settings.center_header %}section-header--center{% endif %}" data-reveal>
+        {%- if section.settings.eyebrow != blank -%}
+          <span class="eyebrow">{{ section.settings.eyebrow }}</span>
+        {%- endif -%}
+        {%- if section.settings.heading != blank -%}
+          <h2 class="h2">{% render 'accent-text', text: section.settings.heading, color: 'blue' %}</h2>
+        {%- endif -%}
+        {%- if section.settings.subhead != blank -%}
+          <p class="lead" {% if section.settings.center_header %}style="margin-inline: auto;"{% endif %}>{{ section.settings.subhead }}</p>
+        {%- endif -%}
+      </div>
+    {%- endif -%}
+
+    <div class="product-grid" style="--card-min: {{ section.settings.card_min }}px;">
+      {%- for block in section.blocks -%}
+        {%- assign product = block.settings.product -%}
+        <article class="product-card" data-reveal style="--reveal-i: {{ forloop.index0 | modulo: 4 }};" {{ block.shopify_attributes }}>
+          <a class="product-card__link" href="{% if product != blank %}{{ product.url }}{% else %}{{ block.settings.link | default: '#' }}{% endif %}">
+            <div class="product-card__media">
+              {%- if block.settings.image != blank -%}
+                <div class="media-slot media-slot--rounded" style="--aspect-mobile: 1 / 1;">
+                  <div class="media-slot__frame"></div>
+                  {%- render 'responsive-image', image: block.settings.image, sizes: '(min-width: 900px) 33vw, 100vw' -%}
+                </div>
+              {%- elsif product != blank and product.featured_image != blank -%}
+                <div class="media-slot media-slot--rounded" style="--aspect-mobile: 1 / 1;">
+                  <div class="media-slot__frame"></div>
+                  {%- render 'responsive-image', image: product.featured_image, sizes: '(min-width: 900px) 33vw, 100vw' -%}
+                </div>
+              {%- else -%}
+                {%- render 'media-placeholder', label: 'featured_product_photo', aspect_mobile: '1 / 1', class: 'media-slot--rounded' -%}
+              {%- endif -%}
+              {%- if block.settings.badge != blank -%}
+                <span class="product-card__badge">{{ block.settings.badge }}</span>
+              {%- endif -%}
+            </div>
+
+            <div class="product-card__body">
+              <h3 class="product-card__title">
+                {%- if block.settings.title != blank -%}{{ block.settings.title }}
+                {%- elsif product != blank -%}{{ product.title }}
+                {%- else -%}Product{%- endif -%}
+              </h3>
+              {%- if block.settings.subtitle != blank -%}
+                <p class="product-card__subtitle">{{ block.settings.subtitle }}</p>
+              {%- endif -%}
+              {%- if product != blank and section.settings.show_price -%}
+                <p class="product-card__price">
+                  {{ product.price_min | money }}
+                  {%- if product.compare_at_price_max > product.price_min %} <s>{{ product.compare_at_price_max | money }}</s>{% endif -%}
+                </p>
+              {%- endif -%}
+            </div>
+          </a>
+          {%- if section.settings.show_button -%}
+            <a class="btn btn--gold product-card__cta" href="{% if product != blank %}{{ product.url }}{% else %}{{ block.settings.link | default: '#' }}{% endif %}">
+              {{ block.settings.button_label | default: section.settings.button_label }}
+            </a>
+          {%- endif -%}
+        </article>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Featured products",
+  "settings": [
+    {
+      "type": "select",
+      "id": "scheme",
+      "label": "Color scheme",
+      "options": [
+        { "value": "white", "label": "White" },
+        { "value": "tint", "label": "Pale blue" },
+        { "value": "ink", "label": "Near-black" }
+      ],
+      "default": "white"
+    },
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "SHOP THE LINEUP" },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "info": "Wrap a word in *asterisks* to accent it.",
+      "default": "The *lineup.*"
+    },
+    { "type": "textarea", "id": "subhead", "label": "Subhead" },
+    { "type": "checkbox", "id": "center_header", "label": "Center the header", "default": true },
+    {
+      "type": "range",
+      "id": "card_min",
+      "label": "Minimum card width",
+      "info": "Controls how many cards fit per row. Smaller = more per row.",
+      "min": 220,
+      "max": 420,
+      "step": 20,
+      "unit": "px",
+      "default": 300
+    },
+    { "type": "checkbox", "id": "show_price", "label": "Show price", "default": true },
+    { "type": "checkbox", "id": "show_button", "label": "Show button on each card", "default": true },
+    { "type": "text", "id": "button_label", "label": "Default button label", "default": "Shop now" }
+  ],
+  "blocks": [
+    {
+      "type": "product",
+      "name": "Product",
+      "settings": [
+        { "type": "product", "id": "product", "label": "Product" },
+        { "type": "image_picker", "id": "image", "label": "Image (overrides product photo)" },
+        { "type": "text", "id": "title", "label": "Title (overrides product title)" },
+        { "type": "text", "id": "subtitle", "label": "Subtitle" },
+        { "type": "text", "id": "badge", "label": "Badge (optional)" },
+        { "type": "text", "id": "button_label", "label": "Button label (optional)" },
+        { "type": "url", "id": "link", "label": "Link (used if no product)" }
+      ]
+    }
+  ],
+  "max_blocks": 6,
+  "presets": [
+    {
+      "name": "Featured products",
+      "blocks": [
+        { "type": "product", "settings": { "title": "Special Water", "subtitle": "Quiet cravings, steady blood sugar.", "badge": "Bestseller" } },
+        { "type": "product", "settings": { "title": "KAMI", "subtitle": "Coming soon." } }
+      ]
+    }
+  ]
+}
+{% endschema %}

@@ -19,9 +19,13 @@
       assign has_media = true
     endif
   endif
+  assign hero_mode = section.settings.hero_size | default: 'fill'
 -%}
 
-<section class="home-hero home-hero--{{ section.settings.scheme | default: 'tint' }}">
+<section
+  class="home-hero home-hero--{{ section.settings.scheme | default: 'tint' }} home-hero--{{ hero_mode }}{% if has_media %} home-hero--has-media{% endif %}"
+  style="--hero-aspect-mobile: {{ section.settings.aspect_mobile }}; --hero-aspect-desktop: {{ section.settings.aspect_desktop }}; --hero-fit: {{ section.settings.media_fit }};"
+>
   {%- if has_media -%}
     <div class="home-hero__media">
       {%- render 'hero-media',
@@ -127,7 +131,55 @@
     { "type": "text", "id": "cta_label", "label": "Primary button label", "default": "Shop Special Water" },
     { "type": "url", "id": "cta_link", "label": "Primary button link" },
     { "type": "text", "id": "cta2_label", "label": "Secondary button label", "default": "Explore the science" },
-    { "type": "url", "id": "cta2_link", "label": "Secondary button link" }
+    { "type": "url", "id": "cta2_link", "label": "Secondary button link" },
+    { "type": "header", "content": "Frame shape (when a background is set)" },
+    {
+      "type": "select",
+      "id": "hero_size",
+      "label": "Hero height",
+      "info": "Fill screen crops to a tall banner. Fixed ratio sizes the frame to match your background video/image.",
+      "options": [
+        { "value": "fill", "label": "Fill screen" },
+        { "value": "sized", "label": "Fixed ratio" }
+      ],
+      "default": "fill"
+    },
+    {
+      "type": "select",
+      "id": "aspect_desktop",
+      "label": "Desktop ratio",
+      "options": [
+        { "value": "16 / 9", "label": "16:9 (wide)" },
+        { "value": "1 / 1", "label": "1:1 (square)" },
+        { "value": "4 / 5", "label": "4:5 (portrait)" },
+        { "value": "9 / 16", "label": "9:16 (tall)" },
+        { "value": "3 / 4", "label": "3:4 (portrait)" }
+      ],
+      "default": "16 / 9"
+    },
+    {
+      "type": "select",
+      "id": "aspect_mobile",
+      "label": "Mobile ratio",
+      "options": [
+        { "value": "3 / 4", "label": "3:4 (portrait)" },
+        { "value": "9 / 16", "label": "9:16 (tall)" },
+        { "value": "1 / 1", "label": "1:1 (square)" },
+        { "value": "4 / 5", "label": "4:5 (portrait)" },
+        { "value": "16 / 9", "label": "16:9 (wide)" }
+      ],
+      "default": "3 / 4"
+    },
+    {
+      "type": "select",
+      "id": "media_fit",
+      "label": "Media fit",
+      "options": [
+        { "value": "cover", "label": "Cover (fill)" },
+        { "value": "contain", "label": "Contain (show all)" }
+      ],
+      "default": "cover"
+    }
   ],
   "presets": [{ "name": "Home hero" }]
 }
