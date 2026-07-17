@@ -14,8 +14,14 @@
   assign color = color | default: 'blue'
   assign segments = text | split: '*'
 -%}
+{%- comment -%}
+  Odd-indexed segments are the ones that sat between a pair of asterisks,
+  so those get the accent span. A filter can't run inside an if tag, so
+  compute the remainder first.
+{%- endcomment -%}
 {%- for segment in segments -%}
-  {%- if forloop.index0 | modulo: 2 == 1 -%}
+  {%- assign remainder = forloop.index0 | modulo: 2 -%}
+  {%- if remainder == 1 -%}
     <span class="accent-pop accent-pop--{{ color }}">{{ segment }}</span>
   {%- else -%}
     {{- segment -}}
