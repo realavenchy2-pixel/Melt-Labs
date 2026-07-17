@@ -1,0 +1,30 @@
+{%- comment -%}
+  Responsive image with srcset per the performance brief (§6).
+  Params:
+    image  — image object (required)
+    sizes  — sizes attribute (default '100vw')
+    eager  — true only above the fold; everything else lazy-loads
+    class  — extra classes
+{%- endcomment -%}
+
+{%- liquid
+  assign sizes = sizes | default: '100vw'
+  assign loading = 'lazy'
+  assign fetchpriority = 'auto'
+  if eager
+    assign loading = 'eager'
+    assign fetchpriority = 'high'
+  endif
+-%}
+
+{{
+  image
+  | image_url: width: 1600
+  | image_tag:
+    widths: '360, 540, 720, 900, 1080, 1440, 1600',
+    sizes: sizes,
+    loading: loading,
+    fetchpriority: fetchpriority,
+    decoding: 'async',
+    class: class
+}}

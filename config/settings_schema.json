@@ -1,0 +1,100 @@
+[
+  {
+    "name": "theme_info",
+    "theme_name": "Melt Labs",
+    "theme_version": "1.0.0",
+    "theme_author": "Melt Labs",
+    "theme_documentation_url": "https://meltlabs.com",
+    "theme_support_url": "https://meltlabs.com"
+  },
+  {
+    "name": "Brand",
+    "settings": [
+      {
+        "type": "image_picker",
+        "id": "logo",
+        "label": "Logo"
+      },
+      {
+        "type": "range",
+        "id": "logo_width",
+        "label": "Logo width",
+        "min": 60,
+        "max": 240,
+        "step": 10,
+        "unit": "px",
+        "default": 120
+      }
+    ]
+  },
+  {
+    "name": "Colors",
+    "settings": [
+      {
+        "type": "color",
+        "id": "color_primary",
+        "label": "Primary accent",
+        "default": "#00AEEF"
+      },
+      {
+        "type": "color",
+        "id": "color_gradient_start",
+        "label": "Brand gradient start",
+        "default": "#00AEEF"
+      },
+      {
+        "type": "color",
+        "id": "color_gradient_end",
+        "label": "Brand gradient end",
+        "default": "#0095D9"
+      },
+      {
+        "type": "color",
+        "id": "color_ink",
+        "label": "Text (near-black)",
+        "default": "#161616"
+      },
+      {
+        "type": "color",
+        "id": "color_tint",
+        "label": "Tinted section background",
+        "default": "#EAF7FC"
+      },
+      {
+        "type": "color",
+        "id": "color_bg",
+        "label": "Page background",
+        "default": "#FFFFFF"
+      },
+      {
+        "type": "color",
+        "id": "color_cta",
+        "label": "Primary button",
+        "default": "#FBB81C"
+      },
+      {
+        "type": "color",
+        "id": "color_cta_hover",
+        "label": "Primary button hover",
+        "default": "#E9A912"
+      }
+    ]
+  },
+  {
+    "name": "Typography",
+    "settings": [
+      {
+        "type": "font_picker",
+        "id": "font_heading",
+        "label": "Heading font",
+        "default": "poppins_n8"
+      },
+      {
+        "type": "font_picker",
+        "id": "font_body",
+        "label": "Body font",
+        "default": "poppins_n4"
+      }
+    ]
+  }
+]

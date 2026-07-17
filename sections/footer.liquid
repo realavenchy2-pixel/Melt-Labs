@@ -1,0 +1,36 @@
+<footer class="site-footer">
+  <div class="container site-footer__inner">
+    <span class="site-footer__wordmark">{{ shop.name }}</span>
+
+    <ul class="site-footer__links">
+      {%- for link in section.settings.menu.links -%}
+        <li><a href="{{ link.url }}">{{ link.title }}</a></li>
+      {%- endfor -%}
+    </ul>
+
+    {%- if section.settings.fine_print != blank -%}
+      <p class="site-footer__fine">{{ section.settings.fine_print }}</p>
+    {%- endif -%}
+    <p class="site-footer__fine">&copy; {{ 'now' | date: '%Y' }} {{ shop.name }}. All rights reserved.</p>
+  </div>
+</footer>
+
+{% schema %}
+{
+  "name": "Footer",
+  "settings": [
+    {
+      "type": "link_list",
+      "id": "menu",
+      "label": "Footer menu",
+      "default": "footer"
+    },
+    {
+      "type": "textarea",
+      "id": "fine_print",
+      "label": "Fine print",
+      "default": "These statements have not been evaluated by the Food and Drug Administration. This product is not intended to diagnose, treat, cure, or prevent any disease."
+    }
+  ]
+}
+{% endschema %}

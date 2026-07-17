@@ -1,0 +1,67 @@
+{%- comment -%}
+  Melt Labs theme shell. Brand tokens flow from config/settings_schema.json
+  into CSS custom properties here, so a KAMI re-skin is a settings change.
+{%- endcomment -%}
+<!doctype html>
+<html lang="{{ request.locale.iso_code }}">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="{{ settings.color_primary }}">
+  <link rel="canonical" href="{{ canonical_url }}">
+
+  <title>
+    {{- page_title -}}
+    {%- unless page_title contains shop.name %} &ndash; {{ shop.name }}{% endunless -%}
+  </title>
+  {%- if page_description -%}
+    <meta name="description" content="{{ page_description | escape }}">
+  {%- endif -%}
+
+  {%- liquid
+    assign font_heading = settings.font_heading
+    assign font_body = settings.font_body
+    assign font_body_medium = font_body | font_modify: 'weight', '500'
+  -%}
+  <link rel="preload" as="font" href="{{ font_heading | font_url }}" type="font/woff2" crossorigin>
+  <link rel="preload" as="font" href="{{ font_body | font_url }}" type="font/woff2" crossorigin>
+
+  <style>
+    {{ font_heading | font_face: font_display: 'swap' }}
+    {{ font_body | font_face: font_display: 'swap' }}
+    {%- if font_body_medium -%}{{ font_body_medium | font_face: font_display: 'swap' }}{%- endif -%}
+
+    :root {
+      --font-heading: {{ font_heading.family }}, {{ font_heading.fallback_families }};
+      --font-body: {{ font_body.family }}, {{ font_body.fallback_families }};
+      --weight-heading: {{ font_heading.weight | default: 800 }};
+      --color-primary: {{ settings.color_primary }};
+      --gradient-brand: linear-gradient(160deg, {{ settings.color_gradient_start }} 0%, {{ settings.color_gradient_end }} 100%);
+      --color-ink: {{ settings.color_ink }};
+      --color-tint: {{ settings.color_tint }};
+      --color-bg: {{ settings.color_bg }};
+      --color-cta: {{ settings.color_cta }};
+      --color-cta-hover: {{ settings.color_cta_hover }};
+    }
+  </style>
+
+  {{ 'theme.css' | asset_url | stylesheet_tag }}
+
+  {{ content_for_header }}
+</head>
+
+<body class="template-{{ template.name | handle }}">
+  <a class="skip-link" href="#main-content">Skip to content</a>
+
+  {% section 'header' %}
+
+  <main id="main-content" tabindex="-1">
+    {{ content_for_layout }}
+  </main>
+
+  {% section 'footer' %}
+
+  <script src="{{ 'carousel.js' | asset_url }}" defer></script>
+  <script src="{{ 'scroll-fx.js' | asset_url }}" defer></script>
+</body>
+</html>

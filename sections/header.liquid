@@ -1,0 +1,26 @@
+<header class="site-header">
+  <div class="container site-header__inner">
+    <a class="site-header__logo" href="{{ routes.root_url }}">
+      {%- if settings.logo -%}
+        {{
+          settings.logo
+          | image_url: width: 480
+          | image_tag: width: settings.logo_width, widths: '120, 240, 480', alt: shop.name, loading: 'eager', decoding: 'async'
+        }}
+      {%- else -%}
+        <span class="site-header__wordmark">{{ shop.name }}</span>
+      {%- endif -%}
+    </a>
+
+    <a class="site-header__cart" href="{{ routes.cart_url }}" aria-label="Cart ({{ cart.item_count }} items)">
+      {%- render 'icon', name: 'cart' -%}
+    </a>
+  </div>
+</header>
+
+{% schema %}
+{
+  "name": "Header",
+  "settings": []
+}
+{% endschema %}

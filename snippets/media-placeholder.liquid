@@ -1,0 +1,38 @@
+{%- comment -%}
+  Final-asset placeholder policy (brief §5): every media slot renders at the
+  exact final aspect ratio so the real asset drops in with zero layout shift.
+
+  Params:
+    label          — human name of the asset that will be swapped in (required)
+    aspect_mobile  — CSS aspect-ratio below 768px, e.g. '9 / 16' (required)
+    aspect_desktop — CSS aspect-ratio at 768px+, defaults to aspect_mobile
+    image          — optional image object; when set, renders instead of the placeholder
+    video          — optional Shopify video object; when set, renders instead (muted loop)
+    eager          — set true only for above-the-fold media (hero)
+    sizes          — sizes attribute for the image (default '100vw')
+    class          — extra classes for the wrapper
+{%- endcomment -%}
+
+{%- liquid
+  assign aspect_desktop = aspect_desktop | default: aspect_mobile
+  assign sizes = sizes | default: '100vw'
+-%}
+
+<!-- SWAP: {{ label }}, {{ aspect_mobile }} mobile / {{ aspect_desktop }} desktop -->
+<div
+  class="media-slot {{ class }}"
+  style="--aspect-mobile: {{ aspect_mobile }}; --aspect-desktop: {{ aspect_desktop }};"
+>
+  <div class="media-slot__frame"></div>
+
+  {%- if video -%}
+    {{ video | video_tag: autoplay: true, muted: true, loop: true, controls: false, playsinline: true, preload: 'metadata' }}
+  {%- elsif image -%}
+    {%- render 'responsive-image', image: image, sizes: sizes, eager: eager -%}
+  {%- else -%}
+    <div class="media-slot__label" aria-hidden="true">
+      <strong>{{ label }}</strong>
+      <span>{{ aspect_mobile }} mobile &middot; {{ aspect_desktop }} desktop</span>
+    </div>
+  {%- endif -%}
+</div>

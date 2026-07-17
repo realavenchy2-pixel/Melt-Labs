@@ -1,0 +1,32 @@
+{%- comment -%}
+  Shared carousel shell (brief §6: ONE reusable carousel component).
+  The calling section captures its slides as HTML and passes them in;
+  each top-level element in `slides` must already be a .carousel__slide.
+
+  Params:
+    slides — captured HTML string of .carousel__slide elements (required)
+    id     — unique id, usually section.id (required)
+    label  — accessible name for the region
+{%- endcomment -%}
+
+<div class="carousel" data-carousel id="carousel-{{ id }}">
+  <div
+    class="carousel__track"
+    data-carousel-track
+    role="region"
+    aria-label="{{ label | default: 'Carousel' | escape }}"
+    tabindex="0"
+  >
+    {{ slides }}
+  </div>
+
+  <div class="carousel__controls">
+    <button class="carousel__arrow" type="button" data-carousel-prev aria-label="Previous slide">
+      {%- render 'icon', name: 'chevron-left' -%}
+    </button>
+    <div class="carousel__dots" data-carousel-dots></div>
+    <button class="carousel__arrow" type="button" data-carousel-next aria-label="Next slide">
+      {%- render 'icon', name: 'chevron-right' -%}
+    </button>
+  </div>
+</div>
