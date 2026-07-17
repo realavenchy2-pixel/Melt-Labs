@@ -154,56 +154,67 @@
     countEls.forEach(function (el) { countObserver.observe(el); });
   }
 
-  /* 5. Science video. Baseline: the video just autoplays muted+looped
-     (markup handles that), so the section is never blank. On a desktop
-     pointer with motion enabled we UPGRADE to a scroll-scrub: pause the
-     loop, size the scroller tall, pin the stage, and drive currentTime
-     from scroll position (down = forward, up = rewind). Mobile, reduced
-     motion, and no-JS all keep the plain autoplay loop. */
-  var desktopScrub = window.matchMedia('(min-width: 768px) and (pointer: fine)').matches;
+  /* 5. Science video: scroll-only scrub. The video never autoplays; its
+     currentTime is driven entirely by scroll position through the sticky
+     stage (down = forward, up = rewind). A continuous rAF loop eases the
+     playhead toward the scroll-derived target while the section is in
+     view, so seeking feels smooth rather than stepwise. Under reduced
+     motion / no-JS the poster/first frame simply holds. */
   document.querySelectorAll('[data-scrub]').forEach(function (scroller) {
     var video = scroller.querySelector('[data-scrub-video]');
     if (!video) return;
 
-    /* Nudge autoplay for browsers that ignore the attribute. */
-    var kick = video.play();
-    if (kick && typeof kick.catch === 'function') kick.catch(function () {});
-
-    if (reduceMotion || !desktopScrub) return; /* keep plain autoplay loop */
+    if (reduceMotion) return; /* hold on poster/first frame, no scrub */
 
     var scrubVh = parseFloat(scroller.getAttribute('data-scrub-vh')) || 350;
     var duration = 0;
-    var ticking = false;
+    var targetTime = 0;
     var inView = false;
+    var rafId = null;
+
+    function targetFromScroll() {
+      var rect = scroller.getBoundingClientRect();
+      var total = rect.height - window.innerHeight;
+      if (total <= 0) return 0;
+      var progress = Math.min(1, Math.max(0, -rect.top / total));
+      return progress * duration;
+    }
+
+    function tick() {
+      /* Ease currentTime toward the target so scrubbing glides. */
+      var current = video.currentTime;
+      var diff = targetTime - current;
+      if (Math.abs(diff) > 0.01) {
+        var nextTime = current + diff * 0.18;
+        if (video.seeking === false) {
+          try { video.currentTime = nextTime; } catch (e) {}
+        }
+        rafId = requestAnimationFrame(tick);
+      } else {
+        rafId = null;
+      }
+    }
+
+    function requestTick() {
+      if (rafId === null) rafId = requestAnimationFrame(tick);
+    }
+
+    function onScroll() {
+      if (!inView || !duration) return;
+      targetTime = targetFromScroll();
+      requestTick();
+    }
 
     function enableScrub() {
       duration = video.duration || 0;
       if (!duration) return;
       video.pause();
-      video.loop = false;
-      video.removeAttribute('autoplay');
       scroller.classList.remove('is-static');
       scroller.style.height = scrubVh + 'vh';
-      update();
-    }
-
-    function update() {
-      ticking = false;
-      if (!duration) return;
-      var rect = scroller.getBoundingClientRect();
-      var total = rect.height - window.innerHeight;
-      if (total <= 0) return;
-      var progress = Math.min(1, Math.max(0, -rect.top / total));
-      var targetTime = progress * duration;
-      if (Math.abs(video.currentTime - targetTime) > 0.03) {
-        video.currentTime = targetTime;
-      }
-    }
-
-    function onScroll() {
-      if (!inView || ticking) return;
-      ticking = true;
-      requestAnimationFrame(update);
+      /* Paint the first frame immediately so the stage is never blank. */
+      try { video.currentTime = 0.001; } catch (e) {}
+      targetTime = targetFromScroll();
+      requestTick();
     }
 
     if (video.readyState >= 1 && video.duration) {
@@ -214,7 +225,7 @@
 
     new IntersectionObserver(function (entries) {
       inView = entries[0].isIntersecting;
-      if (inView) update();
+      if (inView) onScroll();
     }).observe(scroller);
 
     window.addEventListener('scroll', onScroll, { passive: true });

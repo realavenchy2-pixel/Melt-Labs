@@ -2,12 +2,12 @@
   S6 — "The Science Behind Special Water" (reference: PDF p.7-10,
   Apple's scroll-scrubbed exploded view).
 
-  Robust playback model: the video ALWAYS autoplays muted+looped, so the
-  section is never blank. On desktop with motion enabled, scroll-fx.js
-  upgrades it to a scroll-scrubbed experience (pauses the loop, sizes the
-  sticky scroller tall, and drives currentTime from scroll position). On
-  mobile / reduced-motion / no-JS, it simply plays in place. The media
-  backdrop is ink so any buffering moment reads as dark, not light blue.
+  Scroll-only playback: the video never autoplays. Its currentTime is
+  driven purely by scroll position through the sticky stage (scroll down
+  = forward, up = rewind), with eased seeking in scroll-fx.js so it
+  feels smooth. A poster frame paints instantly and the media backdrop
+  is ink, so it never flashes light blue while buffering. Under reduced
+  motion / no-JS it holds on the poster/first frame.
 {%- endcomment -%}
 
 <section class="section section--scheme-ink">
@@ -29,9 +29,7 @@
             <video
               class="science__video"
               data-scrub-video
-              autoplay
               muted
-              loop
               playsinline
               webkit-playsinline
               disablepictureinpicture
@@ -47,16 +45,15 @@
           </div>
         {%- else -%}
           <!-- SWAP: science_scrollable_scrub_video, 4:5 mobile / 1:1 desktop.
-               For the desktop scroll-scrub to look smooth in both
-               directions, export frame-seekable / keyframe-dense (short
-               GOP). Until a video is set this placeholder shows; on
-               mobile the video simply autoplays. -->
+               Scroll-scrubbed (moves only as the page scrolls, never
+               autoplays). For smooth seeking in both directions, export
+               frame-seekable / keyframe-dense (short GOP). -->
           <div class="media-slot media-slot--rounded science__media" style="--aspect-mobile: 4 / 5; --aspect-desktop: 1 / 1;">
             <div class="media-slot__frame"></div>
             <div class="media-slot__label" aria-hidden="true">
-              <strong>science_video</strong>
+              <strong>science_scrollable_scrub_video</strong>
               <span>4 / 5 mobile &middot; 1 / 1 desktop</span>
-              <span>Autoplays on mobile; scroll-scrubs on desktop. Export keyframe-dense for smoothest desktop scrubbing.</span>
+              <span>Moves on scroll only. Export keyframe-dense (short GOP) for smoothest scrubbing.</span>
             </div>
           </div>
         {%- endif -%}
