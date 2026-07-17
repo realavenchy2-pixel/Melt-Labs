@@ -1,8 +1,10 @@
 {%- comment -%}
-  S4 — Ingredients breakdown (reference: PDF p.3, "Take a closer look.").
-  Sticky bottle visual beside a plain-language list. Actives and base
-  ingredients are separate block types. Terminology rule from the brief:
-  always "Cinnamomum cassia", never "cinnamon".
+  S4 — Ingredients breakdown, one-per-slide carousel (reference: PDF p.3,
+  "Take a closer look."). Each active ingredient gets its own slide: image
+  with a text overlay explaining what it does. Terminology rule from the
+  brief: always "Cinnamomum cassia", never "cinnamon". Base ingredients
+  (water, glycerin, preservative) stay a short plain list below, since
+  they don't need individual slides.
 {%- endcomment -%}
 
 <section class="section section--scheme-white">
@@ -12,63 +14,64 @@
       {%- if section.settings.subhead != blank -%}
         <p class="lead">{{ section.settings.subhead }}</p>
       {%- endif -%}
-    </div>
-
-    <div class="ingredients__layout">
-      <div class="ingredients__aside" data-reveal>
-        {%- render 'media-placeholder',
-          label: 'ingredient_start_frame_bottle',
-          aspect_mobile: '4 / 5',
-          image: section.settings.image
-        -%}
-        {%- if section.settings.format_note != blank -%}
-          <p class="ingredients__format">{{ section.settings.format_note }}</p>
-        {%- endif -%}
-      </div>
-
-      <div>
-        <ol class="ingredient-list">
-          {%- assign i = 0 -%}
-          {%- for block in section.blocks -%}
-            {%- if block.type == 'active' -%}
-              {%- assign i = i | plus: 1 -%}
-              <li class="ingredient" data-reveal style="--reveal-i: {{ forloop.index0 | modulo: 4 }};" {{ block.shopify_attributes }}>
-                <h3 class="ingredient__name h3">
-                  {{ block.settings.name }}
-                  {%- if block.settings.source != blank %} <span class="ingredient__source">{{ block.settings.source }}</span>{% endif -%}
-                </h3>
-                <p class="ingredient__role">{{ block.settings.role }}</p>
-              </li>
-            {%- endif -%}
-          {%- endfor -%}
-        </ol>
-
-        {%- assign has_base = false -%}
-        {%- for block in section.blocks -%}
-          {%- if block.type == 'base' -%}{%- assign has_base = true -%}{%- endif -%}
-        {%- endfor -%}
-
-        {%- if has_base -%}
-          <h3 class="ingredients__base-title">{{ section.settings.base_title }}</h3>
-          <ul class="ingredient-list">
-            {%- for block in section.blocks -%}
-              {%- if block.type == 'base' -%}
-                <li class="ingredient ingredient--base" {{ block.shopify_attributes }}>
-                  <p class="ingredient__name">{{ block.settings.name }}</p>
-                  <p class="ingredient__role">{{ block.settings.role }}</p>
-                </li>
-              {%- endif -%}
-            {%- endfor -%}
-          </ul>
-        {%- endif -%}
-      </div>
+      {%- if section.settings.format_note != blank -%}
+        <p class="ingredients__format">{{ section.settings.format_note }}</p>
+      {%- endif -%}
     </div>
   </div>
+
+  {%- capture slides -%}
+    {%- for block in section.blocks -%}
+      {%- if block.type == 'active' -%}
+        <div class="carousel__slide" {{ block.shopify_attributes }}>
+          <figure class="ingredient-slide">
+            {%- render 'media-placeholder',
+              label: 'ingredient_photo',
+              aspect_mobile: '4 / 5',
+              image: block.settings.image
+            -%}
+            <figcaption class="ingredient-slide__overlay">
+              <h3 class="ingredient-slide__name">
+                {{ block.settings.name }}
+                {%- if block.settings.source != blank %}<span class="ingredient-slide__source">{{ block.settings.source }}</span>{% endif -%}
+              </h3>
+              <p class="ingredient-slide__role">{{ block.settings.role }}</p>
+            </figcaption>
+          </figure>
+        </div>
+      {%- endif -%}
+    {%- endfor -%}
+  {%- endcapture -%}
+
+  <div data-reveal>
+    {%- render 'carousel', slides: slides, id: section.id, label: section.settings.headline -%}
+  </div>
+
+  {%- assign has_base = false -%}
+  {%- for block in section.blocks -%}
+    {%- if block.type == 'base' -%}{%- assign has_base = true -%}{%- endif -%}
+  {%- endfor -%}
+
+  {%- if has_base -%}
+    <div class="container">
+      <h3 class="ingredients__base-title">{{ section.settings.base_title }}</h3>
+      <ul class="ingredient-list">
+        {%- for block in section.blocks -%}
+          {%- if block.type == 'base' -%}
+            <li class="ingredient ingredient--base" {{ block.shopify_attributes }}>
+              <p class="ingredient__name">{{ block.settings.name }}</p>
+              <p class="ingredient__role">{{ block.settings.role }}</p>
+            </li>
+          {%- endif -%}
+        {%- endfor -%}
+      </ul>
+    </div>
+  {%- endif -%}
 </section>
 
 {% schema %}
 {
-  "name": "Ingredients list",
+  "name": "Ingredients carousel",
   "settings": [
     {
       "type": "text",
@@ -81,11 +84,6 @@
       "id": "subhead",
       "label": "Subhead",
       "default": "Six botanicals, each chosen for one job: keeping blood sugar steady and cravings quiet."
-    },
-    {
-      "type": "image_picker",
-      "id": "image",
-      "label": "Bottle image"
     },
     {
       "type": "text",
@@ -105,6 +103,7 @@
       "type": "active",
       "name": "Active ingredient",
       "settings": [
+        { "type": "image_picker", "id": "image", "label": "Ingredient photo" },
         { "type": "text", "id": "name", "label": "Name", "default": "Cinnamomum cassia (bark) Extract" },
         { "type": "text", "id": "source", "label": "Latin / source note" },
         {
@@ -126,7 +125,7 @@
   ],
   "presets": [
     {
-      "name": "Ingredients list",
+      "name": "Ingredients carousel",
       "blocks": [
         {
           "type": "active",

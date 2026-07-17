@@ -1,38 +1,71 @@
 {%- comment -%}
   S6 — "The Science Behind Special Water" (reference: PDF p.7-10,
-  Apple's scroll-scrubbed exploded view). A sticky stage crossfades
-  through frame blocks as the user scrolls; the final scrollable 3D /
-  video asset replaces the frame placeholders after production.
-  Falls back to statically stacked frames under reduced motion or no JS.
+  Apple's scroll-scrubbed exploded view). A sticky stage holds a single
+  video whose currentTime is driven directly by scroll position: scroll
+  down plays forward, scroll up rewinds. scroll-fx.js reads
+  data-scrub-vh to convert the section's scroll range into a 0-1
+  progress value, then sets video.currentTime = progress * duration.
+
+  Falls back to a static poster frame under reduced motion or when no
+  video is set yet (labeled placeholder names the encoding requirement,
+  since scroll-scrub needs a keyframe-dense/frame-seekable export -
+  a long-GOP video will stutter when seeking backward on scroll-up).
 {%- endcomment -%}
 
 <section class="section section--scheme-ink">
   <div class="container container--narrow science__intro" data-reveal>
-    <h2 class="h2">{{ section.settings.headline }}</h2>
+    <h2 class="h2">{% render 'accent-text', text: section.settings.headline, color: 'gold' %}</h2>
     <p class="lead" style="margin-inline: auto; margin-top: 1rem;">{{ section.settings.body }}</p>
   </div>
 
-  {%- if section.blocks.size > 0 -%}
-    <div class="science__scroller is-static" data-scrub style="height: {{ section.blocks.size | plus: 1 }}00svh;">
-      <div class="science__stage">
-        <div class="science__frames">
-          {%- for block in section.blocks -%}
-            <div class="science__frame {% if forloop.first %}is-active{% endif %}" {{ block.shopify_attributes }}>
-              {%- assign frame_label = 'science_sequence_frame_' | append: forloop.index -%}
-              {%- render 'media-placeholder',
-                label: frame_label,
-                aspect_mobile: '4 / 5',
-                aspect_desktop: '1 / 1',
-                image: block.settings.image
-              -%}
+  <div
+    class="science__scroller is-static"
+    data-scrub
+    data-scrub-vh="{{ section.settings.scrub_length }}"
+    style="height: {{ section.settings.scrub_length }}vh;"
+  >
+    <div class="science__stage">
+      <div class="science__frame">
+        {%- if section.settings.video -%}
+          <div class="media-slot media-slot--rounded" style="--aspect-mobile: 4 / 5; --aspect-desktop: 1 / 1;">
+            <div class="media-slot__frame"></div>
+            <video
+              class="science__video"
+              data-scrub-video
+              muted
+              playsinline
+              webkit-playsinline
+              disablepictureinpicture
+              preload="auto"
+              poster="{{ section.settings.poster | image_url: width: 1200 }}"
+              aria-hidden="true"
+              tabindex="-1"
+            >
+              {%- for source in section.settings.video.sources -%}
+                <source src="{{ source.url }}" type="{{ source.mime_type }}">
+              {%- endfor -%}
+            </video>
+          </div>
+        {%- else -%}
+          <!-- SWAP: science_scrollable_scrub_video, 4:5 mobile / 1:1 desktop.
+               Export frame-seekable / keyframe-dense (short GOP, ideally
+               all-intra or a keyframe every 1-2 frames): scroll-scrub reads
+               currentTime on every scroll tick in both directions, and a
+               long-GOP encode will stutter or blank out when seeking
+               backward (scroll-up / rewind). -->
+          <div class="media-slot media-slot--rounded" style="--aspect-mobile: 4 / 5; --aspect-desktop: 1 / 1;">
+            <div class="media-slot__frame"></div>
+            <div class="media-slot__label" aria-hidden="true">
+              <strong>science_scrollable_scrub_video</strong>
+              <span>4 / 5 mobile &middot; 1 / 1 desktop</span>
+              <span>Export frame-seekable / keyframe-dense (short GOP) for smooth scroll-scrub in both directions</span>
             </div>
-          {%- endfor -%}
-        </div>
+          </div>
+        {%- endif -%}
       </div>
-      <div class="science__spacer" aria-hidden="true"></div>
     </div>
-    <!-- SWAP: science_scrollable_3d_or_video, replaces the frame sequence above; keep 4:5 mobile / 1:1 desktop stage -->
-  {%- endif -%}
+    <div class="science__spacer" aria-hidden="true"></div>
+  </div>
 
   <div class="container container--narrow science__stats">
     <div class="stat-row">
@@ -44,7 +77,7 @@
         {%- if value != blank -%}
           <div class="stat" data-reveal style="--reveal-i: {{ forloop.index0 }};">
             <p class="stat__intro">{{ section.settings.stat_intro }}</p>
-            <p class="stat__value">{{ value }}</p>
+            <p class="stat__value" data-count-up="{{ value }}">0%</p>
             <p class="stat__caption">{{ caption }}</p>
           </div>
         {%- endif -%}
@@ -64,13 +97,36 @@
       "type": "text",
       "id": "headline",
       "label": "Headline",
-      "default": "The Science Behind Special Water"
+      "info": "Wrap a word in *asterisks* to accent it, e.g. *Science*.",
+      "default": "The *Science* Behind Special Water"
     },
     {
       "type": "textarea",
       "id": "body",
       "label": "Body",
       "default": "Special Water was built around one mechanism: stabilizing blood sugar to shut off the cravings that sabotage weight loss."
+    },
+    {
+      "type": "video",
+      "id": "video",
+      "label": "Scroll-scrubbed video",
+      "info": "Export frame-seekable / keyframe-dense so scrubbing looks smooth in both directions."
+    },
+    {
+      "type": "image_picker",
+      "id": "poster",
+      "label": "Poster frame (shown before video loads)"
+    },
+    {
+      "type": "range",
+      "id": "scrub_length",
+      "label": "Scroll sensitivity",
+      "info": "How much scroll distance covers the full video. Lower = faster scrub, higher = slower and more gradual.",
+      "min": 150,
+      "max": 600,
+      "step": 25,
+      "unit": "vh",
+      "default": 350
     },
     { "type": "text", "id": "stat_intro", "label": "Stat lead-in", "default": "In an in-house study" },
     { "type": "text", "id": "stat_1_value", "label": "Stat 1 value", "default": "93%" },
@@ -96,26 +152,6 @@
       "default": "Based on our in-house study. Individual results may vary."
     }
   ],
-  "blocks": [
-    {
-      "type": "frame",
-      "name": "Sequence frame",
-      "settings": [
-        {
-          "type": "image_picker",
-          "id": "image",
-          "label": "Frame image",
-          "info": "Transformation sequence: starts normal, moves inside as scroll progresses."
-        }
-      ]
-    }
-  ],
-  "max_blocks": 8,
-  "presets": [
-    {
-      "name": "Science scroll",
-      "blocks": [{ "type": "frame" }, { "type": "frame" }, { "type": "frame" }]
-    }
-  ]
+  "presets": [{ "name": "Science scroll" }]
 }
 {% endschema %}

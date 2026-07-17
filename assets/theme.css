@@ -74,6 +74,14 @@ h1, h2, h3, .h1, .h2, .h3 {
 }
 .lead strong { color: var(--color-ink); }
 
+/* Tasteful keyword pops (see snippets/accent-text.liquid): editors wrap
+   a word in *asterisks* in a plain text setting to color it. Inherits
+   the surrounding element's weight/size, so it reads as emphasis, not
+   a different typeface. */
+.accent-pop { font-weight: inherit; }
+.accent-pop--blue { color: var(--color-primary); }
+.accent-pop--gold { color: var(--color-cta); }
+
 .text-gradient {
   background: var(--gradient-brand);
   -webkit-background-clip: text;
@@ -202,7 +210,11 @@ h1, h2, h3, .h1, .h2, .h3 {
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
   border-bottom: 1px solid color-mix(in srgb, var(--color-ink) 8%, transparent);
+  transition: transform 300ms var(--ease-out);
 }
+/* Hidden while the product subnav is stuck, so the two persistent top
+   bars never stack on top of each other (both pin to top:0). */
+.site-header.is-hidden { transform: translateY(-100%); }
 .site-header__inner {
   display: flex;
   align-items: center;
@@ -217,6 +229,27 @@ h1, h2, h3, .h1, .h2, .h3 {
   letter-spacing: -0.01em;
 }
 .site-header__cart { display: inline-flex; padding: 0.5rem; border-radius: 999px; }
+
+.site-header__nav { display: none; }
+@media (min-width: 900px) {
+  .site-header__nav { display: block; }
+}
+.site-header__nav-list {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  list-style: none;
+  padding: 0;
+}
+.site-header__nav-list a {
+  font-size: 0.9rem;
+  font-weight: 500;
+  text-decoration: none;
+  color: color-mix(in srgb, var(--color-ink) 75%, transparent);
+  transition: color 160ms var(--ease-out);
+}
+.site-header__nav-list a:hover,
+.site-header__nav-list a[aria-current="page"] { color: var(--color-ink); }
 
 /* ---- Product subnav (Apple-style local nav) ---- */
 .product-subnav {
@@ -378,31 +411,46 @@ h1, h2, h3, .h1, .h2, .h3 {
   gap: 1rem;
   margin-top: 1.5rem;
 }
-.carousel__dots { display: flex; gap: 0.5rem; }
+/* Dots: quiet dashes that morph into a longer pill when active, Apple-
+   style, rather than a stock filled-circle indicator row. */
+.carousel__dots { display: flex; align-items: center; gap: 6px; }
 .carousel__dot {
-  width: 8px; height: 8px;
+  width: 6px; height: 6px;
   border: 0; border-radius: 999px;
   padding: 0;
-  background: color-mix(in srgb, var(--color-ink) 22%, transparent);
+  background: color-mix(in srgb, var(--color-ink) 20%, transparent);
   cursor: pointer;
-  transition: background-color 200ms var(--ease-out), transform 200ms var(--ease-out);
+  transition: width 280ms var(--ease-out), background-color 200ms var(--ease-out), opacity 200ms var(--ease-out);
 }
-.section--scheme-ink .carousel__dot { background: rgba(255,255,255,0.3); }
-.carousel__dot.is-active { background: var(--color-primary); transform: scale(1.25); }
+.section--scheme-ink .carousel__dot { background: rgba(255,255,255,0.28); }
+.carousel__dot.is-active { width: 20px; background: var(--color-primary); }
+.section--scheme-ink .carousel__dot.is-active { background: var(--color-cta); }
+
+/* Arrows: thin hairline ring rather than a filled chunky button; fills
+   in softly only on hover/press for a lighter, more refined touch. */
 .carousel__arrow {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 40px; height: 40px;
-  border: 0; border-radius: 999px;
-  background: color-mix(in srgb, var(--color-ink) 7%, transparent);
+  width: 38px; height: 38px;
+  border-radius: 999px;
+  border: 1px solid color-mix(in srgb, var(--color-ink) 16%, transparent);
+  background: transparent;
+  color: var(--color-ink);
   cursor: pointer;
-  transition: transform 160ms var(--ease-out), opacity 160ms var(--ease-out);
+  transition: transform 160ms var(--ease-out), background-color 160ms var(--ease-out), border-color 160ms var(--ease-out), opacity 160ms var(--ease-out);
 }
-.section--scheme-ink .carousel__arrow { background: rgba(255,255,255,0.12); color: #fff; }
+.section--scheme-ink .carousel__arrow {
+  border-color: rgba(255,255,255,0.22);
+  color: #fff;
+}
+@media (hover: hover) and (pointer: fine) {
+  .carousel__arrow:hover { background: color-mix(in srgb, var(--color-ink) 5%, transparent); border-color: color-mix(in srgb, var(--color-ink) 28%, transparent); }
+  .section--scheme-ink .carousel__arrow:hover { background: rgba(255,255,255,0.08); border-color: rgba(255,255,255,0.34); }
+}
 .carousel__arrow:active { transform: scale(0.92); }
-.carousel__arrow[disabled] { opacity: 0.35; cursor: default; }
-.carousel__arrow svg { width: 18px; height: 18px; }
+.carousel__arrow[disabled] { opacity: 0.3; cursor: default; }
+.carousel__arrow svg { width: 16px; height: 16px; stroke-width: 1.6; }
 
 /* ---- Testimonial cards ---- */
 .testimonial-card { position: relative; border-radius: var(--radius-card); overflow: hidden; }
@@ -428,14 +476,46 @@ h1, h2, h3, .h1, .h2, .h3 {
 .testimonial-card__author { margin-top: 0.6rem; font-size: 0.85rem; color: rgba(255,255,255,0.8); }
 
 /* ---- Ingredients ---- */
-.ingredients__layout { display: grid; gap: 3rem; }
-@media (min-width: 900px) {
-  .ingredients__layout { grid-template-columns: 5fr 7fr; align-items: start; }
-  .ingredients__aside { position: sticky; top: 96px; }
-}
-.ingredients__aside .media-slot { border-radius: var(--radius-card); }
 .ingredients__format { margin-top: 1rem; font-size: 0.9rem; color: color-mix(in srgb, var(--color-ink) 60%, transparent); }
-.ingredient-list { list-style: none; padding: 0; display: grid; gap: 0; }
+
+.ingredient-slide { position: relative; border-radius: var(--radius-card); overflow: hidden; }
+.ingredient-slide .media-slot__frame { aspect-ratio: 4 / 5; }
+.ingredient-slide .media-slot__label { justify-content: flex-start; padding-top: 14%; border: 0; }
+.ingredient-slide__overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 1.75rem;
+  background: linear-gradient(180deg, rgba(22,22,22,0) 38%, rgba(22,22,22,0.72) 100%);
+  color: #fff;
+}
+.ingredient-slide__name {
+  font-family: var(--font-heading);
+  font-weight: var(--weight-heading);
+  font-size: 1.2rem;
+  line-height: 1.25;
+  letter-spacing: -0.01em;
+}
+.ingredient-slide__source {
+  display: block;
+  margin-top: 0.2rem;
+  font-family: var(--font-body);
+  font-weight: 400;
+  font-size: 0.8rem;
+  font-style: italic;
+  color: rgba(255,255,255,0.75);
+}
+.ingredient-slide__role {
+  margin-top: 0.6rem;
+  font-size: 0.9rem;
+  line-height: 1.5;
+  color: rgba(255,255,255,0.88);
+}
+
+.ingredient-list { list-style: none; padding: 0; display: grid; gap: 0; margin-top: 1rem; }
 .ingredient {
   padding: 1.5rem 0;
   border-bottom: 1px solid color-mix(in srgb, var(--color-ink) 10%, transparent);
@@ -526,18 +606,16 @@ h1, h2, h3, .h1, .h2, .h3 {
   justify-content: center;
   overflow: hidden;
 }
-.science__frames { position: relative; width: min(92vw, 640px); }
-.science__frame { position: absolute; inset: 0; opacity: 0; transition: opacity 300ms linear; }
+.science__frame { position: relative; width: min(92vw, 640px); }
 .science__frame .media-slot { border-radius: var(--radius-card); }
-.science__frame:first-child { position: relative; }
-.science__frame.is-active { opacity: 1; }
+.science__video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
 .science__spacer { height: 60svh; }
 .science__stats { padding-top: clamp(2rem, 5vw, 3rem); }
 
-/* Reduced-motion / no-JS fallback: frames stack statically */
+/* Reduced-motion / no video yet: single static poster frame, no
+   scroll-scrub height reserved (overrides the inline scrub_length vh). */
+.science__scroller.is-static { height: auto !important; }
 .science__scroller.is-static .science__stage { position: static; height: auto; }
-.science__scroller.is-static .science__frames { width: 100%; display: grid; gap: 1rem; }
-.science__scroller.is-static .science__frame { position: relative; opacity: 1; }
 .science__scroller.is-static .science__spacer { display: none; }
 
 /* ---- Icon list (Who this is for) ---- */
@@ -574,6 +652,7 @@ h1, h2, h3, .h1, .h2, .h3 {
   .compare__table { grid-template-columns: 1fr 1fr; gap: 1.25rem; }
 }
 .compare__col {
+  position: relative;
   border-radius: var(--radius-card);
   padding: 2rem;
   background: var(--color-tint);
@@ -581,6 +660,26 @@ h1, h2, h3, .h1, .h2, .h3 {
 .compare__col--featured {
   background: var(--gradient-brand);
   color: #fff;
+}
+.compare__badge {
+  position: absolute;
+  top: 1.25rem;
+  right: 1.25rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 999px;
+}
+.compare__badge svg { width: 18px; height: 18px; }
+.compare__badge--up {
+  background: rgba(255, 255, 255, 0.22);
+  color: #fff;
+}
+.compare__badge--down {
+  background: color-mix(in srgb, var(--color-ink) 8%, transparent);
+  color: color-mix(in srgb, var(--color-ink) 45%, transparent);
 }
 .compare__col-title { font-size: 1.3rem; margin-bottom: 0.25rem; }
 .compare__col--featured .compare__col-title { color: #fff; }
@@ -690,6 +789,5 @@ h1, h2, h3, .h1, .h2, .h3 {
   html { scroll-behavior: auto; }
   [data-reveal] { opacity: 1; transform: none; transition: none; }
   .product-subnav { transition: none; }
-  .science__frame { transition: none; }
   .btn, .carousel__arrow { transition: none; }
 }

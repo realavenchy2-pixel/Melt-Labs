@@ -1,8 +1,26 @@
 /* Melt Labs — shared carousel. CSS scroll-snap does the work; JS adds
-   arrows, dots, and active-slide tracking. One component for every
-   carousel on the site (testimonials, benefit angles, about cards). */
+   arrows, dots, active-slide tracking, and a subtle enter animation on
+   the slide's content whenever the active slide changes (scroll, swipe,
+   or arrow/dot click). One component for every carousel on the site
+   (testimonials, ingredients, benefit angles, about cards). */
 (function () {
   'use strict';
+
+  var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var ENTER_EASING = 'cubic-bezier(0.23, 1, 0.32, 1)'; /* fast ease-out, no overshoot */
+
+  function animateEnter(slide) {
+    if (reduceMotion) return;
+    var content = slide.firstElementChild;
+    if (!content) return;
+    content.animate(
+      [
+        { opacity: 0.001, transform: 'translateY(10px)' },
+        { opacity: 1, transform: 'translateY(0)' }
+      ],
+      { duration: 320, easing: ENTER_EASING, fill: 'both' }
+    );
+  }
 
   function initCarousel(root) {
     var track = root.querySelector('[data-carousel-track]');
@@ -14,6 +32,7 @@
     var dotsWrap = root.querySelector('[data-carousel-dots]');
     var dots = [];
     var activeIndex = 0;
+    var mounted = false;
 
     if (dotsWrap) {
       slides.forEach(function (_, i) {
@@ -38,6 +57,9 @@
       dots.forEach(function (dot, d) { dot.classList.toggle('is-active', d === i); });
       if (prev) prev.disabled = i === 0;
       if (next) next.disabled = i === slides.length - 1;
+      /* Skip the enter animation on initial mount; only animate slides
+         that become active from a real scroll/swipe/click interaction. */
+      if (mounted) animateEnter(slides[i]);
     }
 
     if (prev) prev.addEventListener('click', function () { scrollToSlide(activeIndex - 1); });
@@ -52,6 +74,7 @@
 
     activeIndex = -1;
     setActive(0);
+    mounted = true;
   }
 
   document.querySelectorAll('[data-carousel]').forEach(initCarousel);

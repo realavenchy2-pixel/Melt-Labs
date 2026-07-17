@@ -25,7 +25,7 @@
       <span class="eyebrow">{{ section.settings.eyebrow }}</span>
     {%- endif -%}
 
-    <h1 class="hero__headline">{{ section.settings.headline }}</h1>
+    <h1 class="hero__headline">{% render 'accent-text', text: section.settings.headline, color: 'gold' %}</h1>
 
     {%- if section.settings.subhead != blank -%}
       <p class="hero__subhead">{{ section.settings.subhead }}</p>
@@ -59,7 +59,8 @@
       "type": "text",
       "id": "headline",
       "label": "Headline",
-      "default": "Two drops. Quiet the cravings. Steady your sugar."
+      "info": "Wrap a word in *asterisks* to accent it.",
+      "default": "Two drops. *Quiet* the cravings. Steady your sugar."
     },
     {
       "type": "text",

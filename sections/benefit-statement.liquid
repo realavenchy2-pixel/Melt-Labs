@@ -5,14 +5,20 @@
   S8 passes two statements + 4 slides.
 {%- endcomment -%}
 
-{%- assign scheme = section.settings.scheme | default: 'white' -%}
+{%- liquid
+  assign scheme = section.settings.scheme | default: 'white'
+  assign accent_color = 'blue'
+  if scheme == 'ink'
+    assign accent_color = 'gold'
+  endif
+-%}
 
 <section class="section section--flush section--scheme-{{ scheme }}" style="padding-block: var(--section-pad);">
   <div class="container">
     {%- for block in section.blocks -%}
       {%- if block.type == 'statement' -%}
         <header class="benefit-statement" data-reveal {{ block.shopify_attributes }}>
-          <h2 class="benefit-statement__headline">{{ block.settings.headline }}</h2>
+          <h2 class="benefit-statement__headline">{% render 'accent-text', text: block.settings.headline, color: accent_color %}</h2>
           {%- if block.settings.subhead != blank -%}
             <p class="lead benefit-statement__subhead" style="margin-inline: auto;">{{ block.settings.subhead }}</p>
           {%- endif -%}
@@ -73,7 +79,8 @@
           "type": "text",
           "id": "headline",
           "label": "Headline",
-          "default": "Drink what you already drink. Lose weight seamlessly doing it."
+          "info": "Wrap a word in *asterisks* to accent it.",
+          "default": "Drink what you already drink. Lose weight *seamlessly* doing it."
         },
         { "type": "text", "id": "subhead", "label": "Subhead" }
       ]
@@ -113,7 +120,7 @@
         {
           "type": "statement",
           "settings": {
-            "headline": "Drink what you already drink. Lose weight seamlessly doing it."
+            "headline": "Drink what you already drink. Lose weight *seamlessly* doing it."
           }
         },
         {

@@ -12,6 +12,23 @@
       {%- endif -%}
     </a>
 
+    {%- if section.settings.menu != blank -%}
+      <nav class="site-header__nav" aria-label="Main">
+        <ul class="site-header__nav-list">
+          {%- for link in section.settings.menu.links -%}
+            <li>
+              <a
+                href="{{ link.url }}"
+                {% if link.active %}aria-current="page"{% endif %}
+              >
+                {{ link.title }}
+              </a>
+            </li>
+          {%- endfor -%}
+        </ul>
+      </nav>
+    {%- endif -%}
+
     <a class="site-header__cart" href="{{ routes.cart_url }}" aria-label="Cart ({{ cart.item_count }} items)">
       {%- render 'icon', name: 'cart' -%}
     </a>
@@ -21,6 +38,14 @@
 {% schema %}
 {
   "name": "Header",
-  "settings": []
+  "settings": [
+    {
+      "type": "link_list",
+      "id": "menu",
+      "label": "Navigation menu",
+      "info": "Edit items in Navigation settings, or leave empty to hide the nav.",
+      "default": "main-menu"
+    }
+  ]
 }
 {% endschema %}

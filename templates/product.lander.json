@@ -10,7 +10,7 @@
       "type": "hero-video",
       "settings": {
         "eyebrow": "MELT LABS",
-        "headline": "Two drops. Quiet the cravings. Steady your sugar.",
+        "headline": "Two drops. *Quiet* the cravings. Steady your sugar.",
         "subhead": "A Japanese botanical serum designed to work with your body, not against your routine.",
         "cta_label": "See the protocol"
       }
@@ -47,7 +47,11 @@
           }
         }
       },
-      "block_order": ["t1", "t2", "t3"]
+      "block_order": [
+        "t1",
+        "t2",
+        "t3"
+      ]
     },
     "ingredients": {
       "type": "ingredients-list",
@@ -97,7 +101,13 @@
             "role": "Natural antioxidants (EGCG catechins) that support gentle thermogenesis and a metabolic boost without stimulant jitters."
           }
         },
-        "b1": { "type": "base", "settings": { "name": "Water", "role": "Base and solvent" } },
+        "b1": {
+          "type": "base",
+          "settings": {
+            "name": "Water",
+            "role": "Base and solvent"
+          }
+        },
         "b2": {
           "type": "base",
           "settings": {
@@ -107,19 +117,34 @@
         },
         "b3": {
           "type": "base",
-          "settings": { "name": "Potassium Sorbate", "role": "Natural preservative for shelf stability" }
+          "settings": {
+            "name": "Potassium Sorbate",
+            "role": "Natural preservative for shelf stability"
+          }
         }
       },
-      "block_order": ["i1", "i2", "i3", "i4", "i5", "i6", "b1", "b2", "b3"]
+      "block_order": [
+        "i1",
+        "i2",
+        "i3",
+        "i4",
+        "i5",
+        "i6",
+        "b1",
+        "b2",
+        "b3"
+      ]
     },
     "benefit": {
       "type": "benefit-statement",
-      "settings": { "scheme": "white" },
+      "settings": {
+        "scheme": "white"
+      },
       "blocks": {
         "s1": {
           "type": "statement",
           "settings": {
-            "headline": "Drink what you already drink. Lose weight seamlessly doing it."
+            "headline": "Drink what you already drink. Lose weight *seamlessly* doing it."
           }
         },
         "a1": {
@@ -152,12 +177,18 @@
           }
         }
       },
-      "block_order": ["s1", "a1", "a2", "a3", "a4"]
+      "block_order": [
+        "s1",
+        "a1",
+        "a2",
+        "a3",
+        "a4"
+      ]
     },
     "science": {
       "type": "science-scroll",
       "settings": {
-        "headline": "The Science Behind Special Water",
+        "headline": "The *Science* Behind Special Water",
         "body": "Special Water was built around one mechanism: stabilizing blood sugar to shut off the cravings that sabotage weight loss.",
         "stat_intro": "In an in-house study",
         "stat_1_value": "93%",
@@ -166,58 +197,94 @@
         "stat_2_caption": "lost 10+ lbs",
         "stat_3_value": "90%",
         "stat_3_caption": "saw blood sugar stabilize",
-        "attribution": "Based on our in-house study. Individual results may vary."
-      },
-      "blocks": {
-        "f1": { "type": "frame" },
-        "f2": { "type": "frame" },
-        "f3": { "type": "frame" }
-      },
-      "block_order": ["f1", "f2", "f3"]
+        "attribution": "Based on our in-house study. Individual results may vary.",
+        "scrub_length": 350
+      }
     },
     "who": {
       "type": "icon-list",
-      "settings": { "scheme": "ink" },
+      "settings": {
+        "scheme": "ink"
+      },
       "blocks": {
-        "w1": { "type": "item", "settings": { "icon": "scale", "text": "People trying to lose weight" } },
+        "w1": {
+          "type": "item",
+          "settings": {
+            "icon": "scale",
+            "text": "People trying to lose weight"
+          }
+        },
         "w2": {
           "type": "item",
-          "settings": { "icon": "clock", "text": "People looking for a long-term solution, not a quick fix" }
+          "settings": {
+            "icon": "clock",
+            "text": "People looking for a long-term solution, not a quick fix"
+          }
         },
-        "w3": { "type": "item", "settings": { "icon": "leaf", "text": "Natural weight loss, no injections" } },
+        "w3": {
+          "type": "item",
+          "settings": {
+            "icon": "leaf",
+            "text": "Natural weight loss, no injections"
+          }
+        },
         "w4": {
           "type": "item",
-          "settings": { "icon": "muscle", "text": "Sustainable, steady, muscle-preserving" }
+          "settings": {
+            "icon": "muscle",
+            "text": "Sustainable, steady, muscle-preserving"
+          }
         },
-        "w5": { "type": "item", "settings": { "icon": "droplet", "text": "Easy, low-effort weight control" } },
+        "w5": {
+          "type": "item",
+          "settings": {
+            "icon": "droplet",
+            "text": "Easy, low-effort weight control"
+          }
+        },
         "w6": {
           "type": "item",
-          "settings": { "icon": "check", "text": "People who don't want to worry about it" }
+          "settings": {
+            "icon": "check",
+            "text": "People who don't want to worry about it"
+          }
         }
       },
-      "block_order": ["w1", "w2", "w3", "w4", "w5", "w6"]
+      "block_order": [
+        "w1",
+        "w2",
+        "w3",
+        "w4",
+        "w5",
+        "w6"
+      ]
     },
     "benefits_2": {
       "type": "benefit-statement",
-      "settings": { "scheme": "tint" },
+      "settings": {
+        "scheme": "tint"
+      },
       "blocks": {
         "h1": {
           "type": "statement",
           "settings": {
-            "headline": "Cravings, quieted.",
+            "headline": "Cravings, *quieted.*",
             "subhead": "Two drops shift your relationship with food, without restriction."
           }
         },
         "h2": {
           "type": "statement",
           "settings": {
-            "headline": "Sugar, stabilized.",
+            "headline": "Sugar, *stabilized.*",
             "subhead": "The mechanism behind sustainable, seamless weight loss."
           }
         },
         "g1": {
           "type": "slide",
-          "settings": { "title": "No jitters", "text": "No stimulants, no racing heart, no crash later." }
+          "settings": {
+            "title": "No jitters",
+            "text": "No stimulants, no racing heart, no crash later."
+          }
         },
         "g2": {
           "type": "slide",
@@ -228,7 +295,10 @@
         },
         "g3": {
           "type": "slide",
-          "settings": { "title": "Tasteless", "text": "Undetectable in any drink. You'll forget it's there." }
+          "settings": {
+            "title": "Tasteless",
+            "text": "Undetectable in any drink. You'll forget it's there."
+          }
         },
         "g4": {
           "type": "slide",
@@ -239,7 +309,14 @@
           }
         }
       },
-      "block_order": ["h1", "h2", "g1", "g2", "g3", "g4"]
+      "block_order": [
+        "h1",
+        "h2",
+        "g1",
+        "g2",
+        "g3",
+        "g4"
+      ]
     },
     "potency": {
       "type": "potency-stats",
@@ -261,7 +338,10 @@
           }
         }
       },
-      "block_order": ["p1", "p2"]
+      "block_order": [
+        "p1",
+        "p2"
+      ]
     },
     "compare": {
       "type": "comparison",
@@ -307,7 +387,16 @@
           }
         }
       },
-      "block_order": ["c1", "c2", "c3", "c4", "c5"]
+      "block_order": [
+        "c1",
+        "c2",
+        "c3",
+        "c4",
+        "c5"
+      ],
+      "settings": {
+        "headline": "Built for the *long run.*"
+      }
     },
     "values": {
       "type": "values-carousel",
@@ -337,7 +426,11 @@
           }
         }
       },
-      "block_order": ["v1", "v2", "v3"]
+      "block_order": [
+        "v1",
+        "v2",
+        "v3"
+      ]
     },
     "refs": {
       "type": "references",
@@ -385,7 +478,14 @@
           }
         }
       },
-      "block_order": ["r1", "r2", "r3", "r4", "r5", "r6"]
+      "block_order": [
+        "r1",
+        "r2",
+        "r3",
+        "r4",
+        "r5",
+        "r6"
+      ]
     }
   },
   "order": [

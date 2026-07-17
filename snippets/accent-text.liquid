@@ -1,0 +1,23 @@
+{%- comment -%}
+  Tasteful keyword highlight, Apple-style color pops in headlines/body.
+  Content editors wrap a word or phrase in *asterisks* in any plain text
+  setting; this renders it in the brand accent color. Native text field,
+  no rich text HTML to fight with.
+
+  Params:
+    text  — the raw setting string, may contain *word* markers (required)
+    color — 'blue' (default, for light/tint backgrounds) or 'gold'
+            (for ink/dark backgrounds, where it reads closer to WCAG AA)
+{%- endcomment -%}
+
+{%- liquid
+  assign color = color | default: 'blue'
+  assign segments = text | split: '*'
+-%}
+{%- for segment in segments -%}
+  {%- if forloop.index0 | modulo: 2 == 1 -%}
+    <span class="accent-pop accent-pop--{{ color }}">{{ segment }}</span>
+  {%- else -%}
+    {{- segment -}}
+  {%- endif -%}
+{%- endfor -%}

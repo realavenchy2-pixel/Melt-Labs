@@ -26,7 +26,32 @@
   <div class="media-slot__frame"></div>
 
   {%- if video -%}
-    {{ video | video_tag: autoplay: true, muted: true, loop: true, controls: false, playsinline: true, preload: 'metadata' }}
+    {%- comment -%}
+      Hand-built <video> tag rather than Shopify's video_tag filter: iOS
+      Safari only allows inline autoplay when muted + playsinline are
+      present as literal HTML attributes at parse time, and video_tag's
+      generated markup doesn't reliably guarantee that. scroll-fx.js also
+      calls .play() on load as a safety net for browsers that ignore the
+      autoplay attribute under certain network conditions.
+    {%- endcomment -%}
+    <video
+      class="hero-video"
+      data-autoplay-video
+      autoplay
+      muted
+      loop
+      playsinline
+      webkit-playsinline
+      disablepictureinpicture
+      disableremoteplayback
+      preload="auto"
+      aria-hidden="true"
+      tabindex="-1"
+    >
+      {%- for source in video.sources -%}
+        <source src="{{ source.url }}" type="{{ source.mime_type }}">
+      {%- endfor -%}
+    </video>
   {%- elsif image -%}
     {%- render 'responsive-image', image: image, sizes: sizes, eager: eager -%}
   {%- else -%}

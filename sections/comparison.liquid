@@ -10,7 +10,7 @@
 <section class="section section--scheme-white">
   <div class="container">
     <div class="section-header section-header--center" data-reveal>
-      <h2 class="h2">{{ section.settings.headline }}</h2>
+      <h2 class="h2">{% render 'accent-text', text: section.settings.headline, color: 'blue' %}</h2>
       {%- if section.settings.subhead != blank -%}
         <p class="lead" style="margin-inline: auto;">{{ section.settings.subhead }}</p>
       {%- endif -%}
@@ -18,6 +18,7 @@
 
     <div class="compare__table">
       <div class="compare__col compare__col--featured" data-reveal>
+        <span class="compare__badge compare__badge--up" aria-hidden="true">{% render 'icon', name: 'thumbs-up' %}</span>
         <h3 class="compare__col-title">{{ section.settings.col_a_title }}</h3>
         <p class="compare__col-sub">{{ section.settings.col_a_sub }}</p>
         <ul class="compare__rows">
@@ -31,6 +32,7 @@
       </div>
 
       <div class="compare__col" data-reveal style="--reveal-i: 1;">
+        <span class="compare__badge compare__badge--down" aria-hidden="true">{% render 'icon', name: 'thumbs-down' %}</span>
         <h3 class="compare__col-title">{{ section.settings.col_b_title }}</h3>
         <p class="compare__col-sub">{{ section.settings.col_b_sub }}</p>
         <ul class="compare__rows">
@@ -58,7 +60,8 @@
       "type": "text",
       "id": "headline",
       "label": "Headline",
-      "default": "Built for the long run."
+      "info": "Wrap a word in *asterisks* to accent it.",
+      "default": "Built for the *long run.*"
     },
     {
       "type": "textarea",
