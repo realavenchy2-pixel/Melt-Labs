@@ -21,19 +21,19 @@
         {%- if product != blank and product.images.size > 0 -%}
           <div class="offer__gallery">
             {%- for image in product.images limit: 4 -%}
-              <div class="media-slot media-slot--rounded {% if forloop.first %}offer__gallery-lead{% endif %}" style="--aspect-mobile: 1 / 1;">
+              <div class="media-slot media-slot--rounded {% if forloop.first %}offer__gallery-lead{% endif %}" style="--aspect-mobile: {{ section.settings.aspect_mobile }}; --aspect-desktop: {{ section.settings.aspect_desktop }};">
                 <div class="media-slot__frame"></div>
                 {%- render 'responsive-image', image: image, sizes: '(min-width: 900px) 45vw, 100vw', eager: forloop.first -%}
               </div>
             {%- endfor -%}
           </div>
         {%- elsif section.settings.image != blank -%}
-          <div class="media-slot media-slot--rounded" style="--aspect-mobile: 1 / 1;">
+          <div class="media-slot media-slot--rounded" style="--aspect-mobile: {{ section.settings.aspect_mobile }}; --aspect-desktop: {{ section.settings.aspect_desktop }};">
             <div class="media-slot__frame"></div>
             {%- render 'responsive-image', image: section.settings.image, sizes: '(min-width: 900px) 45vw, 100vw', eager: true -%}
           </div>
         {%- else -%}
-          {%- render 'media-placeholder', label: 'product_gallery_photo', aspect_mobile: '1 / 1', class: 'media-slot--rounded', eager: true -%}
+          {%- render 'media-placeholder', label: 'product_gallery_photo', aspect_mobile: section.settings.aspect_mobile, aspect_desktop: section.settings.aspect_desktop, class: 'media-slot--rounded', eager: true -%}
         {%- endif -%}
       </div>
 
@@ -154,6 +154,32 @@
       "info": "On product pages this defaults to the current product."
     },
     { "type": "image_picker", "id": "image", "label": "Fallback photo (if the product has no images)" },
+    {
+      "type": "select",
+      "id": "aspect_desktop",
+      "label": "Desktop image ratio",
+      "options": [
+        { "value": "1 / 1", "label": "Square (1:1)" },
+        { "value": "4 / 5", "label": "Portrait (4:5)" },
+        { "value": "3 / 4", "label": "Portrait (3:4)" },
+        { "value": "4 / 3", "label": "Landscape (4:3)" },
+        { "value": "16 / 9", "label": "Wide (16:9)" }
+      ],
+      "default": "1 / 1"
+    },
+    {
+      "type": "select",
+      "id": "aspect_mobile",
+      "label": "Mobile image ratio",
+      "options": [
+        { "value": "1 / 1", "label": "Square (1:1)" },
+        { "value": "4 / 5", "label": "Portrait (4:5)" },
+        { "value": "3 / 4", "label": "Portrait (3:4)" },
+        { "value": "4 / 3", "label": "Landscape (4:3)" },
+        { "value": "16 / 9", "label": "Wide (16:9)" }
+      ],
+      "default": "1 / 1"
+    },
     { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "MELT LABS" },
     {
       "type": "text",

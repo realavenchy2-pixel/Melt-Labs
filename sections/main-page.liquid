@@ -1,6 +1,38 @@
-<div class="page-shell">
-  <div class="container container--narrow">
-    <h1 class="h2 page-shell__title">{{ page.title }}</h1>
+{%- comment -%}
+  Generic page template — for About, Shipping, Privacy, Contact-ish
+  informational pages. Simple, on-brand header (optional banner image
+  or a clean eyebrow + title band) over nicely typeset rich-text
+  content. Not for the product landers, which have their own dedicated
+  templates.
+{%- endcomment -%}
+
+<div class="page">
+  {%- if section.settings.image != blank -%}
+    <div class="page__banner" data-reveal>
+      <div class="media-slot" style="--aspect-mobile: {{ section.settings.aspect_mobile }}; --aspect-desktop: {{ section.settings.aspect_desktop }};">
+        <div class="media-slot__frame"></div>
+        {%- render 'responsive-image', image: section.settings.image, sizes: '100vw', eager: true -%}
+        <div class="page__banner-scrim" aria-hidden="true"></div>
+      </div>
+      <div class="container page__banner-content">
+        {%- if section.settings.eyebrow != blank -%}
+          <span class="eyebrow">{{ section.settings.eyebrow }}</span>
+        {%- endif -%}
+        <h1 class="h1">{{ page.title }}</h1>
+      </div>
+    </div>
+  {%- else -%}
+    <div class="page__header section--scheme-{{ section.settings.scheme | default: 'tint' }}">
+      <div class="container page__header-content" data-reveal>
+        {%- if section.settings.eyebrow != blank -%}
+          <span class="eyebrow">{{ section.settings.eyebrow }}</span>
+        {%- endif -%}
+        <h1 class="h1">{{ page.title }}</h1>
+      </div>
+    </div>
+  {%- endif -%}
+
+  <div class="container container--narrow page__body" data-reveal>
     <div class="rte">{{ page.content }}</div>
   </div>
 </div>
@@ -8,6 +40,44 @@
 {% schema %}
 {
   "name": "Page",
-  "settings": []
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow" },
+    {
+      "type": "select",
+      "id": "scheme",
+      "label": "Header background (used when no banner image)",
+      "options": [
+        { "value": "white", "label": "White" },
+        { "value": "tint", "label": "Pale blue" },
+        { "value": "ink", "label": "Near-black" }
+      ],
+      "default": "tint"
+    },
+    { "type": "image_picker", "id": "image", "label": "Banner image (optional)" },
+    {
+      "type": "select",
+      "id": "aspect_desktop",
+      "label": "Banner desktop ratio",
+      "options": [
+        { "value": "21 / 9", "label": "Cinematic (21:9)" },
+        { "value": "16 / 9", "label": "Wide (16:9)" },
+        { "value": "4 / 3", "label": "Landscape (4:3)" },
+        { "value": "1 / 1", "label": "Square (1:1)" }
+      ],
+      "default": "16 / 9"
+    },
+    {
+      "type": "select",
+      "id": "aspect_mobile",
+      "label": "Banner mobile ratio",
+      "options": [
+        { "value": "4 / 3", "label": "Landscape (4:3)" },
+        { "value": "1 / 1", "label": "Square (1:1)" },
+        { "value": "4 / 5", "label": "Portrait (4:5)" },
+        { "value": "16 / 9", "label": "Wide (16:9)" }
+      ],
+      "default": "4 / 3"
+    }
+  ]
 }
 {% endschema %}

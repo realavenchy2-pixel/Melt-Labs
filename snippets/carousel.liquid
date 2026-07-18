@@ -4,12 +4,22 @@
   each top-level element in `slides` must already be a .carousel__slide.
 
   Params:
-    slides — captured HTML string of .carousel__slide elements (required)
-    id     — unique id, usually section.id (required)
-    label  — accessible name for the region
+    slides   — captured HTML string of .carousel__slide elements (required)
+    id       — unique id, usually section.id (required)
+    label    — accessible name for the region
+    autoplay — true to auto-advance on a timer and show a play/pause
+               toggle (starts playing once scrolled into view, pauses on
+               manual interaction/tab-hidden, never runs under
+               prefers-reduced-motion)
+    interval — ms between auto-advances, default 4500
 {%- endcomment -%}
 
-<div class="carousel" data-carousel id="carousel-{{ id }}">
+<div
+  class="carousel"
+  data-carousel
+  {% if autoplay %}data-carousel-autoplay data-carousel-interval="{{ interval | default: 4500 }}"{% endif %}
+  id="carousel-{{ id }}"
+>
   <div
     class="carousel__track"
     data-carousel-track
@@ -24,6 +34,12 @@
     <button class="carousel__arrow" type="button" data-carousel-prev aria-label="Previous slide">
       {%- render 'icon', name: 'chevron-left' -%}
     </button>
+    {%- if autoplay -%}
+      <button class="carousel__arrow carousel__toggle" type="button" data-carousel-toggle data-playing="true" aria-label="Pause autoplay" aria-pressed="false">
+        <span class="carousel__toggle-icon carousel__toggle-icon--pause">{%- render 'icon', name: 'pause' -%}</span>
+        <span class="carousel__toggle-icon carousel__toggle-icon--play">{%- render 'icon', name: 'play' -%}</span>
+      </button>
+    {%- endif -%}
     <div class="carousel__dots" data-carousel-dots></div>
     <button class="carousel__arrow" type="button" data-carousel-next aria-label="Next slide">
       {%- render 'icon', name: 'chevron-right' -%}

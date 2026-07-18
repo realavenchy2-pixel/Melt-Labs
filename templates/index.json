@@ -12,25 +12,22 @@
       }
     },
     "featured": {
-      "type": "featured-products",
+      "type": "product-selector",
       "settings": {
         "scheme": "white",
         "eyebrow": "SHOP THE LINEUP",
-        "heading": "The *lineup.*",
-        "subhead": "Botanical formulas built to fit the routine you already have.",
-        "center_header": true,
-        "card_min": 300,
-        "show_price": true,
-        "show_button": true,
-        "button_label": "Shop now"
+        "heading": "Pick your *protocol.*",
+        "subhead": "Two botanical formulas. Same promise: fit the routine you already have.",
+        "aspect_desktop": "1 / 1",
+        "aspect_mobile": "1 / 1"
       },
       "blocks": {
         "p1": {
           "type": "product",
           "settings": {
-            "title": "Special Water",
-            "subtitle": "Quiet cravings, steady blood sugar.",
-            "badge": "Bestseller",
+            "badge": "FOR CRAVINGS + BLOOD SUGAR",
+            "tagline": "Two drops in whatever you already drink. Quieter cravings, steadier blood sugar, no routine to change.",
+            "points": "60-day supply\nThird-party tested\nNo stimulants",
             "button_label": "Shop Special Water",
             "product": "special-water"
           }
@@ -38,9 +35,11 @@
         "p2": {
           "type": "product",
           "settings": {
-            "title": "KAMI",
-            "subtitle": "Coming soon.",
-            "button_label": "Notify me"
+            "badge": "FOR SCALP + HAIR",
+            "tagline": "Four drops on the scalp, every night. A one-minute ritual for fuller-looking hair.",
+            "points": "Fragrance-free\nThird-party tested\nWorks with color-treated hair",
+            "button_label": "Shop KAMI",
+            "product": "kami"
           }
         }
       },
@@ -101,7 +100,6 @@
       "settings": {
         "scheme": "white",
         "image_side": "right",
-        "eyebrow": "ABOUT MELT LABS",
         "headline": "Japanese botanicals, *made to work.*",
         "body": "Melt Labs exists because natural shouldn't mean weaker. We build our formulas around Japan's most trusted botanicals, then hold them to modern standards: third-party testing, honest labels, and mechanisms we can point to.",
         "body_2": "Every product starts with one question: does it slot into the routine you already have and actually deliver? If the answer isn't yes, it doesn't ship.",

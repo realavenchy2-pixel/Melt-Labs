@@ -28,7 +28,14 @@
     {%- endfor -%}
   {%- endcapture -%}
 
-  {%- render 'carousel', slides: slides, id: section.id, label: section.settings.headline -%}
+  {%-
+    render 'carousel',
+    slides: slides,
+    id: section.id,
+    label: section.settings.headline,
+    autoplay: section.settings.autoplay,
+    interval: section.settings.autoplay_interval
+  -%}
 </section>
 
 {% schema %}
@@ -40,6 +47,23 @@
       "id": "headline",
       "label": "Headline",
       "default": "Real routines. Real results."
+    },
+    {
+      "type": "checkbox",
+      "id": "autoplay",
+      "label": "Autoplay",
+      "info": "Advances on its own while in view; shoppers can pause with the play/pause button. Never runs if the visitor has reduced motion turned on.",
+      "default": true
+    },
+    {
+      "type": "range",
+      "id": "autoplay_interval",
+      "label": "Autoplay speed",
+      "min": 3000,
+      "max": 8000,
+      "step": 500,
+      "unit": "ms",
+      "default": 4500
     }
   ],
   "blocks": [

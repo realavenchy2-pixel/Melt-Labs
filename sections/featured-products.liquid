@@ -28,17 +28,17 @@
           <a class="product-card__link" href="{% if product != blank %}{{ product.url }}{% else %}{{ block.settings.link | default: '#' }}{% endif %}">
             <div class="product-card__media">
               {%- if block.settings.image != blank -%}
-                <div class="media-slot media-slot--rounded" style="--aspect-mobile: 1 / 1;">
+                <div class="media-slot media-slot--rounded" style="--aspect-mobile: {{ section.settings.aspect_mobile }}; --aspect-desktop: {{ section.settings.aspect_desktop }};">
                   <div class="media-slot__frame"></div>
                   {%- render 'responsive-image', image: block.settings.image, sizes: '(min-width: 900px) 33vw, 100vw' -%}
                 </div>
               {%- elsif product != blank and product.featured_image != blank -%}
-                <div class="media-slot media-slot--rounded" style="--aspect-mobile: 1 / 1;">
+                <div class="media-slot media-slot--rounded" style="--aspect-mobile: {{ section.settings.aspect_mobile }}; --aspect-desktop: {{ section.settings.aspect_desktop }};">
                   <div class="media-slot__frame"></div>
                   {%- render 'responsive-image', image: product.featured_image, sizes: '(min-width: 900px) 33vw, 100vw' -%}
                 </div>
               {%- else -%}
-                {%- render 'media-placeholder', label: 'featured_product_photo', aspect_mobile: '1 / 1', class: 'media-slot--rounded' -%}
+                {%- render 'media-placeholder', label: 'featured_product_photo', aspect_mobile: section.settings.aspect_mobile, aspect_desktop: section.settings.aspect_desktop, class: 'media-slot--rounded' -%}
               {%- endif -%}
               {%- if block.settings.badge != blank -%}
                 <span class="product-card__badge">{{ block.settings.badge }}</span>
@@ -98,6 +98,32 @@
     },
     { "type": "textarea", "id": "subhead", "label": "Subhead" },
     { "type": "checkbox", "id": "center_header", "label": "Center the header", "default": true },
+    {
+      "type": "select",
+      "id": "aspect_desktop",
+      "label": "Desktop image ratio",
+      "options": [
+        { "value": "1 / 1", "label": "Square (1:1)" },
+        { "value": "4 / 5", "label": "Portrait (4:5)" },
+        { "value": "3 / 4", "label": "Portrait (3:4)" },
+        { "value": "4 / 3", "label": "Landscape (4:3)" },
+        { "value": "16 / 9", "label": "Wide (16:9)" }
+      ],
+      "default": "1 / 1"
+    },
+    {
+      "type": "select",
+      "id": "aspect_mobile",
+      "label": "Mobile image ratio",
+      "options": [
+        { "value": "1 / 1", "label": "Square (1:1)" },
+        { "value": "4 / 5", "label": "Portrait (4:5)" },
+        { "value": "3 / 4", "label": "Portrait (3:4)" },
+        { "value": "4 / 3", "label": "Landscape (4:3)" },
+        { "value": "16 / 9", "label": "Wide (16:9)" }
+      ],
+      "default": "1 / 1"
+    },
     {
       "type": "range",
       "id": "card_min",
