@@ -1,0 +1,112 @@
+{%- comment -%}
+  About Melt Labs — homepage brand story. Split layout (reuses the
+  featured grid styles): image on one side, the why-we-exist copy on the
+  other with checkmark proof points. Fully schema-driven for re-use.
+{%- endcomment -%}
+
+<section class="section section--scheme-{{ section.settings.scheme | default: 'white' }}">
+  <div class="container">
+    <div class="featured {% if section.settings.image_side == 'right' %}featured--image-right{% endif %}">
+      <div class="featured__media" data-reveal>
+        {%- if section.settings.image != blank -%}
+          <div class="media-slot media-slot--rounded" style="--aspect-mobile: 4 / 5;">
+            <div class="media-slot__frame"></div>
+            {%- render 'responsive-image', image: section.settings.image, sizes: '(min-width: 900px) 50vw, 100vw' -%}
+          </div>
+        {%- else -%}
+          {%- render 'media-placeholder', label: 'about_brand_photo', aspect_mobile: '4 / 5', class: 'media-slot--rounded' -%}
+        {%- endif -%}
+      </div>
+
+      <div class="featured__body" data-reveal style="--reveal-i: 1;">
+        {%- if section.settings.eyebrow != blank -%}
+          <span class="eyebrow">{{ section.settings.eyebrow }}</span>
+        {%- endif -%}
+        <h2 class="featured__title h2">{% render 'accent-text', text: section.settings.headline, color: 'blue' %}</h2>
+        {%- if section.settings.body != blank -%}
+          <p class="lead featured__text">{{ section.settings.body }}</p>
+        {%- endif -%}
+        {%- if section.settings.body_2 != blank -%}
+          <p class="featured__text" style="margin-top: 0.9rem; color: color-mix(in srgb, var(--color-ink) 70%, transparent);">{{ section.settings.body_2 }}</p>
+        {%- endif -%}
+
+        {%- if section.settings.points != blank -%}
+          <ul class="buy-box__reassure featured__reassure">
+            {%- assign items = section.settings.points | newline_to_br | split: '<br />' -%}
+            {%- for item in items -%}
+              {%- assign trimmed = item | strip -%}
+              {%- if trimmed != blank -%}
+                <li>{% render 'icon', name: 'check' %}{{ trimmed }}</li>
+              {%- endif -%}
+            {%- endfor -%}
+          </ul>
+        {%- endif -%}
+
+        {%- if section.settings.cta_label != blank and section.settings.cta_link != blank -%}
+          <div class="featured__actions">
+            <a class="btn btn--outline" href="{{ section.settings.cta_link }}">{{ section.settings.cta_label }}</a>
+          </div>
+        {%- endif -%}
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "About the brand",
+  "settings": [
+    {
+      "type": "select",
+      "id": "scheme",
+      "label": "Color scheme",
+      "options": [
+        { "value": "white", "label": "White" },
+        { "value": "tint", "label": "Pale blue" },
+        { "value": "ink", "label": "Near-black" }
+      ],
+      "default": "white"
+    },
+    {
+      "type": "select",
+      "id": "image_side",
+      "label": "Image side (desktop)",
+      "options": [
+        { "value": "left", "label": "Left" },
+        { "value": "right", "label": "Right" }
+      ],
+      "default": "right"
+    },
+    { "type": "image_picker", "id": "image", "label": "Photo" },
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "ABOUT MELT LABS" },
+    {
+      "type": "text",
+      "id": "headline",
+      "label": "Headline",
+      "info": "Wrap a word in *asterisks* to accent it.",
+      "default": "Japanese botanicals, *made to work.*"
+    },
+    {
+      "type": "textarea",
+      "id": "body",
+      "label": "Body",
+      "default": "Melt Labs exists because natural shouldn't mean weaker. We build our formulas around Japan's most trusted botanicals, then hold them to modern standards: third-party testing, honest labels, and mechanisms we can point to."
+    },
+    {
+      "type": "textarea",
+      "id": "body_2",
+      "label": "Second paragraph",
+      "default": "Every product starts with one question: does it slot into the routine you already have and actually deliver? If the answer isn't yes, it doesn't ship."
+    },
+    {
+      "type": "textarea",
+      "id": "points",
+      "label": "Proof points (one per line)",
+      "default": "Japanese-sourced botanicals\nThird-party tested, every batch\nFormulas that fit your routine"
+    },
+    { "type": "text", "id": "cta_label", "label": "Button label" },
+    { "type": "url", "id": "cta_link", "label": "Button link" }
+  ],
+  "presets": [{ "name": "About the brand" }]
+}
+{% endschema %}

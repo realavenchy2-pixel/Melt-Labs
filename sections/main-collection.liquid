@@ -1,19 +1,37 @@
+{%- comment -%}
+  Collection grid. Uses the same product-card component as the homepage
+  lineup: fixed 1:1 media frames with object-fit cover, so catalog
+  photos render at a consistent size with no stretching or distortion.
+{%- endcomment -%}
+
 <div class="page-shell">
   <div class="container">
     <h1 class="h2 page-shell__title">{{ collection.title }}</h1>
 
     {%- paginate collection.products by 24 -%}
-      <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 1.5rem;">
+      <div class="product-grid" style="--card-min: 260px;">
         {%- for product in collection.products -%}
-          <a href="{{ product.url }}" style="text-decoration: none;">
-            {%- if product.featured_image -%}
-              {%- render 'responsive-image', image: product.featured_image, sizes: '(min-width: 768px) 25vw, 50vw', class: 'media-slot--rounded' -%}
-            {%- else -%}
-              {%- render 'media-placeholder', label: 'product_photo', aspect_mobile: '1 / 1', class: 'media-slot--rounded' -%}
-            {%- endif -%}
-            <p style="margin-top: 0.75rem; font-weight: 500;">{{ product.title }}</p>
-            <p>{{ product.price_min | money }}</p>
-          </a>
+          <article class="product-card">
+            <a class="product-card__link" href="{{ product.url }}">
+              <div class="product-card__media">
+                {%- if product.featured_image -%}
+                  <div class="media-slot media-slot--rounded" style="--aspect-mobile: 1 / 1;">
+                    <div class="media-slot__frame"></div>
+                    {%- render 'responsive-image', image: product.featured_image, sizes: '(min-width: 900px) 25vw, 50vw' -%}
+                  </div>
+                {%- else -%}
+                  {%- render 'media-placeholder', label: 'product_photo', aspect_mobile: '1 / 1', class: 'media-slot--rounded' -%}
+                {%- endif -%}
+              </div>
+              <div class="product-card__body">
+                <h3 class="product-card__title">{{ product.title }}</h3>
+                <p class="product-card__price">
+                  {{ product.price_min | money }}
+                  {%- if product.compare_at_price_max > product.price_min %} <s>{{ product.compare_at_price_max | money }}</s>{% endif -%}
+                </p>
+              </div>
+            </a>
+          </article>
         {%- else -%}
           <p class="lead">No products yet.</p>
         {%- endfor -%}

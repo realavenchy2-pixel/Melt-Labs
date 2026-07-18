@@ -7,7 +7,7 @@
   they don't need individual slides.
 {%- endcomment -%}
 
-<section class="section section--scheme-white">
+<section class="section section--scheme-{{ section.settings.scheme | default: 'white' }}">
   <div class="container">
     <div class="section-header" data-reveal>
       <h2 class="h2">{{ section.settings.headline }}</h2>
@@ -73,6 +73,17 @@
 {
   "name": "Ingredients carousel",
   "settings": [
+    {
+      "type": "select",
+      "id": "scheme",
+      "label": "Color scheme",
+      "options": [
+        { "value": "white", "label": "White" },
+        { "value": "tint", "label": "Pale blue" },
+        { "value": "ink", "label": "Near-black" }
+      ],
+      "default": "white"
+    },
     {
       "type": "text",
       "id": "headline",

@@ -114,6 +114,26 @@
           {%- if section.settings.trust_line != blank -%}
             <p class="offer__trust">{% render 'icon', name: 'shield' %}{{ section.settings.trust_line }}</p>
           {%- endif -%}
+
+          {%- if section.settings.show_description and product.description != blank -%}
+            <div class="offer__description rte">{{ product.description }}</div>
+          {%- endif -%}
+
+          {%- if section.blocks.size > 0 -%}
+            <div class="offer__info">
+              {%- for block in section.blocks -%}
+                <details class="faq__item" data-faq-item {{ block.shopify_attributes }}>
+                  <summary class="faq__q">
+                    <span>{{ block.settings.title }}</span>
+                    <span class="faq__chevron" aria-hidden="true">{% render 'icon', name: 'chevron-right' %}</span>
+                  </summary>
+                  <div class="faq__a" data-faq-content>
+                    <div class="rte">{{ block.settings.content }}</div>
+                  </div>
+                </details>
+              {%- endfor -%}
+            </div>
+          {%- endif -%}
         {%- else -%}
           <h1 class="offer__title">{{ section.settings.placeholder_title }}</h1>
           <p class="lead offer__tagline">Select a product for this section in the theme editor to activate the offer.</p>
@@ -174,12 +194,58 @@
       "default": "Secure checkout. Cancel anytime."
     },
     {
+      "type": "header",
+      "content": "Product details"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_description",
+      "label": "Show the product description",
+      "default": true
+    },
+    {
       "type": "text",
       "id": "placeholder_title",
       "label": "Placeholder title (no product selected)",
       "default": "Special Water"
     }
   ],
-  "presets": [{ "name": "Offer" }]
+  "blocks": [
+    {
+      "type": "info",
+      "name": "Collapsible row",
+      "settings": [
+        { "type": "text", "id": "title", "label": "Title", "default": "How to use" },
+        {
+          "type": "richtext",
+          "id": "content",
+          "label": "Content",
+          "default": "<p>Add the details here.</p>"
+        }
+      ]
+    }
+  ],
+  "max_blocks": 5,
+  "presets": [
+    {
+      "name": "Offer",
+      "blocks": [
+        {
+          "type": "info",
+          "settings": {
+            "title": "How to use",
+            "content": "<p>Two drops in whatever you're already drinking, once or twice a day.</p>"
+          }
+        },
+        {
+          "type": "info",
+          "settings": {
+            "title": "Shipping and returns",
+            "content": "<p>Ships in 2 to 4 days. 60-day money-back guarantee.</p>"
+          }
+        }
+      ]
+    }
+  ]
 }
 {% endschema %}

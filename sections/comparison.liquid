@@ -1,11 +1,24 @@
 {%- comment -%}
-  Comparison — Special Water vs GLP-1 injections (added per client
-  direction; structural nod to PDF p.18's compare grid). Framing:
-  Special Water is the practical long-term lifestyle tool for keeping
-  blood sugar and cravings low; GLP-1s deliver fast results without a
-  lifestyle change. Measured, non-disparaging language; row copy is
-  fully schema-driven.
+  Comparison — supports two OR three columns from the same row blocks.
+  Column A is the brand-accent (featured) column; B and C render neutral.
+  Column C appears whenever its title is set, so existing two-column
+  setups keep working untouched. Desktop uses CSS subgrid so row labels
+  align horizontally across all columns; on phones a three-column setup
+  becomes a horizontal snap-scroll (one column per viewport with a peek)
+  instead of squeezing three columns onto a small screen. Measured,
+  non-disparaging copy; everything schema-driven.
 {%- endcomment -%}
+
+{%- liquid
+  assign row_count = 0
+  for block in section.blocks
+    assign row_count = row_count | plus: 1
+  endfor
+  assign col_count = 2
+  if section.settings.col_c_title != blank
+    assign col_count = 3
+  endif
+-%}
 
 <section class="section section--scheme-white">
   <div class="container">
@@ -16,34 +29,54 @@
       {%- endif -%}
     </div>
 
-    <div class="compare__table">
-      <div class="compare__col compare__col--featured" data-reveal>
-        <span class="compare__badge compare__badge--up" aria-hidden="true">{% render 'icon', name: 'thumbs-up' %}</span>
-        <h3 class="compare__col-title">{{ section.settings.col_a_title }}</h3>
-        <p class="compare__col-sub">{{ section.settings.col_a_sub }}</p>
-        <ul class="compare__rows">
-          {%- for block in section.blocks -%}
-            <li class="compare__row" {{ block.shopify_attributes }}>
-              <p class="compare__row-label">{{ block.settings.label }}</p>
-              <p class="compare__row-value">{{ block.settings.value_a }}</p>
-            </li>
-          {%- endfor -%}
-        </ul>
+    <div
+      class="compare__table compare__table--cols-{{ col_count }}"
+      style="--compare-cols: {{ col_count }}; --compare-rows: {{ row_count }};"
+      data-reveal
+    >
+      <div class="compare__col compare__col--featured">
+        <div class="compare__head">
+          <span class="compare__badge compare__badge--up" aria-hidden="true">{% render 'icon', name: 'thumbs-up' %}</span>
+          <h3 class="compare__col-title">{{ section.settings.col_a_title }}</h3>
+          <p class="compare__col-sub">{{ section.settings.col_a_sub }}</p>
+        </div>
+        {%- for block in section.blocks -%}
+          <div class="compare__row" {{ block.shopify_attributes }}>
+            <p class="compare__row-label">{{ block.settings.label }}</p>
+            <p class="compare__row-value">{{ block.settings.value_a }}</p>
+          </div>
+        {%- endfor -%}
       </div>
 
-      <div class="compare__col" data-reveal style="--reveal-i: 1;">
-        <span class="compare__badge compare__badge--down" aria-hidden="true">{% render 'icon', name: 'thumbs-down' %}</span>
-        <h3 class="compare__col-title">{{ section.settings.col_b_title }}</h3>
-        <p class="compare__col-sub">{{ section.settings.col_b_sub }}</p>
-        <ul class="compare__rows">
-          {%- for block in section.blocks -%}
-            <li class="compare__row">
-              <p class="compare__row-label">{{ block.settings.label }}</p>
-              <p class="compare__row-value">{{ block.settings.value_b }}</p>
-            </li>
-          {%- endfor -%}
-        </ul>
+      <div class="compare__col">
+        <div class="compare__head">
+          <span class="compare__badge compare__badge--down" aria-hidden="true">{% render 'icon', name: 'thumbs-down' %}</span>
+          <h3 class="compare__col-title">{{ section.settings.col_b_title }}</h3>
+          <p class="compare__col-sub">{{ section.settings.col_b_sub }}</p>
+        </div>
+        {%- for block in section.blocks -%}
+          <div class="compare__row">
+            <p class="compare__row-label">{{ block.settings.label }}</p>
+            <p class="compare__row-value">{{ block.settings.value_b }}</p>
+          </div>
+        {%- endfor -%}
       </div>
+
+      {%- if col_count == 3 -%}
+        <div class="compare__col">
+          <div class="compare__head">
+            <span class="compare__badge compare__badge--down" aria-hidden="true">{% render 'icon', name: 'thumbs-down' %}</span>
+            <h3 class="compare__col-title">{{ section.settings.col_c_title }}</h3>
+            <p class="compare__col-sub">{{ section.settings.col_c_sub }}</p>
+          </div>
+          {%- for block in section.blocks -%}
+            <div class="compare__row">
+              <p class="compare__row-label">{{ block.settings.label }}</p>
+              <p class="compare__row-value">{{ block.settings.value_c }}</p>
+            </div>
+          {%- endfor -%}
+        </div>
+      {%- endif -%}
     </div>
 
     {%- if section.settings.note != blank -%}
@@ -69,7 +102,7 @@
       "label": "Subhead",
       "default": "Fast results and lasting results are different goals. Here's how the daily-drops approach compares."
     },
-    { "type": "text", "id": "col_a_title", "label": "Column A title", "default": "Special Water" },
+    { "type": "text", "id": "col_a_title", "label": "Column A title (featured)", "default": "Special Water" },
     {
       "type": "text",
       "id": "col_a_sub",
@@ -84,9 +117,16 @@
       "default": "Fast results, prescription required"
     },
     {
+      "type": "text",
+      "id": "col_c_title",
+      "label": "Column C title (optional)",
+      "info": "Leave blank for a two-column comparison."
+    },
+    { "type": "text", "id": "col_c_sub", "label": "Column C subtitle" },
+    {
       "type": "textarea",
       "id": "note",
-      "label": "Footnote",
+      "label": "Legal disclaimer",
       "default": "Special Water is a dietary supplement, not a medication, and is not a substitute for care from your doctor. If you're considering or taking a GLP-1, talk to your physician."
     }
   ],
@@ -102,7 +142,8 @@
           "label": "Column A value",
           "default": "Two drops in what you already drink"
         },
-        { "type": "text", "id": "value_b", "label": "Column B value", "default": "Weekly injections" }
+        { "type": "text", "id": "value_b", "label": "Column B value", "default": "Weekly injections" },
+        { "type": "text", "id": "value_c", "label": "Column C value (three-column only)" }
       ]
     }
   ],
@@ -125,22 +166,6 @@
             "label": "How it works",
             "value_a": "Supports steady blood sugar so cravings stay quiet",
             "value_b": "Suppresses appetite while the medication is active"
-          }
-        },
-        {
-          "type": "row",
-          "settings": {
-            "label": "Built for",
-            "value_a": "Sustainable, muscle-preserving weight control",
-            "value_b": "Rapid weight loss under medical supervision"
-          }
-        },
-        {
-          "type": "row",
-          "settings": {
-            "label": "Your routine",
-            "value_a": "Nothing changes. It fits the coffee you already pour",
-            "value_b": "Prescription, injections, and ongoing clinical visits"
           }
         },
         {

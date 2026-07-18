@@ -49,45 +49,6 @@
         "p2"
       ]
     },
-    "experts": {
-      "type": "expert-reviews",
-      "settings": {
-        "scheme": "tint",
-        "headline": "What *experts* are saying",
-        "subhead": "Practitioners and researchers on the mechanism behind Special Water."
-      },
-      "blocks": {
-        "e1": {
-          "type": "expert",
-          "settings": {
-            "name": "Dr. Placeholder",
-            "title": "Integrative Medicine",
-            "quote": "Blood-sugar stability is the lever most people miss."
-          }
-        },
-        "e2": {
-          "type": "expert",
-          "settings": {
-            "name": "Placeholder, RD",
-            "title": "Registered Dietitian",
-            "quote": "The appeal is that it fits a routine people already have."
-          }
-        },
-        "e3": {
-          "type": "expert",
-          "settings": {
-            "name": "Dr. Placeholder",
-            "title": "Metabolic Researcher",
-            "quote": "The botanical stack targets the right pathways."
-          }
-        }
-      },
-      "block_order": [
-        "e1",
-        "e2",
-        "e3"
-      ]
-    },
     "values": {
       "type": "values-carousel",
       "settings": {
@@ -134,12 +95,24 @@
         "body": "Early access, restock alerts, and the occasional note on the science. No spam.",
         "button_label": "Sign up"
       }
+    },
+    "about": {
+      "type": "about-brand",
+      "settings": {
+        "scheme": "white",
+        "image_side": "right",
+        "eyebrow": "ABOUT MELT LABS",
+        "headline": "Japanese botanicals, *made to work.*",
+        "body": "Melt Labs exists because natural shouldn't mean weaker. We build our formulas around Japan's most trusted botanicals, then hold them to modern standards: third-party testing, honest labels, and mechanisms we can point to.",
+        "body_2": "Every product starts with one question: does it slot into the routine you already have and actually deliver? If the answer isn't yes, it doesn't ship.",
+        "points": "Japanese-sourced botanicals\nThird-party tested, every batch\nFormulas that fit your routine"
+      }
     }
   },
   "order": [
     "hero",
     "featured",
-    "experts",
+    "about",
     "values",
     "newsletter"
   ]

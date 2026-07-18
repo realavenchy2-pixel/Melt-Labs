@@ -750,6 +750,13 @@ h1, h2, h3, .h1, .h2, .h3 {
 .ingredient--base .ingredient__name { font-size: 0.95rem; font-family: var(--font-body); font-weight: 500; }
 .ingredient--base .ingredient__role { margin-top: 0.15rem; font-size: 0.9rem; }
 
+/* Dark (KAMI) ingredients scheme */
+.section--scheme-ink .ingredients__format { color: rgba(255,255,255,0.55); }
+.section--scheme-ink .ingredients__base-title { color: rgba(255,255,255,0.55); }
+.section--scheme-ink .ingredient { border-bottom-color: rgba(255,255,255,0.14); }
+.section--scheme-ink .ingredient__name { color: #fff; }
+.section--scheme-ink .ingredient__role { color: rgba(255,255,255,0.72); }
+
 /* ---- Benefit statement + stats ---- */
 .benefit-statement { text-align: center; }
 .benefit-statement__headline {
@@ -847,13 +854,13 @@ h1, h2, h3, .h1, .h2, .h3 {
 .icon-list__icon svg { width: 22px; height: 22px; }
 .icon-list__text { font-size: 1.05rem; font-weight: 500; align-self: center; }
 
-/* ---- Comparison ---- */
+/* ---- Comparison (2 or 3 columns) ----
+   Mobile: two-column setups stack; three columns become a horizontal
+   snap-scroll (one card per viewport with a peek) so nothing squeezes.
+   Desktop: equal columns, and each card uses subgrid so every row label
+   lines up horizontally across all columns. */
 .compare__table { display: grid; gap: 1rem; }
-@media (min-width: 768px) {
-  .compare__table { grid-template-columns: 1fr 1fr; gap: 1.25rem; }
-}
 .compare__col {
-  position: relative;
   border-radius: var(--radius-card);
   padding: 2rem;
   background: var(--color-tint);
@@ -862,10 +869,44 @@ h1, h2, h3, .h1, .h2, .h3 {
   background: var(--gradient-brand);
   color: #fff;
 }
+
+/* Mobile 3-column: snap-scroll with a peek of the next card */
+@media (max-width: 899px) {
+  .compare__table--cols-3 {
+    display: flex;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
+    gap: 0.9rem;
+    margin-inline: calc(var(--gutter) * -1);
+    padding-inline: var(--gutter);
+  }
+  .compare__table--cols-3::-webkit-scrollbar { display: none; }
+  .compare__table--cols-3 .compare__col {
+    flex: 0 0 84%;
+    scroll-snap-align: center;
+  }
+}
+
+@media (min-width: 900px) {
+  .compare__table { grid-template-columns: repeat(var(--compare-cols, 2), 1fr); gap: 1.25rem; }
+  /* Row alignment: the table defines shared row tracks (header + N rows)
+     and each card adopts them via subgrid, so labels sit level. */
+  @supports (grid-template-rows: subgrid) {
+    .compare__table { grid-template-rows: repeat(calc(var(--compare-rows, 1) + 1), auto); }
+    .compare__col {
+      display: grid;
+      grid-template-rows: subgrid;
+      grid-row: span calc(var(--compare-rows, 1) + 1);
+    }
+  }
+}
+
+.compare__head { position: relative; padding-right: 3rem; padding-bottom: 1.25rem; }
 .compare__badge {
   position: absolute;
-  top: 1.25rem;
-  right: 1.25rem;
+  top: 0;
+  right: 0;
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -886,9 +927,8 @@ h1, h2, h3, .h1, .h2, .h3 {
 }
 .compare__col-title { font-size: 1.3rem; margin-bottom: 0.25rem; }
 .compare__col--featured .compare__col-title { color: #fff; }
-.compare__col-sub { font-size: 0.9rem; color: color-mix(in srgb, var(--color-ink) 60%, transparent); }
+.compare__col-sub { font-size: 0.9rem; font-style: italic; color: color-mix(in srgb, var(--color-ink) 60%, transparent); }
 .compare__col--featured .compare__col-sub { color: rgba(255,255,255,0.8); }
-.compare__rows { list-style: none; padding: 0; margin-top: 1.5rem; display: grid; gap: 0; }
 .compare__row {
   padding: 0.9rem 0;
   border-top: 1px solid color-mix(in srgb, var(--color-ink) 10%, transparent);
@@ -1338,6 +1378,89 @@ h1, h2, h3, .h1, .h2, .h3 {
   width: 100%;
 }
 .cart-line { display: flex; justify-content: space-between; gap: 1rem; padding: 1rem 0; border-bottom: 1px solid color-mix(in srgb, var(--color-ink) 10%, transparent); }
+
+/* ---- Cart page ---- */
+.cart__layout { display: grid; gap: 2rem; align-items: start; }
+@media (min-width: 900px) {
+  .cart__layout { grid-template-columns: 1.6fr 1fr; gap: 3rem; }
+  .cart__summary { position: sticky; top: 88px; }
+}
+.cart-item {
+  display: grid;
+  grid-template-columns: 96px 1fr auto;
+  gap: 1.25rem;
+  align-items: start;
+  padding: 1.5rem 0;
+}
+.cart-item__media {
+  display: block;
+  width: 96px;
+  height: 96px;
+  border-radius: 16px;
+  overflow: hidden;
+  background: var(--color-tint);
+}
+.cart-item__media img { width: 100%; height: 100%; object-fit: cover; }
+.cart-item__media-empty { display: block; width: 100%; height: 100%; }
+.cart-item__title {
+  font-family: var(--font-heading);
+  font-weight: var(--weight-heading);
+  font-size: 1.05rem;
+  text-decoration: none;
+  color: var(--color-ink);
+}
+.cart-item__variant { margin-top: 0.15rem; font-size: 0.85rem; color: color-mix(in srgb, var(--color-ink) 55%, transparent); }
+.cart-item__unit { margin-top: 0.35rem; font-size: 0.9rem; color: color-mix(in srgb, var(--color-ink) 65%, transparent); }
+.cart-item__controls { margin-top: 0.85rem; display: flex; align-items: center; gap: 1rem; }
+.cart-item__qty {
+  width: 74px;
+  min-height: 42px;
+  padding: 0.4rem 0.7rem;
+  border: 1.5px solid color-mix(in srgb, var(--color-ink) 18%, transparent);
+  border-radius: var(--radius-input);
+  background: var(--color-bg);
+}
+.cart-item__qty:focus-visible { outline: 2px solid var(--color-primary); outline-offset: 1px; }
+.cart-item__remove {
+  font-size: 0.82rem;
+  color: color-mix(in srgb, var(--color-ink) 55%, transparent);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.cart-item__remove:hover { color: var(--color-danger); }
+.cart-item__total {
+  font-family: var(--font-heading);
+  font-weight: var(--weight-heading);
+  font-size: 1.05rem;
+  text-align: right;
+}
+.cart__summary {
+  padding: 1.75rem;
+  border-radius: var(--radius-card);
+  background: var(--color-tint);
+  display: grid;
+  gap: 1rem;
+}
+.cart__summary-row { display: flex; justify-content: space-between; font-weight: 500; }
+.cart__summary-row--savings { color: var(--color-success); }
+.cart__summary-note { font-size: 0.82rem; color: color-mix(in srgb, var(--color-ink) 55%, transparent); }
+.cart__summary-actions { display: grid; gap: 0.75rem; }
+.cart__empty { text-align: center; padding: clamp(2rem, 8vw, 4rem) 0; display: grid; gap: 1.5rem; justify-items: center; }
+
+/* ---- Offer page: description + collapsible info ---- */
+.offer__description {
+  margin-top: 1.75rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid color-mix(in srgb, var(--color-ink) 10%, transparent);
+  color: color-mix(in srgb, var(--color-ink) 75%, transparent);
+  line-height: 1.65;
+}
+.offer__info { margin-top: 1.5rem; display: grid; gap: 0.6rem; }
+.offer__info .faq__item { background: var(--color-tint); border-color: transparent; }
+.offer__info .faq__a .rte { padding: 0 1.4rem 1.25rem; color: color-mix(in srgb, var(--color-ink) 72%, transparent); line-height: 1.6; }
+
+/* Product (offer) pages: Apple-style static header, no stickiness. */
+.template-product .site-header { position: static; }
 
 /* ---- Reduced motion ---- */
 @media (prefers-reduced-motion: reduce) {

@@ -1,37 +1,83 @@
+{%- comment -%}
+  Cart page. Product-image thumbnails, editable quantities via the
+  native cart form (updates[]), per-line totals, and a clean summary
+  card with the gold checkout CTA.
+{%- endcomment -%}
+
 <div class="page-shell">
-  <div class="container container--narrow">
+  <div class="container cart">
     <h1 class="h2 page-shell__title">Your cart</h1>
 
     {%- if cart.item_count > 0 -%}
-      {%- form 'cart', cart -%}
-        {%- for item in cart.items -%}
-          <div class="cart-line">
-            <div>
-              <p><strong>{{ item.product.title }}</strong></p>
-              {%- unless item.product.has_only_default_variant -%}
-                <p>{{ item.variant.title }}</p>
-              {%- endunless -%}
-              <p>
-                Qty: {{ item.quantity }} &middot;
-                <a href="{{ item.url_to_remove }}">Remove</a>
-              </p>
+      {%- form 'cart', cart, class: 'cart__layout' -%}
+        <div class="cart__lines">
+          {%- for item in cart.items -%}
+            <div class="cart-item" {% if forloop.last == false %}style="border-bottom: 1px solid color-mix(in srgb, var(--color-ink) 10%, transparent);"{% endif %}>
+              <a class="cart-item__media" href="{{ item.url }}">
+                {%- if item.image -%}
+                  {{
+                    item.image
+                    | image_url: width: 360
+                    | image_tag: widths: '120, 240, 360', sizes: '96px', loading: 'lazy', decoding: 'async', alt: item.title
+                  }}
+                {%- else -%}
+                  <span class="cart-item__media-empty" aria-hidden="true"></span>
+                {%- endif -%}
+              </a>
+
+              <div class="cart-item__body">
+                <a class="cart-item__title" href="{{ item.url }}">{{ item.product.title }}</a>
+                {%- unless item.product.has_only_default_variant -%}
+                  <p class="cart-item__variant">{{ item.variant.title }}</p>
+                {%- endunless -%}
+                <p class="cart-item__unit">{{ item.final_price | money }}</p>
+
+                <div class="cart-item__controls">
+                  <label class="visually-hidden" for="cart-qty-{{ item.index | plus: 1 }}">Quantity for {{ item.product.title }}</label>
+                  <input
+                    class="cart-item__qty"
+                    type="number"
+                    id="cart-qty-{{ item.index | plus: 1 }}"
+                    name="updates[]"
+                    value="{{ item.quantity }}"
+                    min="0"
+                  >
+                  <a class="cart-item__remove" href="{{ item.url_to_remove }}">Remove</a>
+                </div>
+              </div>
+
+              <p class="cart-item__total">{{ item.final_line_price | money }}</p>
             </div>
-            <p>{{ item.final_line_price | money }}</p>
+          {%- endfor -%}
+        </div>
+
+        <aside class="cart__summary">
+          <h2 class="h3">Summary</h2>
+          <div class="cart__summary-row">
+            <span>Subtotal</span>
+            <span>{{ cart.total_price | money }}</span>
           </div>
-        {%- endfor -%}
-
-        <div class="cart-line">
-          <p><strong>Subtotal</strong></p>
-          <p><strong>{{ cart.total_price | money }}</strong></p>
-        </div>
-
-        <div class="buy-box__actions" style="margin-top: 1.5rem;">
-          <button type="submit" name="checkout" class="btn btn--gold btn--full">Check out</button>
-        </div>
+          {%- if cart.total_discount > 0 -%}
+            <div class="cart__summary-row cart__summary-row--savings">
+              <span>You saved</span>
+              <span>-{{ cart.total_discount | money }}</span>
+            </div>
+          {%- endif -%}
+          <p class="cart__summary-note">{{ section.settings.shipping_note }}</p>
+          <div class="cart__summary-actions">
+            <button type="submit" name="update" class="btn btn--outline btn--full">Update cart</button>
+            <button type="submit" name="checkout" class="btn btn--gold btn--full">Check out</button>
+          </div>
+          <p class="offer__trust" style="justify-content: center;">{% render 'icon', name: 'shield' %}{{ section.settings.trust_line }}</p>
+        </aside>
       {%- endform -%}
     {%- else -%}
-      <p class="lead">Your cart is empty.</p>
-      <p style="margin-top: 1.5rem;"><a class="btn btn--ink" href="{{ routes.all_products_collection_url }}">Continue shopping</a></p>
+      <div class="cart__empty">
+        <p class="lead">Your cart is empty.</p>
+        <a class="btn btn--gold" href="{{ section.settings.empty_link | default: routes.all_products_collection_url }}">
+          {{ section.settings.empty_label }}
+        </a>
+      </div>
     {%- endif -%}
   </div>
 </div>
@@ -39,6 +85,26 @@
 {% schema %}
 {
   "name": "Cart",
-  "settings": []
+  "settings": [
+    {
+      "type": "text",
+      "id": "shipping_note",
+      "label": "Note under subtotal",
+      "default": "Shipping and taxes calculated at checkout."
+    },
+    {
+      "type": "text",
+      "id": "trust_line",
+      "label": "Trust line",
+      "default": "Secure checkout"
+    },
+    {
+      "type": "text",
+      "id": "empty_label",
+      "label": "Empty-cart button label",
+      "default": "Shop the lineup"
+    },
+    { "type": "url", "id": "empty_link", "label": "Empty-cart button link" }
+  ]
 }
 {% endschema %}
