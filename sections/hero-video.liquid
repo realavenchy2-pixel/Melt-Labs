@@ -7,7 +7,18 @@
   scrolls away.
 {%- endcomment -%}
 
-{%- assign hero_mode = section.settings.hero_size | default: 'fill' -%}
+{%- liquid
+  assign hero_mode = section.settings.hero_size | default: 'fill'
+  # CTA target: explicit link wins, else a picked product's page, else the
+  # on-page #offer anchor. Lets the marketing lander send the button to
+  # the separate offer/product page.
+  assign hero_cta = '#offer'
+  if section.settings.cta_link != blank
+    assign hero_cta = section.settings.cta_link
+  elsif section.settings.product != blank
+    assign hero_cta = section.settings.product.url
+  endif
+-%}
 
 <div data-subnav-sentinel></div>
 
@@ -41,7 +52,7 @@
       <p class="hero__subhead">{{ section.settings.subhead }}</p>
     {%- endif -%}
 
-    <a class="btn btn--gold" href="#offer">{{ section.settings.cta_label }}</a>
+    <a class="btn btn--gold" href="{{ hero_cta }}">{{ section.settings.cta_label }}</a>
   </div>
 </section>
 
@@ -171,6 +182,18 @@
       "id": "cta_label",
       "label": "Button label",
       "default": "See the protocol"
+    },
+    {
+      "type": "product",
+      "id": "product",
+      "label": "Link button to product",
+      "info": "The button will link to this product's page. Overridden by an explicit Button link below."
+    },
+    {
+      "type": "url",
+      "id": "cta_link",
+      "label": "Button link (override)",
+      "info": "Leave blank to use the product page above, or the on-page #offer anchor if no product is set."
     }
   ],
   "presets": [{ "name": "Hero video" }]

@@ -1,435 +1,52 @@
 {
   "sections": {
-    "subnav": {
-      "type": "product-subnav",
-      "settings": {
-        "cta_label": "Buy"
-      }
-    },
-    "hero": {
-      "type": "hero-video",
+    "offer": {
+      "type": "offer",
       "settings": {
         "eyebrow": "MELT LABS",
-        "headline": "Two drops. *Quiet* the cravings. Steady your sugar.",
-        "subhead": "A Japanese botanical serum designed to work with your body, not against your routine.",
-        "cta_label": "See the protocol"
-      }
-    },
-    "offer": {
-      "type": "buy-box",
-      "settings": {
         "tagline": "The daily protocol for quieter cravings and steadier blood sugar.",
-        "reassurance": "60-day supply\nShips in 2 to 4 days\nNo stimulants"
+        "show_plan_scaffold": true,
+        "plans_note": "Choose your plan below.",
+        "reassurance": "60-day money-back guarantee\nShips in 2 to 4 days\nThird-party tested\nNo stimulants",
+        "trust_line": "Secure checkout. Cancel anytime.",
+        "placeholder_title": "Special Water"
       }
     },
-    "testimonials": {
-      "type": "testimonial-carousel",
-      "blocks": {
-        "t1": {
-          "type": "slide",
-          "settings": {
-            "quote": "I stopped snacking without even trying.",
-            "author": "Placeholder, 34"
-          }
-        },
-        "t2": {
-          "type": "slide",
-          "settings": {
-            "quote": "Two drops in my coffee and the cravings just... quiet down.",
-            "author": "Placeholder, 41"
-          }
-        },
-        "t3": {
-          "type": "slide",
-          "settings": {
-            "quote": "Didn't change anything else. Just added this.",
-            "author": "Placeholder, 29"
-          }
-        }
-      },
-      "block_order": [
-        "t1",
-        "t2",
-        "t3"
-      ]
-    },
-    "ingredients": {
-      "type": "ingredients-list",
-      "blocks": {
-        "i1": {
-          "type": "active",
-          "settings": {
-            "name": "Cinnamomum cassia (bark) Extract",
-            "role": "The primary active. Supports healthy blood sugar levels and insulin sensitivity, which helps reduce post-meal glucose spikes: the spikes that drive fat storage signaling and cravings."
-          }
-        },
-        "i2": {
-          "type": "active",
-          "settings": {
-            "name": "Japanese Knotweed Extract",
-            "source": "Polygonum cuspidatum, root",
-            "role": "A natural source of trans-resveratrol. The Japanese heritage ingredient and metabolic driver of the formula. Supports metabolic health, antioxidant activity, and healthy inflammatory response."
-          }
-        },
-        "i3": {
-          "type": "active",
-          "settings": {
-            "name": "Bitter Melon Extract",
-            "source": "Momordica charantia Linn., fruit, 4:1",
-            "role": "Traditionally used across Asia for metabolic support. Supports healthy blood sugar metabolism and glucose utilization."
-          }
-        },
-        "i4": {
-          "type": "active",
-          "settings": {
-            "name": "Extract of Turmeric Root",
-            "source": "Curcuma longa",
-            "role": "Antioxidant support and healthy inflammatory response, which plays a role in overall metabolic function."
-          }
-        },
-        "i5": {
-          "type": "active",
-          "settings": {
-            "name": "Extract of Licorice Root",
-            "role": "Traditionally used to support digestive health and adrenal function; may support healthy cortisol levels and metabolic balance."
-          }
-        },
-        "i6": {
-          "type": "active",
-          "settings": {
-            "name": "Matcha",
-            "role": "Natural antioxidants (EGCG catechins) that support gentle thermogenesis and a metabolic boost without stimulant jitters."
-          }
-        },
-        "b1": {
-          "type": "base",
-          "settings": {
-            "name": "Water",
-            "role": "Base and solvent"
-          }
-        },
-        "b2": {
-          "type": "base",
-          "settings": {
-            "name": "Glycerin",
-            "role": "Natural carrier for botanical extracts, adds slight sweetness"
-          }
-        },
-        "b3": {
-          "type": "base",
-          "settings": {
-            "name": "Potassium Sorbate",
-            "role": "Natural preservative for shelf stability"
-          }
-        }
-      },
-      "block_order": [
-        "i1",
-        "i2",
-        "i3",
-        "i4",
-        "i5",
-        "i6",
-        "b1",
-        "b2",
-        "b3"
-      ]
-    },
-    "benefit": {
-      "type": "benefit-statement",
-      "settings": {
-        "scheme": "white"
-      },
-      "blocks": {
-        "s1": {
-          "type": "statement",
-          "settings": {
-            "headline": "Drink what you already drink. Lose weight *seamlessly* doing it."
-          }
-        },
-        "a1": {
-          "type": "slide",
-          "settings": {
-            "title": "Cravings",
-            "text": "Two drops quiet the noise around food. No willpower required.",
-            "accent": true
-          }
-        },
-        "a2": {
-          "type": "slide",
-          "settings": {
-            "title": "Blood sugar",
-            "text": "Steadier glucose means fewer spikes, fewer crashes, fewer cravings."
-          }
-        },
-        "a3": {
-          "type": "slide",
-          "settings": {
-            "title": "Metabolism",
-            "text": "Support your body's natural fat-burning response, daily."
-          }
-        },
-        "a4": {
-          "type": "slide",
-          "settings": {
-            "title": "Zero routine change",
-            "text": "No pills to remember, no shots, no taste. Just add it to what you're already drinking."
-          }
-        }
-      },
-      "block_order": [
-        "s1",
-        "a1",
-        "a2",
-        "a3",
-        "a4"
-      ]
-    },
-    "science": {
-      "type": "science-scroll",
-      "settings": {
-        "headline": "The *Science* Behind Special Water",
-        "body": "Special Water was built around one mechanism: stabilizing blood sugar to shut off the cravings that sabotage weight loss.",
-        "stat_intro": "In an in-house study",
-        "stat_1_value": "93%",
-        "stat_1_caption": "reported fewer cravings",
-        "stat_2_value": "90%",
-        "stat_2_caption": "lost 10+ lbs",
-        "stat_3_value": "90%",
-        "stat_3_caption": "saw blood sugar stabilize",
-        "attribution": "Based on our in-house study. Individual results may vary."
-      }
-    },
-    "who": {
+    "guarantee": {
       "type": "icon-list",
       "settings": {
-        "scheme": "ink"
-      },
-      "blocks": {
-        "w1": {
-          "type": "item",
-          "settings": {
-            "icon": "scale",
-            "text": "People trying to lose weight"
-          }
-        },
-        "w2": {
-          "type": "item",
-          "settings": {
-            "icon": "clock",
-            "text": "People looking for a long-term solution, not a quick fix"
-          }
-        },
-        "w3": {
-          "type": "item",
-          "settings": {
-            "icon": "leaf",
-            "text": "Natural weight loss, no injections"
-          }
-        },
-        "w4": {
-          "type": "item",
-          "settings": {
-            "icon": "muscle",
-            "text": "Sustainable, steady, muscle-preserving"
-          }
-        },
-        "w5": {
-          "type": "item",
-          "settings": {
-            "icon": "droplet",
-            "text": "Easy, low-effort weight control"
-          }
-        },
-        "w6": {
-          "type": "item",
-          "settings": {
-            "icon": "check",
-            "text": "People who don't want to worry about it"
-          }
-        }
-      },
-      "block_order": [
-        "w1",
-        "w2",
-        "w3",
-        "w4",
-        "w5",
-        "w6"
-      ]
-    },
-    "benefits_2": {
-      "type": "benefit-statement",
-      "settings": {
+        "headline": "Every bottle, backed.",
         "scheme": "tint"
       },
       "blocks": {
-        "h1": {
-          "type": "statement",
-          "settings": {
-            "headline": "Cravings, *quieted.*",
-            "subhead": "Two drops shift your relationship with food, without restriction."
-          }
-        },
-        "h2": {
-          "type": "statement",
-          "settings": {
-            "headline": "Sugar, *stabilized.*",
-            "subhead": "The mechanism behind sustainable, seamless weight loss."
-          }
-        },
-        "g1": {
-          "type": "slide",
-          "settings": {
-            "title": "No jitters",
-            "text": "No stimulants, no racing heart, no crash later."
-          }
-        },
-        "g2": {
-          "type": "slide",
-          "settings": {
-            "title": "Works in anything",
-            "text": "Coffee, water, juice, tea. Whatever is already in your hand."
-          }
-        },
-        "g3": {
-          "type": "slide",
-          "settings": {
-            "title": "Tasteless",
-            "text": "Undetectable in any drink. You'll forget it's there."
-          }
-        },
-        "g4": {
-          "type": "slide",
-          "settings": {
-            "title": "Zero new habits",
-            "text": "Fits into a routine you already have. That's the whole point.",
-            "accent": true
-          }
-        }
+        "g1": { "type": "item", "settings": { "icon": "shield", "text": "60-day money-back guarantee" } },
+        "g2": { "type": "item", "settings": { "icon": "flask", "text": "Third-party tested for purity and potency" } },
+        "g3": { "type": "item", "settings": { "icon": "leaf", "text": "Natural botanicals, no stimulants" } },
+        "g4": { "type": "item", "settings": { "icon": "clock", "text": "Ships in 2 to 4 days" } }
       },
-      "block_order": [
-        "h1",
-        "h2",
-        "g1",
-        "g2",
-        "g3",
-        "g4"
-      ]
+      "block_order": ["g1", "g2", "g3", "g4"]
     },
-    "potency": {
-      "type": "potency-stats",
+    "testimonials": {
+      "type": "testimonial-carousel",
+      "settings": { "headline": "Real routines. Real results." },
       "blocks": {
-        "p1": {
-          "type": "stat",
-          "settings": {
-            "intro": "Just",
-            "value": "2 drops",
-            "caption": "in whatever you're already drinking"
-          }
-        },
-        "p2": {
-          "type": "stat",
-          "settings": {
-            "intro": "Support that lasts",
-            "value": "All day",
-            "caption": "steady appetite and blood sugar support, morning to night"
-          }
-        }
+        "t1": { "type": "slide", "settings": { "quote": "I stopped snacking without even trying.", "author": "Placeholder, 34" } },
+        "t2": { "type": "slide", "settings": { "quote": "Two drops in my coffee and the cravings just... quiet down.", "author": "Placeholder, 41" } },
+        "t3": { "type": "slide", "settings": { "quote": "Didn't change anything else. Just added this.", "author": "Placeholder, 29" } }
       },
-      "block_order": [
-        "p1",
-        "p2"
-      ]
+      "block_order": ["t1", "t2", "t3"]
     },
-    "compare": {
-      "type": "comparison",
+    "faq": {
+      "type": "faq",
+      "settings": { "scheme": "white", "headline": "Questions, *answered.*" },
       "blocks": {
-        "c1": {
-          "type": "row",
-          "settings": {
-            "label": "Approach",
-            "value_a": "Two drops in what you already drink",
-            "value_b": "Weekly injections"
-          }
-        },
-        "c2": {
-          "type": "row",
-          "settings": {
-            "label": "How it works",
-            "value_a": "Supports steady blood sugar so cravings stay quiet",
-            "value_b": "Suppresses appetite while the medication is active"
-          }
-        },
-        "c3": {
-          "type": "row",
-          "settings": {
-            "label": "Built for",
-            "value_a": "Sustainable, muscle-preserving weight control",
-            "value_b": "Rapid weight loss under medical supervision"
-          }
-        },
-        "c4": {
-          "type": "row",
-          "settings": {
-            "label": "Your routine",
-            "value_a": "Nothing changes. It fits the coffee you already pour",
-            "value_b": "Prescription, injections, and ongoing clinical visits"
-          }
-        },
-        "c5": {
-          "type": "row",
-          "settings": {
-            "label": "When you stop",
-            "value_a": "The habits it supports are yours to keep",
-            "value_b": "Appetite often returns once treatment ends"
-          }
-        }
+        "q1": { "type": "qa", "settings": { "question": "How do I use Special Water?", "answer": "Two drops in whatever you're already drinking, once or twice a day. Coffee, water, juice, tea. No taste, no prep, no routine to change." } },
+        "q2": { "type": "qa", "settings": { "question": "What does it taste like?", "answer": "Nothing. The serum is designed to be undetectable in any drink, hot or cold." } },
+        "q3": { "type": "qa", "settings": { "question": "Does it contain stimulants or caffeine?", "answer": "No stimulants. The formula works through blood sugar support, not stimulation, so there are no jitters and no crash." } },
+        "q4": { "type": "qa", "settings": { "question": "What is your return policy?", "answer": "If it's not for you, reach out to our support team within 30 days of delivery and we'll make it right." } },
+        "q5": { "type": "qa", "settings": { "question": "Is it safe to take with my medication?", "answer": "Special Water is a dietary supplement, not a medication. If you are pregnant, nursing, have a medical condition, or take prescription medication (including GLP-1s), talk with your doctor before starting any supplement." } }
       },
-      "block_order": [
-        "c1",
-        "c2",
-        "c3",
-        "c4",
-        "c5"
-      ],
-      "settings": {
-        "headline": "Built for the *long run.*"
-      }
-    },
-    "values": {
-      "type": "values-carousel",
-      "blocks": {
-        "v1": {
-          "type": "card",
-          "settings": {
-            "icon": "flask",
-            "title": "Our Standards",
-            "text": "Botanicals sourced for potency, then third-party tested before a single bottle is filled."
-          }
-        },
-        "v2": {
-          "type": "card",
-          "settings": {
-            "icon": "heart",
-            "title": "Our Mission",
-            "text": "Melt Labs exists to make sustainable weight control feel effortless, not clinical."
-          }
-        },
-        "v3": {
-          "type": "card",
-          "settings": {
-            "icon": "shield",
-            "title": "Our Promise",
-            "text": "Full transparency in formulation. Every ingredient and its job, on the label and on this page."
-          }
-        }
-      },
-      "block_order": [
-        "v1",
-        "v2",
-        "v3"
-      ]
+      "block_order": ["q1", "q2", "q3", "q4", "q5"]
     },
     "refs": {
       "type": "references",
@@ -438,168 +55,19 @@
           "type": "group",
           "settings": {
             "title": "Cinnamomum cassia: blood sugar and insulin sensitivity",
-            "citations": "Wickenberg J, et al. \"Cassia cinnamon does not change the insulin sensitivity or the liver enzymes in subjects with impaired glucose tolerance.\" Nutrition Journal, 2014.\nAnderson RA, et al. \"Cassia Cinnamon Supplementation Reduces Peak Blood Glucose Responses.\" Journal of the American College of Nutrition, 2015. Found reduced peak post-meal glucose response.\n\"Mechanistic and clinical insights into the antidiabetic potential of Cinnamomum cassia.\" ScienceDirect review, 2025. Mechanism review on insulin secretion and sensitivity via cinnamaldehyde."
+            "citations": "Wickenberg J, et al. \"Cassia cinnamon does not change the insulin sensitivity or the liver enzymes in subjects with impaired glucose tolerance.\" Nutrition Journal, 2014.\nAnderson RA, et al. \"Cassia Cinnamon Supplementation Reduces Peak Blood Glucose Responses.\" Journal of the American College of Nutrition, 2015. Found reduced peak post-meal glucose response."
           }
         },
         "r2": {
           "type": "group",
           "settings": {
-            "title": "Japanese Knotweed (Polygonum cuspidatum): resveratrol and metabolic health",
-            "citations": "\"Resveratrol and cardiovascular health.\" ScienceDirect, 2014. Trans-resveratrol sourced from P. cuspidatum; cardiovascular and metabolic risk reduction.\n\"A Comparative Evaluation of the Antioxidant Ability of Polygonum cuspidatum Extracts with That of Resveratrol Itself.\" MDPI, 2024. Antioxidant activity confirmation."
-          }
-        },
-        "r3": {
-          "type": "group",
-          "settings": {
-            "title": "Bitter Melon (Momordica charantia): glucose metabolism",
-            "citations": "Kosin University (Korea): 12-week randomized controlled trial on prediabetic participants. Bitter melon extract reduced post-OGTT blood glucose via suppressed glucagon response. NCBI/PMC, 2023.\nNote: a 2024 Frontiers in Nutrition systematic review and meta-analysis of 9 pooled RCTs found mixed, non-significant results; the literature is genuinely contradictory, so on-page claims stay measured."
-          }
-        },
-        "r4": {
-          "type": "group",
-          "settings": {
-            "title": "Turmeric (Curcuma longa): inflammation and metabolic support",
-            "citations": "\"Effects of dietary polyphenol curcumin supplementation on metabolic, inflammatory, and oxidative stress indices.\" Frontiers in Endocrinology, systematic review and meta-analysis, 2023.\n\"Targeting Inflammation-Induced Obesity and Metabolic Diseases by Curcumin and Other Nutraceuticals.\" PMC. Mechanism review on adipocyte and pancreatic interaction."
-          }
-        },
-        "r5": {
-          "type": "group",
-          "settings": {
-            "title": "Licorice Root: cortisol and adrenal support",
-            "citations": "Restorative Medicine Journal: review on Glycyrrhiza's inhibition of 11-beta-hydroxysteroid dehydrogenase, the enzyme that breaks down active cortisol. Mechanism for supporting cortisol availability."
-          }
-        },
-        "r6": {
-          "type": "group",
-          "settings": {
             "title": "Matcha (EGCG): thermogenesis",
-            "citations": "Hursel R, et al. \"The effects of catechin rich teas and caffeine on energy expenditure and fat oxidation: a meta-analysis.\" Obesity Reviews, 2011.\n\"Effect of Acute and Chronic Dietary Supplementation with Green Tea Catechins on Resting Metabolic Rate, Energy Expenditure and Respiratory Quotient.\" PMC systematic review, 2021. 15 studies, 499 participants."
+            "citations": "Hursel R, et al. \"The effects of catechin rich teas and caffeine on energy expenditure and fat oxidation: a meta-analysis.\" Obesity Reviews, 2011.\n\"Effect of Dietary Supplementation with Green Tea Catechins on Resting Metabolic Rate and Energy Expenditure.\" PMC systematic review, 2021. 15 studies, 499 participants."
           }
         }
       },
-      "block_order": [
-        "r1",
-        "r2",
-        "r3",
-        "r4",
-        "r5",
-        "r6"
-      ]
-    },
-    "experts": {
-      "type": "expert-reviews",
-      "settings": {
-        "scheme": "white",
-        "headline": "What *experts* are saying",
-        "subhead": "Practitioners and researchers on the mechanism behind Special Water."
-      },
-      "blocks": {
-        "e1": {
-          "type": "expert",
-          "settings": {
-            "name": "Dr. Placeholder",
-            "title": "Integrative Medicine",
-            "quote": "Blood-sugar stability is the lever most people miss."
-          }
-        },
-        "e2": {
-          "type": "expert",
-          "settings": {
-            "name": "Placeholder, RD",
-            "title": "Registered Dietitian",
-            "quote": "The appeal is that it fits a routine people already have."
-          }
-        },
-        "e3": {
-          "type": "expert",
-          "settings": {
-            "name": "Dr. Placeholder",
-            "title": "Metabolic Researcher",
-            "quote": "The botanical stack targets the right pathways."
-          }
-        }
-      },
-      "block_order": [
-        "e1",
-        "e2",
-        "e3"
-      ]
-    },
-    "faq": {
-      "type": "faq",
-      "settings": {
-        "scheme": "tint",
-        "headline": "Questions, *answered.*"
-      },
-      "blocks": {
-        "q1": {
-          "type": "qa",
-          "settings": {
-            "question": "How do I use Special Water?",
-            "answer": "Two drops in whatever you're already drinking, once or twice a day. Coffee, water, juice, tea. No taste, no prep, no routine to change."
-          }
-        },
-        "q2": {
-          "type": "qa",
-          "settings": {
-            "question": "What does it taste like?",
-            "answer": "Nothing. The serum is designed to be undetectable in any drink, hot or cold."
-          }
-        },
-        "q3": {
-          "type": "qa",
-          "settings": {
-            "question": "Does it contain stimulants or caffeine?",
-            "answer": "No stimulants. The formula works through blood sugar support, not stimulation, so there are no jitters and no crash."
-          }
-        },
-        "q4": {
-          "type": "qa",
-          "settings": {
-            "question": "How long until I notice a difference?",
-            "answer": "Everyone is different. Most people describe cravings quieting first, with steadier energy following as daily use continues over the first few weeks. Consistency matters more than dose."
-          }
-        },
-        "q5": {
-          "type": "qa",
-          "settings": {
-            "question": "Is it safe to take with my medication?",
-            "answer": "Special Water is a dietary supplement, not a medication. If you are pregnant, nursing, have a medical condition, or take prescription medication (including GLP-1s), talk with your doctor before starting any supplement."
-          }
-        },
-        "q6": {
-          "type": "qa",
-          "settings": {
-            "question": "What is your return policy?",
-            "answer": "If it's not for you, reach out to our support team within 30 days of delivery and we'll make it right."
-          }
-        }
-      },
-      "block_order": [
-        "q1",
-        "q2",
-        "q3",
-        "q4",
-        "q5",
-        "q6"
-      ]
+      "block_order": ["r1", "r2"]
     }
   },
-  "order": [
-    "subnav",
-    "hero",
-    "offer",
-    "testimonials",
-    "ingredients",
-    "benefit",
-    "science",
-    "who",
-    "benefits_2",
-    "potency",
-    "compare",
-    "values",
-    "experts",
-    "faq",
-    "refs"
-  ]
+  "order": ["offer", "guarantee", "testimonials", "faq", "refs"]
 }

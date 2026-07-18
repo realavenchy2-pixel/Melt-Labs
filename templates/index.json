@@ -31,7 +31,8 @@
             "title": "Special Water",
             "subtitle": "Quiet cravings, steady blood sugar.",
             "badge": "Bestseller",
-            "button_label": "Shop Special Water"
+            "button_label": "Shop Special Water",
+            "product": "special-water"
           }
         },
         "p2": {
@@ -43,7 +44,10 @@
           }
         }
       },
-      "block_order": ["p1", "p2"]
+      "block_order": [
+        "p1",
+        "p2"
+      ]
     },
     "experts": {
       "type": "expert-reviews",
@@ -55,18 +59,34 @@
       "blocks": {
         "e1": {
           "type": "expert",
-          "settings": { "name": "Dr. Placeholder", "title": "Integrative Medicine", "quote": "Blood-sugar stability is the lever most people miss." }
+          "settings": {
+            "name": "Dr. Placeholder",
+            "title": "Integrative Medicine",
+            "quote": "Blood-sugar stability is the lever most people miss."
+          }
         },
         "e2": {
           "type": "expert",
-          "settings": { "name": "Placeholder, RD", "title": "Registered Dietitian", "quote": "The appeal is that it fits a routine people already have." }
+          "settings": {
+            "name": "Placeholder, RD",
+            "title": "Registered Dietitian",
+            "quote": "The appeal is that it fits a routine people already have."
+          }
         },
         "e3": {
           "type": "expert",
-          "settings": { "name": "Dr. Placeholder", "title": "Metabolic Researcher", "quote": "The botanical stack targets the right pathways." }
+          "settings": {
+            "name": "Dr. Placeholder",
+            "title": "Metabolic Researcher",
+            "quote": "The botanical stack targets the right pathways."
+          }
         }
       },
-      "block_order": ["e1", "e2", "e3"]
+      "block_order": [
+        "e1",
+        "e2",
+        "e3"
+      ]
     },
     "values": {
       "type": "values-carousel",
@@ -100,7 +120,11 @@
           }
         }
       },
-      "block_order": ["v1", "v2", "v3"]
+      "block_order": [
+        "v1",
+        "v2",
+        "v3"
+      ]
     },
     "newsletter": {
       "type": "newsletter",
@@ -112,5 +136,11 @@
       }
     }
   },
-  "order": ["hero", "featured", "experts", "values", "newsletter"]
+  "order": [
+    "hero",
+    "featured",
+    "experts",
+    "values",
+    "newsletter"
+  ]
 }

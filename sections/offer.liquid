@@ -1,0 +1,185 @@
+{%- comment -%}
+  Offer page purchase experience (Apple-style dedicated buy page). Media
+  gallery on one side, purchase panel on the other. The purchase panel
+  holds a real, native {% form 'product' %} so Kaching can inject its
+  three-tier offer UI into it on install; the "plan" area above the
+  buttons is a labeled target for that injection and shows a light
+  scaffold until Kaching is live. No hardcoded tier prices, so what the
+  shopper sees always matches checkout.
+{%- endcomment -%}
+
+{%- liquid
+  if section.settings.product != blank
+    assign product = section.settings.product
+  endif
+-%}
+
+<section id="offer" class="section offer">
+  <div class="container">
+    <div class="offer__grid">
+      <div class="offer__media" data-reveal>
+        {%- if product != blank and product.images.size > 0 -%}
+          <div class="offer__gallery">
+            {%- for image in product.images limit: 4 -%}
+              <div class="media-slot media-slot--rounded {% if forloop.first %}offer__gallery-lead{% endif %}" style="--aspect-mobile: 1 / 1;">
+                <div class="media-slot__frame"></div>
+                {%- render 'responsive-image', image: image, sizes: '(min-width: 900px) 45vw, 100vw', eager: forloop.first -%}
+              </div>
+            {%- endfor -%}
+          </div>
+        {%- elsif section.settings.image != blank -%}
+          <div class="media-slot media-slot--rounded" style="--aspect-mobile: 1 / 1;">
+            <div class="media-slot__frame"></div>
+            {%- render 'responsive-image', image: section.settings.image, sizes: '(min-width: 900px) 45vw, 100vw', eager: true -%}
+          </div>
+        {%- else -%}
+          {%- render 'media-placeholder', label: 'product_gallery_photo', aspect_mobile: '1 / 1', class: 'media-slot--rounded', eager: true -%}
+        {%- endif -%}
+      </div>
+
+      <div class="offer__panel" data-reveal style="--reveal-i: 1;">
+        {%- if section.settings.eyebrow != blank -%}
+          <span class="eyebrow">{{ section.settings.eyebrow }}</span>
+        {%- endif -%}
+
+        {%- if product != blank -%}
+          <h1 class="offer__title">{{ product.title }}</h1>
+          {%- if section.settings.tagline != blank -%}
+            <p class="lead offer__tagline">{{ section.settings.tagline }}</p>
+          {%- endif -%}
+
+          <div class="offer__price">
+            <span>{{ product.selected_or_first_available_variant.price | money }}</span>
+            {%- if product.selected_or_first_available_variant.compare_at_price > product.selected_or_first_available_variant.price -%}
+              <s>{{ product.selected_or_first_available_variant.compare_at_price | money }}</s>
+            {%- endif -%}
+          </div>
+
+          {%- comment -%} Kaching injects its tiered offer UI into this region. {%- endcomment -%}
+          <div class="offer__plans" data-kaching-offer>
+            {%- if section.settings.show_plan_scaffold -%}
+              <!-- SWAP: kaching_tiered_offer_ui renders here once the app is installed. -->
+              <p class="offer__plans-note">{{ section.settings.plans_note }}</p>
+            {%- endif -%}
+          </div>
+
+          {%- form 'product', product, class: 'offer__form' -%}
+            {%- unless product.has_only_default_variant -%}
+              {%- for option in product.options_with_values -%}
+                <div class="offer__field">
+                  <label for="offer-option-{{ section.id }}-{{ forloop.index0 }}">{{ option.name }}</label>
+                  <select id="offer-option-{{ section.id }}-{{ forloop.index0 }}" name="options[{{ option.name | escape }}]">
+                    {%- for value in option.values -%}
+                      <option value="{{ value | escape }}" {% if option.selected_value == value %}selected{% endif %}>{{ value }}</option>
+                    {%- endfor -%}
+                  </select>
+                </div>
+              {%- endfor -%}
+            {%- endunless -%}
+
+            <div class="offer__qty-row">
+              <div class="offer__field offer__field--qty">
+                <label for="offer-qty-{{ section.id }}">Quantity</label>
+                <input type="number" id="offer-qty-{{ section.id }}" name="quantity" value="1" min="1">
+              </div>
+            </div>
+
+            <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
+
+            <div class="offer__actions">
+              <button
+                type="submit"
+                name="add"
+                class="btn btn--gold btn--full"
+                {% unless product.selected_or_first_available_variant.available %}disabled{% endunless %}
+              >
+                {%- if product.selected_or_first_available_variant.available %}Add to cart{% else %}Sold out{% endif -%}
+              </button>
+              {{ form | payment_button }}
+            </div>
+          {%- endform -%}
+
+          {%- if section.settings.reassurance != blank -%}
+            <ul class="offer__reassure">
+              {%- assign items = section.settings.reassurance | newline_to_br | split: '<br />' -%}
+              {%- for item in items -%}
+                {%- assign trimmed = item | strip -%}
+                {%- if trimmed != blank -%}
+                  <li>{% render 'icon', name: 'check' %}{{ trimmed }}</li>
+                {%- endif -%}
+              {%- endfor -%}
+            </ul>
+          {%- endif -%}
+
+          {%- if section.settings.trust_line != blank -%}
+            <p class="offer__trust">{% render 'icon', name: 'shield' %}{{ section.settings.trust_line }}</p>
+          {%- endif -%}
+        {%- else -%}
+          <h1 class="offer__title">{{ section.settings.placeholder_title }}</h1>
+          <p class="lead offer__tagline">Select a product for this section in the theme editor to activate the offer.</p>
+        {%- endif -%}
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Offer",
+  "settings": [
+    {
+      "type": "product",
+      "id": "product",
+      "label": "Product",
+      "info": "On product pages this defaults to the current product."
+    },
+    { "type": "image_picker", "id": "image", "label": "Fallback photo (if the product has no images)" },
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "MELT LABS" },
+    {
+      "type": "text",
+      "id": "tagline",
+      "label": "Tagline",
+      "default": "The daily protocol for quieter cravings and steadier blood sugar."
+    },
+    {
+      "type": "header",
+      "content": "Tiered offer (Kaching)"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_plan_scaffold",
+      "label": "Show placeholder note until Kaching is installed",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "plans_note",
+      "label": "Placeholder note",
+      "default": "Choose your plan below."
+    },
+    {
+      "type": "header",
+      "content": "Trust"
+    },
+    {
+      "type": "textarea",
+      "id": "reassurance",
+      "label": "Reassurance points (one per line)",
+      "default": "60-day money-back guarantee\nShips in 2 to 4 days\nThird-party tested"
+    },
+    {
+      "type": "text",
+      "id": "trust_line",
+      "label": "Secure-checkout line",
+      "default": "Secure checkout. Cancel anytime."
+    },
+    {
+      "type": "text",
+      "id": "placeholder_title",
+      "label": "Placeholder title (no product selected)",
+      "default": "Special Water"
+    }
+  ],
+  "presets": [{ "name": "Offer" }]
+}
+{% endschema %}
