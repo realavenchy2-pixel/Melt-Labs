@@ -22,8 +22,10 @@
     "hero": {
       "type": "hero-video",
       "settings": {
-        "media_type": "video",
-        "overlay_darkness": 60,
+        "media_type": "image",
+        "image": "shopify://shop_images/Resize._2K_202607190026.jpg",
+        "image_mobile": "shopify://shop_images/Special_Water_hero_2K_202607190025.jpg",
+        "overlay_darkness": 90,
         "hero_size": "fill",
         "aspect_desktop": "16 / 9",
         "aspect_mobile": "9 / 16",
