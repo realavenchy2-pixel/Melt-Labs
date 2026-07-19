@@ -15,13 +15,26 @@
   elsif product != blank
     assign buy_href = product.url
   endif
+  # Logo: section-level upload wins, else the theme's global logo
+  # (Theme settings → Logo), else fall back to the product/shop name.
+  assign subnav_logo = section.settings.logo
+  if subnav_logo == blank
+    assign subnav_logo = settings.logo
+  endif
+  assign logo_style = 'height: ' | append: section.settings.logo_height | append: 'px'
 -%}
 
 <nav class="product-subnav" data-subnav aria-label="Product">
   <div class="container product-subnav__inner">
-    <span class="product-subnav__title">
-      {%- if product != blank -%}{{ product.title }}{%- else -%}{{ shop.name }}{%- endif -%}
-    </span>
+    {%- if subnav_logo != blank -%}
+      <a class="product-subnav__logo" href="{{ routes.root_url }}">
+        {{ subnav_logo | image_url: width: 300 | image_tag: widths: '80, 150, 300', alt: shop.name, style: logo_style, loading: 'eager', decoding: 'async' }}
+      </a>
+    {%- else -%}
+      <span class="product-subnav__title">
+        {%- if product != blank -%}{{ product.title }}{%- else -%}{{ shop.name }}{%- endif -%}
+      </span>
+    {%- endif -%}
     <span class="product-subnav__meta">
       {%- if product != blank -%}
         <span class="product-subnav__price">{{ product.selected_or_first_available_variant.price | money }}</span>
@@ -40,6 +53,26 @@
       "id": "product",
       "label": "Product",
       "info": "On product pages this defaults to the current product."
+    },
+    {
+      "type": "header",
+      "content": "Logo"
+    },
+    {
+      "type": "image_picker",
+      "id": "logo",
+      "label": "Logo",
+      "info": "Replaces the product name with your logo. Leave blank to use the theme's logo (Theme settings → Logo) if one is set there, or the product name as plain text otherwise."
+    },
+    {
+      "type": "range",
+      "id": "logo_height",
+      "label": "Logo height",
+      "min": 16,
+      "max": 48,
+      "step": 2,
+      "unit": "px",
+      "default": 28
     },
     {
       "type": "text",

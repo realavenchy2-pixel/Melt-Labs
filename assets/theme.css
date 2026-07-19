@@ -368,6 +368,8 @@ h1, h2, h3, .h1, .h2, .h3 {
   overflow: hidden;
   text-overflow: ellipsis;
 }
+.product-subnav__logo { display: inline-flex; align-items: center; flex: 0 0 auto; }
+.product-subnav__logo img { display: block; width: auto; max-width: 100%; }
 .product-subnav__meta { display: flex; align-items: center; gap: 0.9rem; }
 .product-subnav__price { font-size: 0.9rem; color: color-mix(in srgb, var(--color-ink) 65%, transparent); }
 .product-subnav .btn { min-height: 38px; padding: 0.4rem 1.2rem; font-size: 0.8rem; }
