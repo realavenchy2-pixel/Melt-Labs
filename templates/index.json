@@ -33,18 +33,6 @@
     "featured": {
       "type": "product-selector",
       "blocks": {
-        "p1": {
-          "type": "product",
-          "settings": {
-            "product": "special-water",
-            "badge": "FOR CRAVINGS + BLOOD SUGAR",
-            "title": "",
-            "tagline": "Two drops in whatever you already drink. Quieter cravings, steadier blood sugar, no routine to change.",
-            "points": "60-day supply\nThird-party tested\nNo stimulants",
-            "button_label": "Shop Special Water",
-            "link": "shopify://products/the-special-water"
-          }
-        },
         "product_KgJiz7": {
           "type": "product",
           "settings": {
@@ -72,7 +60,6 @@
         }
       },
       "block_order": [
-        "p1",
         "product_KgJiz7",
         "p2"
       ],
