@@ -14,11 +14,18 @@
     {%- endif -%}
   </div>
 
-  {%- assign chapters = section.blocks | where: 'type', 'chapter' -%}
-  {%- if chapters.size > 0 -%}
+  {%- assign chapter_count = 0 -%}
+  {%- for block in section.blocks -%}
+    {%- if block.type == 'chapter' -%}
+      {%- assign chapter_count = chapter_count | plus: 1 -%}
+    {%- endif -%}
+  {%- endfor -%}
+  {%- if chapter_count > 0 -%}
     <div class="container science__story">
-      {%- for block in chapters -%}
-        {%- assign rem = forloop.index0 | modulo: 2 -%}
+      {%- assign chapter_i = 0 -%}
+      {%- for block in section.blocks -%}
+        {%- if block.type == 'chapter' -%}
+        {%- assign rem = chapter_i | modulo: 2 -%}
         <div class="science-chapter{% if rem == 1 %} science-chapter--flip{% endif %}" data-reveal {{ block.shopify_attributes }}>
           <div class="science-chapter__media">
             {%- render 'media-placeholder',
@@ -42,6 +49,8 @@
             {%- endif -%}
           </div>
         </div>
+        {%- assign chapter_i = chapter_i | plus: 1 -%}
+        {%- endif -%}
       {%- endfor -%}
     </div>
   {%- endif -%}

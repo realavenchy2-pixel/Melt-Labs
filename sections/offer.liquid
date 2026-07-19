@@ -57,20 +57,24 @@
             <p class="lead offer__tagline">{{ section.settings.tagline }}</p>
           {%- endif -%}
 
-          {%- liquid
-            assign variant = product.selected_or_first_available_variant
-            assign tiers = section.blocks | where: 'type', 'tier'
-            # Default-selected tier: the highlighted one, else the first.
-            assign default_index = 0
-            for block in tiers
-              if block.settings.highlighted
-                assign default_index = forloop.index0
-                break
-              endif
-            endfor
-          -%}
+          {%- assign variant = product.selected_or_first_available_variant -%}
 
-          {%- if tiers.size == 0 -%}
+          {%- comment -%} Count tier blocks; the first highlighted one is pre-selected, else the first. {%- endcomment -%}
+          {%- assign tier_count = 0 -%}
+          {%- assign default_index = -1 -%}
+          {%- for block in section.blocks -%}
+            {%- if block.type == 'tier' -%}
+              {%- if block.settings.highlighted and default_index == -1 -%}
+                {%- assign default_index = tier_count -%}
+              {%- endif -%}
+              {%- assign tier_count = tier_count | plus: 1 -%}
+            {%- endif -%}
+          {%- endfor -%}
+          {%- if default_index == -1 -%}
+            {%- assign default_index = 0 -%}
+          {%- endif -%}
+
+          {%- if tier_count == 0 -%}
             <div class="offer__price">
               <span>{{ variant.price | money }}</span>
               {%- if variant.compare_at_price > variant.price -%}
@@ -93,14 +97,16 @@
               {%- endfor -%}
             {%- endunless -%}
 
-            {%- if tiers.size > 0 -%}
+            {%- if tier_count > 0 -%}
               {%- if section.settings.bundle_heading != blank -%}
                 <p class="bundle__heading">{{ section.settings.bundle_heading }}</p>
               {%- endif -%}
               <div class="bundle" data-bundle role="radiogroup" aria-label="{{ section.settings.bundle_heading | default: 'Choose a bundle' | escape }}">
-                {%- for block in tiers -%}
+                {%- assign tier_i = 0 -%}
+                {%- for block in section.blocks -%}
+                  {%- if block.type == 'tier' -%}
                   {%- assign checked = false -%}
-                  {%- if forloop.index0 == default_index -%}{%- assign checked = true -%}{%- endif -%}
+                  {%- if tier_i == default_index -%}{%- assign checked = true -%}{%- endif -%}
                   <label class="bundle__tier{% if checked %} is-selected{% endif %}{% if block.settings.highlighted %} bundle__tier--popular{% endif %}" {{ block.shopify_attributes }}>
                     <input
                       class="bundle__radio"
@@ -132,6 +138,8 @@
                       {%- endif -%}
                     </span>
                   </label>
+                  {%- assign tier_i = tier_i | plus: 1 -%}
+                  {%- endif -%}
                 {%- endfor -%}
               </div>
               {%- if section.settings.bundle_note != blank -%}
@@ -159,7 +167,7 @@
                 {%- if variant.available %}Add to bag{% else %}Sold out{% endif -%}
                 <span data-bundle-total-suffix></span>
               </button>
-              {%- if tiers.size == 0 -%}{{ form | payment_button }}{%- endif -%}
+              {%- if tier_count == 0 -%}{{ form | payment_button }}{%- endif -%}
             </div>
           {%- endform -%}
 
@@ -183,9 +191,16 @@
             <div class="offer__description rte">{{ product.description }}</div>
           {%- endif -%}
 
-          {%- if section.blocks.size > 0 -%}
+          {%- assign info_count = 0 -%}
+          {%- for block in section.blocks -%}
+            {%- if block.type == 'info' -%}
+              {%- assign info_count = info_count | plus: 1 -%}
+            {%- endif -%}
+          {%- endfor -%}
+          {%- if info_count > 0 -%}
             <div class="offer__info">
               {%- for block in section.blocks -%}
+                {%- if block.type == 'info' -%}
                 <details class="faq__item" data-faq-item {{ block.shopify_attributes }}>
                   <summary class="faq__q">
                     <span>{{ block.settings.title }}</span>
@@ -195,6 +210,7 @@
                     <div class="rte">{{ block.settings.content }}</div>
                   </div>
                 </details>
+                {%- endif -%}
               {%- endfor -%}
             </div>
           {%- endif -%}
@@ -257,7 +273,7 @@
     },
     {
       "type": "paragraph",
-      "content": "Add 'Bundle tier' blocks below to build a buy-more-save-more selector. Each tier adds real units to the cart, so Supliful fulfils the exact bottle count. To make checkout match the price you show on a tier, either (a) create a matching Automatic discount in Shopify (Discounts → Create → Automatic → amount or % off, set the minimum quantity to that tier's units), or (b) put a discount code in the tier and the widget will apply it automatically. With no tiers, a simple quantity box is shown instead."
+      "content": "Add Bundle tier blocks to build the selector. Each tier adds real units to the cart. Match the shown price at checkout with an automatic quantity discount, or set a discount code on the tier."
     },
     {
       "type": "text",
