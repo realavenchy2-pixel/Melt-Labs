@@ -1,28 +1,38 @@
 {%- comment -%}
   S9 — Potency / efficacy (reference: PDF p.19, Apple's "8 hrs / 10 hrs"
   battery stack). Big stat values with hairline dividers; copy explains
-  all-day support rather than a short-lived spike.
+  all-day support rather than a short-lived spike. Optional how-to-use
+  photo (4:5) sits beside the stats so the "just a couple of drops"
+  claim is shown, not just told.
 {%- endcomment -%}
 
 <section class="section section--scheme-tint">
-  <div class="container container--narrow">
-    <div class="section-header section-header--center" data-reveal>
-      <h2 class="h2">{{ section.settings.headline }}</h2>
-      {%- if section.settings.body != blank -%}
-        <p class="lead" style="margin-inline: auto;">{{ section.settings.body }}</p>
-      {%- endif -%}
-    </div>
+  <div class="container">
+    <div class="featured">
+      <div class="featured__media" data-reveal>
+        {%- render 'media-placeholder', image: section.settings.image, label: 'how_to_use_photo', aspect_mobile: '4 / 5', class: 'media-slot--rounded' -%}
+      </div>
 
-    <div class="stat-row">
-      {%- for block in section.blocks -%}
-        <div class="stat" data-reveal style="--reveal-i: {{ forloop.index0 }};" {{ block.shopify_attributes }}>
-          {%- if block.settings.intro != blank -%}
-            <p class="stat__intro">{{ block.settings.intro }}</p>
+      <div class="featured__body" data-reveal style="--reveal-i: 1;">
+        <div class="section-header" style="margin-bottom: 2rem;">
+          <h2 class="h2">{{ section.settings.headline }}</h2>
+          {%- if section.settings.body != blank -%}
+            <p class="lead">{{ section.settings.body }}</p>
           {%- endif -%}
-          <p class="stat__value">{{ block.settings.value }}</p>
-          <p class="stat__caption">{{ block.settings.caption }}</p>
         </div>
-      {%- endfor -%}
+
+        <div class="stat-row">
+          {%- for block in section.blocks -%}
+            <div class="stat" data-reveal style="--reveal-i: {{ forloop.index0 | plus: 2 }};" {{ block.shopify_attributes }}>
+              {%- if block.settings.intro != blank -%}
+                <p class="stat__intro">{{ block.settings.intro }}</p>
+              {%- endif -%}
+              <p class="stat__value">{{ block.settings.value }}</p>
+              <p class="stat__caption">{{ block.settings.caption }}</p>
+            </div>
+          {%- endfor -%}
+        </div>
+      </div>
     </div>
   </div>
 </section>
@@ -31,6 +41,7 @@
 {
   "name": "Potency stats",
   "settings": [
+    { "type": "image_picker", "id": "image", "label": "How-to-use photo" },
     {
       "type": "text",
       "id": "headline",
