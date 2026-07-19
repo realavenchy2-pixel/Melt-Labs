@@ -166,5 +166,51 @@
     setToggleUI();
   }
 
-  document.querySelectorAll('[data-carousel]').forEach(initCarousel);
+  var allCarousels = Array.prototype.slice.call(document.querySelectorAll('[data-carousel]'));
+  allCarousels.forEach(function (root, i) {
+    /* First two carousels keep the default dot style; later ones get a
+       different indicator so the page feels custom, not templated. */
+    var variant = i < 2 ? 'a' : (i === 2 ? 'b' : 'c');
+    root.classList.add('carousel--dots-' + variant);
+    initCarousel(root);
+  });
+
+  /* Parallax + word-bounce entrance. Each slide's card drifts up into
+     its resting position as the carousel scrolls into frame (scroll-
+     linked and clamped, so it settles when in frame and reverses on the
+     way back up), and the caption springs in once. Skipped entirely
+     under reduced motion. */
+  if (!reduceMotion && allCarousels.length) {
+    var pxItems = allCarousels.map(function (root) {
+      root.setAttribute('data-parallax', '');
+      return { root: root, wordsIn: false };
+    });
+    var ticking = false;
+    function updateParallax() {
+      ticking = false;
+      var vh = window.innerHeight || document.documentElement.clientHeight;
+      var startY = vh * 0.9; /* begins as the carousel top enters the lower viewport */
+      var endY = vh * 0.4;   /* fully settled once it's comfortably in frame */
+      pxItems.forEach(function (item) {
+        var top = item.root.getBoundingClientRect().top;
+        var p = (startY - top) / (startY - endY);
+        p = p < 0 ? 0 : (p > 1 ? 1 : p);
+        var eased = 1 - Math.pow(1 - p, 3);
+        item.root.style.setProperty('--reveal-p', eased.toFixed(3));
+        if (!item.wordsIn && p >= 0.5) {
+          item.wordsIn = true;
+          item.root.classList.add('carousel--words-in');
+        } else if (item.wordsIn && p <= 0.02) {
+          item.wordsIn = false;
+          item.root.classList.remove('carousel--words-in');
+        }
+      });
+    }
+    function onScroll() {
+      if (!ticking) { ticking = true; window.requestAnimationFrame(updateParallax); }
+    }
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', onScroll);
+    updateParallax();
+  }
 })();

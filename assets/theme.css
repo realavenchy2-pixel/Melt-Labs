@@ -672,8 +672,8 @@ h1, h2, h3, .h1, .h2, .h3 {
 }
 .carousel__track::-webkit-scrollbar { display: none; }
 .carousel__slide {
-  flex: 0 0 84%;
-  max-width: 420px;
+  flex: 0 0 88%;
+  max-width: 560px;
   scroll-snap-align: start;
 }
 /* Smooth, immersive slide transitions: inactive slides sit slightly
@@ -702,7 +702,29 @@ h1, h2, h3, .h1, .h2, .h3 {
 }
 @media (min-width: 768px) {
   .carousel__track { gap: 1.25rem; }
-  .carousel__slide { flex-basis: 44%; }
+  .carousel__slide { flex-basis: 50%; }
+}
+
+/* ---- Carousel parallax + word-bounce entrance (JS adds [data-parallax]) ----
+   As the carousel scrolls into frame, each slide's card drifts up into
+   its resting position (scroll-linked via --reveal-p, clamped so it
+   settles when in frame and reverses on the way back up), and the
+   caption springs in once with a slight bounce. JS never adds
+   [data-parallax] under reduced motion, so this whole layer is skipped
+   there and captions stay plainly visible. */
+[data-carousel][data-parallax] .carousel__slide > * {
+  transform: translateY(calc((1 - var(--reveal-p, 1)) * 36px));
+  opacity: calc(0.12 + var(--reveal-p, 1) * 0.88);
+  will-change: transform, opacity;
+}
+[data-carousel][data-parallax] .carousel__slide figcaption { opacity: 0; }
+[data-carousel][data-parallax].carousel--words-in .carousel__slide figcaption {
+  animation: carouselWordsIn 640ms var(--ease-out) forwards;
+}
+@keyframes carouselWordsIn {
+  0% { opacity: 0; transform: translateY(18px); }
+  55% { opacity: 1; transform: translateY(-5px); }
+  100% { opacity: 1; transform: translateY(0); }
 }
 @media (min-width: 1240px) {
   .carousel__track {
@@ -731,6 +753,23 @@ h1, h2, h3, .h1, .h2, .h3 {
 .section--scheme-ink .carousel__dot { background: rgba(255,255,255,0.28); }
 .carousel__dot.is-active { width: 20px; background: var(--color-primary); }
 .section--scheme-ink .carousel__dot.is-active { background: var(--color-cta); }
+
+/* Dot indicator variety: the first two carousels keep the dash-to-pill
+   style above (variant a); carousels after that get progressively
+   different indicators (JS assigns the variant class by page order) so
+   the site reads as hand-built rather than templated. */
+.carousel--dots-b .carousel__dots { gap: 9px; }
+.carousel--dots-b .carousel__dot {
+  width: 8px; height: 8px;
+  transition: transform 260ms var(--ease-out), background-color 200ms var(--ease-out);
+}
+.carousel--dots-b .carousel__dot.is-active { width: 8px; transform: scale(1.6); }
+.carousel--dots-c .carousel__dots { gap: 7px; }
+.carousel--dots-c .carousel__dot {
+  width: 16px; height: 3px; border-radius: 2px;
+  transition: width 280ms var(--ease-out), background-color 200ms var(--ease-out);
+}
+.carousel--dots-c .carousel__dot.is-active { width: 30px; }
 
 /* Arrows: thin hairline ring rather than a filled chunky button; fills
    in softly only on hover/press for a lighter, more refined touch. */
