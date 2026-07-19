@@ -5,14 +5,17 @@
       "settings": {
         "eyebrow": "MELT LABS",
         "tagline": "The nightly peptide ritual for fuller-looking hair.",
-        "show_plan_scaffold": true,
-        "plans_note": "Choose your plan below.",
+        "bundle_heading": "Choose your supply",
+        "bundle_note": "Bulk savings apply automatically at checkout.",
         "reassurance": "60-day money-back guarantee\nShips in 2 to 4 days\nThird-party tested\nFragrance-free",
         "trust_line": "Secure checkout. Cancel anytime.",
         "show_description": true,
         "placeholder_title": "KAMI"
       },
       "blocks": {
+        "tier1": { "type": "tier", "settings": { "units": 1, "label": "1 Bottle", "sublabel": "1-month supply", "price": "$59", "per_unit": "$59/bottle" } },
+        "tier3": { "type": "tier", "settings": { "units": 3, "label": "3 Bottles", "sublabel": "3-month supply", "badge": "MOST POPULAR", "price": "$147", "compare_price": "$177", "per_unit": "$49/bottle", "highlighted": true } },
+        "tier6": { "type": "tier", "settings": { "units": 6, "label": "6 Bottles", "sublabel": "6-month supply", "badge": "BEST VALUE", "price": "$258", "compare_price": "$354", "per_unit": "$43/bottle" } },
         "b1": {
           "type": "info",
           "settings": {
@@ -28,7 +31,7 @@
           }
         }
       },
-      "block_order": ["b1", "b2"]
+      "block_order": ["tier1", "tier3", "tier6", "b1", "b2"]
     },
     "guarantee": {
       "type": "icon-list",

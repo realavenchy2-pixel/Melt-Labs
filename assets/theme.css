@@ -465,17 +465,94 @@ h1, h2, h3, .h1, .h2, .h3 {
   font-size: 1.65rem;
 }
 .offer__price s { font-size: 1.1rem; font-weight: 400; color: color-mix(in srgb, var(--color-ink) 45%, transparent); }
-.offer__plans { margin-top: 1.5rem; }
-.offer__plans:empty { display: none; }
-.offer__plans-note {
-  padding: 1.1rem 1.25rem;
-  border: 1.5px dashed color-mix(in srgb, var(--color-primary) 40%, transparent);
-  border-radius: 16px;
-  background: color-mix(in srgb, var(--color-primary) 6%, transparent);
-  color: color-mix(in srgb, var(--color-ink) 65%, transparent);
-  font-size: 0.9rem;
-  text-align: center;
+/* ---- Bundle selector (native tiered pricing) ----
+   Radio "cards": the whole tier is a clickable label wrapping a
+   visually-hidden radio. Selected tier gets a gold ring + check. Each
+   tier's radio value is the unit count it adds to the cart. */
+.bundle__heading {
+  font-family: var(--font-heading);
+  font-weight: var(--weight-heading);
+  font-size: 0.75rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: color-mix(in srgb, var(--color-ink) 60%, transparent);
+  margin-bottom: 0.85rem;
 }
+.bundle { display: grid; gap: 0.75rem; }
+.bundle__tier {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 0.9rem;
+  padding: 1.1rem 1.25rem;
+  border: 1.5px solid color-mix(in srgb, var(--color-ink) 14%, transparent);
+  border-radius: 16px;
+  background: var(--color-bg);
+  cursor: pointer;
+  transition: border-color 180ms var(--ease-out), box-shadow 180ms var(--ease-out), background-color 180ms var(--ease-out);
+}
+@media (hover: hover) and (pointer: fine) {
+  .bundle__tier:hover { border-color: color-mix(in srgb, var(--color-ink) 30%, transparent); }
+}
+.bundle__tier.is-selected {
+  border-color: var(--color-cta);
+  box-shadow: 0 0 0 1.5px var(--color-cta), 0 8px 22px color-mix(in srgb, var(--color-cta) 22%, transparent);
+  background: color-mix(in srgb, var(--color-cta) 6%, var(--color-bg));
+}
+.bundle__radio {
+  position: absolute;
+  opacity: 0;
+  width: 1px; height: 1px;
+  pointer-events: none;
+}
+.bundle__radio:focus-visible + .bundle__tier-badge,
+.bundle__tier:has(.bundle__radio:focus-visible) { outline: 2px solid var(--color-primary); outline-offset: 3px; }
+.bundle__tier-check {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 auto;
+  width: 24px; height: 24px;
+  border-radius: 999px;
+  border: 1.5px solid color-mix(in srgb, var(--color-ink) 22%, transparent);
+  color: transparent;
+  transition: background-color 160ms var(--ease-out), border-color 160ms var(--ease-out), color 160ms var(--ease-out);
+}
+.bundle__tier-check svg { width: 14px; height: 14px; }
+.bundle__tier.is-selected .bundle__tier-check {
+  background: var(--color-cta);
+  border-color: var(--color-cta);
+  color: var(--color-ink);
+}
+.bundle__tier-info { display: flex; flex-direction: column; gap: 0.15rem; margin-right: auto; }
+.bundle__tier-title { font-family: var(--font-heading); font-weight: var(--weight-heading); font-size: 1.02rem; }
+.bundle__tier-sub { font-size: 0.82rem; color: color-mix(in srgb, var(--color-ink) 58%, transparent); }
+.bundle__tier-pricing { display: flex; flex-direction: column; align-items: flex-end; gap: 0.1rem; text-align: right; }
+.bundle__tier-price { font-family: var(--font-heading); font-weight: var(--weight-heading); font-size: 1.1rem; }
+.bundle__tier-compare { font-size: 0.85rem; color: color-mix(in srgb, var(--color-ink) 42%, transparent); }
+.bundle__tier-per { font-size: 0.75rem; color: color-mix(in srgb, var(--color-ink) 55%, transparent); }
+.bundle__tier-badge {
+  position: absolute;
+  top: 0; right: 1.1rem;
+  transform: translateY(-50%);
+  padding: 0.2rem 0.6rem;
+  border-radius: 999px;
+  background: var(--color-ink);
+  color: #fff;
+  font-size: 0.62rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+.bundle__tier--popular .bundle__tier-badge { background: var(--color-cta); color: var(--color-ink); }
+.bundle__note {
+  margin-top: 0.9rem;
+  font-size: 0.8rem;
+  text-align: center;
+  color: color-mix(in srgb, var(--color-ink) 55%, transparent);
+}
+[data-bundle-add].is-loading { opacity: 0.7; pointer-events: none; }
+
 .offer__form { margin-top: 1.5rem; display: grid; gap: 1rem; }
 .offer__field label {
   display: block;

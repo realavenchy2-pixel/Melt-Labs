@@ -58,20 +58,27 @@
             <p class="lead offer__tagline">{{ section.settings.tagline }}</p>
           {%- endif -%}
 
-          <div class="offer__price">
-            <span>{{ product.selected_or_first_available_variant.price | money }}</span>
-            {%- if product.selected_or_first_available_variant.compare_at_price > product.selected_or_first_available_variant.price -%}
-              <s>{{ product.selected_or_first_available_variant.compare_at_price | money }}</s>
-            {%- endif -%}
-          </div>
+          {%- liquid
+            assign variant = product.selected_or_first_available_variant
+            assign tiers = section.blocks | where: 'type', 'tier'
+            # Default-selected tier: the highlighted one, else the first.
+            assign default_index = 0
+            for block in tiers
+              if block.settings.highlighted
+                assign default_index = forloop.index0
+                break
+              endif
+            endfor
+          -%}
 
-          {%- comment -%} Kaching injects its tiered offer UI into this region. {%- endcomment -%}
-          <div class="offer__plans" data-kaching-offer>
-            {%- if section.settings.show_plan_scaffold -%}
-              <!-- SWAP: kaching_tiered_offer_ui renders here once the app is installed. -->
-              <p class="offer__plans-note">{{ section.settings.plans_note }}</p>
-            {%- endif -%}
-          </div>
+          {%- if tiers.size == 0 -%}
+            <div class="offer__price">
+              <span>{{ variant.price | money }}</span>
+              {%- if variant.compare_at_price > variant.price -%}
+                <s>{{ variant.compare_at_price | money }}</s>
+              {%- endif -%}
+            </div>
+          {%- endif -%}
 
           {%- form 'product', product, class: 'offer__form' -%}
             {%- unless product.has_only_default_variant -%}
@@ -87,25 +94,73 @@
               {%- endfor -%}
             {%- endunless -%}
 
-            <div class="offer__qty-row">
-              <div class="offer__field offer__field--qty">
-                <label for="offer-qty-{{ section.id }}">Quantity</label>
-                <input type="number" id="offer-qty-{{ section.id }}" name="quantity" value="1" min="1">
+            {%- if tiers.size > 0 -%}
+              {%- if section.settings.bundle_heading != blank -%}
+                <p class="bundle__heading">{{ section.settings.bundle_heading }}</p>
+              {%- endif -%}
+              <div class="bundle" data-bundle role="radiogroup" aria-label="{{ section.settings.bundle_heading | default: 'Choose a bundle' | escape }}">
+                {%- for block in tiers -%}
+                  {%- assign checked = false -%}
+                  {%- if forloop.index0 == default_index -%}{%- assign checked = true -%}{%- endif -%}
+                  <label class="bundle__tier{% if checked %} is-selected{% endif %}{% if block.settings.highlighted %} bundle__tier--popular{% endif %}" {{ block.shopify_attributes }}>
+                    <input
+                      class="bundle__radio"
+                      type="radio"
+                      name="quantity"
+                      value="{{ block.settings.units }}"
+                      data-bundle-tier
+                      data-code="{{ block.settings.discount_code | escape }}"
+                      data-price="{{ block.settings.price | escape }}"
+                      {% if checked %}checked{% endif %}
+                    >
+                    {%- if block.settings.badge != blank -%}
+                      <span class="bundle__tier-badge">{{ block.settings.badge }}</span>
+                    {%- endif -%}
+                    <span class="bundle__tier-check" aria-hidden="true">{% render 'icon', name: 'check' %}</span>
+                    <span class="bundle__tier-info">
+                      <span class="bundle__tier-title">{{ block.settings.label }}</span>
+                      {%- if block.settings.sublabel != blank -%}
+                        <span class="bundle__tier-sub">{{ block.settings.sublabel }}</span>
+                      {%- endif -%}
+                    </span>
+                    <span class="bundle__tier-pricing">
+                      <span class="bundle__tier-price">{{ block.settings.price }}</span>
+                      {%- if block.settings.compare_price != blank -%}
+                        <s class="bundle__tier-compare">{{ block.settings.compare_price }}</s>
+                      {%- endif -%}
+                      {%- if block.settings.per_unit != blank -%}
+                        <span class="bundle__tier-per">{{ block.settings.per_unit }}</span>
+                      {%- endif -%}
+                    </span>
+                  </label>
+                {%- endfor -%}
               </div>
-            </div>
+              {%- if section.settings.bundle_note != blank -%}
+                <p class="bundle__note">{{ section.settings.bundle_note }}</p>
+              {%- endif -%}
+            {%- else -%}
+              <div class="offer__qty-row">
+                <div class="offer__field offer__field--qty">
+                  <label for="offer-qty-{{ section.id }}">Quantity</label>
+                  <input type="number" id="offer-qty-{{ section.id }}" name="quantity" value="1" min="1">
+                </div>
+              </div>
+            {%- endif -%}
 
-            <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
+            <input type="hidden" name="id" value="{{ variant.id }}">
 
             <div class="offer__actions">
               <button
                 type="submit"
                 name="add"
                 class="btn btn--gold btn--full"
-                {% unless product.selected_or_first_available_variant.available %}disabled{% endunless %}
+                data-bundle-add
+                {% unless variant.available %}disabled{% endunless %}
               >
-                {%- if product.selected_or_first_available_variant.available %}Add to cart{% else %}Sold out{% endif -%}
+                {%- if variant.available %}Add to bag{% else %}Sold out{% endif -%}
+                <span data-bundle-total-suffix></span>
               </button>
-              {{ form | payment_button }}
+              {%- if tiers.size == 0 -%}{{ form | payment_button }}{%- endif -%}
             </div>
           {%- endform -%}
 
@@ -199,19 +254,23 @@
     },
     {
       "type": "header",
-      "content": "Tiered offer (Kaching)"
+      "content": "Bundle & pricing"
     },
     {
-      "type": "checkbox",
-      "id": "show_plan_scaffold",
-      "label": "Show placeholder note until Kaching is installed",
-      "default": true
+      "type": "paragraph",
+      "content": "Add 'Bundle tier' blocks below to build a buy-more-save-more selector. Each tier adds real units to the cart, so Supliful fulfils the exact bottle count. To make checkout match the price you show on a tier, either (a) create a matching Automatic discount in Shopify (Discounts → Create → Automatic → amount or % off, set the minimum quantity to that tier's units), or (b) put a discount code in the tier and the widget will apply it automatically. With no tiers, a simple quantity box is shown instead."
     },
     {
       "type": "text",
-      "id": "plans_note",
-      "label": "Placeholder note",
-      "default": "Choose your plan below."
+      "id": "bundle_heading",
+      "label": "Bundle heading",
+      "default": "Choose your supply"
+    },
+    {
+      "type": "text",
+      "id": "bundle_note",
+      "label": "Small note under the tiers",
+      "default": "Bulk savings apply automatically at checkout."
     },
     {
       "type": "header",
@@ -248,6 +307,41 @@
   ],
   "blocks": [
     {
+      "type": "tier",
+      "name": "Bundle tier",
+      "settings": [
+        {
+          "type": "range",
+          "id": "units",
+          "label": "Units added to cart",
+          "info": "How many bottles this tier adds. Supliful fulfils this exact count, and the cart shows every unit.",
+          "min": 1,
+          "max": 12,
+          "step": 1,
+          "default": 1
+        },
+        { "type": "text", "id": "label", "label": "Title", "default": "1 Bottle" },
+        { "type": "text", "id": "sublabel", "label": "Subtitle", "default": "30-day supply" },
+        { "type": "text", "id": "badge", "label": "Badge (optional)", "info": "e.g. MOST POPULAR or SAVE 25%" },
+        {
+          "type": "text",
+          "id": "price",
+          "label": "Price shown",
+          "info": "The agreed price to display, e.g. $79. Enforce it at checkout with a matching discount (see the Bundle & pricing note above).",
+          "default": "$79"
+        },
+        { "type": "text", "id": "compare_price", "label": "Compare-at price (optional)", "info": "Struck-through original, e.g. $79" },
+        { "type": "text", "id": "per_unit", "label": "Per-unit note (optional)", "info": "e.g. $50/bottle" },
+        {
+          "type": "text",
+          "id": "discount_code",
+          "label": "Discount code (optional)",
+          "info": "A Shopify discount code applied automatically when this tier is chosen, so checkout matches the price shown. Leave blank if you use an automatic discount instead."
+        },
+        { "type": "checkbox", "id": "highlighted", "label": "Highlight as most popular", "default": false }
+      ]
+    },
+    {
       "type": "info",
       "name": "Collapsible row",
       "settings": [
@@ -261,11 +355,14 @@
       ]
     }
   ],
-  "max_blocks": 5,
+  "max_blocks": 12,
   "presets": [
     {
       "name": "Offer",
       "blocks": [
+        { "type": "tier", "settings": { "units": 1, "label": "1 Bottle", "sublabel": "30-day supply", "price": "$79", "per_unit": "$79/bottle" } },
+        { "type": "tier", "settings": { "units": 3, "label": "3 Bottles", "sublabel": "90-day supply", "badge": "MOST POPULAR", "price": "$177", "compare_price": "$237", "per_unit": "$59/bottle", "highlighted": true } },
+        { "type": "tier", "settings": { "units": 6, "label": "6 Bottles", "sublabel": "180-day supply", "badge": "BEST VALUE", "price": "$294", "compare_price": "$474", "per_unit": "$49/bottle" } },
         {
           "type": "info",
           "settings": {
