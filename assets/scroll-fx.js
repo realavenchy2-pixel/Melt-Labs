@@ -70,8 +70,14 @@
   var sentinel = document.querySelector('[data-subnav-sentinel]');
   var siteHeader = document.querySelector('.site-header');
   if (subnav && sentinel) {
+    /* The sentinel sits just below the hero's own CTA button. It reveals
+       the sticky Buy bar only once it has scrolled ABOVE the top of the
+       viewport (button no longer visible) - not while it's still below
+       the fold on load, which is also "not intersecting". The
+       boundingClientRect.top check distinguishes the two. */
     new IntersectionObserver(function (entries) {
-      var stuck = !entries[0].isIntersecting;
+      var entry = entries[0];
+      var stuck = !entry.isIntersecting && entry.boundingClientRect.top < 0;
       subnav.classList.toggle('is-stuck', stuck);
       if (siteHeader) siteHeader.classList.toggle('is-hidden', stuck);
     }).observe(sentinel);

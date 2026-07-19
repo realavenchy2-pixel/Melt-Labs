@@ -20,8 +20,6 @@
   endif
 -%}
 
-<div data-subnav-sentinel></div>
-
 <section
   class="hero hero--{{ hero_mode }}"
   style="--hero-aspect-mobile: {{ section.settings.aspect_mobile }}; --hero-aspect-desktop: {{ section.settings.aspect_desktop }}; --hero-fit: {{ section.settings.media_fit }};"
@@ -53,6 +51,13 @@
     {%- endif -%}
 
     <a class="btn btn--gold" href="{{ hero_cta }}">{{ section.settings.cta_label }}</a>
+
+    {%- comment -%}
+      Sentinel sits right after the hero's own CTA. scroll-fx.js reveals
+      the sticky Buy subnav only once this marker scrolls above the top
+      of the viewport - i.e. once the hero button is no longer visible.
+    {%- endcomment -%}
+    <div data-subnav-sentinel aria-hidden="true"></div>
   </div>
 </section>
 

@@ -1,17 +1,102 @@
-<footer class="site-footer">
-  <div class="container site-footer__inner">
-    <span class="site-footer__wordmark">{{ shop.name }}</span>
+{%- comment -%}
+  Premium multi-column footer. A brand column (wordmark, one-line
+  mission, social row) sits beside merchant-configured link columns,
+  over a quiet assurance strip and a legal bottom bar. Everything is
+  schema-driven; the brand side renders cleanly even before any menus
+  are attached.
+{%- endcomment -%}
 
-    <ul class="site-footer__links">
-      {%- for link in section.settings.menu.links -%}
-        <li><a href="{{ link.url }}">{{ link.title }}</a></li>
+<footer class="site-footer">
+  <div class="container" data-reveal>
+    <div class="site-footer__top">
+      <div class="site-footer__brand">
+        <span class="site-footer__wordmark">{{ shop.name }}</span>
+        {%- if section.settings.tagline != blank -%}
+          <p class="site-footer__tagline">{{ section.settings.tagline }}</p>
+        {%- endif -%}
+
+        {%- liquid
+          assign has_social = false
+          if section.settings.instagram != blank or section.settings.tiktok != blank or section.settings.facebook != blank or section.settings.youtube != blank or section.settings.twitter != blank or section.settings.email != blank
+            assign has_social = true
+          endif
+        -%}
+        {%- if has_social -%}
+          <ul class="site-footer__social" aria-label="Social links">
+            {%- if section.settings.instagram != blank -%}
+              <li><a href="{{ section.settings.instagram }}" aria-label="Instagram" target="_blank" rel="noopener">{%- render 'icon', name: 'instagram' -%}</a></li>
+            {%- endif -%}
+            {%- if section.settings.tiktok != blank -%}
+              <li><a href="{{ section.settings.tiktok }}" aria-label="TikTok" target="_blank" rel="noopener">{%- render 'icon', name: 'tiktok' -%}</a></li>
+            {%- endif -%}
+            {%- if section.settings.facebook != blank -%}
+              <li><a href="{{ section.settings.facebook }}" aria-label="Facebook" target="_blank" rel="noopener">{%- render 'icon', name: 'facebook' -%}</a></li>
+            {%- endif -%}
+            {%- if section.settings.youtube != blank -%}
+              <li><a href="{{ section.settings.youtube }}" aria-label="YouTube" target="_blank" rel="noopener">{%- render 'icon', name: 'youtube' -%}</a></li>
+            {%- endif -%}
+            {%- if section.settings.twitter != blank -%}
+              <li><a href="{{ section.settings.twitter }}" aria-label="X" target="_blank" rel="noopener">{%- render 'icon', name: 'x' -%}</a></li>
+            {%- endif -%}
+            {%- if section.settings.email != blank -%}
+              <li><a href="mailto:{{ section.settings.email }}" aria-label="Email us">{%- render 'icon', name: 'mail' -%}</a></li>
+            {%- endif -%}
+          </ul>
+        {%- endif -%}
+      </div>
+
+      {%- assign column_count = 0 -%}
+      {%- for block in section.blocks -%}
+        {%- if block.type == 'column' -%}{%- assign column_count = column_count | plus: 1 -%}{%- endif -%}
       {%- endfor -%}
-    </ul>
+      {%- if column_count > 0 -%}
+        <nav class="site-footer__nav" aria-label="Footer">
+          {%- for block in section.blocks -%}
+            {%- if block.type == 'column' -%}
+              <div class="site-footer__col" {{ block.shopify_attributes }}>
+                {%- if block.settings.heading != blank -%}
+                  <h2 class="site-footer__col-title">{{ block.settings.heading }}</h2>
+                {%- endif -%}
+                {%- if block.settings.menu != blank -%}
+                  <ul class="site-footer__col-links">
+                    {%- for link in block.settings.menu.links -%}
+                      <li><a href="{{ link.url }}">{{ link.title }}</a></li>
+                    {%- endfor -%}
+                  </ul>
+                {%- endif -%}
+              </div>
+            {%- endif -%}
+          {%- endfor -%}
+        </nav>
+      {%- endif -%}
+    </div>
+
+    {%- if section.settings.assurances != blank -%}
+      <ul class="site-footer__assurances">
+        {%- assign items = section.settings.assurances | newline_to_br | split: '<br />' -%}
+        {%- for item in items -%}
+          {%- assign trimmed = item | strip -%}
+          {%- if trimmed != blank -%}
+            <li>{%- render 'icon', name: 'check' -%}<span>{{ trimmed }}</span></li>
+          {%- endif -%}
+        {%- endfor -%}
+      </ul>
+    {%- endif -%}
+
+    <div class="site-footer__bottom">
+      <p class="site-footer__copy">&copy; {{ 'now' | date: '%Y' }} {{ shop.name }}. All rights reserved.</p>
+      {%- if section.settings.legal_menu != blank and section.settings.legal_menu.links.size > 0 -%}
+        <ul class="site-footer__legal">
+          {%- for link in section.settings.legal_menu.links -%}
+            <li><a href="{{ link.url }}">{{ link.title }}</a></li>
+          {%- endfor -%}
+        </ul>
+      {%- endif -%}
+    </div>
 
     {%- if section.settings.fine_print != blank -%}
       <p class="site-footer__fine">{{ section.settings.fine_print }}</p>
     {%- endif -%}
-    <p class="site-footer__fine">&copy; {{ 'now' | date: '%Y' }} {{ shop.name }}. All rights reserved.</p>
   </div>
 </footer>
 
@@ -20,9 +105,30 @@
   "name": "Footer",
   "settings": [
     {
+      "type": "text",
+      "id": "tagline",
+      "label": "Brand line",
+      "default": "Japanese botanical formulas, held to modern standards."
+    },
+    { "type": "header", "content": "Assurance strip" },
+    {
+      "type": "textarea",
+      "id": "assurances",
+      "label": "Assurances (one per line)",
+      "default": "Third-party tested every batch\nFormulated with Japanese botanicals\n30-day happy-customer guarantee"
+    },
+    { "type": "header", "content": "Social" },
+    { "type": "url", "id": "instagram", "label": "Instagram URL" },
+    { "type": "url", "id": "tiktok", "label": "TikTok URL" },
+    { "type": "url", "id": "facebook", "label": "Facebook URL" },
+    { "type": "url", "id": "youtube", "label": "YouTube URL" },
+    { "type": "url", "id": "twitter", "label": "X (Twitter) URL" },
+    { "type": "text", "id": "email", "label": "Contact email" },
+    { "type": "header", "content": "Legal" },
+    {
       "type": "link_list",
-      "id": "menu",
-      "label": "Footer menu",
+      "id": "legal_menu",
+      "label": "Legal / policy menu",
       "default": "footer"
     },
     {
@@ -30,6 +136,27 @@
       "id": "fine_print",
       "label": "Fine print",
       "default": "These statements have not been evaluated by the Food and Drug Administration. This product is not intended to diagnose, treat, cure, or prevent any disease."
+    }
+  ],
+  "blocks": [
+    {
+      "type": "column",
+      "name": "Link column",
+      "settings": [
+        { "type": "text", "id": "heading", "label": "Heading", "default": "Explore" },
+        { "type": "link_list", "id": "menu", "label": "Menu" }
+      ]
+    }
+  ],
+  "max_blocks": 4,
+  "presets": [
+    {
+      "name": "Footer",
+      "blocks": [
+        { "type": "column", "settings": { "heading": "Shop" } },
+        { "type": "column", "settings": { "heading": "Company" } },
+        { "type": "column", "settings": { "heading": "Support" } }
+      ]
     }
   ]
 }
