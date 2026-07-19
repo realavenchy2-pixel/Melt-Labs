@@ -153,14 +153,19 @@ h1, h2, h3, .h1, .h2, .h3 {
 .section-header--center { text-align: center; }
 .section-header--center .lead { margin-inline: auto; }
 
-/* ---- Reveal on scroll ---- */
+/* ---- Reveal on scroll ----
+   Cinematic, Apple-style entrance: content drifts up from a touch lower,
+   fades from a soft blur into sharp focus over a long, gentle ease-out.
+   The blur is what reads as "cinematic" rather than a plain fade. */
 [data-reveal] {
   opacity: 0;
-  transform: translateY(16px);
-  transition: opacity 500ms var(--ease-out), transform 500ms var(--ease-out);
-  transition-delay: calc(var(--reveal-i, 0) * 60ms);
+  transform: translateY(28px);
+  filter: blur(8px);
+  transition: opacity 950ms var(--ease-out), transform 950ms var(--ease-out), filter 950ms var(--ease-out);
+  transition-delay: calc(var(--reveal-i, 0) * 75ms);
+  will-change: opacity, transform, filter;
 }
-[data-reveal].is-revealed { opacity: 1; transform: none; }
+[data-reveal].is-revealed { opacity: 1; transform: none; filter: blur(0); }
 
 /* ---- Media placeholder (final-asset slots) ---- */
 .media-slot {
@@ -934,6 +939,29 @@ h1, h2, h3, .h1, .h2, .h3 {
 .science__media .media-slot__label { color: rgba(255,255,255,0.6); border-color: rgba(255,255,255,0.22); }
 .science__media .media-slot__label strong { color: #fff; }
 .science__stats { padding-top: clamp(2.5rem, 6vw, 4rem); }
+
+/* Science storyboard: alternating image + paragraph chapters. */
+.science__story {
+  display: grid;
+  gap: clamp(3rem, 8vw, 6rem);
+  margin-top: clamp(3rem, 7vw, 5rem);
+}
+.science-chapter { display: grid; gap: 2rem; align-items: center; }
+@media (min-width: 800px) {
+  .science-chapter { grid-template-columns: 1fr 1fr; gap: clamp(3rem, 6vw, 5rem); }
+  .science-chapter--flip .science-chapter__media { order: 2; }
+}
+.science-chapter__title {
+  font-family: var(--font-heading);
+  font-weight: var(--weight-heading);
+  font-size: clamp(1.4rem, 3.2vw, 2.1rem);
+  letter-spacing: -0.01em;
+  margin-top: 0.4rem;
+}
+.science-chapter__text { margin-top: 1rem; line-height: 1.65; }
+.section--scheme-ink .science-chapter .eyebrow { color: rgba(255,255,255,0.7); }
+.section--scheme-ink .science-chapter__title { color: #fff; }
+.section--scheme-ink .science-chapter__text { color: rgba(255,255,255,0.75); }
 
 /* ---- Icon list (Who this is for) ---- */
 .icon-list {
@@ -1817,12 +1845,14 @@ h1, h2, h3, .h1, .h2, .h3 {
 .offer__info .faq__a .rte { padding: 0 1.4rem 1.25rem; color: color-mix(in srgb, var(--color-ink) 72%, transparent); line-height: 1.6; }
 
 /* Product (offer) pages: Apple-style static header, no stickiness. */
-.template-product .site-header { position: static; }
+/* Product pages keep the site header pinned on scroll (sticky), same as
+   the rest of the store. */
+.template-product .site-header { position: sticky; top: 0; }
 
 /* ---- Reduced motion ---- */
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
-  [data-reveal] { opacity: 1; transform: none; transition: none; }
+  [data-reveal] { opacity: 1; transform: none; filter: none; transition: none; }
   .product-subnav { transition: none; }
   .btn, .carousel__arrow { transition: none; }
 }
