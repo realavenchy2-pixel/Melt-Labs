@@ -13,7 +13,9 @@
       "type": "home-hero",
       "settings": {
         "scheme": "tint",
-        "media_type": "none",
+        "media_type": "image",
+        "image": "shopify://shop_images/resize_2K_202607182237.jpg",
+        "image_mobile": "shopify://shop_images/Glass_dropper_bottle_mid-drip_2K_202607182236.jpg",
         "overlay_darkness": 45,
         "eyebrow": "MELT LABS",
         "headline": "Weight control, *made effortless.*",
@@ -43,6 +45,19 @@
             "link": "shopify://products/the-special-water"
           }
         },
+        "product_KgJiz7": {
+          "type": "product",
+          "settings": {
+            "product": "the-special-water",
+            "image": "shopify://shop_images/2nd_image_2K_202607181243.jpg",
+            "badge": "MELT LABS",
+            "title": "",
+            "tagline": "",
+            "points": "",
+            "button_label": "Shop now",
+            "link": "shopify://pages/the-special-water"
+          }
+        },
         "p2": {
           "type": "product",
           "settings": {
@@ -58,6 +73,7 @@
       },
       "block_order": [
         "p1",
+        "product_KgJiz7",
         "p2"
       ],
       "settings": {
