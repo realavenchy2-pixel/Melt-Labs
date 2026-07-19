@@ -1570,6 +1570,24 @@ h1, h2, h3, .h1, .h2, .h3 {
 .page-shell { padding: clamp(3rem, 8vw, 5rem) 0; }
 .page-shell__title { margin-bottom: 1.5rem; }
 
+/* ---- Collection grid ----
+   Fixed column count (not auto-fit) so cards never stretch to fill the
+   row when a collection has few products - that stretch is what made
+   photos balloon to oversized, distorted-looking tiles. Columns, rows
+   per page, and an image scale are merchant-adjustable; this is scoped
+   to .collection-grid so it doesn't touch the shared .product-grid
+   used by the homepage featured-products section. */
+.collection-grid {
+  grid-template-columns: repeat(var(--collection-cols-mobile, 2), 1fr);
+}
+@media (min-width: 700px) {
+  .collection-grid { grid-template-columns: repeat(var(--collection-cols-desktop, 4), 1fr); }
+}
+.collection-grid .product-card__media {
+  max-width: var(--collection-scale, 100%);
+  margin-inline: auto;
+}
+
 /* ---- Generic page template ---- */
 .page__banner { position: relative; }
 .page__banner .media-slot__frame { width: 100%; }

@@ -1,15 +1,27 @@
 {%- comment -%}
   Collection grid. Uses the same product-card component as the homepage
-  lineup: fixed 1:1 media frames with object-fit cover, so catalog
-  photos render at a consistent size with no stretching or distortion.
+  lineup, but with a fixed (not auto-fit) column count: auto-fit grids
+  stretch their tracks to fill the row when a collection has few
+  products, which is what was blowing photos up to oversized cards.
+  Columns, rows-per-page, and an overall card scale are merchant
+  settings so the grid can be tuned without ballooning again.
 {%- endcomment -%}
+
+{%- liquid
+  assign cols_desktop = section.settings.columns_desktop | default: 4
+  assign rows = section.settings.rows | default: 3
+  assign per_page = cols_desktop | times: rows
+-%}
 
 <div class="page-shell">
   <div class="container">
     <h1 class="h2 page-shell__title">{{ collection.title }}</h1>
 
-    {%- paginate collection.products by 24 -%}
-      <div class="product-grid" style="--card-min: 260px;">
+    {%- paginate collection.products by per_page -%}
+      <div
+        class="product-grid collection-grid"
+        style="--collection-cols-mobile: {{ section.settings.columns_mobile }}; --collection-cols-desktop: {{ cols_desktop }}; --collection-scale: {{ section.settings.card_scale }}%;"
+      >
         {%- for product in collection.products -%}
           <article class="product-card">
             <a class="product-card__link" href="{{ product.url }}">
@@ -48,6 +60,57 @@
 {
   "name": "Collection",
   "settings": [
+    {
+      "type": "header",
+      "content": "Grid layout"
+    },
+    {
+      "type": "select",
+      "id": "columns_desktop",
+      "label": "Columns (desktop)",
+      "options": [
+        { "value": "2", "label": "2" },
+        { "value": "3", "label": "3" },
+        { "value": "4", "label": "4" },
+        { "value": "5", "label": "5" }
+      ],
+      "default": "4"
+    },
+    {
+      "type": "select",
+      "id": "columns_mobile",
+      "label": "Columns (mobile)",
+      "options": [
+        { "value": "1", "label": "1" },
+        { "value": "2", "label": "2" }
+      ],
+      "default": "2"
+    },
+    {
+      "type": "range",
+      "id": "rows",
+      "label": "Rows per page",
+      "info": "Columns x rows = products shown before pagination.",
+      "min": 1,
+      "max": 8,
+      "step": 1,
+      "default": 3
+    },
+    {
+      "type": "range",
+      "id": "card_scale",
+      "label": "Image scale",
+      "info": "Shrinks the photo within its column without changing the grid. 100% fills the column.",
+      "min": 60,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "default": 100
+    },
+    {
+      "type": "header",
+      "content": "Image shape"
+    },
     {
       "type": "select",
       "id": "aspect_desktop",
