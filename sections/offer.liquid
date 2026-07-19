@@ -1,11 +1,10 @@
 {%- comment -%}
   Offer page purchase experience (Apple-style dedicated buy page). Media
   gallery on one side, purchase panel on the other. The purchase panel
-  holds a real, native {% form 'product' %} so Kaching can inject its
-  three-tier offer UI into it on install; the "plan" area above the
-  buttons is a labeled target for that injection and shows a light
-  scaffold until Kaching is live. No hardcoded tier prices, so what the
-  shopper sees always matches checkout.
+  holds a real, native product form with an optional bundle-tier
+  selector: each tier adds real units to the cart, so fulfilment and the
+  cart line always match. No hardcoded tier prices, so what the shopper
+  sees is enforced by a Shopify discount at checkout.
 {%- endcomment -%}
 
 {%- liquid
