@@ -434,12 +434,25 @@ h1, h2, h3, .h1, .h2, .h3 {
   .offer__grid { grid-template-columns: 1fr 1fr; gap: 4rem; align-items: start; }
   .offer__panel { position: sticky; top: 88px; }
 }
-.offer__gallery { display: grid; gap: 1rem; }
-@media (min-width: 640px) {
-  .offer__gallery { grid-template-columns: 1fr 1fr; }
-  .offer__gallery-lead { grid-column: 1 / -1; }
+/* Product gallery carousel: the shared carousel, but scoped to sit
+   inside the offer media column instead of spanning the viewport. One
+   image per view (full-width slides, no full-bleed track padding) so it
+   reads as a clean product gallery you swipe/arrow through. */
+.offer__carousel .carousel__track {
+  padding-inline: 0;
+  scroll-padding-inline: 0;
+  gap: 0;
 }
-.offer__gallery .media-slot { border-radius: var(--radius-card); }
+.offer__carousel .carousel__slide {
+  flex: 0 0 100%;
+  max-width: 100%;
+}
+.offer__carousel .carousel--enhanced .carousel__slide {
+  transform: none;
+  opacity: 1;
+}
+.offer__carousel .media-slot { border-radius: var(--radius-card); }
+.offer__carousel .carousel__controls { margin-top: 1rem; }
 .offer__title { font-size: clamp(2rem, 5.5vw, 2.9rem); margin-top: 0.3rem; }
 .offer__tagline { margin-top: 0.75rem; }
 .offer__price {

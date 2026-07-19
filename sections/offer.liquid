@@ -18,14 +18,24 @@
   <div class="container">
     <div class="offer__grid">
       <div class="offer__media" data-reveal>
-        {%- if product != blank and product.images.size > 0 -%}
-          <div class="offer__gallery">
-            {%- for image in product.images limit: 4 -%}
-              <div class="media-slot media-slot--rounded {% if forloop.first %}offer__gallery-lead{% endif %}" style="--aspect-mobile: {{ section.settings.aspect_mobile }}; --aspect-desktop: {{ section.settings.aspect_desktop }};">
-                <div class="media-slot__frame"></div>
-                {%- render 'responsive-image', image: image, sizes: '(min-width: 900px) 45vw, 100vw', eager: forloop.first -%}
+        {%- if product != blank and product.images.size > 1 -%}
+          {%- capture slides -%}
+            {%- for image in product.images -%}
+              <div class="carousel__slide">
+                <div class="media-slot media-slot--rounded" style="--aspect-mobile: {{ section.settings.aspect_mobile }}; --aspect-desktop: {{ section.settings.aspect_desktop }};">
+                  <div class="media-slot__frame"></div>
+                  {%- render 'responsive-image', image: image, sizes: '(min-width: 900px) 45vw, 100vw', eager: forloop.first -%}
+                </div>
               </div>
             {%- endfor -%}
+          {%- endcapture -%}
+          <div class="offer__carousel">
+            {%- render 'carousel', slides: slides, id: section.id, label: product.title -%}
+          </div>
+        {%- elsif product != blank and product.images.size == 1 -%}
+          <div class="media-slot media-slot--rounded" style="--aspect-mobile: {{ section.settings.aspect_mobile }}; --aspect-desktop: {{ section.settings.aspect_desktop }};">
+            <div class="media-slot__frame"></div>
+            {%- render 'responsive-image', image: product.featured_image, sizes: '(min-width: 900px) 45vw, 100vw', eager: true -%}
           </div>
         {%- elsif section.settings.image != blank -%}
           <div class="media-slot media-slot--rounded" style="--aspect-mobile: {{ section.settings.aspect_mobile }}; --aspect-desktop: {{ section.settings.aspect_desktop }};">
