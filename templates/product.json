@@ -11,6 +11,26 @@
   "sections": {
     "offer": {
       "type": "offer",
+      "blocks": {
+        "info1": {
+          "type": "info",
+          "settings": {
+            "title": "How to use",
+            "content": "<p>Two drops in whatever you're already drinking, once or twice a day. Coffee, water, juice, tea. No taste, no prep.</p>"
+          }
+        },
+        "info2": {
+          "type": "info",
+          "settings": {
+            "title": "Shipping and returns",
+            "content": "<p>Ships in 2 to 4 days. 60-day money-back guarantee.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "info1",
+        "info2"
+      ],
       "settings": {
         "eyebrow": "MELT LABS",
         "tagline": "The daily protocol for quieter cravings and steadier blood sugar.",
@@ -19,48 +39,135 @@
         "reassurance": "60-day money-back guarantee\nShips in 2 to 4 days\nThird-party tested\nNo stimulants",
         "trust_line": "Secure checkout. Cancel anytime.",
         "placeholder_title": "Special Water"
-      },
-      "blocks": {
-        "info1": { "type": "info", "settings": { "title": "How to use", "content": "<p>Two drops in whatever you're already drinking, once or twice a day. Coffee, water, juice, tea. No taste, no prep.</p>" } },
-        "info2": { "type": "info", "settings": { "title": "Shipping and returns", "content": "<p>Ships in 2 to 4 days. 60-day money-back guarantee.</p>" } }
-      },
-      "block_order": ["info1", "info2"]
+      }
     },
     "guarantee": {
       "type": "icon-list",
+      "blocks": {
+        "g1": {
+          "type": "item",
+          "settings": {
+            "icon": "shield",
+            "text": "60-day money-back guarantee"
+          }
+        },
+        "g2": {
+          "type": "item",
+          "settings": {
+            "icon": "flask",
+            "text": "Third-party tested for purity and potency"
+          }
+        },
+        "g3": {
+          "type": "item",
+          "settings": {
+            "icon": "leaf",
+            "text": "Natural botanicals, no stimulants"
+          }
+        },
+        "g4": {
+          "type": "item",
+          "settings": {
+            "icon": "clock",
+            "text": "Ships in 2 to 4 days"
+          }
+        }
+      },
+      "block_order": [
+        "g1",
+        "g2",
+        "g3",
+        "g4"
+      ],
       "settings": {
         "headline": "Every bottle, backed.",
         "scheme": "tint"
-      },
-      "blocks": {
-        "g1": { "type": "item", "settings": { "icon": "shield", "text": "60-day money-back guarantee" } },
-        "g2": { "type": "item", "settings": { "icon": "flask", "text": "Third-party tested for purity and potency" } },
-        "g3": { "type": "item", "settings": { "icon": "leaf", "text": "Natural botanicals, no stimulants" } },
-        "g4": { "type": "item", "settings": { "icon": "clock", "text": "Ships in 2 to 4 days" } }
-      },
-      "block_order": ["g1", "g2", "g3", "g4"]
+      }
     },
     "testimonials": {
       "type": "testimonial-carousel",
-      "settings": { "headline": "Real routines. Real results." },
       "blocks": {
-        "t1": { "type": "slide", "settings": { "quote": "I stopped snacking without even trying.", "author": "Placeholder, 34" } },
-        "t2": { "type": "slide", "settings": { "quote": "Two drops in my coffee and the cravings just... quiet down.", "author": "Placeholder, 41" } },
-        "t3": { "type": "slide", "settings": { "quote": "Didn't change anything else. Just added this.", "author": "Placeholder, 29" } }
+        "t1": {
+          "type": "slide",
+          "settings": {
+            "quote": "I stopped snacking without even trying.",
+            "author": "Placeholder, 34"
+          }
+        },
+        "t2": {
+          "type": "slide",
+          "settings": {
+            "quote": "Two drops in my coffee and the cravings just... quiet down.",
+            "author": "Placeholder, 41"
+          }
+        },
+        "t3": {
+          "type": "slide",
+          "settings": {
+            "quote": "Didn't change anything else. Just added this.",
+            "author": "Placeholder, 29"
+          }
+        }
       },
-      "block_order": ["t1", "t2", "t3"]
+      "block_order": [
+        "t1",
+        "t2",
+        "t3"
+      ],
+      "settings": {
+        "headline": "Real routines. Real results."
+      }
     },
     "faq": {
       "type": "faq",
-      "settings": { "scheme": "white", "headline": "Questions, *answered.*" },
       "blocks": {
-        "q1": { "type": "qa", "settings": { "question": "How do I use Special Water?", "answer": "Two drops in whatever you're already drinking, once or twice a day. Coffee, water, juice, tea. No taste, no prep, no routine to change." } },
-        "q2": { "type": "qa", "settings": { "question": "What does it taste like?", "answer": "Nothing. The serum is designed to be undetectable in any drink, hot or cold." } },
-        "q3": { "type": "qa", "settings": { "question": "Does it contain stimulants or caffeine?", "answer": "No stimulants. The formula works through blood sugar support, not stimulation, so there are no jitters and no crash." } },
-        "q4": { "type": "qa", "settings": { "question": "What is your return policy?", "answer": "If it's not for you, reach out to our support team within 30 days of delivery and we'll make it right." } },
-        "q5": { "type": "qa", "settings": { "question": "Is it safe to take with my medication?", "answer": "Special Water is a dietary supplement, not a medication. If you are pregnant, nursing, have a medical condition, or take prescription medication (including GLP-1s), talk with your doctor before starting any supplement." } }
+        "q1": {
+          "type": "qa",
+          "settings": {
+            "question": "How do I use Special Water?",
+            "answer": "Two drops in whatever you're already drinking, once or twice a day. Coffee, water, juice, tea. No taste, no prep, no routine to change."
+          }
+        },
+        "q2": {
+          "type": "qa",
+          "settings": {
+            "question": "What does it taste like?",
+            "answer": "Nothing. The serum is designed to be undetectable in any drink, hot or cold."
+          }
+        },
+        "q3": {
+          "type": "qa",
+          "settings": {
+            "question": "Does it contain stimulants or caffeine?",
+            "answer": "No stimulants. The formula works through blood sugar support, not stimulation, so there are no jitters and no crash."
+          }
+        },
+        "q4": {
+          "type": "qa",
+          "settings": {
+            "question": "What is your return policy?",
+            "answer": "If it's not for you, reach out to our support team within 30 days of delivery and we'll make it right."
+          }
+        },
+        "q5": {
+          "type": "qa",
+          "settings": {
+            "question": "Is it safe to take with my medication?",
+            "answer": "Special Water is a dietary supplement, not a medication. If you are pregnant, nursing, have a medical condition, or take prescription medication (including GLP-1s), talk with your doctor before starting any supplement."
+          }
+        }
       },
-      "block_order": ["q1", "q2", "q3", "q4", "q5"]
+      "block_order": [
+        "q1",
+        "q2",
+        "q3",
+        "q4",
+        "q5"
+      ],
+      "settings": {
+        "headline": "Questions, *answered.*",
+        "scheme": "white"
+      }
     },
     "refs": {
       "type": "references",
@@ -80,8 +187,18 @@
           }
         }
       },
-      "block_order": ["r1", "r2"]
+      "block_order": [
+        "r1",
+        "r2"
+      ],
+      "settings": {}
     }
   },
-  "order": ["offer", "guarantee", "testimonials", "faq", "refs"]
+  "order": [
+    "offer",
+    "guarantee",
+    "testimonials",
+    "faq",
+    "refs"
+  ]
 }
