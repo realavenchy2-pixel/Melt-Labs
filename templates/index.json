@@ -1,18 +1,65 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
     "hero": {
       "type": "home-hero",
       "settings": {
         "scheme": "tint",
+        "media_type": "none",
+        "overlay_darkness": 45,
         "eyebrow": "MELT LABS",
         "headline": "Weight control, *made effortless.*",
         "subhead": "Japanese botanical formulas that work with your body, not against your routine.",
         "cta_label": "Shop Special Water",
-        "cta2_label": "Explore the science"
+        "cta_link": "",
+        "cta2_label": "Explore the science",
+        "cta2_link": "",
+        "hero_size": "fill",
+        "aspect_desktop": "16 / 9",
+        "aspect_mobile": "3 / 4",
+        "media_fit": "cover"
       }
     },
     "featured": {
       "type": "product-selector",
+      "blocks": {
+        "p1": {
+          "type": "product",
+          "settings": {
+            "product": "special-water",
+            "badge": "FOR CRAVINGS + BLOOD SUGAR",
+            "title": "",
+            "tagline": "Two drops in whatever you already drink. Quieter cravings, steadier blood sugar, no routine to change.",
+            "points": "60-day supply\nThird-party tested\nNo stimulants",
+            "button_label": "Shop Special Water",
+            "link": "shopify://products/the-special-water"
+          }
+        },
+        "p2": {
+          "type": "product",
+          "settings": {
+            "product": "kami",
+            "badge": "FOR SCALP + HAIR",
+            "title": "",
+            "tagline": "Four drops on the scalp, every night. A one-minute ritual for fuller-looking hair.",
+            "points": "Fragrance-free\nThird-party tested\nWorks with color-treated hair",
+            "button_label": "Shop KAMI",
+            "link": ""
+          }
+        }
+      },
+      "block_order": [
+        "p1",
+        "p2"
+      ],
       "settings": {
         "scheme": "white",
         "eyebrow": "SHOP THE LINEUP",
@@ -20,40 +67,24 @@
         "subhead": "Two botanical formulas. Same promise: fit the routine you already have.",
         "aspect_desktop": "1 / 1",
         "aspect_mobile": "1 / 1"
-      },
-      "blocks": {
-        "p1": {
-          "type": "product",
-          "settings": {
-            "badge": "FOR CRAVINGS + BLOOD SUGAR",
-            "tagline": "Two drops in whatever you already drink. Quieter cravings, steadier blood sugar, no routine to change.",
-            "points": "60-day supply\nThird-party tested\nNo stimulants",
-            "button_label": "Shop Special Water",
-            "product": "special-water"
-          }
-        },
-        "p2": {
-          "type": "product",
-          "settings": {
-            "badge": "FOR SCALP + HAIR",
-            "tagline": "Four drops on the scalp, every night. A one-minute ritual for fuller-looking hair.",
-            "points": "Fragrance-free\nThird-party tested\nWorks with color-treated hair",
-            "button_label": "Shop KAMI",
-            "product": "kami"
-          }
-        }
-      },
-      "block_order": [
-        "p1",
-        "p2"
-      ]
+      }
+    },
+    "about": {
+      "type": "about-brand",
+      "settings": {
+        "scheme": "white",
+        "image_side": "right",
+        "eyebrow": "ABOUT MELT LABS",
+        "headline": "Japanese botanicals, *made to work.*",
+        "body": "Melt Labs exists because natural shouldn't mean weaker. We build our formulas around Japan's most trusted botanicals, then hold them to modern standards: third-party testing, honest labels, and mechanisms we can point to.",
+        "body_2": "Every product starts with one question: does it slot into the routine you already have and actually deliver? If the answer isn't yes, it doesn't ship.",
+        "points": "Japanese-sourced botanicals\nThird-party tested, every batch\nFormulas that fit your routine",
+        "cta_label": "",
+        "cta_link": ""
+      }
     },
     "values": {
       "type": "values-carousel",
-      "settings": {
-        "headline": "Our values lead the way.",
-        "body": "Every batch is third-party tested for purity and potency before it ships."
-      },
       "blocks": {
         "v1": {
           "type": "card",
@@ -84,7 +115,11 @@
         "v1",
         "v2",
         "v3"
-      ]
+      ],
+      "settings": {
+        "headline": "Our values lead the way.",
+        "body": "Every batch is third-party tested for purity and potency before it ships."
+      }
     },
     "newsletter": {
       "type": "newsletter",
@@ -92,18 +127,9 @@
         "scheme": "ink",
         "headline": "Join the *Melt Labs* list.",
         "body": "Early access, restock alerts, and the occasional note on the science. No spam.",
-        "button_label": "Sign up"
-      }
-    },
-    "about": {
-      "type": "about-brand",
-      "settings": {
-        "scheme": "white",
-        "image_side": "right",
-        "headline": "Japanese botanicals, *made to work.*",
-        "body": "Melt Labs exists because natural shouldn't mean weaker. We build our formulas around Japan's most trusted botanicals, then hold them to modern standards: third-party testing, honest labels, and mechanisms we can point to.",
-        "body_2": "Every product starts with one question: does it slot into the routine you already have and actually deliver? If the answer isn't yes, it doesn't ship.",
-        "points": "Japanese-sourced botanicals\nThird-party tested, every batch\nFormulas that fit your routine"
+        "placeholder": "Your email",
+        "button_label": "Sign up",
+        "success_text": "You're in. Watch your inbox."
       }
     }
   },
