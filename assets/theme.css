@@ -153,19 +153,14 @@ h1, h2, h3, .h1, .h2, .h3 {
 .section-header--center { text-align: center; }
 .section-header--center .lead { margin-inline: auto; }
 
-/* ---- Reveal on scroll ----
-   Cinematic, Apple-style entrance: content drifts up from a touch lower,
-   fades from a soft blur into sharp focus over a long, gentle ease-out.
-   The blur is what reads as "cinematic" rather than a plain fade. */
+/* ---- Reveal on scroll ---- */
 [data-reveal] {
   opacity: 0;
-  transform: translateY(28px);
-  filter: blur(8px);
-  transition: opacity 950ms var(--ease-out), transform 950ms var(--ease-out), filter 950ms var(--ease-out);
-  transition-delay: calc(var(--reveal-i, 0) * 75ms);
-  will-change: opacity, transform, filter;
+  transform: translateY(16px);
+  transition: opacity 500ms var(--ease-out), transform 500ms var(--ease-out);
+  transition-delay: calc(var(--reveal-i, 0) * 60ms);
 }
-[data-reveal].is-revealed { opacity: 1; transform: none; filter: blur(0); }
+[data-reveal].is-revealed { opacity: 1; transform: none; }
 
 /* ---- Media placeholder (final-asset slots) ---- */
 .media-slot {
@@ -754,10 +749,32 @@ h1, h2, h3, .h1, .h2, .h3 {
 .carousel__dot.is-active { width: 20px; background: var(--color-primary); }
 .section--scheme-ink .carousel__dot.is-active { background: var(--color-cta); }
 
-/* Dot indicator variety: the first two carousels keep the dash-to-pill
-   style above (variant a); carousels after that get progressively
-   different indicators (JS assigns the variant class by page order) so
-   the site reads as hand-built rather than templated. */
+/* Apple-style pill indicator (variant a, the first two carousels): the
+   controls sit in a floating frosted-glass pill and the active dot
+   stretches into a bar that hands off to the next dot LIVE as you swipe
+   (carousel.js drives the widths from scroll position). */
+.carousel--dots-a .carousel__controls {
+  width: fit-content;
+  margin-inline: auto;
+  padding: 8px 12px;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--color-ink) 5%, var(--color-bg));
+  border: 1px solid color-mix(in srgb, var(--color-ink) 7%, transparent);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  box-shadow: 0 4px 18px color-mix(in srgb, var(--color-ink) 8%, transparent);
+}
+.section--scheme-ink .carousel--dots-a .carousel__controls {
+  background: rgba(255,255,255,0.09);
+  border-color: rgba(255,255,255,0.12);
+}
+.carousel--dots-a .carousel__arrow { border-color: transparent; }
+.carousel--dots-a .carousel__dot { height: 7px; }
+
+/* Dot indicator variety: the first two carousels get the Apple pill
+   above (variant a); carousels after that get progressively different
+   indicators (JS assigns the variant class by page order) so the site
+   reads as hand-built rather than templated. */
 .carousel--dots-b .carousel__dots { gap: 9px; }
 .carousel--dots-b .carousel__dot {
   width: 8px; height: 8px;

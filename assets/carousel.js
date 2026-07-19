@@ -85,16 +85,42 @@
       });
       return bestIndex;
     }
+    /* Variant-a (Apple pill indicator): the active dot stretches into a
+       bar whose length hands off to the neighboring dot continuously as
+       the track scrolls, instead of flipping discretely. */
+    var scrubbing = root.classList.contains('carousel--dots-a');
+    if (scrubbing) {
+      dots.forEach(function (dot) { dot.style.transition = 'width 80ms linear, background-color 200ms ease'; });
+    }
+    function scrubDots() {
+      if (!scrubbing || dots.length < 2) return;
+      /* Normalize scroll progress across the whole track so f runs
+         exactly 0 -> (n-1) from first slide to last, since snap-start
+         slides never center in the viewport. */
+      var maxScroll = track.scrollWidth - track.clientWidth;
+      if (maxScroll <= 0) return;
+      var f = (track.scrollLeft / maxScroll) * (slides.length - 1);
+      if (f < 0) f = 0;
+      if (f > slides.length - 1) f = slides.length - 1;
+      dots.forEach(function (dot, i) {
+        var closeness = 1 - Math.abs(f - i);
+        if (closeness < 0) closeness = 0;
+        dot.style.width = (7 + closeness * 15) + 'px';
+      });
+    }
+
     function onScroll() {
       if (rafId) return;
       rafId = window.requestAnimationFrame(function () {
         rafId = null;
         setActive(nearestIndex());
+        scrubDots();
       });
     }
     track.addEventListener('scroll', onScroll, { passive: true });
 
     setActive(0);
+    scrubDots();
 
     /* ---- Autoplay ---- */
     var autoplayEnabled = root.hasAttribute('data-carousel-autoplay') && !reduceMotion;
