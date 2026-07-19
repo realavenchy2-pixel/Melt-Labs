@@ -13,14 +13,16 @@
       "type": "home-hero",
       "settings": {
         "scheme": "tint",
-        "media_type": "none",
+        "media_type": "image",
+        "image": "shopify://shop_images/resize_2K_202607182237.jpg",
+        "image_mobile": "shopify://shop_images/Glass_dropper_bottle_mid-drip_2K_202607182236.jpg",
         "overlay_darkness": 45,
         "eyebrow": "MELT LABS",
         "headline": "Weight control, *made effortless.*",
         "subhead": "Japanese botanical formulas that work with your body, not against your routine.",
         "cta_label": "Shop Special Water",
-        "cta_link": "",
-        "cta2_label": "Explore the science",
+        "cta_link": "https://shopmeltlab.com/pages/the-special-water",
+        "cta2_label": "",
         "cta2_link": "",
         "hero_size": "fill",
         "aspect_desktop": "16 / 9",
@@ -31,16 +33,17 @@
     "featured": {
       "type": "product-selector",
       "blocks": {
-        "p1": {
+        "product_KgJiz7": {
           "type": "product",
           "settings": {
-            "product": "special-water",
-            "badge": "FOR CRAVINGS + BLOOD SUGAR",
+            "product": "",
+            "image": "shopify://shop_images/2nd_image_2K_202607181243.jpg",
+            "badge": "MELT LABS",
             "title": "",
-            "tagline": "Two drops in whatever you already drink. Quieter cravings, steadier blood sugar, no routine to change.",
-            "points": "60-day supply\nThird-party tested\nNo stimulants",
-            "button_label": "Shop Special Water",
-            "link": "shopify://products/the-special-water"
+            "tagline": "",
+            "points": "Loose Weight Drinking Water",
+            "button_label": "Shop now",
+            "link": "https://shopmeltlab.com/pages/the-special-water"
           }
         },
         "p2": {
@@ -57,7 +60,7 @@
         }
       },
       "block_order": [
-        "p1",
+        "product_KgJiz7",
         "p2"
       ],
       "settings": {
