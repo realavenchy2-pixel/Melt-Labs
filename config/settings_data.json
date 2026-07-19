@@ -1,5 +1,16 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "current": {
+    "logo": "shopify://shop_images/melt-logofooter.jpg",
+    "logo_width": 150,
     "color_primary": "#00AEEF",
     "color_gradient_start": "#00AEEF",
     "color_gradient_end": "#0095D9",
@@ -10,6 +21,29 @@
     "color_cta_hover": "#E9A912",
     "font_heading": "poppins_n8",
     "font_body": "poppins_n4",
-    "logo_width": 120
+    "sections": {
+      "header": {
+        "type": "header",
+        "settings": {
+          "menu": "main-menu"
+        }
+      },
+      "footer": {
+        "type": "footer",
+        "settings": {
+          "tagline": "Japanese botanical formulas, held to modern standards.",
+          "assurances": "Third-party tested every batch\nFormulated with Japanese botanicals\n30-day happy-customer guarantee",
+          "instagram": "",
+          "tiktok": "",
+          "facebook": "",
+          "youtube": "",
+          "twitter": "",
+          "email": "",
+          "legal_menu": "footer",
+          "fine_print": "These statements have not been evaluated by the Food and Drug Administration. This product is not intended to diagnose, treat, cure, or prevent any disease."
+        }
+      }
+    },
+    "content_for_index": []
   }
 }
