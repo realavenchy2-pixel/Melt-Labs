@@ -23,7 +23,7 @@
         "cta_label": "Shop Special Water",
         "cta_link": "",
         "cta2_label": "Explore the science",
-        "cta2_link": "",
+        "cta2_link": "shopify://collections/all",
         "hero_size": "fill",
         "aspect_desktop": "16 / 9",
         "aspect_mobile": "3 / 4",
