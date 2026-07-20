@@ -76,7 +76,7 @@
     "about": {
       "type": "about-brand",
       "settings": {
-        "scheme": "ink",
+        "scheme": "tint",
         "image_side": "right",
         "image": "shopify://shop_images/aab9623f-b7cc-465e-9b80-cf19ffe7293a_1.png",
         "eyebrow": "ABOUT MELT LABS",
