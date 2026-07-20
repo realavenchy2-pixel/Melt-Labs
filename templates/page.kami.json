@@ -156,6 +156,7 @@
         },
         "b1": {
           "type": "base",
+          "disabled": true,
           "settings": {
             "name": "Water",
             "role": "Base and solvent"
@@ -163,6 +164,7 @@
         },
         "b2": {
           "type": "base",
+          "disabled": true,
           "settings": {
             "name": "Glycerin",
             "role": "Humectant that helps the scalp hold moisture"
@@ -170,6 +172,7 @@
         },
         "b3": {
           "type": "base",
+          "disabled": true,
           "settings": {
             "name": "Potassium Sorbate",
             "role": "Natural preservative for shelf stability"
