@@ -1,71 +1,234 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
     "subnav": {
       "type": "product-subnav",
       "settings": {
         "product": "kami",
-        "cta_label": "Buy"
+        "logo_height": 28,
+        "cta_label": "Buy",
+        "cta_link": ""
       }
     },
     "hero": {
       "type": "hero-video",
       "settings": {
-        "product": "kami",
+        "media_type": "image",
+        "image_mobile": "shopify://shop_images/KAMI_Official_Hero_2K_202607190024_422f9a51-0e28-43cf-b914-c2fb4dca3b12.jpg",
+        "overlay_darkness": 60,
+        "hero_size": "fill",
+        "aspect_desktop": "16 / 9",
+        "aspect_mobile": "9 / 16",
+        "media_fit": "cover",
         "eyebrow": "MELT LABS",
         "headline": "Four drops. *Fuller-looking* hair.",
         "subhead": "A Japanese peptide serum for your scalp's nightly reset.",
-        "cta_label": "See the ritual"
+        "cta_label": "See the ritual",
+        "product": "kami",
+        "cta_link": ""
       }
     },
     "testimonials": {
       "type": "testimonial-carousel",
-      "settings": { "headline": "Real routines. Real hair." },
       "blocks": {
-        "t1": { "type": "slide", "settings": { "quote": "My part line looks fuller in the mirror.", "author": "Placeholder, 38" } },
-        "t2": { "type": "slide", "settings": { "quote": "Less hair on my pillow within weeks.", "author": "Placeholder, 45" } },
-        "t3": { "type": "slide", "settings": { "quote": "The shine is back. It feels alive again.", "author": "Placeholder, 31" } }
+        "t1": {
+          "type": "slide",
+          "settings": {
+            "quote": "My part line looks fuller in the mirror.",
+            "author": "Placeholder, 38"
+          }
+        },
+        "t2": {
+          "type": "slide",
+          "settings": {
+            "quote": "Less hair on my pillow within weeks.",
+            "author": "Placeholder, 45"
+          }
+        },
+        "t3": {
+          "type": "slide",
+          "settings": {
+            "quote": "The shine is back. It feels alive again.",
+            "author": "Placeholder, 31"
+          }
+        }
       },
-      "block_order": ["t1", "t2", "t3"]
+      "block_order": [
+        "t1",
+        "t2",
+        "t3"
+      ],
+      "settings": {
+        "headline": "Real routines. Real hair.",
+        "autoplay": true,
+        "autoplay_interval": 4500
+      }
     },
     "ingredients": {
       "type": "ingredients-list",
+      "blocks": {
+        "i1": {
+          "type": "active",
+          "settings": {
+            "name": "Copper Tripeptide-1",
+            "source": "GHK-Cu",
+            "role": "The signal peptide. Supports a healthy scalp environment, the foundation follicles need to do their best work."
+          }
+        },
+        "i2": {
+          "type": "active",
+          "settings": {
+            "name": "Biotinoyl Tripeptide-1",
+            "source": "",
+            "role": "A biotin-bound peptide studied for supporting the look of anchored, thicker-feeling strands."
+          }
+        },
+        "i3": {
+          "type": "active",
+          "settings": {
+            "name": "Tsubaki Oil",
+            "source": "Camellia japonica, seed",
+            "role": "Japan's heritage hair oil. Featherweight lipids for shine and softness without residue."
+          }
+        },
+        "i4": {
+          "type": "active",
+          "settings": {
+            "name": "Rice Bran Extract",
+            "source": "Komenuka",
+            "role": "The Japanese beauty staple. Conditions the scalp and supports a balanced moisture barrier."
+          }
+        },
+        "i5": {
+          "type": "active",
+          "settings": {
+            "name": "Hinoki Cypress Extract",
+            "source": "Chamaecyparis obtusa",
+            "role": "A traditional Japanese botanical that keeps the scalp feeling fresh, calm, and clean."
+          }
+        },
+        "i6": {
+          "type": "active",
+          "settings": {
+            "name": "Matcha",
+            "source": "EGCG catechins",
+            "role": "Green tea antioxidants help protect the scalp and strands from everyday oxidative stress."
+          }
+        },
+        "b1": {
+          "type": "base",
+          "settings": {
+            "name": "Water",
+            "role": "Base and solvent"
+          }
+        },
+        "b2": {
+          "type": "base",
+          "settings": {
+            "name": "Glycerin",
+            "role": "Humectant that helps the scalp hold moisture"
+          }
+        },
+        "b3": {
+          "type": "base",
+          "settings": {
+            "name": "Potassium Sorbate",
+            "role": "Natural preservative for shelf stability"
+          }
+        }
+      },
+      "block_order": [
+        "i1",
+        "i2",
+        "i3",
+        "i4",
+        "i5",
+        "i6",
+        "b1",
+        "b2",
+        "b3"
+      ],
       "settings": {
         "scheme": "ink",
         "headline": "What's inside. And what each drop does.",
         "subhead": "Signal peptides plus Japan's heritage hair botanicals, chosen for the scalp first.",
         "format_note": "1 oz / 30 mL glass dropper bottle. Fragrance-free.",
         "base_title": "Base ingredients"
-      },
-      "blocks": {
-        "i1": { "type": "active", "settings": { "name": "Copper Tripeptide-1", "source": "GHK-Cu", "role": "The signal peptide. Supports a healthy scalp environment, the foundation follicles need to do their best work." } },
-        "i2": { "type": "active", "settings": { "name": "Biotinoyl Tripeptide-1", "role": "A biotin-bound peptide studied for supporting the look of anchored, thicker-feeling strands." } },
-        "i3": { "type": "active", "settings": { "name": "Tsubaki Oil", "source": "Camellia japonica, seed", "role": "Japan's heritage hair oil. Featherweight lipids for shine and softness without residue." } },
-        "i4": { "type": "active", "settings": { "name": "Rice Bran Extract", "source": "Komenuka", "role": "The Japanese beauty staple. Conditions the scalp and supports a balanced moisture barrier." } },
-        "i5": { "type": "active", "settings": { "name": "Hinoki Cypress Extract", "source": "Chamaecyparis obtusa", "role": "A traditional Japanese botanical that keeps the scalp feeling fresh, calm, and clean." } },
-        "i6": { "type": "active", "settings": { "name": "Matcha", "source": "EGCG catechins", "role": "Green tea antioxidants help protect the scalp and strands from everyday oxidative stress." } },
-        "b1": { "type": "base", "settings": { "name": "Water", "role": "Base and solvent" } },
-        "b2": { "type": "base", "settings": { "name": "Glycerin", "role": "Humectant that helps the scalp hold moisture" } },
-        "b3": { "type": "base", "settings": { "name": "Potassium Sorbate", "role": "Natural preservative for shelf stability" } }
-      },
-      "block_order": ["i1", "i2", "i3", "i4", "i5", "i6", "b1", "b2", "b3"]
+      }
     },
     "benefit": {
       "type": "benefit-statement",
-      "settings": { "scheme": "white" },
       "blocks": {
-        "s1": { "type": "statement", "settings": { "headline": "Your hair's night shift. *Handled.*" } },
-        "a1": { "type": "slide", "settings": { "title": "Fuller look", "text": "Peptides support the scalp so hair can look denser at the root.", "accent": true } },
-        "a2": { "type": "slide", "settings": { "title": "Softer feel", "text": "Tsubaki and rice bran leave strands silky, never greasy." } },
-        "a3": { "type": "slide", "settings": { "title": "Calmer scalp", "text": "Hinoki keeps things fresh and comfortable, even on sensitive skin." } },
-        "a4": { "type": "slide", "settings": { "title": "Zero residue", "text": "Featherweight and fragrance-free. Apply at night, forget it by morning." } }
+        "s1": {
+          "type": "statement",
+          "settings": {
+            "headline": "Your hair's night shift. *Handled.*",
+            "subhead": ""
+          }
+        },
+        "a1": {
+          "type": "slide",
+          "settings": {
+            "title": "Fuller look",
+            "text": "Peptides support the scalp so hair can look denser at the root.",
+            "show_media_slot": false,
+            "accent": true
+          }
+        },
+        "a2": {
+          "type": "slide",
+          "settings": {
+            "title": "Softer feel",
+            "text": "Tsubaki and rice bran leave strands silky, never greasy.",
+            "show_media_slot": false,
+            "accent": false
+          }
+        },
+        "a3": {
+          "type": "slide",
+          "settings": {
+            "title": "Calmer scalp",
+            "text": "Hinoki keeps things fresh and comfortable, even on sensitive skin.",
+            "show_media_slot": false,
+            "accent": false
+          }
+        },
+        "a4": {
+          "type": "slide",
+          "settings": {
+            "title": "Zero residue",
+            "text": "Featherweight and fragrance-free. Apply at night, forget it by morning.",
+            "show_media_slot": false,
+            "accent": false
+          }
+        }
       },
-      "block_order": ["s1", "a1", "a2", "a3", "a4"]
+      "block_order": [
+        "s1",
+        "a1",
+        "a2",
+        "a3",
+        "a4"
+      ],
+      "settings": {
+        "scheme": "white"
+      }
     },
     "science": {
       "type": "science-scroll",
       "settings": {
+        "scheme": "ink",
         "headline": "The *Science* Behind KAMI",
         "body": "KAMI pairs signal peptides with Japanese botanicals to care for the scalp first, because healthier-looking hair starts where it grows.",
+        "chapter_aspect": "4 / 5",
         "stat_intro": "In an in-house study",
         "stat_1_value": "92%",
         "stat_1_caption": "said their hair looked fuller",
@@ -78,44 +241,214 @@
     },
     "who": {
       "type": "icon-list",
-      "settings": { "scheme": "ink", "headline": "Who this is for" },
       "blocks": {
-        "w1": { "type": "item", "settings": { "icon": "sparkle", "text": "Hair that's losing its density look" } },
-        "w2": { "type": "item", "settings": { "icon": "clock", "text": "People playing the long game, not chasing quick fixes" } },
-        "w3": { "type": "item", "settings": { "icon": "leaf", "text": "Natural, needle-free scalp care" } },
-        "w4": { "type": "item", "settings": { "icon": "shield", "text": "Sensitive scalps. Fragrance-free formula" } },
-        "w5": { "type": "item", "settings": { "icon": "droplet", "text": "Color-treated and heat-styled hair" } },
-        "w6": { "type": "item", "settings": { "icon": "check", "text": "Anyone building a one-minute night routine" } }
+        "w1": {
+          "type": "item",
+          "settings": {
+            "icon": "sparkle",
+            "text": "Hair that's losing its density look"
+          }
+        },
+        "w2": {
+          "type": "item",
+          "settings": {
+            "icon": "clock",
+            "text": "People playing the long game, not chasing quick fixes"
+          }
+        },
+        "w3": {
+          "type": "item",
+          "settings": {
+            "icon": "leaf",
+            "text": "Natural, needle-free scalp care"
+          }
+        },
+        "w4": {
+          "type": "item",
+          "settings": {
+            "icon": "shield",
+            "text": "Sensitive scalps. Fragrance-free formula"
+          }
+        },
+        "w5": {
+          "type": "item",
+          "settings": {
+            "icon": "droplet",
+            "text": "Color-treated and heat-styled hair"
+          }
+        },
+        "w6": {
+          "type": "item",
+          "settings": {
+            "icon": "check",
+            "text": "Anyone building a one-minute night routine"
+          }
+        }
       },
-      "block_order": ["w1", "w2", "w3", "w4", "w5", "w6"]
+      "block_order": [
+        "w1",
+        "w2",
+        "w3",
+        "w4",
+        "w5",
+        "w6"
+      ],
+      "settings": {
+        "headline": "Who this is for",
+        "scheme": "ink"
+      }
     },
     "benefits_2": {
       "type": "benefit-statement",
-      "settings": { "scheme": "tint" },
       "blocks": {
-        "h1": { "type": "statement", "settings": { "headline": "Peptides, *precise.*", "subhead": "Signal molecules chosen for the scalp, not the shelf." } },
-        "h2": { "type": "statement", "settings": { "headline": "Botanicals, *proven by tradition.*", "subhead": "Tsubaki, komenuka, hinoki: Japan's centuries-old hair ritual, distilled." } },
-        "g1": { "type": "slide", "settings": { "title": "Night-time ritual", "text": "Four drops before bed. The serum works while you sleep." } },
-        "g2": { "type": "slide", "settings": { "title": "Fragrance-free", "text": "No perfume, no menthol sting. Just the formula." } },
-        "g3": { "type": "slide", "settings": { "title": "Featherweight finish", "text": "Absorbs fast. No grease on your pillow or your morning style." } },
-        "g4": { "type": "slide", "settings": { "title": "Styled-hair safe", "text": "Plays well with color, keratin, and heat styling.", "accent": true } }
+        "h1": {
+          "type": "statement",
+          "settings": {
+            "headline": "Peptides, *precise.*",
+            "subhead": "Signal molecules chosen for the scalp, not the shelf."
+          }
+        },
+        "h2": {
+          "type": "statement",
+          "settings": {
+            "headline": "Botanicals, *proven by tradition.*",
+            "subhead": "Tsubaki, komenuka, hinoki: Japan's centuries-old hair ritual, distilled."
+          }
+        },
+        "g1": {
+          "type": "slide",
+          "settings": {
+            "title": "Night-time ritual",
+            "text": "Four drops before bed. The serum works while you sleep.",
+            "show_media_slot": false,
+            "accent": false
+          }
+        },
+        "g2": {
+          "type": "slide",
+          "settings": {
+            "title": "Fragrance-free",
+            "text": "No perfume, no menthol sting. Just the formula.",
+            "show_media_slot": false,
+            "accent": false
+          }
+        },
+        "g3": {
+          "type": "slide",
+          "settings": {
+            "title": "Featherweight finish",
+            "text": "Absorbs fast. No grease on your pillow or your morning style.",
+            "show_media_slot": false,
+            "accent": false
+          }
+        },
+        "g4": {
+          "type": "slide",
+          "settings": {
+            "title": "Styled-hair safe",
+            "text": "Plays well with color, keratin, and heat styling.",
+            "show_media_slot": false,
+            "accent": true
+          }
+        }
       },
-      "block_order": ["h1", "h2", "g1", "g2", "g3", "g4"]
+      "block_order": [
+        "h1",
+        "h2",
+        "g1",
+        "g2",
+        "g3",
+        "g4"
+      ],
+      "settings": {
+        "scheme": "tint"
+      }
     },
     "potency": {
       "type": "potency-stats",
+      "blocks": {
+        "p1": {
+          "type": "stat",
+          "settings": {
+            "intro": "Just",
+            "value": "4 drops",
+            "caption": "massaged into the scalp each night"
+          }
+        },
+        "p2": {
+          "type": "stat",
+          "settings": {
+            "intro": "In about",
+            "value": "60 sec",
+            "caption": "the whole ritual is done"
+          }
+        }
+      },
+      "block_order": [
+        "p1",
+        "p2"
+      ],
       "settings": {
         "headline": "Four drops. One minute. That's the ritual.",
         "body": "Massage into the scalp each night and let it absorb while you sleep. Consistency, not effort, is what compounds."
-      },
-      "blocks": {
-        "p1": { "type": "stat", "settings": { "intro": "Just", "value": "4 drops", "caption": "massaged into the scalp each night" } },
-        "p2": { "type": "stat", "settings": { "intro": "In about", "value": "60 sec", "caption": "the whole ritual is done" } }
-      },
-      "block_order": ["p1", "p2"]
+      }
     },
     "compare": {
       "type": "comparison",
+      "blocks": {
+        "c1": {
+          "type": "row",
+          "settings": {
+            "label": "Approach",
+            "value_a": "Four drops, one minute, every night",
+            "value_b": "Daily medicated application",
+            "value_c": "Procedures scheduled at a clinic"
+          }
+        },
+        "c2": {
+          "type": "row",
+          "settings": {
+            "label": "How it works",
+            "value_a": "Peptides and botanicals support a healthy scalp environment",
+            "value_b": "Drug activity on the follicle while applied",
+            "value_c": "Mechanical or light-based stimulation"
+          }
+        },
+        "c3": {
+          "type": "row",
+          "settings": {
+            "label": "The feel",
+            "value_a": "Featherweight, fragrance-free serum",
+            "value_b": "Medicated feel; some experience irritation",
+            "value_c": "Downtime varies by treatment"
+          }
+        },
+        "c4": {
+          "type": "row",
+          "settings": {
+            "label": "Commitment",
+            "value_a": "A minute a night",
+            "value_b": "Ongoing prescription refills",
+            "value_c": "Repeat sessions to maintain"
+          }
+        },
+        "c5": {
+          "type": "row",
+          "settings": {
+            "label": "When you stop",
+            "value_a": "Your ritual and scalp care are yours to keep",
+            "value_b": "Results typically fade after stopping",
+            "value_c": "Maintenance visits required"
+          }
+        }
+      },
+      "block_order": [
+        "c1",
+        "c2",
+        "c3",
+        "c4",
+        "c5"
+      ],
       "settings": {
         "headline": "Built for the *long run.*",
         "subhead": "Three roads to fuller-looking hair. Here's how the nightly-serum approach compares.",
@@ -126,69 +459,222 @@
         "col_c_title": "In-clinic treatments",
         "col_c_sub": "High-intensity, high-cost sessions",
         "note": "KAMI is a cosmetic serum and is not intended to treat, cure, or prevent hair loss or any medical condition. For medical concerns about hair loss, talk with a dermatologist."
-      },
-      "blocks": {
-        "c1": { "type": "row", "settings": { "label": "Approach", "value_a": "Four drops, one minute, every night", "value_b": "Daily medicated application", "value_c": "Procedures scheduled at a clinic" } },
-        "c2": { "type": "row", "settings": { "label": "How it works", "value_a": "Peptides and botanicals support a healthy scalp environment", "value_b": "Drug activity on the follicle while applied", "value_c": "Mechanical or light-based stimulation" } },
-        "c3": { "type": "row", "settings": { "label": "The feel", "value_a": "Featherweight, fragrance-free serum", "value_b": "Medicated feel; some experience irritation", "value_c": "Downtime varies by treatment" } },
-        "c4": { "type": "row", "settings": { "label": "Commitment", "value_a": "A minute a night", "value_b": "Ongoing prescription refills", "value_c": "Repeat sessions to maintain" } },
-        "c5": { "type": "row", "settings": { "label": "When you stop", "value_a": "Your ritual and scalp care are yours to keep", "value_b": "Results typically fade after stopping", "value_c": "Maintenance visits required" } }
-      },
-      "block_order": ["c1", "c2", "c3", "c4", "c5"]
+      }
     },
     "values": {
       "type": "values-carousel",
+      "blocks": {
+        "v1": {
+          "type": "card",
+          "settings": {
+            "icon": "flask",
+            "title": "Our Standards",
+            "text": "Peptides and botanicals sourced for potency, then third-party tested before a single bottle is filled."
+          }
+        },
+        "v2": {
+          "type": "card",
+          "settings": {
+            "icon": "heart",
+            "title": "Our Mission",
+            "text": "Melt Labs exists to make natural self-care feel effortless, not clinical."
+          }
+        },
+        "v3": {
+          "type": "card",
+          "settings": {
+            "icon": "shield",
+            "title": "Our Promise",
+            "text": "Full transparency in formulation. Every ingredient and its job, on the label and on this page."
+          }
+        }
+      },
+      "block_order": [
+        "v1",
+        "v2",
+        "v3"
+      ],
       "settings": {
         "headline": "Tested. Verified. Trusted.",
         "body": "Every batch is third-party tested for purity before it ships."
-      },
-      "blocks": {
-        "v1": { "type": "card", "settings": { "icon": "flask", "title": "Our Standards", "text": "Peptides and botanicals sourced for potency, then third-party tested before a single bottle is filled." } },
-        "v2": { "type": "card", "settings": { "icon": "heart", "title": "Our Mission", "text": "Melt Labs exists to make natural self-care feel effortless, not clinical." } },
-        "v3": { "type": "card", "settings": { "icon": "shield", "title": "Our Promise", "text": "Full transparency in formulation. Every ingredient and its job, on the label and on this page." } }
-      },
-      "block_order": ["v1", "v2", "v3"]
+      }
     },
     "experts": {
       "type": "expert-reviews",
-      "settings": { "scheme": "white", "headline": "What *experts* are saying", "subhead": "Practitioners on scalp-first hair care." },
       "blocks": {
-        "e1": { "type": "expert", "settings": { "name": "Dr. Placeholder", "title": "Dermatology", "quote": "Scalp health is the part of hair care most people skip." } },
-        "e2": { "type": "expert", "settings": { "name": "Placeholder", "title": "Trichologist", "quote": "Consistency with a gentle nightly routine beats intensity." } },
-        "e3": { "type": "expert", "settings": { "name": "Dr. Placeholder", "title": "Cosmetic Science", "quote": "Peptides plus lightweight botanicals is a smart, wearable stack." } }
+        "e1": {
+          "type": "expert",
+          "settings": {
+            "quote": "Scalp health is the part of hair care most people skip.",
+            "name": "Dr. Placeholder",
+            "title": "Dermatology"
+          }
+        },
+        "e2": {
+          "type": "expert",
+          "settings": {
+            "quote": "Consistency with a gentle nightly routine beats intensity.",
+            "name": "Placeholder",
+            "title": "Trichologist"
+          }
+        },
+        "e3": {
+          "type": "expert",
+          "settings": {
+            "quote": "Peptides plus lightweight botanicals is a smart, wearable stack.",
+            "name": "Dr. Placeholder",
+            "title": "Cosmetic Science"
+          }
+        }
       },
-      "block_order": ["e1", "e2", "e3"]
+      "block_order": [
+        "e1",
+        "e2",
+        "e3"
+      ],
+      "settings": {
+        "headline": "What *experts* are saying",
+        "subhead": "Practitioners on scalp-first hair care.",
+        "scheme": "white",
+        "autoplay": false,
+        "autoplay_interval": 5000
+      }
     },
     "faq": {
       "type": "faq",
-      "settings": { "scheme": "tint", "headline": "Questions, *answered.*" },
       "blocks": {
-        "q1": { "type": "qa", "settings": { "question": "How do I use KAMI?", "answer": "Four drops onto the scalp each night, massaged in for about a minute. It absorbs fast and works while you sleep." } },
-        "q2": { "type": "qa", "settings": { "question": "Will it make my hair greasy?", "answer": "No. The serum is featherweight and fragrance-free, designed to absorb without residue on your pillow or your morning style." } },
-        "q3": { "type": "qa", "settings": { "question": "Is it safe for color-treated hair?", "answer": "Yes. KAMI is applied to the scalp, not the lengths, and plays well with color, keratin, and heat styling." } },
-        "q4": { "type": "qa", "settings": { "question": "When will I notice a difference?", "answer": "Hair works on long cycles. Most people notice softness and scalp comfort first, with fuller-looking hair building over consistent nightly use across a few months." } },
-        "q5": { "type": "qa", "settings": { "question": "Is KAMI a treatment for hair loss?", "answer": "No. KAMI is a cosmetic serum that supports a healthy-looking scalp and hair. For medical concerns about hair loss, talk with a dermatologist." } },
-        "q6": { "type": "qa", "settings": { "question": "What is your return policy?", "answer": "If it's not for you, reach out to our support team within 30 days of delivery and we'll make it right." } }
+        "q1": {
+          "type": "qa",
+          "settings": {
+            "question": "How do I use KAMI?",
+            "answer": "Four drops onto the scalp each night, massaged in for about a minute. It absorbs fast and works while you sleep."
+          }
+        },
+        "q2": {
+          "type": "qa",
+          "settings": {
+            "question": "Will it make my hair greasy?",
+            "answer": "No. The serum is featherweight and fragrance-free, designed to absorb without residue on your pillow or your morning style."
+          }
+        },
+        "q3": {
+          "type": "qa",
+          "settings": {
+            "question": "Is it safe for color-treated hair?",
+            "answer": "Yes. KAMI is applied to the scalp, not the lengths, and plays well with color, keratin, and heat styling."
+          }
+        },
+        "q4": {
+          "type": "qa",
+          "settings": {
+            "question": "When will I notice a difference?",
+            "answer": "Hair works on long cycles. Most people notice softness and scalp comfort first, with fuller-looking hair building over consistent nightly use across a few months."
+          }
+        },
+        "q5": {
+          "type": "qa",
+          "settings": {
+            "question": "Is KAMI a treatment for hair loss?",
+            "answer": "No. KAMI is a cosmetic serum that supports a healthy-looking scalp and hair. For medical concerns about hair loss, talk with a dermatologist."
+          }
+        },
+        "q6": {
+          "type": "qa",
+          "settings": {
+            "question": "What is your return policy?",
+            "answer": "If it's not for you, reach out to our support team within 30 days of delivery and we'll make it right."
+          }
+        }
       },
-      "block_order": ["q1", "q2", "q3", "q4", "q5", "q6"]
+      "block_order": [
+        "q1",
+        "q2",
+        "q3",
+        "q4",
+        "q5",
+        "q6"
+      ],
+      "settings": {
+        "headline": "Questions, *answered.*",
+        "subhead": "",
+        "scheme": "tint"
+      }
     },
     "refs": {
       "type": "references",
+      "blocks": {
+        "r1": {
+          "type": "group",
+          "settings": {
+            "title": "Copper Tripeptide-1 (GHK-Cu): scalp and follicle support",
+            "citations": "Pyo HK, et al. \"The effect of tripeptide-copper complex on human hair growth in vitro.\" Archives of Pharmacal Research, 2007.\nPickart L, Margolina A. \"Regenerative and protective actions of the GHK-Cu peptide in the light of the new gene data.\" International Journal of Molecular Sciences, 2018."
+          }
+        },
+        "r2": {
+          "type": "group",
+          "settings": {
+            "title": "Biotinoyl Tripeptide-1: anchoring and thickness appearance",
+            "citations": "\"Evaluation of a peptide-based cosmetic approach to reduce the appearance of hair thinning.\" Journal of Cosmetic Science; industry-sponsored trials of biotinoyl tripeptide-1 complexes report improved appearance of hair density with topical use. Evidence is early and largely vendor-funded, so claims stay measured."
+          }
+        },
+        "r3": {
+          "type": "group",
+          "settings": {
+            "title": "Tsubaki oil (Camellia japonica): shine and conditioning",
+            "citations": "Reviews of Camellia japonica seed oil document its high oleic-acid lipid profile and traditional Japanese use for hair conditioning and shine; cosmetic evidence is formulation-based rather than clinical."
+          }
+        },
+        "r4": {
+          "type": "group",
+          "settings": {
+            "title": "Rice bran (komenuka): scalp conditioning",
+            "citations": "\"Effects of rice bran extract on hair growth in cultured cells and animal models.\" Published preclinical work suggests rice-bran-derived compounds support the follicle environment; human data is limited, so on-page claims stay cosmetic."
+          }
+        },
+        "r5": {
+          "type": "group",
+          "settings": {
+            "title": "Hinoki cypress: scalp freshness",
+            "citations": "Preclinical studies of hinokitiol (a hinoki-associated compound) report follicle-supportive activity in vitro. Traditional Japanese use centers on scalp cleanliness and comfort."
+          }
+        },
+        "r6": {
+          "type": "group",
+          "settings": {
+            "title": "Matcha (EGCG): antioxidant protection",
+            "citations": "Kwon OS, et al. \"Human hair growth enhancement in vitro by green tea epigallocatechin-3-gallate (EGCG).\" Phytomedicine, 2007.\nGreen tea catechins are widely documented antioxidants; topical evidence for hair is preclinical."
+          }
+        }
+      },
+      "block_order": [
+        "r1",
+        "r2",
+        "r3",
+        "r4",
+        "r5",
+        "r6"
+      ],
       "settings": {
         "headline": "Scientific references",
         "intro": "Cosmetic ingredient research spans in vitro, animal, and small human studies, and strength varies by ingredient. Peptide data is largely lab-based; the botanical evidence leans on tradition plus emerging studies. Claims on this page are calibrated accordingly.",
         "disclaimer": "In-house study statistics are based on our own study; individual results may vary. KAMI is a cosmetic product and is not intended to diagnose, treat, cure, or prevent any disease or medical condition, including hair loss."
-      },
-      "blocks": {
-        "r1": { "type": "group", "settings": { "title": "Copper Tripeptide-1 (GHK-Cu): scalp and follicle support", "citations": "Pyo HK, et al. \"The effect of tripeptide-copper complex on human hair growth in vitro.\" Archives of Pharmacal Research, 2007.\nPickart L, Margolina A. \"Regenerative and protective actions of the GHK-Cu peptide in the light of the new gene data.\" International Journal of Molecular Sciences, 2018." } },
-        "r2": { "type": "group", "settings": { "title": "Biotinoyl Tripeptide-1: anchoring and thickness appearance", "citations": "\"Evaluation of a peptide-based cosmetic approach to reduce the appearance of hair thinning.\" Journal of Cosmetic Science; industry-sponsored trials of biotinoyl tripeptide-1 complexes report improved appearance of hair density with topical use. Evidence is early and largely vendor-funded, so claims stay measured." } },
-        "r3": { "type": "group", "settings": { "title": "Tsubaki oil (Camellia japonica): shine and conditioning", "citations": "Reviews of Camellia japonica seed oil document its high oleic-acid lipid profile and traditional Japanese use for hair conditioning and shine; cosmetic evidence is formulation-based rather than clinical." } },
-        "r4": { "type": "group", "settings": { "title": "Rice bran (komenuka): scalp conditioning", "citations": "\"Effects of rice bran extract on hair growth in cultured cells and animal models.\" Published preclinical work suggests rice-bran-derived compounds support the follicle environment; human data is limited, so on-page claims stay cosmetic." } },
-        "r5": { "type": "group", "settings": { "title": "Hinoki cypress: scalp freshness", "citations": "Preclinical studies of hinokitiol (a hinoki-associated compound) report follicle-supportive activity in vitro. Traditional Japanese use centers on scalp cleanliness and comfort." } },
-        "r6": { "type": "group", "settings": { "title": "Matcha (EGCG): antioxidant protection", "citations": "Kwon OS, et al. \"Human hair growth enhancement in vitro by green tea epigallocatechin-3-gallate (EGCG).\" Phytomedicine, 2007.\nGreen tea catechins are widely documented antioxidants; topical evidence for hair is preclinical." } }
-      },
-      "block_order": ["r1", "r2", "r3", "r4", "r5", "r6"]
+      }
     }
   },
-  "order": ["subnav", "hero", "testimonials", "ingredients", "benefit", "science", "who", "benefits_2", "potency", "compare", "values", "experts", "faq", "refs"]
+  "order": [
+    "subnav",
+    "hero",
+    "testimonials",
+    "ingredients",
+    "benefit",
+    "science",
+    "who",
+    "benefits_2",
+    "potency",
+    "compare",
+    "values",
+    "experts",
+    "faq",
+    "refs"
+  ]
 }
