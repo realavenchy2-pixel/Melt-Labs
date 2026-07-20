@@ -135,6 +135,7 @@
         "i4": {
           "type": "active",
           "settings": {
+            "image": "shopify://shop_images/Apple_tech_meets_supps_style_202607201615.jpg",
             "name": "Rice Bran Extract",
             "source": "Komenuka",
             "role": "The Japanese beauty staple. Conditions the scalp and supports a balanced moisture barrier."
