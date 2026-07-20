@@ -42,13 +42,15 @@
         "t1": {
           "type": "slide",
           "settings": {
+            "image": "shopify://shop_images/Make_before_after_images_2K_202607190108_2.jpg",
             "quote": "My part line looks fuller in the mirror.",
             "author": "Placeholder, 38"
           }
         },
-        "t2": {
+        "slide_BNtrw8": {
           "type": "slide",
           "settings": {
+            "image": "shopify://shop_images/Make_before_after_images_2K_202607190108.jpg",
             "quote": "Less hair on my pillow within weeks.",
             "author": "Placeholder, 45"
           }
@@ -56,15 +58,43 @@
         "t3": {
           "type": "slide",
           "settings": {
+            "image": "shopify://shop_images/Make_before_after_photo_2K_202607190109.jpg",
             "quote": "The shine is back. It feels alive again.",
             "author": "Placeholder, 31"
+          }
+        },
+        "t2": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/Woman_screenshot_before_after_2K_202607190108.jpg",
+            "quote": "Less hair on my pillow within weeks.",
+            "author": "Placeholder, 45"
+          }
+        },
+        "slide_aAqHk7": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/Make_before_after_images_2K_202607190108_1.jpg",
+            "quote": "Less hair on my pillow within weeks.",
+            "author": "Placeholder, 45"
+          }
+        },
+        "slide_NCnLMn": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/Make_before_after_screenshot_2K_202607190108.jpg",
+            "quote": "Less hair on my pillow within weeks.",
+            "author": "Placeholder, 45"
           }
         }
       },
       "block_order": [
         "t1",
+        "slide_BNtrw8",
+        "t3",
         "t2",
-        "t3"
+        "slide_aAqHk7",
+        "slide_NCnLMn"
       ],
       "settings": {
         "headline": "Real routines. Real hair.",
