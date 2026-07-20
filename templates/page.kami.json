@@ -153,6 +153,7 @@
         "i6": {
           "type": "active",
           "settings": {
+            "image": "shopify://shop_images/Matcha_bowl_photo_style_2K_202607201626.jpg",
             "name": "Matcha",
             "source": "EGCG catechins",
             "role": "Green tea antioxidants help protect the scalp and strands from everyday oxidative stress."
