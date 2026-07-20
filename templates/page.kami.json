@@ -117,6 +117,7 @@
         "i2": {
           "type": "active",
           "settings": {
+            "image": "shopify://shop_images/IMG_4030.jpg",
             "name": "Biotinoyl Tripeptide-1",
             "source": "",
             "role": "A biotin-bound peptide studied for supporting the look of anchored, thicker-feeling strands."
