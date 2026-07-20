@@ -108,6 +108,7 @@
         "i1": {
           "type": "active",
           "settings": {
+            "image": "shopify://shop_images/hair_I_card_2K_202607181451.jpg",
             "name": "Copper Tripeptide-1",
             "source": "GHK-Cu",
             "role": "The signal peptide. Supports a healthy scalp environment, the foundation follicles need to do their best work."
