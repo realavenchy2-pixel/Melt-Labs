@@ -428,6 +428,7 @@
         "p2"
       ],
       "settings": {
+        "image": "shopify://shop_images/Serum_squeezed_into_hair_2K_202607201515_aec85d18-114a-424e-b9ae-6e789ebe0100.jpg",
         "headline": "Four drops. One minute. That's the ritual.",
         "body": "Massage into the scalp each night and let it absorb while you sleep. Consistency, not effort, is what compounds."
       }
@@ -571,6 +572,7 @@
         "e2",
         "e3"
       ],
+      "disabled": true,
       "settings": {
         "headline": "What *experts* are saying",
         "subhead": "Practitioners on scalp-first hair care.",
