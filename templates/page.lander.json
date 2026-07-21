@@ -550,6 +550,7 @@
         "e2",
         "e3"
       ],
+      "disabled": true,
       "settings": {
         "headline": "What *experts* are saying",
         "subhead": "Practitioners and researchers on the mechanism behind Special Water.",
