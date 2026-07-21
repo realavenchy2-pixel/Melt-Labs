@@ -88,7 +88,7 @@
     /* Variant-a (Apple pill indicator): the active dot stretches into a
        bar whose length hands off to the neighboring dot continuously as
        the track scrolls, instead of flipping discretely. */
-    var scrubbing = root.classList.contains('carousel--dots-a');
+    var scrubbing = root.classList.contains('carousel--pill');
     if (scrubbing) {
       dots.forEach(function (dot) { dot.style.transition = 'width 80ms linear, background-color 200ms ease'; });
     }

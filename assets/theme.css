@@ -753,7 +753,7 @@ h1, h2, h3, .h1, .h2, .h3 {
    controls sit in a floating frosted-glass pill and the active dot
    stretches into a bar that hands off to the next dot LIVE as you swipe
    (carousel.js drives the widths from scroll position). */
-.carousel--dots-a .carousel__controls {
+.carousel--pill .carousel__controls {
   width: fit-content;
   margin-inline: auto;
   padding: 8px 12px;
@@ -764,19 +764,19 @@ h1, h2, h3, .h1, .h2, .h3 {
   -webkit-backdrop-filter: blur(14px);
   box-shadow: 0 4px 18px color-mix(in srgb, var(--color-ink) 8%, transparent);
 }
-.section--scheme-ink .carousel--dots-a .carousel__controls {
+.section--scheme-ink .carousel--pill .carousel__controls {
   background: rgba(255,255,255,0.09);
   border-color: rgba(255,255,255,0.12);
 }
-.carousel--dots-a .carousel__arrow { border-color: transparent; }
-.carousel--dots-a .carousel__dot { height: 7px; }
+.carousel--pill .carousel__arrow { border-color: transparent; }
+.carousel--pill .carousel__dot { height: 7px; }
 
 /* Mobile: the pill floats ON the carousel media, Apple-style (the
    AirPods "Get the highlights." treatment) - frosted glass over the
    image, dots + play/pause only (swipe replaces the arrows), with the
    card captions raised to clear it. */
 @media (max-width: 767px) {
-  .carousel--dots-a .carousel__controls {
+  .carousel--pill .carousel__controls {
     position: absolute;
     bottom: 14px;
     left: 50%;
@@ -787,14 +787,14 @@ h1, h2, h3, .h1, .h2, .h3 {
     background: color-mix(in srgb, var(--color-bg) 55%, transparent);
     border-color: color-mix(in srgb, var(--color-bg) 30%, transparent);
   }
-  .carousel--dots-a .carousel__arrow {
+  .carousel--pill .carousel__arrow {
     width: 34px; height: 34px;
     flex: 0 0 auto;
     color: var(--color-ink);
   }
-  .carousel--dots-a .carousel__arrow svg { width: 15px; height: 15px; }
-  .carousel--dots-a .testimonial-card__overlay,
-  .carousel--dots-a .ingredient-slide__overlay { padding-bottom: 4.6rem; }
+  .carousel--pill .carousel__arrow svg { width: 15px; height: 15px; }
+  .carousel--pill .testimonial-card__overlay,
+  .carousel--pill .ingredient-slide__overlay { padding-bottom: 4.6rem; }
 }
 
 /* Dot indicator variety: the first two carousels get the Apple pill

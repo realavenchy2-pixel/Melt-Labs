@@ -15,7 +15,7 @@
 {%- endcomment -%}
 
 <div
-  class="carousel"
+  class="carousel{% if pill %} carousel--pill{% endif %}"
   data-carousel
   {% if autoplay %}data-carousel-autoplay data-carousel-interval="{{ interval | default: 4500 }}"{% endif %}
   id="carousel-{{ id }}"
