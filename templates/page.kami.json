@@ -22,6 +22,7 @@
       "type": "hero-video",
       "settings": {
         "media_type": "image",
+        "image": "shopify://shop_images/Resize._2K_202607190029_87f62b15-6ac3-46ee-8a68-b38d785084a4.jpg",
         "image_mobile": "shopify://shop_images/KAMI_Official_Hero_2K_202607190024_422f9a51-0e28-43cf-b914-c2fb4dca3b12.jpg",
         "overlay_darkness": 90,
         "hero_size": "fill",
