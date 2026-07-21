@@ -11,16 +11,6 @@
   "sections": {
     "offer": {
       "type": "offer",
-      "settings": {
-        "eyebrow": "MELT LABS",
-        "tagline": "The nightly peptide ritual for fuller-looking hair.",
-        "bundle_heading": "Choose your supply",
-        "bundle_note": "Bulk savings apply automatically at checkout.",
-        "reassurance": "60-day money-back guarantee\nShips in 2 to 4 days\nThird-party tested\nFragrance-free",
-        "trust_line": "Secure checkout. Cancel anytime.",
-        "show_description": true,
-        "placeholder_title": "KAMI"
-      },
       "blocks": {
         "b1": {
           "type": "info",
@@ -37,57 +27,219 @@
           }
         }
       },
-      "block_order": ["b1", "b2"]
+      "block_order": [
+        "b1",
+        "b2"
+      ],
+      "settings": {
+        "product": "kami-15",
+        "aspect_desktop": "1 / 1",
+        "aspect_mobile": "1 / 1",
+        "eyebrow": "MELT LABS",
+        "tagline": "The nightly peptide ritual for fuller-looking hair.",
+        "bundle_heading": "Choose your supply",
+        "bundle_note": "Bulk savings apply automatically at checkout.",
+        "reassurance": "60-day money-back guarantee\nShips in 2 to 4 days\nThird-party tested\nFragrance-free",
+        "trust_line": "Secure checkout. Cancel anytime.",
+        "show_description": true,
+        "placeholder_title": "KAMI"
+      }
     },
     "guarantee": {
       "type": "icon-list",
+      "blocks": {
+        "g1": {
+          "type": "item",
+          "settings": {
+            "icon": "shield",
+            "text": "60-day money-back guarantee"
+          }
+        },
+        "g2": {
+          "type": "item",
+          "settings": {
+            "icon": "flask",
+            "text": "Third-party tested for purity"
+          }
+        },
+        "g3": {
+          "type": "item",
+          "settings": {
+            "icon": "leaf",
+            "text": "Japanese botanicals, fragrance-free"
+          }
+        },
+        "g4": {
+          "type": "item",
+          "settings": {
+            "icon": "clock",
+            "text": "Ships in 2 to 4 days"
+          }
+        }
+      },
+      "block_order": [
+        "g1",
+        "g2",
+        "g3",
+        "g4"
+      ],
       "settings": {
         "headline": "Every bottle, backed.",
         "scheme": "tint"
-      },
-      "blocks": {
-        "g1": { "type": "item", "settings": { "icon": "shield", "text": "60-day money-back guarantee" } },
-        "g2": { "type": "item", "settings": { "icon": "flask", "text": "Third-party tested for purity" } },
-        "g3": { "type": "item", "settings": { "icon": "leaf", "text": "Japanese botanicals, fragrance-free" } },
-        "g4": { "type": "item", "settings": { "icon": "clock", "text": "Ships in 2 to 4 days" } }
-      },
-      "block_order": ["g1", "g2", "g3", "g4"]
+      }
     },
-    "testimonials": {
+    "testimonial_carousel_yxrkGK": {
       "type": "testimonial-carousel",
-      "settings": { "headline": "Real routines. Real hair." },
       "blocks": {
-        "t1": { "type": "slide", "settings": { "quote": "My part line looks fuller in the mirror.", "author": "Placeholder, 38" } },
-        "t2": { "type": "slide", "settings": { "quote": "Less hair on my pillow within weeks.", "author": "Placeholder, 45" } },
-        "t3": { "type": "slide", "settings": { "quote": "The shine is back. It feels alive again.", "author": "Placeholder, 31" } }
+        "slide_h8QxYy": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/Make_before_after_images_2K_202607190108_2.jpg",
+            "quote": "My part line looks fuller in the mirror.",
+            "author": "Placeholder, 38"
+          }
+        },
+        "slide_VFPtgM": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/Make_before_after_images_2K_202607190108.jpg",
+            "quote": "Less hair on my pillow within weeks.",
+            "author": "Placeholder, 45"
+          }
+        },
+        "slide_fJnRb4": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/Make_before_after_photo_2K_202607190109.jpg",
+            "quote": "The shine is back. It feels alive again.",
+            "author": "Placeholder, 31"
+          }
+        },
+        "slide_TK43KY": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/Woman_screenshot_before_after_2K_202607190108.jpg",
+            "quote": "Less hair on my pillow within weeks.",
+            "author": "Placeholder, 45"
+          }
+        },
+        "slide_tFye6i": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/Make_before_after_images_2K_202607190108_1.jpg",
+            "quote": "Less hair on my pillow within weeks.",
+            "author": "Placeholder, 45"
+          }
+        },
+        "slide_dMeBJj": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/Make_before_after_screenshot_2K_202607190108.jpg",
+            "quote": "Less hair on my pillow within weeks.",
+            "author": "Placeholder, 45"
+          }
+        }
       },
-      "block_order": ["t1", "t2", "t3"]
+      "block_order": [
+        "slide_h8QxYy",
+        "slide_VFPtgM",
+        "slide_fJnRb4",
+        "slide_TK43KY",
+        "slide_tFye6i",
+        "slide_dMeBJj"
+      ],
+      "settings": {
+        "headline": "Real routines. Real hair.",
+        "autoplay": true,
+        "autoplay_interval": 4500
+      }
     },
     "faq": {
       "type": "faq",
-      "settings": { "scheme": "white", "headline": "Questions, *answered.*" },
       "blocks": {
-        "q1": { "type": "qa", "settings": { "question": "How do I use KAMI?", "answer": "Four drops onto the scalp each night, massaged in for about a minute. It absorbs fast and works while you sleep." } },
-        "q2": { "type": "qa", "settings": { "question": "Will it make my hair greasy?", "answer": "No. The serum is featherweight and fragrance-free, designed to absorb without residue on your pillow or your morning style." } },
-        "q3": { "type": "qa", "settings": { "question": "Is it safe for color-treated hair?", "answer": "Yes. KAMI is applied to the scalp, not the lengths, and plays well with color, keratin, and heat styling." } },
-        "q4": { "type": "qa", "settings": { "question": "Is KAMI a treatment for hair loss?", "answer": "No. KAMI is a cosmetic serum that supports a healthy-looking scalp and hair. For medical concerns about hair loss, talk with a dermatologist." } },
-        "q5": { "type": "qa", "settings": { "question": "What is your return policy?", "answer": "If it's not for you, reach out to our support team within 30 days of delivery and we'll make it right." } }
+        "q1": {
+          "type": "qa",
+          "settings": {
+            "question": "How do I use KAMI?",
+            "answer": "Four drops onto the scalp each night, massaged in for about a minute. It absorbs fast and works while you sleep."
+          }
+        },
+        "q2": {
+          "type": "qa",
+          "settings": {
+            "question": "Will it make my hair greasy?",
+            "answer": "No. The serum is featherweight and fragrance-free, designed to absorb without residue on your pillow or your morning style."
+          }
+        },
+        "q3": {
+          "type": "qa",
+          "settings": {
+            "question": "Is it safe for color-treated hair?",
+            "answer": "Yes. KAMI is applied to the scalp, not the lengths, and plays well with color, keratin, and heat styling."
+          }
+        },
+        "q4": {
+          "type": "qa",
+          "settings": {
+            "question": "Is KAMI a treatment for hair loss?",
+            "answer": "No. KAMI is a cosmetic serum that supports a healthy-looking scalp and hair. For medical concerns about hair loss, talk with a dermatologist."
+          }
+        },
+        "q5": {
+          "type": "qa",
+          "settings": {
+            "question": "What is your return policy?",
+            "answer": "If it's not for you, reach out to our support team within 30 days of delivery and we'll make it right."
+          }
+        }
       },
-      "block_order": ["q1", "q2", "q3", "q4", "q5"]
+      "block_order": [
+        "q1",
+        "q2",
+        "q3",
+        "q4",
+        "q5"
+      ],
+      "settings": {
+        "headline": "Questions, *answered.*",
+        "subhead": "",
+        "scheme": "white"
+      }
     },
     "refs": {
       "type": "references",
+      "blocks": {
+        "r1": {
+          "type": "group",
+          "settings": {
+            "title": "Copper Tripeptide-1 (GHK-Cu): scalp and follicle support",
+            "citations": "Pyo HK, et al. \"The effect of tripeptide-copper complex on human hair growth in vitro.\" Archives of Pharmacal Research, 2007.\nPickart L, Margolina A. \"Regenerative and protective actions of the GHK-Cu peptide in the light of the new gene data.\" International Journal of Molecular Sciences, 2018."
+          }
+        },
+        "r2": {
+          "type": "group",
+          "settings": {
+            "title": "Matcha (EGCG): antioxidant protection",
+            "citations": "Kwon OS, et al. \"Human hair growth enhancement in vitro by green tea epigallocatechin-3-gallate (EGCG).\" Phytomedicine, 2007."
+          }
+        }
+      },
+      "block_order": [
+        "r1",
+        "r2"
+      ],
       "settings": {
         "headline": "Scientific references",
         "intro": "Cosmetic ingredient research spans in vitro, animal, and small human studies, and strength varies by ingredient. Claims on this page are calibrated accordingly.",
         "disclaimer": "In-house study statistics are based on our own study; individual results may vary. KAMI is a cosmetic product and is not intended to diagnose, treat, cure, or prevent any disease or medical condition, including hair loss."
-      },
-      "blocks": {
-        "r1": { "type": "group", "settings": { "title": "Copper Tripeptide-1 (GHK-Cu): scalp and follicle support", "citations": "Pyo HK, et al. \"The effect of tripeptide-copper complex on human hair growth in vitro.\" Archives of Pharmacal Research, 2007.\nPickart L, Margolina A. \"Regenerative and protective actions of the GHK-Cu peptide in the light of the new gene data.\" International Journal of Molecular Sciences, 2018." } },
-        "r2": { "type": "group", "settings": { "title": "Matcha (EGCG): antioxidant protection", "citations": "Kwon OS, et al. \"Human hair growth enhancement in vitro by green tea epigallocatechin-3-gallate (EGCG).\" Phytomedicine, 2007." } }
-      },
-      "block_order": ["r1", "r2"]
+      }
     }
   },
-  "order": ["offer", "guarantee", "testimonials", "faq", "refs"]
+  "order": [
+    "offer",
+    "guarantee",
+    "testimonial_carousel_yxrkGK",
+    "faq",
+    "refs"
+  ]
 }
