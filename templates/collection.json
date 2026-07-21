@@ -11,6 +11,7 @@
   "sections": {
     "main": {
       "type": "main-collection",
+      "disabled": true,
       "settings": {
         "columns_desktop": "4",
         "columns_mobile": "2",
@@ -20,44 +21,45 @@
         "aspect_mobile": "1 / 1"
       }
     },
-    "product_selector_qBPMmp": {
+    "product_selector_67CkzJ": {
       "type": "product-selector",
       "blocks": {
-        "product_yQ6YYE": {
+        "product_jpDpHJ": {
           "type": "product",
           "settings": {
             "product": "",
-            "badge": "FOR CRAVINGS + BLOOD SUGAR",
-            "title": "",
-            "tagline": "Two drops in whatever you already drink.",
-            "points": "60-day supply\nThird-party tested\nNo stimulants",
-            "button_label": "Shop Special Water",
-            "link": ""
+            "image": "shopify://shop_images/2nd_image_2K_202607181243.jpg",
+            "badge": "For Sustained Weight Loss",
+            "title": "The Special Water",
+            "tagline": "",
+            "points": "Loose Weight Drinking Water\nProven Japanese Botanical Formula\nStill Taste Like Water",
+            "button_label": "Shop now",
+            "link": "https://shopmeltlab.com/pages/the-special-water"
           }
         },
-        "product_GjwmG9": {
+        "product_TzkNr8": {
           "type": "product",
           "settings": {
             "product": "",
+            "image": "shopify://shop_images/KAMI_Official_Hero_2K_202607190024.jpg",
             "badge": "FOR SCALP + HAIR",
-            "title": "",
-            "tagline": "Four drops on the scalp, every night.",
+            "title": "KAMI 15",
+            "tagline": "Four drops on the scalp, every night. A one-minute ritual for fuller-looking hair.",
             "points": "Fragrance-free\nThird-party tested\nWorks with color-treated hair",
             "button_label": "Shop KAMI",
-            "link": ""
+            "link": "shopify://pages/kami"
           }
         }
       },
       "block_order": [
-        "product_yQ6YYE",
-        "product_GjwmG9"
+        "product_jpDpHJ",
+        "product_TzkNr8"
       ],
-      "name": "Product selector",
       "settings": {
         "scheme": "white",
         "eyebrow": "SHOP THE LINEUP",
-        "heading": "Pick your *protocol.*",
-        "subhead": "",
+        "heading": "Select Your Best",
+        "subhead": "Two botanical formulas. Same promise: fit the routine you already have.",
         "aspect_desktop": "1 / 1",
         "aspect_mobile": "1 / 1"
       }
@@ -65,6 +67,6 @@
   },
   "order": [
     "main",
-    "product_selector_qBPMmp"
+    "product_selector_67CkzJ"
   ]
 }
