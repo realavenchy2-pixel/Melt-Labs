@@ -263,6 +263,20 @@
     },
     "science": {
       "type": "science-scroll",
+      "blocks": {
+        "chapter_9k6KmA": {
+          "type": "chapter",
+          "settings": {
+            "image": "shopify://shop_images/Hair_follicle_cross-section_with__2K_202607181530_9f743d5d-ced0-470c-ae47-50a61c5ca978.jpg",
+            "eyebrow": "",
+            "heading": "",
+            "text": ""
+          }
+        }
+      },
+      "block_order": [
+        "chapter_9k6KmA"
+      ],
       "settings": {
         "scheme": "ink",
         "headline": "The *Science* Behind KAMI",
