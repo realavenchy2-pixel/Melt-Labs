@@ -1,8 +1,70 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
     "main": {
-      "type": "main-collection"
+      "type": "main-collection",
+      "settings": {
+        "columns_desktop": "4",
+        "columns_mobile": "2",
+        "rows": 3,
+        "card_scale": 100,
+        "aspect_desktop": "1 / 1",
+        "aspect_mobile": "1 / 1"
+      }
+    },
+    "product_selector_qBPMmp": {
+      "type": "product-selector",
+      "blocks": {
+        "product_yQ6YYE": {
+          "type": "product",
+          "settings": {
+            "product": "",
+            "badge": "FOR CRAVINGS + BLOOD SUGAR",
+            "title": "",
+            "tagline": "Two drops in whatever you already drink.",
+            "points": "60-day supply\nThird-party tested\nNo stimulants",
+            "button_label": "Shop Special Water",
+            "link": ""
+          }
+        },
+        "product_GjwmG9": {
+          "type": "product",
+          "settings": {
+            "product": "",
+            "badge": "FOR SCALP + HAIR",
+            "title": "",
+            "tagline": "Four drops on the scalp, every night.",
+            "points": "Fragrance-free\nThird-party tested\nWorks with color-treated hair",
+            "button_label": "Shop KAMI",
+            "link": ""
+          }
+        }
+      },
+      "block_order": [
+        "product_yQ6YYE",
+        "product_GjwmG9"
+      ],
+      "name": "Product selector",
+      "settings": {
+        "scheme": "white",
+        "eyebrow": "SHOP THE LINEUP",
+        "heading": "Pick your *protocol.*",
+        "subhead": "",
+        "aspect_desktop": "1 / 1",
+        "aspect_mobile": "1 / 1"
+      }
     }
   },
-  "order": ["main"]
+  "order": [
+    "main",
+    "product_selector_qBPMmp"
+  ]
 }
