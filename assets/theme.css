@@ -771,6 +771,27 @@ h1, h2, h3, .h1, .h2, .h3 {
 .carousel--dots-a .carousel__arrow { border-color: transparent; }
 .carousel--dots-a .carousel__dot { height: 7px; }
 
+/* Mobile: the pill floats ON the carousel media, Apple-style (the
+   AirPods "Get the highlights." treatment) - frosted glass over the
+   image, dots + play/pause only (swipe replaces the arrows), with the
+   card captions raised to clear it. */
+@media (max-width: 767px) {
+  .carousel--dots-a .carousel__controls {
+    position: absolute;
+    bottom: 14px;
+    left: 50%;
+    transform: translateX(-50%);
+    margin-top: 0;
+    z-index: 5;
+    gap: 0.5rem;
+    background: color-mix(in srgb, var(--color-bg) 55%, transparent);
+    border-color: color-mix(in srgb, var(--color-bg) 30%, transparent);
+  }
+  .carousel--dots-a .carousel__arrow:not(.carousel__toggle) { display: none; }
+  .carousel--dots-a .testimonial-card__overlay,
+  .carousel--dots-a .ingredient-slide__overlay { padding-bottom: 4.6rem; }
+}
+
 /* Dot indicator variety: the first two carousels get the Apple pill
    above (variant a); carousels after that get progressively different
    indicators (JS assigns the variant class by page order) so the site
