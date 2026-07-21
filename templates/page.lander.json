@@ -13,7 +13,7 @@
       "type": "product-subnav",
       "settings": {
         "product": "special-water",
-        "logo": "shopify://shop_images/melt-logofooter.jpg",
+        "logo": "shopify://shop_images/blue-mono.jpg",
         "logo_height": 28,
         "cta_label": "Buy",
         "cta_link": "shopify://products/the-special-water"
