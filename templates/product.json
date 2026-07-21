@@ -32,12 +32,17 @@
         "info2"
       ],
       "settings": {
+        "product": "the-special-water",
+        "image": "shopify://shop_images/2nd_image_2K_202607181243.jpg",
+        "aspect_desktop": "1 / 1",
+        "aspect_mobile": "1 / 1",
         "eyebrow": "MELT LABS",
         "tagline": "The daily protocol for quieter cravings and steadier blood sugar.",
         "bundle_heading": "Choose your supply",
         "bundle_note": "Bulk savings apply automatically at checkout.",
         "reassurance": "60-day money-back guarantee\nShips in 2 to 4 days\nThird-party tested\nNo stimulants",
         "trust_line": "Secure checkout. Cancel anytime.",
+        "show_description": true,
         "placeholder_title": "Special Water"
       }
     },
@@ -84,38 +89,70 @@
         "scheme": "tint"
       }
     },
-    "testimonials": {
+    "testimonial_carousel_4xbWtw": {
       "type": "testimonial-carousel",
       "blocks": {
-        "t1": {
+        "slide_Tdbzgb": {
           "type": "slide",
           "settings": {
-            "quote": "I stopped snacking without even trying.",
-            "author": "Placeholder, 34"
+            "image": "shopify://shop_images/split-physique.webp",
+            "quote": "To put it short. The Special Water changed my life.",
+            "author": "Tiago, 34"
           }
         },
-        "t2": {
+        "slide_PLYKcj": {
           "type": "slide",
           "settings": {
-            "quote": "Two drops in my coffee and the cravings just... quiet down.",
-            "author": "Placeholder, 41"
+            "image": "shopify://shop_images/before-after.webp",
+            "quote": "Two drops in my coffee and the cravings are non existent for the entire day.",
+            "author": "Kati 41"
           }
         },
-        "t3": {
+        "slide_bmete7": {
           "type": "slide",
           "settings": {
+            "image": "shopify://shop_images/split-transformation.webp",
             "quote": "Didn't change anything else. Just added this.",
-            "author": "Placeholder, 29"
+            "author": "John, 29"
+          }
+        },
+        "slide_xUiQNc": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/split-transform.webp",
+            "quote": "Didn't change anything else. Just added this.",
+            "author": "Kimi, 29"
+          }
+        },
+        "slide_rxQacm": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/gym-split.webp",
+            "quote": "Didn't change anything else. Just added this.",
+            "author": "Roway, 29"
+          }
+        },
+        "slide_8HF64e": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/split-face.webp",
+            "quote": "Didn't change anything else. Just added this.",
+            "author": "Sutrura, 29"
           }
         }
       },
       "block_order": [
-        "t1",
-        "t2",
-        "t3"
+        "slide_Tdbzgb",
+        "slide_PLYKcj",
+        "slide_bmete7",
+        "slide_xUiQNc",
+        "slide_rxQacm",
+        "slide_8HF64e"
       ],
       "settings": {
-        "headline": "Real routines. Real results."
+        "headline": "Real routines. Real results.",
+        "autoplay": true,
+        "autoplay_interval": 4500
       }
     },
     "faq": {
@@ -166,6 +203,7 @@
       ],
       "settings": {
         "headline": "Questions, *answered.*",
+        "subhead": "",
         "scheme": "white"
       }
     },
@@ -191,13 +229,17 @@
         "r1",
         "r2"
       ],
-      "settings": {}
+      "settings": {
+        "headline": "Scientific references",
+        "intro": "Research strength varies by ingredient. Cinnamomum cassia and green tea catechins carry the strongest human clinical support; bitter melon evidence is mixed across trials. Claims on this page are calibrated to what the research supports.",
+        "disclaimer": "In-house study statistics are based on our own study; individual results may vary. These statements have not been evaluated by the Food and Drug Administration. This product is not intended to diagnose, treat, cure, or prevent any disease."
+      }
     }
   },
   "order": [
     "offer",
     "guarantee",
-    "testimonials",
+    "testimonial_carousel_4xbWtw",
     "faq",
     "refs"
   ]
