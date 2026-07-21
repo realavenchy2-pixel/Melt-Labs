@@ -41,7 +41,7 @@
         "bundle_note": "Bulk savings apply automatically at checkout.",
         "reassurance": "60-day money-back guarantee\nShips in 2 to 4 days\nThird-party tested\nFragrance-free",
         "trust_line": "Secure checkout. Cancel anytime.",
-        "show_description": false,
+        "show_description": true,
         "placeholder_title": "KAMI"
       }
     },
