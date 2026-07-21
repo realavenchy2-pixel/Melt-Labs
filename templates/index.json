@@ -14,14 +14,14 @@
       "settings": {
         "scheme": "tint",
         "media_type": "image",
-        "image": "shopify://shop_images/resize_2K_202607182237.jpg",
-        "image_mobile": "shopify://shop_images/Glass_dropper_bottle_mid-drip_2K_202607182236.jpg",
-        "overlay_darkness": 45,
-        "eyebrow": "MELT LABS",
-        "headline": "Weight control, *made effortless.*",
+        "image": "shopify://shop_images/resize_2K_202607201936.jpg",
+        "image_mobile": "shopify://shop_images/Apple_tech_meets_Japanese_supple__202607201935.jpg",
+        "overlay_darkness": 90,
+        "eyebrow": "",
+        "headline": "Advanced Japanese Botanicals, *made into easy to use serums.*",
         "subhead": "Japanese botanical formulas that work with your body, not against your routine.",
-        "cta_label": "Shop Special Water",
-        "cta_link": "https://shopmeltlab.com/pages/the-special-water",
+        "cta_label": "Shop Serums",
+        "cta_link": "shopify://collections/all",
         "cta2_label": "",
         "cta2_link": "",
         "hero_size": "fill",
@@ -38,10 +38,10 @@
           "settings": {
             "product": "",
             "image": "shopify://shop_images/2nd_image_2K_202607181243.jpg",
-            "badge": "MELT LABS",
-            "title": "",
+            "badge": "For Sustained Weight Loss",
+            "title": "The Special Water",
             "tagline": "",
-            "points": "Loose Weight Drinking Water",
+            "points": "Loose Weight Drinking Water\nProven Japanese Botanical Formula\nStill Taste Like Water",
             "button_label": "Shop now",
             "link": "https://shopmeltlab.com/pages/the-special-water"
           }
@@ -49,13 +49,14 @@
         "p2": {
           "type": "product",
           "settings": {
-            "product": "kami",
+            "product": "",
+            "image": "shopify://shop_images/KAMI_Official_Hero_2K_202607190024.jpg",
             "badge": "FOR SCALP + HAIR",
-            "title": "",
+            "title": "KAMI 15",
             "tagline": "Four drops on the scalp, every night. A one-minute ritual for fuller-looking hair.",
             "points": "Fragrance-free\nThird-party tested\nWorks with color-treated hair",
             "button_label": "Shop KAMI",
-            "link": ""
+            "link": "shopify://pages/kami"
           }
         }
       },
@@ -66,7 +67,7 @@
       "settings": {
         "scheme": "white",
         "eyebrow": "SHOP THE LINEUP",
-        "heading": "Pick your *protocol.*",
+        "heading": "Select Your Best",
         "subhead": "Two botanical formulas. Same promise: fit the routine you already have.",
         "aspect_desktop": "1 / 1",
         "aspect_mobile": "1 / 1"
@@ -75,8 +76,9 @@
     "about": {
       "type": "about-brand",
       "settings": {
-        "scheme": "white",
+        "scheme": "tint",
         "image_side": "right",
+        "image": "shopify://shop_images/Remove_background_melt_labs_logo_202607201909_d88faa65-9ecb-4dd0-8220-771f0f78bbb1.jpg",
         "eyebrow": "ABOUT MELT LABS",
         "headline": "Japanese botanicals, *made to work.*",
         "body": "Melt Labs exists because natural shouldn't mean weaker. We build our formulas around Japan's most trusted botanicals, then hold them to modern standards: third-party testing, honest labels, and mechanisms we can point to.",

@@ -1,8 +1,72 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
     "main": {
-      "type": "main-collection"
+      "type": "main-collection",
+      "disabled": true,
+      "settings": {
+        "columns_desktop": "4",
+        "columns_mobile": "2",
+        "rows": 3,
+        "card_scale": 100,
+        "aspect_desktop": "1 / 1",
+        "aspect_mobile": "1 / 1"
+      }
+    },
+    "product_selector_67CkzJ": {
+      "type": "product-selector",
+      "blocks": {
+        "product_jpDpHJ": {
+          "type": "product",
+          "settings": {
+            "product": "",
+            "image": "shopify://shop_images/2nd_image_2K_202607181243.jpg",
+            "badge": "For Sustained Weight Loss",
+            "title": "The Special Water",
+            "tagline": "",
+            "points": "Loose Weight Drinking Water\nProven Japanese Botanical Formula\nStill Taste Like Water",
+            "button_label": "Shop now",
+            "link": "https://shopmeltlab.com/pages/the-special-water"
+          }
+        },
+        "product_TzkNr8": {
+          "type": "product",
+          "settings": {
+            "product": "",
+            "image": "shopify://shop_images/KAMI_Official_Hero_2K_202607190024.jpg",
+            "badge": "FOR SCALP + HAIR",
+            "title": "KAMI 15",
+            "tagline": "Four drops on the scalp, every night. A one-minute ritual for fuller-looking hair.",
+            "points": "Fragrance-free\nThird-party tested\nWorks with color-treated hair",
+            "button_label": "Shop KAMI",
+            "link": "shopify://pages/kami"
+          }
+        }
+      },
+      "block_order": [
+        "product_jpDpHJ",
+        "product_TzkNr8"
+      ],
+      "settings": {
+        "scheme": "white",
+        "eyebrow": "SHOP THE LINEUP",
+        "heading": "Select Your Best",
+        "subhead": "Two botanical formulas. Same promise: fit the routine you already have.",
+        "aspect_desktop": "1 / 1",
+        "aspect_mobile": "1 / 1"
+      }
     }
   },
-  "order": ["main"]
+  "order": [
+    "main",
+    "product_selector_67CkzJ"
+  ]
 }
