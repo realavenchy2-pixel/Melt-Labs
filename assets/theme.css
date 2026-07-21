@@ -787,7 +787,12 @@ h1, h2, h3, .h1, .h2, .h3 {
     background: color-mix(in srgb, var(--color-bg) 55%, transparent);
     border-color: color-mix(in srgb, var(--color-bg) 30%, transparent);
   }
-  .carousel--dots-a .carousel__arrow:not(.carousel__toggle) { display: none; }
+  .carousel--dots-a .carousel__arrow {
+    width: 34px; height: 34px;
+    flex: 0 0 auto;
+    color: var(--color-ink);
+  }
+  .carousel--dots-a .carousel__arrow svg { width: 15px; height: 15px; }
   .carousel--dots-a .testimonial-card__overlay,
   .carousel--dots-a .ingredient-slide__overlay { padding-bottom: 4.6rem; }
 }
