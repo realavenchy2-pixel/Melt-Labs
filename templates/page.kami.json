@@ -33,20 +33,18 @@
         "headline": "Your Follicles May Not Be Dead. *They May Be Miniaturized.*",
         "subhead": "KAMI 15 is a minoxidil-free, leave-in peptide serum designed for thinning-looking areas. Four drops a day support a healthier scalp environment, fuller-looking density, and stronger-feeling strands, without pills, needles, added fragrance, or a greasy finish.",
         "cta_label": "Start my 60-day follicle ritual",
+        "microcopy": "60 mL bottle · Free U.S. shipping · 60-day money-back guarantee. Four drops. Sixty seconds. Leave it in.",
         "product": "",
-        "cta_link": "shopify://products/kami-15",
-        "microcopy": "60 mL bottle · Free U.S. shipping · 60-day money-back guarantee. Four drops. Sixty seconds. Leave it in."
+        "cta_link": "shopify://products/kami-15"
       }
     },
     "testimonials": {
       "type": "testimonial-carousel",
-      "blocks": {},
-      "block_order": [],
       "settings": {
         "headline": "Real Routines. Real Hair Journeys.",
+        "subhead": "No clinic appointments. No complicated application schedule. No completely rebuilding your morning. Just four drops worked into the areas where your hair looks thinner.",
         "autoplay": true,
-        "autoplay_interval": 4500,
-        "subhead": "No clinic appointments. No complicated application schedule. No completely rebuilding your morning. Just four drops worked into the areas where your hair looks thinner."
+        "autoplay_interval": 4500
       }
     },
     "ingredients": {
@@ -547,8 +545,6 @@
     },
     "experts": {
       "type": "expert-reviews",
-      "blocks": {},
-      "block_order": [],
       "disabled": true,
       "settings": {
         "headline": "What *experts* are saying",
