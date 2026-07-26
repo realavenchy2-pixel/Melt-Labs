@@ -1,20 +1,33 @@
-/* Melt Labs — shared carousel. CSS scroll-snap does the work; JS tracks
-   which slide is centered and toggles .is-active on it. Inactive slides
-   sit slightly smaller and dimmer and the active one stretches to full
-   size via a CSS transition, so moving between slides is a smooth,
-   immersive scale rather than a flash. One component for every carousel
-   on the site (testimonials, ingredients, benefit angles, about cards,
-   experts).
+/* Melt Labs — shared carousel. CSS scroll-snap does the scrolling; JS
+   reads scroll position every frame and publishes two normalized values
+   per slide as custom properties:
+
+     --slide-p  1 when the slide is centered, 0 when it is a full slide
+                width away. Drives the scale/dim of the card.
+     --slide-x  signed -1..1 offset from centre. Drives the horizontal
+                parallax of the media INSIDE the card, so the photo
+                drifts against the card like a window rather than moving
+                with it (the Apple "Get the highlights" treatment).
+
+   Both are written straight from scroll geometry, so the card tracks the
+   finger 1:1 through a swipe. Nothing here waits for a transition to
+   finish, so a swipe can be grabbed, reversed, or handed to an arrow tap
+   at any moment.
 
    Autoplay (opt-in via data-carousel-autoplay): advances on a timer
    while the carousel is scrolled into view, pauses when the tab is
-   hidden or the shopper interacts (arrow/dot/swipe/toggle), and never
-   runs under prefers-reduced-motion. The play/pause button lets
-   shoppers stop it entirely. */
+   hidden or the shopper interacts, and never runs under
+   prefers-reduced-motion. */
 (function () {
   'use strict';
 
-  var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var motionQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
+  var reduceMotion = motionQuery.matches;
+  /* Re-read the preference if the shopper changes it mid-session rather
+     than pinning whatever it was at load. */
+  if (motionQuery.addEventListener) {
+    motionQuery.addEventListener('change', function (e) { reduceMotion = e.matches; });
+  }
 
   function initCarousel(root) {
     var track = root.querySelector('[data-carousel-track]');
@@ -34,6 +47,7 @@
     var targetIndex = 0;
 
     root.classList.add('carousel--enhanced');
+    if (!reduceMotion) root.classList.add('carousel--parallax');
 
     if (dotsWrap) {
       slides.forEach(function (_, i) {
@@ -50,14 +64,26 @@
     function scrollToSlide(i) {
       i = Math.max(0, Math.min(slides.length - 1, i));
       targetIndex = i;
-      track.scrollTo({ left: slides[i].offsetLeft - track.offsetLeft, behavior: 'smooth' });
+      /* Longer easing only while a programmatic jump is in flight - a
+         finger-driven scroll keeps the 1:1 tracking transition. */
+      root.classList.add('is-settling');
+      clearTimeout(settleTimer);
+      settleTimer = setTimeout(function () { root.classList.remove('is-settling'); }, 420);
+      track.scrollTo({
+        left: slides[i].offsetLeft - track.offsetLeft,
+        behavior: reduceMotion ? 'auto' : 'smooth'
+      });
     }
+    var settleTimer = null;
 
     function setActive(i) {
       if (i === activeIndex) return;
       activeIndex = i;
       slides.forEach(function (slide, s) { slide.classList.toggle('is-active', s === i); });
-      dots.forEach(function (dot, d) { dot.classList.toggle('is-active', d === i); });
+      dots.forEach(function (dot, d) {
+        dot.classList.toggle('is-active', d === i);
+        dot.setAttribute('aria-current', d === i ? 'true' : 'false');
+      });
       if (prev) prev.disabled = i === 0;
       if (next) next.disabled = i === slides.length - 1;
     }
@@ -85,15 +111,36 @@
       });
       return bestIndex;
     }
+
+    /* Publish per-slide centredness + parallax offset. Pure reads of
+       layout geometry (offsetLeft/offsetWidth are not affected by the
+       transforms we then apply), so this can run every frame without
+       feeding back on itself. */
+    function updateSlideProps() {
+      if (reduceMotion) return;
+      var viewCenter = track.scrollLeft + track.clientWidth / 2;
+      slides.forEach(function (slide) {
+        var w = slide.offsetWidth || 1;
+        var center = slide.offsetLeft - track.offsetLeft + w / 2;
+        var delta = (center - viewCenter) / w; /* -1 .. 1 across one slide */
+        var clamped = delta < -1 ? -1 : (delta > 1 ? 1 : delta);
+        var p = 1 - Math.abs(clamped);
+        slide.style.setProperty('--slide-p', p.toFixed(3));
+        slide.style.setProperty('--slide-x', clamped.toFixed(3));
+      });
+    }
+
     /* Variant-a (Apple pill indicator): the active dot stretches into a
        bar whose length hands off to the neighboring dot continuously as
        the track scrolls, instead of flipping discretely. */
     var scrubbing = root.classList.contains('carousel--pill');
-    if (scrubbing) {
-      dots.forEach(function (dot) { dot.style.transition = 'width 80ms linear, background-color 200ms ease'; });
+    if (scrubbing && !reduceMotion) {
+      dots.forEach(function (dot) {
+        dot.style.transition = 'width 80ms linear, background-color 200ms var(--ease-out)';
+      });
     }
     function scrubDots() {
-      if (!scrubbing || dots.length < 2) return;
+      if (!scrubbing || reduceMotion || dots.length < 2) return;
       /* Normalize scroll progress across the whole track so f runs
          exactly 0 -> (n-1) from first slide to last, since snap-start
          slides never center in the viewport. */
@@ -114,16 +161,35 @@
       rafId = window.requestAnimationFrame(function () {
         rafId = null;
         setActive(nearestIndex());
+        updateSlideProps();
         scrubDots();
       });
     }
     track.addEventListener('scroll', onScroll, { passive: true });
 
     setActive(0);
+    updateSlideProps();
     scrubDots();
+    window.addEventListener('resize', function () { updateSlideProps(); scrubDots(); });
 
     /* ---- Autoplay ---- */
     var autoplayEnabled = root.hasAttribute('data-carousel-autoplay') && !reduceMotion;
+
+    function endDrag() {
+      root.classList.remove('is-dragging');
+      if (autoplayEnabled && playing) start();
+    }
+    track.addEventListener('pointerdown', function () {
+      root.classList.add('is-dragging');
+      root.classList.remove('is-settling');
+      if (autoplayEnabled) stop();
+    });
+    /* pointercancel as well as pointerup: a swipe interrupted by a system
+       gesture never fires pointerup, which used to leave autoplay stopped
+       for good and the will-change hint stuck on. */
+    track.addEventListener('pointerup', endDrag);
+    track.addEventListener('pointercancel', endDrag);
+
     if (!autoplayEnabled) {
       if (toggle) toggle.hidden = true;
       return;
@@ -161,8 +227,9 @@
 
     function userInteracted() {
       if (!autoplayEnabled || !playing) return;
-      /* A manual nudge pauses the timer briefly rather than fighting the
-         shopper's own scroll/swipe; it resumes on the next tick cycle. */
+      /* A manual nudge restarts the timer rather than fighting the
+         shopper's own scroll/swipe: they get a full interval before the
+         carousel moves on its own again. */
       stop();
       start();
     }
@@ -174,9 +241,6 @@
         if (playing) start(); else stop();
       });
     }
-
-    track.addEventListener('pointerdown', function () { stop(); });
-    track.addEventListener('pointerup', function () { if (playing) start(); });
 
     document.addEventListener('visibilitychange', function () {
       if (document.hidden) stop();
@@ -201,15 +265,16 @@
     initCarousel(root);
   });
 
-  /* Parallax + word-bounce entrance. Each slide's card drifts up into
-     its resting position as the carousel scrolls into frame (scroll-
-     linked and clamped, so it settles when in frame and reverses on the
-     way back up), and the caption springs in once. Skipped entirely
-     under reduced motion. */
+  /* Vertical entrance drift: each carousel's cards rise into their
+     resting position as the section scrolls into frame (scroll-linked and
+     clamped, so it settles when in frame and reverses on the way back up),
+     and the caption springs in once. Skipped entirely under reduced
+     motion. This is the section-level parallax; the per-slide horizontal
+     parallax lives in updateSlideProps() above. */
   if (!reduceMotion && allCarousels.length) {
     var pxItems = allCarousels.map(function (root) {
       root.setAttribute('data-parallax', '');
-      return { root: root, wordsIn: false };
+      return { root: root, wordsIn: false, top: 0 };
     });
     var ticking = false;
     function updateParallax() {
@@ -218,7 +283,7 @@
       var startY = vh * 0.9; /* begins as the carousel top enters the lower viewport */
       var endY = vh * 0.4;   /* fully settled once it's comfortably in frame */
       pxItems.forEach(function (item) {
-        var top = item.root.getBoundingClientRect().top;
+        var top = item.top;
         var p = (startY - top) / (startY - endY);
         p = p < 0 ? 0 : (p > 1 ? 1 : p);
         var eased = 1 - Math.pow(1 - p, 3);
@@ -232,11 +297,21 @@
         }
       });
     }
+    /* Measure every carousel in one batch, then write in one batch, so a
+       page with five carousels forces layout once per frame instead of
+       once per carousel. */
+    function measure() {
+      pxItems.forEach(function (item) { item.top = item.root.getBoundingClientRect().top; });
+    }
     function onScroll() {
-      if (!ticking) { ticking = true; window.requestAnimationFrame(updateParallax); }
+      if (!ticking) {
+        ticking = true;
+        window.requestAnimationFrame(function () { measure(); updateParallax(); });
+      }
     }
     window.addEventListener('scroll', onScroll, { passive: true });
     window.addEventListener('resize', onScroll);
+    measure();
     updateParallax();
   }
 })();

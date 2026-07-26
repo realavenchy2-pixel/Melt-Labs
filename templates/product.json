@@ -15,15 +15,15 @@
         "info1": {
           "type": "info",
           "settings": {
-            "title": "How to use",
-            "content": "<p>Two drops in whatever you're already drinking, once or twice a day. Coffee, water, juice, tea. No taste, no prep.</p>"
+            "title": "Two squirts. No new routine.",
+            "content": "<p>Add two squirts to water, coffee, tea, or juice once or twice daily as directed on the label.</p><p>No added taste. No powder. No pills. No shots.</p>"
           }
         },
         "info2": {
           "type": "info",
           "settings": {
             "title": "Shipping and returns",
-            "content": "<p>Ships in 2 to 4 days. 60-day money-back guarantee.</p>"
+            "content": "<p>Ships in 2 to 4 business days. Protected by a 60-day money-back guarantee.</p>"
           }
         }
       },
@@ -36,56 +36,58 @@
         "image": "shopify://shop_images/2nd_image_2K_202607181243.jpg",
         "aspect_desktop": "1 / 1",
         "aspect_mobile": "1 / 1",
-        "eyebrow": "MELT LABS",
-        "tagline": "The daily protocol for quieter cravings and steadier blood sugar.",
+        "eyebrow": "THE JAPANESE WEIGHT LOSS WATER",
+        "tagline": "Your Better Long-Term Weight-Loss Partner.",
         "bundle_heading": "Choose your supply",
         "bundle_note": "Bulk savings apply automatically at checkout.",
-        "reassurance": "60-day money-back guarantee\nShips in 2 to 4 days\nThird-party tested\nNo stimulants",
-        "trust_line": "Secure checkout. Cancel anytime.",
+        "reassurance": "Tasteless in any drink\n2 oz / 60 mL bottle\nThird-party tested\n60-day money-back guarantee",
+        "trust_line": "Secure checkout. Third-party tested every batch.",
         "show_description": true,
-        "placeholder_title": "Special Water"
+        "placeholder_title": "The Special Water",
+        "add_label": "Add Special Water to my routine",
+        "under_button": "Secure checkout · Ships in 2–4 business days"
       }
     },
     "guarantee": {
       "type": "icon-list",
       "blocks": {
-        "g1": {
+        "ben_1": {
           "type": "item",
           "settings": {
-            "icon": "shield",
-            "text": "60-day money-back guarantee"
+            "icon": "sparkle",
+            "text": "Quieter cravings — supports appetite control so staying consistent does not feel like a constant fight."
           }
         },
-        "g2": {
+        "ben_2": {
           "type": "item",
           "settings": {
-            "icon": "flask",
-            "text": "Third-party tested for purity and potency"
+            "icon": "droplet",
+            "text": "Steadier blood-sugar response — supports healthy glucose metabolism and insulin sensitivity."
           }
         },
-        "g3": {
+        "ben_3": {
           "type": "item",
           "settings": {
             "icon": "leaf",
-            "text": "Natural botanicals, no stimulants"
+            "text": "Daily metabolic support — Japanese botanicals support thermogenesis, antioxidant activity, and metabolic function."
           }
         },
-        "g4": {
+        "ben_4": {
           "type": "item",
           "settings": {
-            "icon": "clock",
-            "text": "Ships in 2 to 4 days"
+            "icon": "shield",
+            "text": "Backed for 60 days — third-party tested, with a 60-day money-back guarantee."
           }
         }
       },
       "block_order": [
-        "g1",
-        "g2",
-        "g3",
-        "g4"
+        "ben_1",
+        "ben_2",
+        "ben_3",
+        "ben_4"
       ],
       "settings": {
-        "headline": "Every bottle, backed.",
+        "headline": "One Simple Routine. Three Forms of Daily Support.",
         "scheme": "tint"
       }
     },
@@ -115,42 +117,15 @@
             "quote": "Didn't change anything else. Just added this.",
             "author": "John, 29"
           }
-        },
-        "slide_xUiQNc": {
-          "type": "slide",
-          "settings": {
-            "image": "shopify://shop_images/split-transform.webp",
-            "quote": "Didn't change anything else. Just added this.",
-            "author": "Kimi, 29"
-          }
-        },
-        "slide_rxQacm": {
-          "type": "slide",
-          "settings": {
-            "image": "shopify://shop_images/gym-split.webp",
-            "quote": "Didn't change anything else. Just added this.",
-            "author": "Roway, 29"
-          }
-        },
-        "slide_8HF64e": {
-          "type": "slide",
-          "settings": {
-            "image": "shopify://shop_images/split-face.webp",
-            "quote": "Didn't change anything else. Just added this.",
-            "author": "Sutrura, 29"
-          }
         }
       },
       "block_order": [
         "slide_Tdbzgb",
         "slide_PLYKcj",
-        "slide_bmete7",
-        "slide_xUiQNc",
-        "slide_rxQacm",
-        "slide_8HF64e"
+        "slide_bmete7"
       ],
       "settings": {
-        "headline": "Real routines. Real results.",
+        "headline": "Real Routines. Real Results.",
         "autoplay": true,
         "autoplay_interval": 4500
       }
@@ -158,48 +133,72 @@
     "faq": {
       "type": "faq",
       "blocks": {
-        "q1": {
+        "faq_1": {
           "type": "qa",
           "settings": {
             "question": "How do I use Special Water?",
-            "answer": "Two drops in whatever you're already drinking, once or twice a day. Coffee, water, juice, tea. No taste, no prep, no routine to change."
+            "answer": "Add two squirts to whatever you are already drinking, once or twice daily as directed on the label. It works in water, coffee, tea, or juice."
           }
         },
-        "q2": {
+        "faq_2": {
           "type": "qa",
           "settings": {
             "question": "What does it taste like?",
-            "answer": "Nothing. The serum is designed to be undetectable in any drink, hot or cold."
+            "answer": "Nothing. Special Water was designed to disappear into hot or cold drinks without changing their normal taste."
           }
         },
-        "q3": {
+        "faq_3": {
           "type": "qa",
           "settings": {
-            "question": "Does it contain stimulants or caffeine?",
-            "answer": "No stimulants. The formula works through blood sugar support, not stimulation, so there are no jitters and no crash."
+            "question": "How quickly should I expect to notice something?",
+            "answer": "Everyone responds differently. Appetite and craving support may be noticed first, while broader results require consistent daily use over time."
           }
         },
-        "q4": {
+        "faq_4": {
           "type": "qa",
           "settings": {
-            "question": "What is your return policy?",
-            "answer": "If it's not for you, reach out to our support team within 30 days of delivery and we'll make it right."
+            "question": "Does Special Water replace Ozempic or another GLP-1 medication?",
+            "answer": "No. Special Water is a dietary supplement, not a prescription medication or replacement for medical care. Speak with your physician before making changes to any prescribed treatment."
           }
         },
-        "q5": {
+        "faq_5": {
           "type": "qa",
           "settings": {
-            "question": "Is it safe to take with my medication?",
-            "answer": "Special Water is a dietary supplement, not a medication. If you are pregnant, nursing, have a medical condition, or take prescription medication (including GLP-1s), talk with your doctor before starting any supplement."
+            "question": "Is this a stimulant fat burner?",
+            "answer": "The formula is not built around the high-stimulant approach used by many conventional fat burners. Review the complete ingredient label before use, particularly if you are sensitive to caffeine or botanical extracts."
+          }
+        },
+        "faq_6": {
+          "type": "qa",
+          "settings": {
+            "question": "Can I take it with medication?",
+            "answer": "Speak with your physician before using Special Water if you take prescription medication, use a GLP-1, have a medical condition, are pregnant, or are nursing."
+          }
+        },
+        "faq_7": {
+          "type": "qa",
+          "settings": {
+            "question": "What ingredients are inside?",
+            "answer": "The formula contains Cinnamomum cassia bark extract, Japanese knotweed extract, bitter melon extract, turmeric root extract, licorice root extract, and matcha."
+          }
+        },
+        "faq_8": {
+          "type": "qa",
+          "settings": {
+            "question": "What is the return policy?",
+            "answer": "You are protected by a 60-day money-back guarantee. Contact the support team within 60 days of delivery if Special Water is not right for you."
           }
         }
       },
       "block_order": [
-        "q1",
-        "q2",
-        "q3",
-        "q4",
-        "q5"
+        "faq_1",
+        "faq_2",
+        "faq_3",
+        "faq_4",
+        "faq_5",
+        "faq_6",
+        "faq_7",
+        "faq_8"
       ],
       "settings": {
         "headline": "Questions, *answered.*",

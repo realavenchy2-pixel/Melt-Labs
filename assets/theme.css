@@ -29,6 +29,25 @@ a { color: inherit; }
   --gutter: clamp(1.25rem, 5vw, 2.5rem);
   --content-max: 1200px;
   --copy-max: 34em;
+
+  /* Type ramp. Size, leading, and tracking move together as a set -
+     tracking tightens and leading compresses as type grows, so a
+     headline and a card title are never handed the same values. */
+  --type-display-1: clamp(2.4rem, 8vw, 4.2rem);
+  --type-display-2: clamp(2.1rem, 7.5vw, 3.6rem);
+  --type-display-3: clamp(1.9rem, 6vw, 3rem);
+  --type-display-4: clamp(1.6rem, 5vw, 2.4rem);
+  --type-title: clamp(1.2rem, 4vw, 1.6rem);
+  --lead-display: 1.03;
+  --lead-h2: 1.12;
+  --lead-title: 1.25;
+  --track-display: -0.03em;
+  --track-h2: -0.015em;
+  --track-title: -0.005em;
+
+  /* Chrome height, so sticky offsets and anchor targets stop guessing.
+     56px subnav / 60px header + breathing room. */
+  --chrome-h: 72px;
   /* Semantic accents, tuned to sit beside the cyan/gold brand: a
      teal-leaning green and a warm coral red rather than default UI
      green/red, so the thumbs read on-brand. */
@@ -53,13 +72,14 @@ a { color: inherit; }
 h1, h2, h3, .h1, .h2, .h3 {
   font-family: var(--font-heading);
   font-weight: var(--weight-heading);
-  line-height: 1.08;
-  letter-spacing: -0.02em;
   color: var(--color-ink);
+  text-wrap: balance;
 }
-.h1 { font-size: clamp(2.1rem, 7.5vw, 3.6rem); }
-.h2 { font-size: clamp(1.75rem, 6vw, 3rem); }
-.h3 { font-size: clamp(1.2rem, 4vw, 1.6rem); }
+/* Leading and tracking are size-specific: a fixed pair is always wrong
+   at one end of the ramp. Large type tightens, small type relaxes. */
+h1, .h1 { font-size: var(--type-display-2); line-height: var(--lead-display); letter-spacing: var(--track-display); }
+h2, .h2 { font-size: var(--type-display-3); line-height: var(--lead-h2); letter-spacing: var(--track-h2); }
+h3, .h3 { font-size: var(--type-title); line-height: var(--lead-title); letter-spacing: var(--track-title); }
 
 .eyebrow {
   display: block;
@@ -112,9 +132,55 @@ h1, h2, h3, .h1, .h2, .h3 {
   text-decoration: none;
   cursor: pointer;
   white-space: nowrap;
-  transition: transform 160ms var(--ease-out), background-color 160ms var(--ease-out);
+  transition: transform 120ms var(--ease-out), background-color 160ms var(--ease-out);
+  -webkit-tap-highlight-color: transparent;
 }
 .btn:active { transform: scale(0.97); }
+
+/* ---- Shared press + focus ----
+   Every tappable surface answers the finger on pointer-DOWN, outside any
+   (hover: hover) query - the hover layer below is desktop-only and this
+   site is overwhelmingly touch. Press is 100ms so it reads as contact,
+   not as an animation. */
+.bundle__tier,
+.faq__q,
+.product-card__link,
+.carousel__dot,
+.mobile-menu__list a,
+.site-header__burger,
+.product-selector__tab,
+.carousel__arrow {
+  -webkit-tap-highlight-color: transparent;
+}
+.bundle__tier:active,
+.faq__q:active,
+.product-card__link:active .product-card__media,
+.mobile-menu__list a:active,
+.site-header__burger:active {
+  transform: scale(0.985);
+  transition: transform 100ms var(--ease-out);
+}
+.carousel__dot:active { transform: scale(0.85); }
+
+/* One focus ring for every custom control. Inputs already carry their
+   own; these are the ones that had none. */
+.btn:focus-visible,
+.carousel__arrow:focus-visible,
+.carousel__dot:focus-visible,
+.product-selector__tab:focus-visible,
+.faq__q:focus-visible,
+.product-card__link:focus-visible,
+.carousel__track:focus-visible,
+.site-header__burger:focus-visible,
+.site-footer__social a:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 3px;
+  border-radius: 999px;
+}
+.carousel__track:focus-visible, .product-card__link:focus-visible { border-radius: var(--radius-card); }
+.section--scheme-ink .btn:focus-visible,
+.section--scheme-ink .carousel__arrow:focus-visible,
+.section--scheme-ink .carousel__dot:focus-visible { outline-color: var(--color-cta); }
 
 .btn--gold { background: var(--color-cta); color: var(--color-ink); }
 @media (hover: hover) and (pointer: fine) {
@@ -153,14 +219,19 @@ h1, h2, h3, .h1, .h2, .h3 {
 .section-header--center { text-align: center; }
 .section-header--center .lead { margin-inline: auto; }
 
-/* ---- Reveal on scroll ---- */
-[data-reveal] {
+/* ---- Reveal on scroll ----
+   Scoped to .js (set by an inline head script in theme.liquid) so that if
+   the deferred scroll-fx.js never arrives - blocked, timed out, cold 3G -
+   content is visible rather than permanently transparent. Nothing
+   above the fold should carry [data-reveal]: a transparent element is
+   not counted as painted, which pushes LCP out. */
+.js [data-reveal] {
   opacity: 0;
   transform: translateY(16px);
-  transition: opacity 500ms var(--ease-out), transform 500ms var(--ease-out);
-  transition-delay: calc(var(--reveal-i, 0) * 60ms);
+  transition: opacity 300ms var(--ease-out), transform 300ms var(--ease-out);
+  transition-delay: calc(var(--reveal-i, 0) * 50ms);
 }
-[data-reveal].is-revealed { opacity: 1; transform: none; }
+.js [data-reveal].is-revealed { opacity: 1; transform: none; }
 
 /* ---- Media placeholder (final-asset slots) ---- */
 .media-slot {
@@ -205,8 +276,17 @@ h1, h2, h3, .h1, .h2, .h3 {
   height: 100%;
   object-fit: cover;
 }
+/* Late-decoding media arrives rather than snapping. The class is added
+   by scroll-fx.js only to images that are not already decoded, so this
+   is additive: without JS, or when cached, media is simply visible. */
+.media-slot img { transition: opacity 220ms var(--ease-out); }
+.media-slot img.is-media-loading { opacity: 0; }
 
 /* ---- Header ---- */
+/* Anchor targets clear the fixed chrome. Without this, "#offer" scrolls
+   the buy box directly under the subnav bar. */
+[id] { scroll-margin-top: var(--chrome-h); }
+
 .site-header {
   position: sticky;
   top: 0;
@@ -214,8 +294,20 @@ h1, h2, h3, .h1, .h2, .h3 {
   background: color-mix(in srgb, var(--color-bg) 82%, transparent);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
-  border-bottom: 1px solid color-mix(in srgb, var(--color-ink) 8%, transparent);
   transition: transform 300ms var(--ease-out);
+}
+/* A soft scroll edge rather than a hard 1px rule: content fades as it
+   passes under the floating bar instead of being cut by a line. */
+.site-header::after,
+.product-subnav::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  height: 14px;
+  pointer-events: none;
+  background: linear-gradient(180deg, color-mix(in srgb, var(--color-bg) 55%, transparent), transparent);
 }
 /* Hidden while the product subnav is stuck, so the two persistent top
    bars never stack on top of each other (both pin to top:0). */
@@ -348,7 +440,6 @@ h1, h2, h3, .h1, .h2, .h3 {
   background: color-mix(in srgb, var(--color-bg) 88%, transparent);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
-  border-bottom: 1px solid color-mix(in srgb, var(--color-ink) 8%, transparent);
   transform: translateY(-100%);
   transition: transform 300ms var(--ease-out);
 }
@@ -421,7 +512,22 @@ h1, h2, h3, .h1, .h2, .h3 {
   color: #fff;
 }
 .hero__content .eyebrow { color: rgba(255,255,255,0.85); }
-.hero__headline { color: #fff; font-size: clamp(2.2rem, 8.5vw, 4rem); max-width: 15ch; margin-inline: auto; }
+.hero__headline {
+  color: #fff;
+  font-size: var(--type-display-1);
+  line-height: var(--lead-display);
+  letter-spacing: var(--track-display);
+  max-width: 15ch;
+  margin-inline: auto;
+}
+.hero__microcopy {
+  margin-top: 1rem;
+  font-size: 0.82rem;
+  letter-spacing: 0.02em;
+  color: rgba(255, 255, 255, 0.78);
+  text-wrap: balance;
+  max-width: 34ch;
+}
 .hero__subhead {
   margin: 1rem auto 1.75rem;
   max-width: 32ch;
@@ -434,7 +540,7 @@ h1, h2, h3, .h1, .h2, .h3 {
 .offer__grid { display: grid; gap: 2.5rem; }
 @media (min-width: 900px) {
   .offer__grid { grid-template-columns: 1fr 1fr; gap: 4rem; align-items: start; }
-  .offer__panel { position: sticky; top: 88px; }
+  .offer__panel { position: sticky; top: calc(var(--chrome-h) + 1rem); }
 }
 /* Product gallery carousel: the shared carousel, but scoped to sit
    inside the offer media column instead of spanning the viewport. One
@@ -453,9 +559,16 @@ h1, h2, h3, .h1, .h2, .h3 {
   transform: none;
   opacity: 1;
 }
+/* A product gallery shows the whole photo: no over-scale, no drift.
+   Carries .carousel--parallax in the selector so it outweighs the
+   parallax rule declared later in the polish layer. */
+.offer__carousel .carousel--parallax .carousel__slide .media-slot > img,
+.offer__carousel .carousel--parallax .carousel__slide .media-slot > picture img {
+  transform: none;
+}
 .offer__carousel .media-slot { border-radius: var(--radius-card); }
 .offer__carousel .carousel__controls { margin-top: 1rem; }
-.offer__title { font-size: clamp(2rem, 5.5vw, 2.9rem); margin-top: 0.3rem; }
+.offer__title { font-size: var(--type-display-3); line-height: var(--lead-display); letter-spacing: var(--track-display); margin-top: 0.3rem; }
 .offer__tagline { margin-top: 0.75rem; }
 .offer__price {
   display: flex; align-items: baseline; gap: 0.75rem;
@@ -485,18 +598,28 @@ h1, h2, h3, .h1, .h2, .h3 {
   align-items: center;
   gap: 0.9rem;
   padding: 1.1rem 1.25rem;
-  border: 1.5px solid color-mix(in srgb, var(--color-ink) 14%, transparent);
+  border: 0;
   border-radius: 16px;
   background: var(--color-bg);
   cursor: pointer;
-  transition: border-color 180ms var(--ease-out), box-shadow 180ms var(--ease-out), background-color 180ms var(--ease-out);
+  /* Hairline + lift instead of a solid stroke: the tier reads as a card
+     sitting on the page rather than a wireframe box. */
+  box-shadow:
+    inset 0 0 0 1px color-mix(in srgb, var(--color-ink) 11%, transparent),
+    0 1px 2px color-mix(in srgb, var(--color-ink) 5%, transparent);
+  transition: box-shadow 180ms var(--ease-out), background-color 180ms var(--ease-out), transform 100ms var(--ease-out);
 }
 @media (hover: hover) and (pointer: fine) {
-  .bundle__tier:hover { border-color: color-mix(in srgb, var(--color-ink) 30%, transparent); }
+  .bundle__tier:hover {
+    box-shadow:
+      inset 0 0 0 1px color-mix(in srgb, var(--color-ink) 22%, transparent),
+      0 4px 12px color-mix(in srgb, var(--color-ink) 8%, transparent);
+  }
 }
 .bundle__tier.is-selected {
-  border-color: var(--color-cta);
-  box-shadow: 0 0 0 1.5px var(--color-cta), 0 8px 22px color-mix(in srgb, var(--color-cta) 22%, transparent);
+  box-shadow:
+    inset 0 0 0 2px var(--color-cta),
+    0 8px 22px color-mix(in srgb, var(--color-cta) 22%, transparent);
   background: color-mix(in srgb, var(--color-cta) 6%, var(--color-bg));
 }
 .bundle__radio {
@@ -551,7 +674,31 @@ h1, h2, h3, .h1, .h2, .h3 {
   text-align: center;
   color: color-mix(in srgb, var(--color-ink) 55%, transparent);
 }
-[data-bundle-add].is-loading { opacity: 0.7; pointer-events: none; }
+/* Pending state: a moving spinner, not just a dimmed button - on a slow
+   connection a static 70%-opacity button is indistinguishable from a tap
+   that did nothing. */
+[data-bundle-add].is-loading { opacity: 0.75; pointer-events: none; }
+[data-bundle-add].is-loading::before {
+  content: "";
+  width: 16px;
+  height: 16px;
+  margin-right: 0.1rem;
+  border-radius: 999px;
+  border: 2px solid color-mix(in srgb, var(--color-ink) 30%, transparent);
+  border-top-color: var(--color-ink);
+  animation: bundleSpin 700ms linear infinite;
+}
+@keyframes bundleSpin { to { transform: rotate(360deg); } }
+@media (prefers-reduced-motion: reduce) {
+  [data-bundle-add].is-loading::before { animation-duration: 2s; }
+}
+.bundle__status {
+  margin-top: 0.75rem;
+  font-size: 0.85rem;
+  text-align: center;
+  color: color-mix(in srgb, var(--color-ink) 62%, transparent);
+}
+.bundle__status--error { color: var(--color-danger); font-weight: 500; }
 
 .offer__form { margin-top: 1.5rem; display: grid; gap: 1rem; }
 .offer__field label {
@@ -580,6 +727,12 @@ h1, h2, h3, .h1, .h2, .h3 {
   transition: transform 160ms var(--ease-out);
 }
 .offer__actions .shopify-payment-button__button--unbranded:active { transform: scale(0.97); }
+.offer__under-button {
+  margin-top: 0.75rem;
+  text-align: center;
+  font-size: 0.8rem;
+  color: color-mix(in srgb, var(--color-ink) 55%, transparent);
+}
 .offer__reassure {
   margin-top: 1.5rem; padding: 0; list-style: none;
   display: grid; gap: 0.6rem; font-size: 0.9rem;
@@ -599,7 +752,7 @@ h1, h2, h3, .h1, .h2, .h3 {
   .buy-box__grid { grid-template-columns: 1.1fr 1fr; align-items: center; }
 }
 .buy-box__media .media-slot { border-radius: var(--radius-card); }
-.buy-box__title { font-size: clamp(1.75rem, 5vw, 2.4rem); }
+.buy-box__title { font-size: var(--type-display-4); line-height: var(--lead-h2); letter-spacing: var(--track-h2); }
 .buy-box__tagline { margin-top: 0.5rem; }
 .buy-box__price {
   display: flex; align-items: baseline; gap: 0.75rem;
@@ -676,17 +829,24 @@ h1, h2, h3, .h1, .h2, .h3 {
    applied once JS has enhanced the carousel, so no-JS shows all slides
    at full clarity. transform-origin centers the scale so it "breathes"
    rather than snapping. */
+/* Scale and dim are driven continuously from scroll position by
+   carousel.js (--slide-p, 0 = far, 1 = centered) so the card tracks the
+   finger 1:1 through a swipe instead of chasing it with a transition.
+   The short transition below only smooths arrow/dot jumps, where there is
+   no finger to track. will-change is applied from JS on pointerdown and
+   cleared on settle - a permanent hint would promote every slide of every
+   carousel to its own layer. */
 .carousel--enhanced .carousel__slide {
-  transform: scale(0.93);
-  opacity: 0.55;
+  --slide-p: 1;
+  transform: scale(calc(0.93 + var(--slide-p) * 0.07));
+  opacity: calc(0.55 + var(--slide-p) * 0.45);
   transform-origin: center;
-  transition: transform 450ms var(--ease-out), opacity 450ms var(--ease-out);
-  will-change: transform;
+  transition: transform 120ms linear, opacity 120ms linear;
 }
-.carousel--enhanced .carousel__slide.is-active {
-  transform: scale(1);
-  opacity: 1;
+.carousel--enhanced.is-settling .carousel__slide {
+  transition: transform 260ms var(--ease-out), opacity 260ms var(--ease-out);
 }
+.carousel--enhanced.is-dragging .carousel__slide { will-change: transform, opacity; }
 @media (prefers-reduced-motion: reduce) {
   .carousel--enhanced .carousel__slide {
     transform: none;
@@ -956,7 +1116,9 @@ h1, h2, h3, .h1, .h2, .h3 {
 /* ---- Benefit statement + stats ---- */
 .benefit-statement { text-align: center; }
 .benefit-statement__headline {
-  font-size: clamp(2rem, 7.5vw, 3.4rem);
+  font-size: var(--type-display-2);
+  line-height: var(--lead-display);
+  letter-spacing: var(--track-display);
   max-width: 18ch;
   margin-inline: auto;
 }
@@ -1000,10 +1162,11 @@ h1, h2, h3, .h1, .h2, .h3 {
 .stat__value {
   font-family: var(--font-heading);
   font-weight: var(--weight-heading);
-  font-size: clamp(2.4rem, 8vw, 3.6rem);
-  line-height: 1.05;
-  letter-spacing: -0.02em;
+  font-size: var(--type-display-2);
+  line-height: var(--lead-display);
+  letter-spacing: var(--track-display);
   color: var(--color-primary);
+  font-variant-numeric: tabular-nums;
 }
 .stat__caption { margin-top: 0.35rem; max-width: 30ch; color: color-mix(in srgb, var(--color-ink) 70%, transparent); }
 .section--scheme-ink .stat__caption { color: rgba(255,255,255,0.72); }
@@ -1037,7 +1200,8 @@ h1, h2, h3, .h1, .h2, .h3 {
   font-family: var(--font-heading);
   font-weight: var(--weight-heading);
   font-size: clamp(1.4rem, 3.2vw, 2.1rem);
-  letter-spacing: -0.01em;
+  line-height: var(--lead-h2);
+  letter-spacing: var(--track-h2);
   margin-top: 0.4rem;
 }
 .science-chapter__text { margin-top: 1rem; line-height: 1.65; }
@@ -1291,7 +1455,13 @@ h1, h2, h3, .h1, .h2, .h3 {
 .home-hero__content--over-media { color: #fff; }
 .home-hero__content--over-media .eyebrow { color: rgba(255,255,255,0.85); }
 .home-hero__content--over-media .home-hero__headline { color: #fff; }
-.home-hero__headline { font-size: clamp(2.4rem, 8vw, 4.2rem); max-width: 16ch; margin-inline: auto; }
+.home-hero__headline {
+  font-size: var(--type-display-1);
+  line-height: var(--lead-display);
+  letter-spacing: var(--track-display);
+  max-width: 16ch;
+  margin-inline: auto;
+}
 .home-hero__subhead {
   margin: 1.25rem auto 2rem;
   max-width: 40ch;
@@ -1360,7 +1530,7 @@ h1, h2, h3, .h1, .h2, .h3 {
   .product-selector__panel { grid-template-columns: 1fr 1fr; gap: 4rem; }
 }
 .product-selector__media .media-slot { border-radius: var(--radius-card); }
-.product-selector__title { font-size: clamp(1.75rem, 5vw, 2.4rem); margin-top: 0.4rem; }
+.product-selector__title { font-size: var(--type-display-4); line-height: var(--lead-h2); letter-spacing: var(--track-h2); margin-top: 0.4rem; }
 .product-selector__tagline { margin-top: 0.75rem; }
 .product-selector__price {
   margin-top: 1.1rem;
@@ -1471,14 +1641,16 @@ h1, h2, h3, .h1, .h2, .h3 {
 .faq__item {
   border-radius: 16px;
   background: var(--color-bg);
-  border: 1px solid color-mix(in srgb, var(--color-ink) 8%, transparent);
+  border: 0;
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--color-ink) 7%, transparent);
   overflow: hidden;
-  transition: border-color 200ms var(--ease-out), box-shadow 200ms var(--ease-out);
+  transition: box-shadow 200ms var(--ease-out);
 }
-.section--scheme-white .faq__item { background: var(--color-tint); border-color: transparent; }
+.section--scheme-white .faq__item { background: var(--color-tint); box-shadow: none; }
 .faq__item[open] {
-  border-color: color-mix(in srgb, var(--color-primary) 35%, transparent);
-  box-shadow: 0 8px 30px color-mix(in srgb, var(--color-primary) 10%, transparent);
+  box-shadow:
+    inset 0 0 0 1px color-mix(in srgb, var(--color-primary) 30%, transparent),
+    0 8px 30px color-mix(in srgb, var(--color-primary) 10%, transparent);
 }
 .faq__q {
   display: flex;
@@ -1522,19 +1694,32 @@ h1, h2, h3, .h1, .h2, .h3 {
    collapses under prefers-reduced-motion.
    ========================================================================== */
 
-/* Hero intro: eyebrow, headline, subhead, CTA rise in staggered on load. */
+/* Hero intro: eyebrow, subhead, CTA rise in staggered on load. */
 @media (prefers-reduced-motion: no-preference) {
   .hero__content > *, .home-hero__content > * {
     opacity: 0;
     transform: translateY(18px);
-    animation: introRise 700ms var(--ease-out) forwards;
+    animation: introRise 300ms var(--ease-out) forwards;
   }
-  .hero__content > :nth-child(1), .home-hero__content > :nth-child(1) { animation-delay: 120ms; }
-  .hero__content > :nth-child(2), .home-hero__content > :nth-child(2) { animation-delay: 220ms; }
-  .hero__content > :nth-child(3), .home-hero__content > :nth-child(3) { animation-delay: 320ms; }
-  .hero__content > :nth-child(4), .home-hero__content > :nth-child(4) { animation-delay: 420ms; }
+  .hero__content > :nth-child(1), .home-hero__content > :nth-child(1) { animation-delay: 60ms; }
+  .hero__content > :nth-child(2), .home-hero__content > :nth-child(2) { animation-delay: 110ms; }
+  .hero__content > :nth-child(3), .home-hero__content > :nth-child(3) { animation-delay: 160ms; }
+  .hero__content > :nth-child(4), .home-hero__content > :nth-child(4) { animation-delay: 210ms; }
+
+  /* The headline is the mobile LCP candidate. LCP does not count a fully
+     transparent element as painted, so it never starts at opacity 0 and
+     never waits on a delay - it rises on transform alone, from frame one.
+     Listed after the nth-child rules and at equal specificity so its
+     zeroed delay wins. */
+  .hero__content > .hero__headline,
+  .home-hero__content > .home-hero__headline {
+    opacity: 1;
+    animation: introRiseOpaque 300ms var(--ease-out) forwards;
+    animation-delay: 0s;
+  }
 }
 @keyframes introRise { to { opacity: 1; transform: none; } }
+@keyframes introRiseOpaque { from { transform: translateY(18px); } to { transform: none; } }
 
 /* Buttons: gentle lift on hover, existing press-scale stays. */
 @media (hover: hover) and (pointer: fine) {
@@ -1597,10 +1782,34 @@ h1, h2, h3, .h1, .h2, .h3 {
 @media (prefers-reduced-motion: no-preference) {
   [data-reveal] .media-slot > img, [data-reveal] .media-slot > picture img {
     transform: scale(1.05);
-    transition: transform 900ms var(--ease-out);
+    transition: transform 500ms var(--ease-out);
   }
   [data-reveal].is-revealed .media-slot > img, [data-reveal].is-revealed .media-slot > picture img {
     transform: scale(1);
+  }
+}
+
+/* ---- Carousel media parallax ----
+   The photo inside each card drifts against the card as the track
+   scrolls, so a swipe reads as looking through a moving window rather
+   than sliding a flat tile. carousel.js publishes --slide-x (-1..1,
+   signed distance from centre) every frame; the media is over-scaled so
+   the drift never exposes an edge.
+
+   Declared after the reveal-settle rule above deliberately: both
+   selectors weigh the same, so source order decides, and inside a
+   carousel the parallax must win. */
+@media (prefers-reduced-motion: no-preference) {
+  .carousel--parallax .carousel__slide .media-slot > img,
+  .carousel--parallax .carousel__slide .media-slot > picture img,
+  .carousel--parallax .carousel__slide .media-slot > video {
+    transform: scale(1.14) translate3d(calc(var(--slide-x, 0) * 9%), 0, 0);
+    transition: none;
+  }
+  .carousel--parallax.is-settling .carousel__slide .media-slot > img,
+  .carousel--parallax.is-settling .carousel__slide .media-slot > picture img,
+  .carousel--parallax.is-settling .carousel__slide .media-slot > video {
+    transition: transform 260ms var(--ease-out);
   }
 }
 
@@ -1850,7 +2059,7 @@ h1, h2, h3, .h1, .h2, .h3 {
 .cart__layout { display: grid; gap: 2rem; align-items: start; }
 @media (min-width: 900px) {
   .cart__layout { grid-template-columns: 1.6fr 1fr; gap: 3rem; }
-  .cart__summary { position: sticky; top: 88px; }
+  .cart__summary { position: sticky; top: calc(var(--chrome-h) + 1rem); }
 }
 .cart-item {
   display: grid;
@@ -1931,10 +2140,90 @@ h1, h2, h3, .h1, .h2, .h3 {
    the rest of the store. */
 .template-product .site-header { position: sticky; top: 0; }
 
-/* ---- Reduced motion ---- */
+/* ---- Reduced motion ----
+   Not "no feedback" - colour and opacity changes that aid comprehension
+   stay. What goes is travel: transforms, slides, scale, rotation, and
+   parallax. */
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
-  [data-reveal] { opacity: 1; transform: none; filter: none; transition: none; }
-  .product-subnav { transition: none; }
-  .btn, .carousel__arrow { transition: none; }
+  .js [data-reveal] { opacity: 1; transform: none; filter: none; transition: none; }
+
+  .btn,
+  .carousel__arrow,
+  .carousel__dot,
+  .product-subnav,
+  .site-header,
+  .faq__chevron,
+  .product-selector__tab,
+  .product-card__media img,
+  .site-footer__social a,
+  .angle-card,
+  .value-card,
+  .testimonial-card,
+  .expert-card__media,
+  .faq__item {
+    transition: none;
+  }
+
+  /* Hover/press travel: keep the state legible, drop the movement. */
+  .btn:hover,
+  .btn:active,
+  .angle-card:hover,
+  .value-card:hover,
+  .testimonial-card:hover,
+  .expert-card:hover .expert-card__media,
+  .product-card__link:hover .product-card__media,
+  .product-card__link:hover .product-card__media img,
+  .site-footer__social a:hover,
+  .site-footer__social a:active,
+  .bundle__tier:active,
+  .faq__q:active,
+  .mobile-menu__list a:active,
+  .site-header__burger:active,
+  .carousel__dot:active,
+  .product-selector__tab:active,
+  .carousel__arrow:active {
+    transform: none;
+  }
+
+  .faq__item[open] .faq__chevron { transform: none; }
+  .carousel--enhanced .carousel__slide { transform: none; opacity: 1; }
+  .carousel--enhanced .carousel__slide:not(.is-active) { opacity: 0.7; }
+}
+
+/* ---- Reduced transparency ----
+   Frost the translucent chrome into a solid surface rather than dropping
+   it: the bars still need to separate from the content scrolling under
+   them. */
+@media (prefers-reduced-transparency: reduce) {
+  .site-header,
+  .mobile-menu,
+  .product-subnav {
+    background: var(--color-bg);
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+  }
+  .carousel--pill .carousel__controls {
+    background: var(--color-bg);
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+  }
+  .section--scheme-ink .carousel--pill .carousel__controls { background: #2a2a2a; }
+}
+
+/* ---- Increased contrast ----
+   Near-solid surfaces with a defined edge, and no low-opacity text. */
+@media (prefers-contrast: more) {
+  .site-header, .product-subnav, .mobile-menu {
+    background: var(--color-bg);
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    border-bottom: 1px solid var(--color-ink);
+  }
+  .site-header::after, .product-subnav::after { display: none; }
+  .lead, .angle-card__text, .stat__caption, .ingredient__role, .compare__row-value {
+    color: var(--color-ink);
+  }
+  .bundle__tier { border-color: var(--color-ink); }
+  .btn--outline { box-shadow: inset 0 0 0 2px var(--color-ink); }
 }

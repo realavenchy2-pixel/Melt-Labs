@@ -16,7 +16,12 @@
 <section id="offer" class="section offer">
   <div class="container">
     <div class="offer__grid">
-      <div class="offer__media" data-reveal>
+      {%- comment -%}
+        No [data-reveal] here: this is the first section on the product
+        template and its image is the LCP element. Fading it in would
+        delay LCP behind a deferred script.
+      {%- endcomment -%}
+      <div class="offer__media">
         {%- if product != blank and product.images.size > 1 -%}
           {%- capture slides -%}
             {%- for image in product.images -%}
@@ -46,7 +51,7 @@
         {%- endif -%}
       </div>
 
-      <div class="offer__panel" data-reveal style="--reveal-i: 1;">
+      <div class="offer__panel">
         {%- if section.settings.eyebrow != blank -%}
           <span class="eyebrow">{{ section.settings.eyebrow }}</span>
         {%- endif -%}
@@ -146,12 +151,13 @@
                 <p class="bundle__note">{{ section.settings.bundle_note }}</p>
               {%- endif -%}
             {%- else -%}
-              <div class="offer__qty-row">
-                <div class="offer__field offer__field--qty">
-                  <label for="offer-qty-{{ section.id }}">Quantity</label>
-                  <input type="number" id="offer-qty-{{ section.id }}" name="quantity" value="1" min="1">
-                </div>
-              </div>
+              {%- comment -%}
+                No quantity stepper: one bottle is the default purchase and
+                the tier blocks above are how a shopper buys more. The
+                hidden field keeps the posted quantity explicit rather
+                than relying on Shopify's implicit default.
+              {%- endcomment -%}
+              <input type="hidden" name="quantity" value="1">
             {%- endif -%}
 
             <input type="hidden" name="id" value="{{ variant.id }}">
@@ -164,11 +170,18 @@
                 data-bundle-add
                 {% unless variant.available %}disabled{% endunless %}
               >
-                {%- if variant.available %}Add to bag{% else %}Sold out{% endif -%}
+                {%- if variant.available -%}
+                  {{ section.settings.add_label | default: 'Add to bag' }}
+                {%- else -%}
+                  Sold out
+                {%- endif -%}
                 <span data-bundle-total-suffix></span>
               </button>
               {%- if tier_count == 0 -%}{{ form | payment_button }}{%- endif -%}
             </div>
+            {%- if section.settings.under_button != blank -%}
+              <p class="offer__under-button">{{ section.settings.under_button }}</p>
+            {%- endif -%}
           {%- endform -%}
 
           {%- if section.settings.reassurance != blank -%}
@@ -261,6 +274,20 @@
       "default": "1 / 1"
     },
     { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "MELT LABS" },
+    {
+      "type": "text",
+      "id": "add_label",
+      "label": "Add to cart button label",
+      "info": "Leave blank for the default 'Add to bag'. The price is never baked in here - Shopify renders it dynamically.",
+      "default": "Add to bag"
+    },
+    {
+      "type": "text",
+      "id": "under_button",
+      "label": "Under-button reassurance",
+      "info": "Small line directly beneath the add to cart button.",
+      "default": ""
+    },
     {
       "type": "text",
       "id": "tagline",

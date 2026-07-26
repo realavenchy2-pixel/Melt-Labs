@@ -45,6 +45,13 @@
     }
   </style>
 
+  {%- comment -%}
+    Marks the document as JS-capable before first paint. Scroll reveals are
+    scoped to .js, so if the deferred scroll-fx.js never runs the content
+    stays visible instead of being stuck at opacity 0.
+  {%- endcomment -%}
+  <script>document.documentElement.classList.add('js');</script>
+
   {{ 'theme.css' | asset_url | stylesheet_tag }}
 
   {{ content_for_header }}

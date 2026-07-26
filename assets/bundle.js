@@ -47,6 +47,27 @@
     });
     sync();
 
+    /* Status line for pending/error feedback. Created here rather than in
+       Liquid so the no-JS path stays a plain native form. */
+    var status = null;
+    function statusEl() {
+      if (status) return status;
+      status = document.createElement('p');
+      status.className = 'bundle__status';
+      status.setAttribute('role', 'status');
+      status.setAttribute('aria-live', 'polite');
+      var actions = form.querySelector('.offer__actions') || form;
+      actions.insertAdjacentElement('afterend', status);
+      return status;
+    }
+
+    function setPending(on) {
+      if (!addBtn) return;
+      addBtn.disabled = on;
+      addBtn.classList.toggle('is-loading', on);
+      addBtn.setAttribute('aria-busy', on ? 'true' : 'false');
+    }
+
     form.addEventListener('submit', function (e) {
       var choice = selected();
       if (!choice) return; /* let the native form handle it */
@@ -57,7 +78,9 @@
       var idField = form.querySelector('[name="id"]');
       if (!idField) { form.submit(); return; }
 
-      if (addBtn) { addBtn.disabled = true; addBtn.classList.add('is-loading'); }
+      setPending(true);
+      statusEl().textContent = 'Adding to your bag…';
+      status.classList.remove('bundle__status--error');
 
       fetch('/cart/add.js', {
         method: 'POST',
@@ -69,6 +92,9 @@
           return res.json();
         })
         .then(function () {
+          /* Completion feedback before the navigation, so a slow cart
+             page still reads as success rather than a stalled tap. */
+          statusEl().textContent = 'Added. Taking you to your bag…';
           if (code) {
             /* Apply the discount, then land on the cart so the shopper
                sees the agreed total and every unit before checkout. */
@@ -78,9 +104,12 @@
           }
         })
         .catch(function () {
-          /* Fall back to a normal form post so the shopper is never stuck. */
-          if (addBtn) { addBtn.disabled = false; addBtn.classList.remove('is-loading'); }
-          form.submit();
+          /* Say what happened and re-arm the button. The shopper decides
+             whether to retry - a silent full-page resubmit looks like the
+             tap did nothing. */
+          setPending(false);
+          statusEl().textContent = 'That didn’t go through. Check your connection and try again.';
+          status.classList.add('bundle__status--error');
         });
     });
   });

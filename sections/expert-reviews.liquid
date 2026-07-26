@@ -8,6 +8,11 @@
 
 {%- assign scheme = section.settings.scheme | default: 'tint' -%}
 
+{%- comment -%}
+  Renders nothing when there are no expert blocks, so removing unverified
+  quotes leaves no empty carousel behind.
+{%- endcomment -%}
+{%- if section.blocks.size > 0 -%}
 <section class="section section--flush section--scheme-{{ scheme }}" style="padding-block: var(--section-pad);">
   <div class="container section-header section-header--center" data-reveal>
     <h2 class="h2">{% render 'accent-text', text: section.settings.headline, color: 'blue' %}</h2>
@@ -73,6 +78,7 @@
     -%}
   </div>
 </section>
+{%- endif -%}
 
 {% schema %}
 {

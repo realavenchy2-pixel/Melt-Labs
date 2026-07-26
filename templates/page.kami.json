@@ -29,78 +29,24 @@
         "aspect_desktop": "16 / 9",
         "aspect_mobile": "9 / 16",
         "media_fit": "cover",
-        "eyebrow": "MELT LABS",
-        "headline": "Four drops. *Fuller-looking* hair.",
-        "subhead": "A Japanese peptide serum for your scalp's nightly reset.",
-        "cta_label": "See the ritual",
+        "eyebrow": "MODERN PEPTIDE SCIENCE. JAPANESE BOTANICAL RITUAL.",
+        "headline": "Your Follicles May Not Be Dead. *They May Be Miniaturized.*",
+        "subhead": "KAMI 15 is a minoxidil-free, leave-in peptide serum designed for thinning-looking areas. Four drops a day support a healthier scalp environment, fuller-looking density, and stronger-feeling strands, without pills, needles, added fragrance, or a greasy finish.",
+        "cta_label": "Start my 60-day follicle ritual",
         "product": "",
-        "cta_link": "shopify://products/kami-15"
+        "cta_link": "shopify://products/kami-15",
+        "microcopy": "60 mL bottle · Free U.S. shipping · 60-day money-back guarantee. Four drops. Sixty seconds. Leave it in."
       }
     },
     "testimonials": {
       "type": "testimonial-carousel",
-      "blocks": {
-        "t1": {
-          "type": "slide",
-          "settings": {
-            "image": "shopify://shop_images/Make_before_after_images_2K_202607190108_2.jpg",
-            "quote": "My part line looks fuller in the mirror.",
-            "author": "Placeholder, 38"
-          }
-        },
-        "slide_BNtrw8": {
-          "type": "slide",
-          "settings": {
-            "image": "shopify://shop_images/Make_before_after_images_2K_202607190108.jpg",
-            "quote": "Less hair on my pillow within weeks.",
-            "author": "Placeholder, 45"
-          }
-        },
-        "t3": {
-          "type": "slide",
-          "settings": {
-            "image": "shopify://shop_images/Make_before_after_photo_2K_202607190109.jpg",
-            "quote": "The shine is back. It feels alive again.",
-            "author": "Placeholder, 31"
-          }
-        },
-        "t2": {
-          "type": "slide",
-          "settings": {
-            "image": "shopify://shop_images/Woman_screenshot_before_after_2K_202607190108.jpg",
-            "quote": "Less hair on my pillow within weeks.",
-            "author": "Placeholder, 45"
-          }
-        },
-        "slide_aAqHk7": {
-          "type": "slide",
-          "settings": {
-            "image": "shopify://shop_images/Make_before_after_images_2K_202607190108_1.jpg",
-            "quote": "Less hair on my pillow within weeks.",
-            "author": "Placeholder, 45"
-          }
-        },
-        "slide_NCnLMn": {
-          "type": "slide",
-          "settings": {
-            "image": "shopify://shop_images/Make_before_after_screenshot_2K_202607190108.jpg",
-            "quote": "Less hair on my pillow within weeks.",
-            "author": "Placeholder, 45"
-          }
-        }
-      },
-      "block_order": [
-        "t1",
-        "slide_BNtrw8",
-        "t3",
-        "t2",
-        "slide_aAqHk7",
-        "slide_NCnLMn"
-      ],
+      "blocks": {},
+      "block_order": [],
       "settings": {
-        "headline": "Real routines. Real hair.",
+        "headline": "Real Routines. Real Hair Journeys.",
         "autoplay": true,
-        "autoplay_interval": 4500
+        "autoplay_interval": 4500,
+        "subhead": "No clinic appointments. No complicated application schedule. No completely rebuilding your morning. Just four drops worked into the areas where your hair looks thinner."
       }
     },
     "ingredients": {
@@ -112,7 +58,7 @@
             "image": "shopify://shop_images/hair_I_card_2K_202607181451.jpg",
             "name": "Copper Tripeptide-1",
             "source": "GHK-Cu",
-            "role": "The signal peptide. Supports a healthy scalp environment, the foundation follicles need to do their best work."
+            "role": "A signal peptide used in cosmetic scalp formulas to support a healthy-looking environment around the follicle."
           }
         },
         "i2": {
@@ -121,7 +67,7 @@
             "image": "shopify://shop_images/IMG_4030.jpg",
             "name": "Biotinoyl Tripeptide-1",
             "source": "",
-            "role": "A biotin-bound peptide studied for supporting the look of anchored, thicker-feeling strands."
+            "role": "A biotin-bound cosmetic peptide studied in topical complexes designed to support thicker-looking, better-anchored strands."
           }
         },
         "i3": {
@@ -130,7 +76,7 @@
             "image": "shopify://shop_images/Apple_tech_meets_supps_style_202607201618.jpg",
             "name": "Tsubaki Oil",
             "source": "Camellia japonica, seed",
-            "role": "Japan's heritage hair oil. Featherweight lipids for shine and softness without residue."
+            "role": "A lightweight Japanese hair-care oil that conditions strands for softness and shine without a heavy finish."
           }
         },
         "i4": {
@@ -139,7 +85,7 @@
             "image": "shopify://shop_images/Apple_tech_meets_supps_style_202607201615.jpg",
             "name": "Rice Bran Extract",
             "source": "Komenuka",
-            "role": "The Japanese beauty staple. Conditions the scalp and supports a balanced moisture barrier."
+            "role": "Supports scalp moisture and helps maintain a balanced, conditioned skin barrier."
           }
         },
         "i5": {
@@ -148,7 +94,7 @@
             "image": "shopify://shop_images/Apple_tech_meets_supps_style_202607201640.jpg",
             "name": "Hinoki Cypress Extract",
             "source": "Chamaecyparis obtusa",
-            "role": "A traditional Japanese botanical that keeps the scalp feeling fresh, calm, and clean."
+            "role": "A traditional Japanese botanical selected to keep the scalp feeling fresh, comfortable, and clean."
           }
         },
         "i6": {
@@ -157,7 +103,7 @@
             "image": "shopify://shop_images/Matcha_bowl_photo_style_2K_202607201626.jpg",
             "name": "Matcha",
             "source": "EGCG catechins",
-            "role": "Green tea antioxidants help protect the scalp and strands from everyday oxidative stress."
+            "role": "Provides antioxidant catechins that help protect the scalp and strands from everyday oxidative stress."
           }
         },
         "b1": {
@@ -198,65 +144,65 @@
       ],
       "settings": {
         "scheme": "ink",
-        "headline": "What's inside. And what each drop does.",
-        "subhead": "Signal peptides plus Japan's heritage hair botanicals, chosen for the scalp first.",
-        "format_note": "1 oz / 30 mL glass dropper bottle. Fragrance-free.",
+        "headline": "Peptide Precision Meets Japanese Scalp Care.",
+        "subhead": "KAMI 15 combines modern cosmetic peptides with Japanese-inspired scalp botanicals in one lightweight leave-in serum.",
+        "format_note": "60 mL glass dropper bottle. Fragrance-free. Research strength varies by ingredient and includes laboratory, preclinical, cosmetic, and emerging human evidence. KAMI is a cosmetic serum and is not intended to treat a medical condition.",
         "base_title": "Base ingredients"
       }
     },
     "benefit": {
       "type": "benefit-statement",
       "blocks": {
-        "s1": {
+        "stmt_1": {
           "type": "statement",
           "settings": {
-            "headline": "Your hair's night shift. *Handled.*",
-            "subhead": ""
+            "headline": "Miniaturized Is Not the Same as *Gone.*",
+            "subhead": "For years, people looked at thinning areas and assumed every barely visible follicle was permanently dead. But pattern thinning often happens through miniaturization: the follicle gradually produces strands that are finer, weaker, shorter-lived, and harder to see under normal lighting. Over time, once-thick strands can become so small they appear to have disappeared. That changes the question from “Is this follicle dead?” to “How do I better support the environment around thinning-looking follicles?” That is the question KAMI 15 was created around."
           }
         },
-        "a1": {
+        "ang_1": {
           "type": "slide",
           "settings": {
-            "title": "Fuller look",
-            "text": "Peptides support the scalp so hair can look denser at the root.",
+            "title": "Support the scalp environment",
+            "text": "Hair begins at the scalp. KAMI’s peptides and botanicals help support the moisture, comfort, and cosmetic environment surrounding thinning-looking areas.",
             "show_media_slot": false,
             "accent": true
           }
         },
-        "a2": {
+        "ang_2": {
           "type": "slide",
           "settings": {
-            "title": "Softer feel",
-            "text": "Tsubaki and rice bran leave strands silky, never greasy.",
+            "title": "Support stronger-looking strands",
+            "text": "Conditioned strands appear smoother, healthier, and less fragile, helping the hair you still have look its best.",
             "show_media_slot": false,
             "accent": false
           }
         },
-        "a3": {
+        "ang_3": {
           "type": "slide",
           "settings": {
-            "title": "Calmer scalp",
-            "text": "Hinoki keeps things fresh and comfortable, even on sensitive skin.",
+            "title": "Support the appearance of density",
+            "text": "With consistent use, the goal is hair that looks fuller at the root and less visibly sparse under mirrors, phone cameras, and overhead lighting.",
             "show_media_slot": false,
             "accent": false
           }
         },
-        "a4": {
+        "ang_4": {
           "type": "slide",
           "settings": {
-            "title": "Zero residue",
-            "text": "Featherweight and fragrance-free. Apply at night, forget it by morning.",
+            "title": "Defend the hair you still have",
+            "text": "Conditioning botanicals support softer, stronger-feeling strands and help reduce the visible effects of dryness and breakage.",
             "show_media_slot": false,
             "accent": false
           }
         }
       },
       "block_order": [
-        "s1",
-        "a1",
-        "a2",
-        "a3",
-        "a4"
+        "stmt_1",
+        "ang_1",
+        "ang_2",
+        "ang_3",
+        "ang_4"
       ],
       "settings": {
         "scheme": "white"
@@ -280,139 +226,155 @@
       ],
       "settings": {
         "scheme": "ink",
-        "headline": "The *Science* Behind KAMI",
-        "body": "KAMI pairs signal peptides with Japanese botanicals to care for the scalp first, because healthier-looking hair starts where it grows.",
+        "headline": "The Research Changed the *Conversation.*",
+        "body": "Emerging follicle research has challenged the old assumption that every weakened follicle is simply gone forever. Researchers now understand pattern thinning as a progressive process involving shorter visible growth, finer strands, reduced follicle activity, and progressive miniaturization. KAMI 15 is not an investigational drug and does not claim to be one. It is the currently available, minoxidil-free cosmetic ritual for people who want to support thinning-looking areas now, without waiting for the next experimental treatment to reach the market.",
         "chapter_aspect": "4 / 5",
-        "stat_intro": "In an in-house study",
+        "stat_intro": "In our in-house consumer study",
         "stat_1_value": "92%",
         "stat_1_caption": "said their hair looked fuller",
         "stat_2_value": "89%",
         "stat_2_caption": "noticed less fallout from breakage",
         "stat_3_value": "87%",
         "stat_3_caption": "said their scalp felt healthier",
-        "attribution": "Based on our in-house study. Individual results may vary."
+        "attribution": "Based on Melt Labs’ in-house consumer study, not a clinical trial. Individual experiences and timelines vary."
       }
     },
     "who": {
       "type": "icon-list",
       "blocks": {
-        "w1": {
+        "aud_1": {
           "type": "item",
           "settings": {
             "icon": "sparkle",
-            "text": "Hair that's losing its density look"
+            "text": "Your part line appears wider than it used to."
           }
         },
-        "w2": {
-          "type": "item",
-          "settings": {
-            "icon": "clock",
-            "text": "People playing the long game, not chasing quick fixes"
-          }
-        },
-        "w3": {
-          "type": "item",
-          "settings": {
-            "icon": "leaf",
-            "text": "Natural, needle-free scalp care"
-          }
-        },
-        "w4": {
-          "type": "item",
-          "settings": {
-            "icon": "shield",
-            "text": "Sensitive scalps. Fragrance-free formula"
-          }
-        },
-        "w5": {
+        "aud_2": {
           "type": "item",
           "settings": {
             "icon": "droplet",
-            "text": "Color-treated and heat-styled hair"
+            "text": "Your crown looks thinner under overhead lighting."
           }
         },
-        "w6": {
+        "aud_3": {
+          "type": "item",
+          "settings": {
+            "icon": "leaf",
+            "text": "Your temples or hairline have lost visible density."
+          }
+        },
+        "aud_4": {
+          "type": "item",
+          "settings": {
+            "icon": "shield",
+            "text": "Your strands feel finer, weaker, or easier to break."
+          }
+        },
+        "aud_5": {
+          "type": "item",
+          "settings": {
+            "icon": "clock",
+            "text": "You notice more hair in the brush or shower."
+          }
+        },
+        "aud_6": {
+          "type": "item",
+          "settings": {
+            "icon": "flask",
+            "text": "You want a minoxidil-free cosmetic option."
+          }
+        },
+        "aud_7": {
+          "type": "item",
+          "settings": {
+            "icon": "heart",
+            "text": "You prefer a simple leave-in serum over pills, needles, or clinic visits."
+          }
+        },
+        "aud_8": {
           "type": "item",
           "settings": {
             "icon": "check",
-            "text": "Anyone building a one-minute night routine"
+            "text": "You are willing to stay consistent instead of chasing overnight promises."
           }
         }
       },
       "block_order": [
-        "w1",
-        "w2",
-        "w3",
-        "w4",
-        "w5",
-        "w6"
+        "aud_1",
+        "aud_2",
+        "aud_3",
+        "aud_4",
+        "aud_5",
+        "aud_6",
+        "aud_7",
+        "aud_8"
       ],
       "settings": {
-        "headline": "Who this is for",
+        "headline": "Built for People Who Refuse to Wait Until It Looks Worse.",
         "scheme": "ink"
       }
     },
     "benefits_2": {
       "type": "benefit-statement",
       "blocks": {
-        "h1": {
+        "st2_1": {
           "type": "statement",
           "settings": {
-            "headline": "Peptides, *precise.*",
-            "subhead": "Signal molecules chosen for the scalp, not the shelf."
+            "headline": "Support the Follicle Environment Before More Density *Disappears.*",
+            "subhead": "KAMI 15 combines modern cosmetic peptides with Japanese-inspired scalp botanicals in one lightweight leave-in serum. This is not an overnight cover-up. It is a sixty-second daily ritual for people playing the long game with their hair."
           }
         },
-        "h2": {
+        "st2_2": {
           "type": "statement",
           "settings": {
-            "headline": "Botanicals, *proven by tradition.*",
-            "subhead": "Tsubaki, komenuka, hinoki: Japan's centuries-old hair ritual, distilled."
+            "headline": "Hair Works on a *Monthly* Timeline, Not a Weekend Timeline.",
+            "subhead": "The first differences people commonly notice are cosmetic: a more comfortable-feeling scalp, softer and better-conditioned strands, less fragile-feeling hair, and less visible fallout associated with breakage. The appearance of fuller density takes longer because hair follows a slow biological cycle. Consistency matters more than using too much serum."
           }
         },
-        "g1": {
+        "step_1": {
           "type": "slide",
           "settings": {
-            "title": "Night-time ritual",
-            "text": "Four drops before bed. The serum works while you sleep.",
+            "title": "Apply",
+            "text": "Place four drops total directly onto thinning-looking areas. Use once daily or divide the four drops between morning and night.",
             "show_media_slot": false,
             "accent": false
           }
         },
-        "g2": {
+        "step_2": {
           "type": "slide",
           "settings": {
-            "title": "Fragrance-free",
-            "text": "No perfume, no menthol sting. Just the formula.",
+            "title": "Massage",
+            "text": "Rub the serum gently into a dry or damp scalp for approximately sixty seconds.",
             "show_media_slot": false,
             "accent": false
           }
         },
-        "g3": {
+        "step_3": {
           "type": "slide",
           "settings": {
-            "title": "Featherweight finish",
-            "text": "Absorbs fast. No grease on your pillow or your morning style.",
+            "title": "Leave in",
+            "text": "Do not rinse. Allow it to absorb and continue with your normal routine.",
             "show_media_slot": false,
             "accent": false
           }
         },
-        "g4": {
+        "step_4": {
           "type": "slide",
           "settings": {
-            "title": "Styled-hair safe",
-            "text": "Plays well with color, keratin, and heat styling.",
+            "title": "Repeat",
+            "text": "Use consistently and photograph the same areas monthly.",
             "show_media_slot": false,
             "accent": true
           }
         }
       },
       "block_order": [
-        "h1",
-        "h2",
-        "g1",
-        "g2",
-        "g3",
-        "g4"
+        "st2_1",
+        "st2_2",
+        "step_1",
+        "step_2",
+        "step_3",
+        "step_4"
       ],
       "settings": {
         "scheme": "tint"
@@ -421,172 +383,172 @@
     "potency": {
       "type": "potency-stats",
       "blocks": {
-        "p1": {
+        "rit_1": {
           "type": "stat",
           "settings": {
             "intro": "Just",
             "value": "4 drops",
-            "caption": "massaged into the scalp each night"
+            "caption": "total each day, on thinning-looking areas"
           }
         },
-        "p2": {
+        "rit_2": {
           "type": "stat",
           "settings": {
-            "intro": "In about",
+            "intro": "About",
             "value": "60 sec",
-            "caption": "the whole ritual is done"
+            "caption": "to massage it into a dry or damp scalp"
+          }
+        },
+        "rit_3": {
+          "type": "stat",
+          "settings": {
+            "intro": "One bottle lasts",
+            "value": "1–1.5 mo",
+            "caption": "60 mL, depending on how you apply it"
           }
         }
       },
       "block_order": [
-        "p1",
-        "p2"
+        "rit_1",
+        "rit_2",
+        "rit_3"
       ],
       "settings": {
         "image": "shopify://shop_images/Serum_squeezed_into_hair_2K_202607201515_aec85d18-114a-424e-b9ae-6e789ebe0100.jpg",
-        "headline": "Four drops. One minute. That's the ritual.",
-        "body": "Massage into the scalp each night and let it absorb while you sleep. Consistency, not effort, is what compounds."
+        "headline": "Four Drops Total. Sixty Seconds. Leave It In.",
+        "body": "One 60 mL bottle lasts approximately one to one-and-a-half months, depending on application. Do not trust your memory: take one photo before beginning, then repeat it every month using the same room, overhead lighting, camera angle, hairstyle, and dry hair. Track the part line, crown, temples, hairline, and visible scalp under bright light. Boring, consistent photos reveal more than checking the mirror ten times a day."
       }
     },
     "compare": {
       "type": "comparison",
       "blocks": {
-        "c1": {
+        "cmp_1": {
+          "type": "row",
+          "settings": {
+            "label": "Format",
+            "value_a": "Lightweight leave-in cosmetic serum",
+            "value_b": "Drug-based topical treatment",
+            "value_c": "Professional procedures"
+          }
+        },
+        "cmp_2": {
+          "type": "row",
+          "settings": {
+            "label": "Routine",
+            "value_a": "Four drops total daily",
+            "value_b": "Continued medicated application",
+            "value_c": "Scheduled appointments and maintenance"
+          }
+        },
+        "cmp_3": {
           "type": "row",
           "settings": {
             "label": "Approach",
-            "value_a": "Four drops, one minute, every night",
-            "value_b": "Daily medicated application",
-            "value_c": "Procedures scheduled at a clinic"
+            "value_a": "Peptide and botanical scalp support",
+            "value_b": "Pharmacological action",
+            "value_c": "Mechanical, injectable, transplant, or light-based procedures"
           }
         },
-        "c2": {
+        "cmp_4": {
           "type": "row",
           "settings": {
-            "label": "How it works",
-            "value_a": "Peptides and botanicals support a healthy scalp environment",
-            "value_b": "Drug activity on the follicle while applied",
-            "value_c": "Mechanical or light-based stimulation"
+            "label": "Feel",
+            "value_a": "Fragrance-free and non-greasy",
+            "value_b": "Depends on formula; irritation may occur for some users",
+            "value_c": "Varies by treatment"
           }
         },
-        "c3": {
+        "cmp_5": {
           "type": "row",
           "settings": {
-            "label": "The feel",
-            "value_a": "Featherweight, fragrance-free serum",
-            "value_b": "Medicated feel; some experience irritation",
-            "value_c": "Downtime varies by treatment"
+            "label": "Best for",
+            "value_a": "Thinning-looking areas and long-term cosmetic scalp care",
+            "value_b": "Diagnosed hair-loss conditions under appropriate guidance",
+            "value_c": "People pursuing professionally supervised intervention"
           }
         },
-        "c4": {
+        "cmp_6": {
           "type": "row",
           "settings": {
-            "label": "Commitment",
-            "value_a": "A minute a night",
-            "value_b": "Ongoing prescription refills",
-            "value_c": "Repeat sessions to maintain"
+            "label": "Prescription",
+            "value_a": "Not required",
+            "value_b": "Depends on medication",
+            "value_c": "Varies by procedure"
           }
         },
-        "c5": {
+        "cmp_7": {
           "type": "row",
           "settings": {
-            "label": "When you stop",
-            "value_a": "Your ritual and scalp care are yours to keep",
-            "value_b": "Results typically fade after stopping",
-            "value_c": "Maintenance visits required"
+            "label": "Minoxidil",
+            "value_a": "None",
+            "value_b": "Present in minoxidil products",
+            "value_c": "Not applicable"
           }
         }
       },
       "block_order": [
-        "c1",
-        "c2",
-        "c3",
-        "c4",
-        "c5"
+        "cmp_1",
+        "cmp_2",
+        "cmp_3",
+        "cmp_4",
+        "cmp_5",
+        "cmp_6",
+        "cmp_7"
       ],
       "settings": {
-        "headline": "Built for the *long run.*",
-        "subhead": "Three roads to fuller-looking hair. Here's how the nightly-serum approach compares.",
-        "col_a_title": "KAMI",
-        "col_a_sub": "A nightly ritual for the long run",
-        "col_b_title": "Prescription topicals",
-        "col_b_sub": "Drug-based, tied to continued use",
-        "col_c_title": "In-clinic treatments",
-        "col_c_sub": "High-intensity, high-cost sessions",
-        "note": "KAMI is a cosmetic serum and is not intended to treat, cure, or prevent hair loss or any medical condition. For medical concerns about hair loss, talk with a dermatologist."
+        "headline": "Choose the Hair Routine You Can Actually *Continue.*",
+        "subhead": "Three different routes, three different commitments. Here is how they actually compare.",
+        "col_a_title": "KAMI 15",
+        "col_a_sub": "Cosmetic leave-in serum",
+        "col_b_title": "Medicated topical",
+        "col_b_sub": "Drug-based treatment",
+        "col_c_title": "In-clinic",
+        "col_c_sub": "Professional procedures",
+        "note": "KAMI is a cosmetic serum and does not replace medical treatment. Consult a dermatologist about sudden, severe, patchy, or medically concerning hair loss."
       }
     },
     "values": {
       "type": "values-carousel",
       "blocks": {
-        "v1": {
+        "std_1": {
           "type": "card",
           "settings": {
             "icon": "flask",
-            "title": "Our Standards",
-            "text": "Peptides and botanicals sourced for potency, then third-party tested before a single bottle is filled."
+            "title": "The Formula",
+            "text": "Minoxidil-free, fragrance-free, and lightweight. Third-party tested, with complete ingredient transparency."
           }
         },
-        "v2": {
+        "std_2": {
           "type": "card",
           "settings": {
             "icon": "heart",
-            "title": "Our Mission",
-            "text": "Melt Labs exists to make natural self-care feel effortless, not clinical."
+            "title": "The Ritual",
+            "text": "A leave-in serum for dry or damp scalp, suitable for men and women. Four drops total daily is the whole routine."
           }
         },
-        "v3": {
+        "std_3": {
           "type": "card",
           "settings": {
             "icon": "shield",
-            "title": "Our Promise",
-            "text": "Full transparency in formulation. Every ingredient and its job, on the label and on this page."
+            "title": "The Promise",
+            "text": "Manufactured in Texas. Free U.S. shipping and a 60-day money-back guarantee on every bottle."
           }
         }
       },
       "block_order": [
-        "v1",
-        "v2",
-        "v3"
+        "std_1",
+        "std_2",
+        "std_3"
       ],
       "settings": {
-        "headline": "Tested. Verified. Trusted.",
-        "body": "Every batch is third-party tested for purity before it ships."
+        "headline": "Precise Formula. Simple Ritual. No Mystery Blend.",
+        "body": "Third-party tested and manufactured in Texas, with the full ingredient list on the label and on this page."
       }
     },
     "experts": {
       "type": "expert-reviews",
-      "blocks": {
-        "e1": {
-          "type": "expert",
-          "settings": {
-            "quote": "Scalp health is the part of hair care most people skip.",
-            "name": "Dr. Placeholder",
-            "title": "Dermatology"
-          }
-        },
-        "e2": {
-          "type": "expert",
-          "settings": {
-            "quote": "Consistency with a gentle nightly routine beats intensity.",
-            "name": "Placeholder",
-            "title": "Trichologist"
-          }
-        },
-        "e3": {
-          "type": "expert",
-          "settings": {
-            "quote": "Peptides plus lightweight botanicals is a smart, wearable stack.",
-            "name": "Dr. Placeholder",
-            "title": "Cosmetic Science"
-          }
-        }
-      },
-      "block_order": [
-        "e1",
-        "e2",
-        "e3"
-      ],
+      "blocks": {},
+      "block_order": [],
       "disabled": true,
       "settings": {
         "headline": "What *experts* are saying",
@@ -599,56 +561,96 @@
     "faq": {
       "type": "faq",
       "blocks": {
-        "q1": {
+        "faq_1": {
           "type": "qa",
           "settings": {
-            "question": "How do I use KAMI?",
-            "answer": "Four drops onto the scalp each night, massaged in for about a minute. It absorbs fast and works while you sleep."
+            "question": "How do I apply KAMI 15?",
+            "answer": "Apply four drops total directly to thinning-looking areas each day. Use all four at once or divide them between morning and evening. Massage into a dry or damp scalp and leave the serum in."
           }
         },
-        "q2": {
+        "faq_2": {
           "type": "qa",
           "settings": {
-            "question": "Will it make my hair greasy?",
-            "answer": "No. The serum is featherweight and fragrance-free, designed to absorb without residue on your pillow or your morning style."
+            "question": "Do I rinse it out?",
+            "answer": "No. KAMI is a leave-in scalp serum."
           }
         },
-        "q3": {
+        "faq_3": {
           "type": "qa",
           "settings": {
-            "question": "Is it safe for color-treated hair?",
-            "answer": "Yes. KAMI is applied to the scalp, not the lengths, and plays well with color, keratin, and heat styling."
+            "question": "How long does one bottle last?",
+            "answer": "The 60 mL bottle lasts approximately one to one-and-a-half months when used as directed."
           }
         },
-        "q4": {
+        "faq_4": {
           "type": "qa",
           "settings": {
-            "question": "When will I notice a difference?",
-            "answer": "Hair works on long cycles. Most people notice softness and scalp comfort first, with fuller-looking hair building over consistent nightly use across a few months."
+            "question": "Is KAMI made with minoxidil?",
+            "answer": "No. KAMI is completely minoxidil-free."
           }
         },
-        "q5": {
+        "faq_5": {
           "type": "qa",
           "settings": {
             "question": "Is KAMI a treatment for hair loss?",
-            "answer": "No. KAMI is a cosmetic serum that supports a healthy-looking scalp and hair. For medical concerns about hair loss, talk with a dermatologist."
+            "answer": "No. KAMI is a cosmetic scalp and hair serum designed to support fuller-looking density and healthier-looking hair. Speak with a dermatologist about medical hair-loss concerns."
           }
         },
-        "q6": {
+        "faq_6": {
           "type": "qa",
           "settings": {
-            "question": "What is your return policy?",
-            "answer": "If it's not for you, reach out to our support team within 30 days of delivery and we'll make it right."
+            "question": "Does KAMI wake up dead follicles?",
+            "answer": "KAMI does not claim to resurrect permanently inactive follicles. It is designed to support the scalp environment around thinning-looking and miniaturized areas."
+          }
+        },
+        "faq_7": {
+          "type": "qa",
+          "settings": {
+            "question": "When should I expect visible results?",
+            "answer": "Timelines vary. Scalp comfort and strand conditioning may be noticed first. Fuller-looking density requires consistent use over a period of months because hair follows a slow cycle."
+          }
+        },
+        "faq_8": {
+          "type": "qa",
+          "settings": {
+            "question": "Can men and women use the same formula?",
+            "answer": "Yes. The same KAMI formula and application directions are designed for both men and women."
+          }
+        },
+        "faq_9": {
+          "type": "qa",
+          "settings": {
+            "question": "Can I use it on color-treated hair?",
+            "answer": "Yes. Apply KAMI to the scalp rather than saturating the lengths. Patch-test first if you have a sensitive scalp."
+          }
+        },
+        "faq_10": {
+          "type": "qa",
+          "settings": {
+            "question": "Is it greasy or strongly scented?",
+            "answer": "No. KAMI is lightweight and fragrance-free."
+          }
+        },
+        "faq_11": {
+          "type": "qa",
+          "settings": {
+            "question": "What is the return policy?",
+            "answer": "KAMI is protected by a 60-day money-back guarantee. Contact support within 60 days of delivery if it is not right for you."
           }
         }
       },
       "block_order": [
-        "q1",
-        "q2",
-        "q3",
-        "q4",
-        "q5",
-        "q6"
+        "faq_1",
+        "faq_2",
+        "faq_3",
+        "faq_4",
+        "faq_5",
+        "faq_6",
+        "faq_7",
+        "faq_8",
+        "faq_9",
+        "faq_10",
+        "faq_11"
       ],
       "settings": {
         "headline": "Questions, *answered.*",
@@ -712,8 +714,8 @@
       ],
       "settings": {
         "headline": "Scientific references",
-        "intro": "Cosmetic ingredient research spans in vitro, animal, and small human studies, and strength varies by ingredient. Peptide data is largely lab-based; the botanical evidence leans on tradition plus emerging studies. Claims on this page are calibrated accordingly.",
-        "disclaimer": "In-house study statistics are based on our own study; individual results may vary. KAMI is a cosmetic product and is not intended to diagnose, treat, cure, or prevent any disease or medical condition, including hair loss."
+        "intro": "Evidence below is grouped by what it actually shows. Laboratory and preclinical work studies an ingredient in cells or animals, not this finished serum. Ingredient evidence comes from human or cosmetic studies of a single component, often at a different concentration or in a different base. Finished-product evidence would mean a study of KAMI 15 itself; where none is listed, none is claimed. KAMI 15 is a cosmetic serum, not an investigational drug, and the in-house consumer study referenced on this page is a consumer study, not a clinical trial.",
+        "disclaimer": "In-house study figures come from Melt Labs' own consumer study; individual experiences and timelines vary. KAMI 15 is a cosmetic product and is not intended to diagnose, treat, cure, or prevent any disease. These statements have not been evaluated by the Food and Drug Administration."
       }
     }
   },

@@ -66,7 +66,12 @@
           {%- if value != blank -%}
             <div class="stat" data-reveal style="--reveal-i: {{ forloop.index0 }};">
               <p class="stat__intro">{{ section.settings.stat_intro }}</p>
-              <p class="stat__value" data-count-up="{{ value }}">0%</p>
+              {%- comment -%}
+                The real value ships in the markup. scroll-fx.js zeroes it
+                only once it knows it can animate, so a visitor without JS
+                reads the true statistic instead of "0%".
+              {%- endcomment -%}
+              <p class="stat__value" data-count-up="{{ value }}">{{ value }}</p>
               <p class="stat__caption">{{ caption }}</p>
             </div>
           {%- endif -%}
