@@ -16,7 +16,12 @@
 <section id="offer" class="section offer">
   <div class="container">
     <div class="offer__grid">
-      <div class="offer__media" data-reveal>
+      {%- comment -%}
+        No [data-reveal] here: this is the first section on the product
+        template and its image is the LCP element. Fading it in would
+        delay LCP behind a deferred script.
+      {%- endcomment -%}
+      <div class="offer__media">
         {%- if product != blank and product.images.size > 1 -%}
           {%- capture slides -%}
             {%- for image in product.images -%}
@@ -46,7 +51,7 @@
         {%- endif -%}
       </div>
 
-      <div class="offer__panel" data-reveal style="--reveal-i: 1;">
+      <div class="offer__panel">
         {%- if section.settings.eyebrow != blank -%}
           <span class="eyebrow">{{ section.settings.eyebrow }}</span>
         {%- endif -%}
@@ -146,12 +151,13 @@
                 <p class="bundle__note">{{ section.settings.bundle_note }}</p>
               {%- endif -%}
             {%- else -%}
-              <div class="offer__qty-row">
-                <div class="offer__field offer__field--qty">
-                  <label for="offer-qty-{{ section.id }}">Quantity</label>
-                  <input type="number" id="offer-qty-{{ section.id }}" name="quantity" value="1" min="1">
-                </div>
-              </div>
+              {%- comment -%}
+                No quantity stepper: one bottle is the default purchase and
+                the tier blocks above are how a shopper buys more. The
+                hidden field keeps the posted quantity explicit rather
+                than relying on Shopify's implicit default.
+              {%- endcomment -%}
+              <input type="hidden" name="quantity" value="1">
             {%- endif -%}
 
             <input type="hidden" name="id" value="{{ variant.id }}">

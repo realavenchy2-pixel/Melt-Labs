@@ -4,13 +4,19 @@
    3. Hero video autoplay safety-net for browsers that ignore the
       autoplay attribute under some network/battery conditions.
    4. Stat count-up: locked percentages animate from 0 when scrolled
-      into view, once.
-   5. FAQ accordion: smooth open/close height animation.
+      into view, once. The real value is what ships in the HTML, so a
+      no-JS visitor never sees a zeroed statistic.
+   5. FAQ accordion: smooth, interruptible open/close.
+   6. Media fade-in so late-decoding images arrive rather than snap.
    All of the above collapse to static under prefers-reduced-motion. */
 (function () {
   'use strict';
 
-  var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var motionQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
+  var reduceMotion = motionQuery.matches;
+  if (motionQuery.addEventListener) {
+    motionQuery.addEventListener('change', function (e) { reduceMotion = e.matches; });
+  }
 
   /* 1. Reveal on scroll */
   var revealEls = document.querySelectorAll('[data-reveal]');
@@ -116,19 +122,28 @@
     });
   }
 
-  /* 4. Stat count-up: animate the locked percentage values from 0 the
-     first time they scroll into view. Values/copy are never invented
-     here - only the number already in the markup is what animates. */
+  /* 4. Stat count-up. The markup ships the REAL value as text, so a
+     visitor without JS reads the true statistic instead of "0%". Only
+     once we know we can animate do we zero it and count up. */
   var countEls = document.querySelectorAll('[data-count-up]');
-  if (countEls.length) {
-    function finalize(el, raw) {
-      el.textContent = raw;
-    }
+  if (countEls.length && !reduceMotion) {
+    var pending = [];
+    countEls.forEach(function (el) {
+      var raw = el.getAttribute('data-count-up') || el.textContent;
+      var match = raw.match(/^(\d+(?:\.\d+)?)(.*)$/);
+      if (!match) return;
+      var decimals = (match[1].split('.')[1] || '').length;
+      /* Zero it only now, and reserve the final width so the row cannot
+         reflow as digits are added. */
+      el.style.minWidth = el.getBoundingClientRect().width + 'px';
+      el.textContent = (0).toFixed(decimals) + match[2];
+      pending.push(el);
+    });
+
     function animateCount(el) {
       var raw = el.getAttribute('data-count-up');
       var match = raw.match(/^(\d+(?:\.\d+)?)(.*)$/);
-      if (!match) { finalize(el, raw); return; }
-      if (reduceMotion) { finalize(el, raw); return; }
+      if (!match) return;
 
       var target = parseFloat(match[1]);
       var suffix = match[2];
@@ -142,7 +157,7 @@
         var eased = 1 - Math.pow(1 - progress, 3); /* ease-out cubic */
         el.textContent = (target * eased).toFixed(decimals) + suffix;
         if (progress < 1) requestAnimationFrame(step);
-        else finalize(el, raw);
+        else el.textContent = raw;
       }
       requestAnimationFrame(step);
     }
@@ -155,40 +170,87 @@
         }
       });
     }, { threshold: 0.6 });
-    countEls.forEach(function (el) { countObserver.observe(el); });
+    pending.forEach(function (el) { countObserver.observe(el); });
   }
 
   /* 5. FAQ accordion: native <details>/<summary> works without JS; this
-     enhancement smooth-animates the open/close height with WAAPI. */
+     enhancement smooth-animates the open/close.
+
+     Every animation is interruptible. A second tap mid-flight cancels
+     the running animation, reads the height actually on screen, and
+     retargets from there - it is never swallowed, and the panel never
+     jumps back to a logical value the shopper cannot see. */
   document.querySelectorAll('[data-faq-item]').forEach(function (item) {
     var summary = item.querySelector('summary');
     var content = item.querySelector('[data-faq-content]');
-    if (!summary || !content || reduceMotion) return;
+    if (!summary || !content) return;
 
-    var animating = false;
+    var current = null;   /* in-flight Animation */
+    var closing = false;
+
+    function currentHeight() {
+      var h = content.getBoundingClientRect().height;
+      return h > 0 ? h : content.offsetHeight;
+    }
+
+    function run(from, to, onDone) {
+      if (current) current.cancel();
+      content.style.overflow = 'hidden';
+      current = content.animate(
+        [
+          { height: from + 'px', opacity: from === 0 ? 0 : 1 },
+          { height: to + 'px', opacity: to === 0 ? 0 : 1 }
+        ],
+        { duration: 260, easing: 'cubic-bezier(0.23, 1, 0.32, 1)' }
+      );
+      current.onfinish = function () {
+        current = null;
+        content.style.overflow = '';
+        content.style.height = '';
+        if (onDone) onDone();
+      };
+    }
+
     summary.addEventListener('click', function (e) {
+      if (reduceMotion) return; /* let <details> toggle natively */
       e.preventDefault();
-      if (animating) return;
-      animating = true;
 
-      if (item.open) {
-        var closeAnim = content.animate(
-          [{ height: content.offsetHeight + 'px', opacity: 1 }, { height: '0px', opacity: 0 }],
-          { duration: 260, easing: 'cubic-bezier(0.23, 1, 0.32, 1)' }
-        );
-        closeAnim.onfinish = function () {
+      var from = current ? currentHeight() : (item.open ? currentHeight() : 0);
+      if (current) current.cancel();
+      current = null;
+
+      if (item.open && !closing) {
+        /* Closing: keep it open for the duration, then collapse. */
+        closing = true;
+        run(from, 0, function () {
           item.open = false;
-          animating = false;
-        };
+          closing = false;
+        });
       } else {
+        /* Opening, or reversing a close that is still in flight. */
+        closing = false;
         item.open = true;
-        var target = content.offsetHeight;
-        var openAnim = content.animate(
-          [{ height: '0px', opacity: 0 }, { height: target + 'px', opacity: 1 }],
-          { duration: 300, easing: 'cubic-bezier(0.23, 1, 0.32, 1)' }
-        );
-        openAnim.onfinish = function () { animating = false; };
+        content.style.height = 'auto';
+        var target = content.getBoundingClientRect().height;
+        content.style.height = from + 'px';
+        run(from, target);
       }
     });
   });
+
+  /* 6. Media fade-in. Purely additive: an image is only marked as
+     loading if it is NOT already decoded, so cached media never flashes
+     and a no-JS visitor is never left with a transparent image. Eager /
+     high-priority media is skipped entirely - fading the LCP element
+     would delay the very metric this exists to protect. */
+  if (!reduceMotion) {
+    document.querySelectorAll('.media-slot > img, .media-slot > picture img').forEach(function (img) {
+      if (img.loading === 'eager' || img.getAttribute('fetchpriority') === 'high') return;
+      if (img.complete && img.naturalWidth > 0) return;
+      img.classList.add('is-media-loading');
+      function done() { img.classList.remove('is-media-loading'); }
+      img.addEventListener('load', done, { once: true });
+      img.addEventListener('error', done, { once: true });
+    });
+  }
 })();
