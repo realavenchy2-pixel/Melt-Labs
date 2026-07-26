@@ -520,6 +520,14 @@ h3, .h3 { font-size: var(--type-title); line-height: var(--lead-title); letter-s
   max-width: 15ch;
   margin-inline: auto;
 }
+.hero__microcopy {
+  margin-top: 1rem;
+  font-size: 0.82rem;
+  letter-spacing: 0.02em;
+  color: rgba(255, 255, 255, 0.78);
+  text-wrap: balance;
+  max-width: 34ch;
+}
 .hero__subhead {
   margin: 1rem auto 1.75rem;
   max-width: 32ch;
@@ -719,6 +727,12 @@ h3, .h3 { font-size: var(--type-title); line-height: var(--lead-title); letter-s
   transition: transform 160ms var(--ease-out);
 }
 .offer__actions .shopify-payment-button__button--unbranded:active { transform: scale(0.97); }
+.offer__under-button {
+  margin-top: 0.75rem;
+  text-align: center;
+  font-size: 0.8rem;
+  color: color-mix(in srgb, var(--color-ink) 55%, transparent);
+}
 .offer__reassure {
   margin-top: 1.5rem; padding: 0; list-style: none;
   display: grid; gap: 0.6rem; font-size: 0.9rem;

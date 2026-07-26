@@ -30,12 +30,13 @@
         "aspect_desktop": "16 / 9",
         "aspect_mobile": "9 / 16",
         "media_fit": "cover",
-        "eyebrow": "MELT LABS",
-        "headline": "Two drops. *Quiet* the cravings. Steady your sugar.",
-        "subhead": "A Japanese botanical serum designed to work with your body, not against your routine.",
-        "cta_label": "See the protocol",
+        "eyebrow": "THE JAPANESE WEIGHT LOSS WATER",
+        "headline": "Meet Your Better *Long-Term* Weight-Loss Partner.",
+        "subhead": "Special Water is a tasteless Japanese botanical serum you add to what you already drink. Two quick squirts support quieter cravings, a steadier blood-sugar response, and daily metabolic function, without shots, pills, or rebuilding your entire routine.",
+        "cta_label": "Try Special Water risk-free",
         "product": "special-water",
-        "cta_link": "shopify://products/the-special-water"
+        "cta_link": "shopify://products/the-special-water",
+        "microcopy": "60-day money-back guarantee · Tasteless · Third-party tested. Add it. Drink normally. Stay consistent."
       }
     },
     "testimonials": {
@@ -64,44 +65,18 @@
             "quote": "Didn't change anything else. Just added this.",
             "author": "John, 29"
           }
-        },
-        "slide_jNpYPV": {
-          "type": "slide",
-          "settings": {
-            "image": "shopify://shop_images/split-transform.webp",
-            "quote": "Didn't change anything else. Just added this.",
-            "author": "Kimi, 29"
-          }
-        },
-        "slide_EUfeCH": {
-          "type": "slide",
-          "settings": {
-            "image": "shopify://shop_images/gym-split.webp",
-            "quote": "Didn't change anything else. Just added this.",
-            "author": "Roway, 29"
-          }
-        },
-        "slide_Kpzmwr": {
-          "type": "slide",
-          "settings": {
-            "image": "shopify://shop_images/split-face.webp",
-            "quote": "Didn't change anything else. Just added this.",
-            "author": "Sutrura, 29"
-          }
         }
       },
       "block_order": [
         "t1",
         "t2",
-        "t3",
-        "slide_jNpYPV",
-        "slide_EUfeCH",
-        "slide_Kpzmwr"
+        "t3"
       ],
       "settings": {
-        "headline": "Real routines. Real results.",
+        "headline": "Real Routines. Real Results.",
         "autoplay": true,
-        "autoplay_interval": 4500
+        "autoplay_interval": 4500,
+        "subhead": "No complicated plan. No complete lifestyle overhaul. Just two squirts added to the drinks people were already having every day."
       }
     },
     "ingredients": {
@@ -113,7 +88,7 @@
             "image": "shopify://shop_images/Cinnamon_quills_in_cluster_2K_202607171211.jpg",
             "name": "Cinnamomum cassia (bark) Extract",
             "source": "",
-            "role": "The primary active. Supports healthy blood sugar levels and insulin sensitivity, which helps reduce post-meal glucose spikes: the spikes that drive fat storage signaling and cravings."
+            "role": "Supports healthy glucose metabolism, insulin sensitivity, and a more balanced post-meal blood-sugar response."
           }
         },
         "i2": {
@@ -122,7 +97,7 @@
             "image": "shopify://shop_images/Japanese_knotweed_stalks_and_root_202607171208.jpg",
             "name": "Japanese Knotweed Extract",
             "source": "Polygonum cuspidatum, root",
-            "role": "A natural source of trans-resveratrol. The Japanese heritage ingredient and metabolic driver of the formula. Supports metabolic health, antioxidant activity, and healthy inflammatory response."
+            "role": "A botanical source of trans-resveratrol that supports metabolic health, antioxidant activity, and a healthy inflammatory response."
           }
         },
         "i3": {
@@ -131,7 +106,7 @@
             "image": "shopify://shop_images/Green_bitter_melon_with_slice_202607171213.jpg",
             "name": "Bitter Melon Extract",
             "source": "Momordica charantia Linn., fruit, 4:1",
-            "role": "Traditionally used across Asia for metabolic support. Supports healthy blood sugar metabolism and glucose utilization."
+            "role": "Traditionally used throughout Asia to support healthy glucose utilization and blood-sugar metabolism."
           }
         },
         "i4": {
@@ -140,7 +115,7 @@
             "image": "shopify://shop_images/Fresh_turmeric_rhizomes_and_powder_202607171214.jpg",
             "name": "Extract of Turmeric Root",
             "source": "Curcuma longa",
-            "role": "Antioxidant support and healthy inflammatory response, which plays a role in overall metabolic function."
+            "role": "Supports antioxidant defenses, a healthy inflammatory response, and overall metabolic function."
           }
         },
         "i5": {
@@ -149,7 +124,7 @@
             "image": "shopify://shop_images/Licorice_root_sticks_bundle_2K_202607171215.jpg",
             "name": "Extract of Licorice Root",
             "source": "",
-            "role": "Traditionally used to support digestive health and adrenal function; may support healthy cortisol levels and metabolic balance."
+            "role": "Traditionally used to support digestive health, adrenal function, and healthy metabolic balance."
           }
         },
         "i6": {
@@ -158,7 +133,7 @@
             "image": "shopify://shop_images/Matcha_powder_with_bamboo_whisk_202607171214.jpg",
             "name": "Matcha",
             "source": "",
-            "role": "Natural antioxidants (EGCG catechins) that support gentle thermogenesis and a metabolic boost without stimulant jitters."
+            "role": "Provides natural catechins that support gentle thermogenesis, energy expenditure, and metabolic activity."
           }
         },
         "b1": {
@@ -199,65 +174,65 @@
       ],
       "settings": {
         "scheme": "white",
-        "headline": "What's inside. And what each drop does.",
-        "subhead": "Six botanicals, each chosen for one job: keeping blood sugar steady and cravings quiet.",
-        "format_note": "2 oz / 60 mL clear glass dropper bottle.",
+        "headline": "Six Botanicals. One Long-Term Strategy.",
+        "subhead": "Every ingredient was selected to support a different part of healthy weight management.",
+        "format_note": "2 oz / 60 mL clear glass dropper bottle. Research strength varies by ingredient. View the complete scientific references below.",
         "base_title": "Base ingredients"
       }
     },
     "benefit": {
       "type": "benefit-statement",
       "blocks": {
-        "s1": {
+        "stmt_1": {
           "type": "statement",
           "settings": {
-            "headline": "Drink what you already drink. Lose weight *seamlessly* doing it.",
-            "subhead": ""
+            "headline": "Fast Weight Loss and Lasting Weight Control Are *Not the Same Thing.*",
+            "subhead": "Some approaches are built to make the scale move quickly. But long-term control comes from a routine you can actually continue, one that supports the hunger, blood-sugar swings, energy crashes, and metabolic challenges that make old weight so easy to regain. Special Water was built for the part most plans ignore: what happens after the initial motivation wears off. Instead of forcing another complicated routine into your life, Special Water disappears into the water, coffee, tea, or juice already in your hand."
           }
         },
-        "a1": {
+        "mech_1": {
           "type": "slide",
           "settings": {
-            "title": "Cravings",
-            "text": "Two drops quiet the noise around food. No willpower required.",
+            "title": "Quiet the food noise",
+            "text": "Supports appetite control so staying consistent feels less like a nonstop willpower test.",
             "show_media_slot": false,
             "accent": true
           }
         },
-        "a2": {
+        "mech_2": {
           "type": "slide",
           "settings": {
-            "title": "Blood sugar",
-            "text": "Steadier glucose means fewer spikes, fewer crashes, fewer cravings.",
+            "title": "Smooth the spike-and-crash cycle",
+            "text": "Supports healthy blood-sugar metabolism and insulin sensitivity, helping manage the swings that can trigger cravings and energy crashes.",
             "show_media_slot": false,
             "accent": false
           }
         },
-        "a3": {
+        "mech_3": {
           "type": "slide",
           "settings": {
-            "title": "Metabolism",
-            "text": "Support your body's natural fat-burning response, daily.",
+            "title": "Support daily metabolism",
+            "text": "Japanese botanicals support metabolic function, thermogenesis, antioxidant activity, and a healthy inflammatory response.",
             "show_media_slot": false,
             "accent": false
           }
         },
-        "a4": {
+        "mech_4": {
           "type": "slide",
           "settings": {
-            "title": "Zero routine change",
-            "text": "No pills to remember, no shots, no taste. Just add it to what you're already drinking.",
+            "title": "Not a crash diet",
+            "text": "Not a quick hit either. Daily support built around consistency.",
             "show_media_slot": false,
             "accent": false
           }
         }
       },
       "block_order": [
-        "s1",
-        "a1",
-        "a2",
-        "a3",
-        "a4"
+        "stmt_1",
+        "mech_1",
+        "mech_2",
+        "mech_3",
+        "mech_4"
       ],
       "settings": {
         "scheme": "white"
@@ -281,139 +256,139 @@
       ],
       "settings": {
         "scheme": "ink",
-        "headline": "The *Science* Behind Special Water",
-        "body": "Special Water was built around one mechanism: stabilizing blood sugar to shut off the cravings that sabotage weight loss.",
+        "headline": "What Consistent Use Looked Like in Our *In-House Study*",
+        "body": "Real-world results from people who made Special Water part of their daily routine.",
         "chapter_aspect": "4 / 5",
-        "stat_intro": "In an in-house study",
+        "stat_intro": "In our in-house study",
         "stat_1_value": "93%",
         "stat_1_caption": "reported fewer cravings",
         "stat_2_value": "90%",
         "stat_2_caption": "lost 10+ lbs",
         "stat_3_value": "90%",
         "stat_3_caption": "saw blood sugar stabilize",
-        "attribution": "Based on our in-house study. Individual results may vary."
+        "attribution": "Based on our in-house study. Individual results will vary."
       }
     },
     "who": {
       "type": "icon-list",
       "blocks": {
-        "w1": {
+        "aud_1": {
           "type": "item",
           "settings": {
-            "icon": "scale",
-            "text": "People trying to lose weight"
+            "icon": "sparkle",
+            "text": "You want fewer cravings without white-knuckling every meal."
           }
         },
-        "w2": {
+        "aud_2": {
           "type": "item",
           "settings": {
             "icon": "clock",
-            "text": "People looking for a long-term solution, not a quick fix"
+            "text": "You want support that fits a normal schedule."
           }
         },
-        "w3": {
+        "aud_3": {
           "type": "item",
           "settings": {
-            "icon": "leaf",
-            "text": "Natural weight loss, no injections"
+            "icon": "shield",
+            "text": "You prefer a non-injection approach."
           }
         },
-        "w4": {
+        "aud_4": {
           "type": "item",
           "settings": {
-            "icon": "muscle",
-            "text": "Sustainable, steady, muscle-preserving"
+            "icon": "heart",
+            "text": "You care about maintaining control, not only losing weight quickly."
           }
         },
-        "w5": {
+        "aud_5": {
           "type": "item",
           "settings": {
             "icon": "droplet",
-            "text": "Easy, low-effort weight control"
+            "text": "You want something tasteless that disappears into your day."
           }
         },
-        "w6": {
+        "aud_6": {
           "type": "item",
           "settings": {
             "icon": "check",
-            "text": "People who don't want to worry about it"
+            "text": "You are tired of routines that feel impossible to maintain."
           }
         }
       },
       "block_order": [
-        "w1",
-        "w2",
-        "w3",
-        "w4",
-        "w5",
-        "w6"
+        "aud_1",
+        "aud_2",
+        "aud_3",
+        "aud_4",
+        "aud_5",
+        "aud_6"
       ],
       "settings": {
-        "headline": "Who this is for",
+        "headline": "Built for People Who Are Done Starting Over.",
         "scheme": "ink"
       }
     },
     "benefits_2": {
       "type": "benefit-statement",
       "blocks": {
-        "h1": {
+        "st2_1": {
           "type": "statement",
           "settings": {
-            "headline": "Cravings, *quieted.*",
-            "subhead": "Two drops shift your relationship with food, without restriction."
+            "headline": "You Already Drink Something *Every Day.*",
+            "subhead": "That is what makes Special Water different. You do not have to remember another complicated protocol or force yourself through an unpleasant taste. Add two squirts to water, coffee, tea, or juice, then carry on with your day. Your routine stays the same. What the routine supports gets upgraded."
           }
         },
-        "h2": {
+        "st2_2": {
           "type": "statement",
           "settings": {
-            "headline": "Sugar, *stabilized.*",
-            "subhead": "The mechanism behind sustainable, seamless weight loss."
+            "headline": "Built for the Weight That *Tries to Come Back.*",
+            "subhead": "Losing weight is one challenge. Creating a routine that helps you maintain control is another. Special Water supports three systems connected to long-term weight management, all inside something you already do every day: drink water."
           }
         },
-        "g1": {
+        "sys_1": {
           "type": "slide",
           "settings": {
-            "title": "No jitters",
-            "text": "No stimulants, no racing heart, no crash later.",
-            "show_media_slot": false,
-            "accent": false
-          }
-        },
-        "g2": {
-          "type": "slide",
-          "settings": {
-            "title": "Works in anything",
-            "text": "Coffee, water, juice, tea. Whatever is already in your hand.",
-            "show_media_slot": false,
-            "accent": false
-          }
-        },
-        "g3": {
-          "type": "slide",
-          "settings": {
-            "title": "Tasteless",
-            "text": "Undetectable in any drink. You'll forget it's there.",
-            "show_media_slot": false,
-            "accent": false
-          }
-        },
-        "g4": {
-          "type": "slide",
-          "settings": {
-            "title": "Zero new habits",
-            "text": "Fits into a routine you already have. That's the whole point.",
+            "title": "Appetite control",
+            "text": "So food does not have to dominate your thoughts all day.",
             "show_media_slot": false,
             "accent": true
+          }
+        },
+        "sys_2": {
+          "type": "slide",
+          "settings": {
+            "title": "Healthy blood-sugar response",
+            "text": "So fewer spikes and crashes pull you back toward constant snacking.",
+            "show_media_slot": false,
+            "accent": false
+          }
+        },
+        "sys_3": {
+          "type": "slide",
+          "settings": {
+            "title": "Daily metabolic support",
+            "text": "So your routine supports your body consistently instead of relying on a temporary burst.",
+            "show_media_slot": false,
+            "accent": false
+          }
+        },
+        "sys_4": {
+          "type": "slide",
+          "settings": {
+            "title": "Hot or cold",
+            "text": "Morning or afternoon. Special Water was designed to fit your life, not take it over.",
+            "show_media_slot": false,
+            "accent": false
           }
         }
       },
       "block_order": [
-        "h1",
-        "h2",
-        "g1",
-        "g2",
-        "g3",
-        "g4"
+        "st2_1",
+        "st2_2",
+        "sys_1",
+        "sys_2",
+        "sys_3",
+        "sys_4"
       ],
       "settings": {
         "scheme": "tint"
@@ -422,15 +397,15 @@
     "potency": {
       "type": "potency-stats",
       "blocks": {
-        "p1": {
+        "howto_1": {
           "type": "stat",
           "settings": {
             "intro": "Just",
-            "value": "2 drops",
+            "value": "2 squirts",
             "caption": "in whatever you're already drinking"
           }
         },
-        "p2": {
+        "howto_2": {
           "type": "stat",
           "settings": {
             "intro": "Support that lasts",
@@ -440,116 +415,87 @@
         }
       },
       "block_order": [
-        "p1",
-        "p2"
+        "howto_1",
+        "howto_2"
       ],
       "settings": {
         "image": "shopify://shop_images/Remove_dropper_pipette_on_table_202607201050.jpg",
-        "headline": "A couple of squirts. That's the entire routine.",
-        "body": "Potency that carries through the day, supporting appetite control and blood sugar stability continuously. Not a short-lived spike."
+        "headline": "Two Squirts. That Is the Entire Routine.",
+        "body": "Add two squirts to whatever you are already drinking, once or twice daily as directed on the label. No taste. No mixing ritual. No shots. No complicated schedule. Consistency matters more than perfection."
       }
     },
     "compare": {
       "type": "comparison",
       "blocks": {
-        "c1": {
+        "cmp_1": {
+          "type": "row",
+          "settings": {
+            "label": "Routine",
+            "value_a": "Two squirts in something you already drink",
+            "value_b": "Prescription injections or medication",
+            "value_c": ""
+          }
+        },
+        "cmp_2": {
           "type": "row",
           "settings": {
             "label": "Approach",
-            "value_a": "Two drops in what you already drink",
-            "value_b": "Weekly injections",
+            "value_a": "Supports appetite, blood sugar, and metabolism",
+            "value_b": "Medication-driven appetite regulation",
             "value_c": ""
           }
         },
-        "c2": {
+        "cmp_3": {
           "type": "row",
           "settings": {
-            "label": "How it works",
-            "value_a": "Supports steady blood sugar so cravings stay quiet",
-            "value_b": "Suppresses appetite while the medication is active",
+            "label": "Experience",
+            "value_a": "Tasteless and easy to repeat daily",
+            "value_b": "Requires a medical treatment plan",
             "value_c": ""
           }
         },
-        "c3": {
+        "cmp_4": {
           "type": "row",
           "settings": {
-            "label": "Built for",
-            "value_a": "Sustainable, muscle-preserving weight control",
-            "value_b": "Rapid weight loss under medical supervision",
+            "label": "Designed for",
+            "value_a": "Long-term consistency and weight control",
+            "value_b": "Clinically supervised weight management",
             "value_c": ""
           }
         },
-        "c4": {
+        "cmp_5": {
           "type": "row",
           "settings": {
-            "label": "Your routine",
-            "value_a": "Nothing changes. It fits the coffee you already pour",
-            "value_b": "Prescription, injections, and ongoing clinical visits",
-            "value_c": ""
-          }
-        },
-        "c5": {
-          "type": "row",
-          "settings": {
-            "label": "When you stop",
-            "value_a": "The habits it supports are yours to keep",
-            "value_b": "Appetite often returns once treatment ends",
+            "label": "Medical visits",
+            "value_a": "Not required to purchase a dietary supplement",
+            "value_b": "Requires consultation and continued medical guidance",
             "value_c": ""
           }
         }
       },
       "block_order": [
-        "c1",
-        "c2",
-        "c3",
-        "c4",
-        "c5"
+        "cmp_1",
+        "cmp_2",
+        "cmp_3",
+        "cmp_4",
+        "cmp_5"
       ],
       "settings": {
-        "headline": "Built for the *long run.*",
-        "subhead": "Fast results and lasting results are different goals. Here's how the daily-drops approach compares.",
+        "headline": "A Different Kind of *Weight-Loss Relationship.*",
+        "subhead": "Special Water is not a prescription medication and does not pretend to be one. It is a simple, non-injection daily protocol for people who want weight-management support that fits naturally into real life.",
         "col_a_title": "Special Water",
-        "col_a_sub": "A daily habit for long-term control",
-        "col_b_title": "GLP-1 injections",
-        "col_b_sub": "Fast results, prescription required",
+        "col_a_sub": "A daily botanical protocol",
+        "col_b_title": "GLP-1 medication",
+        "col_b_sub": "Prescription treatment",
         "col_c_title": "",
         "col_c_sub": "",
-        "note": "Special Water is a dietary supplement, not a medication, and is not a substitute for care from your doctor. If you're considering or taking a GLP-1, talk to your physician."
+        "note": "Special Water is a dietary supplement, not a medication or substitute for medical care. Speak with your physician before changing or discontinuing any prescribed treatment."
       }
     },
     "experts": {
       "type": "expert-reviews",
-      "blocks": {
-        "e1": {
-          "type": "expert",
-          "settings": {
-            "quote": "Blood-sugar stability is the lever most people miss.",
-            "name": "Dr. Placeholder",
-            "title": "Integrative Medicine"
-          }
-        },
-        "e2": {
-          "type": "expert",
-          "settings": {
-            "quote": "The appeal is that it fits a routine people already have.",
-            "name": "Placeholder, RD",
-            "title": "Registered Dietitian"
-          }
-        },
-        "e3": {
-          "type": "expert",
-          "settings": {
-            "quote": "The botanical stack targets the right pathways.",
-            "name": "Dr. Placeholder",
-            "title": "Metabolic Researcher"
-          }
-        }
-      },
-      "block_order": [
-        "e1",
-        "e2",
-        "e3"
-      ],
+      "blocks": {},
+      "block_order": [],
       "disabled": true,
       "settings": {
         "headline": "What *experts* are saying",
@@ -562,56 +508,72 @@
     "faq": {
       "type": "faq",
       "blocks": {
-        "q1": {
+        "faq_1": {
           "type": "qa",
           "settings": {
             "question": "How do I use Special Water?",
-            "answer": "Two drops in whatever you're already drinking, once or twice a day. Coffee, water, juice, tea. No taste, no prep, no routine to change."
+            "answer": "Add two squirts to whatever you are already drinking, once or twice daily as directed on the label. It works in water, coffee, tea, or juice."
           }
         },
-        "q2": {
+        "faq_2": {
           "type": "qa",
           "settings": {
             "question": "What does it taste like?",
-            "answer": "Nothing. The serum is designed to be undetectable in any drink, hot or cold."
+            "answer": "Nothing. Special Water was designed to disappear into hot or cold drinks without changing their normal taste."
           }
         },
-        "q3": {
+        "faq_3": {
           "type": "qa",
           "settings": {
-            "question": "Does it contain stimulants or caffeine?",
-            "answer": "No stimulants. The formula works through blood sugar support, not stimulation, so there are no jitters and no crash."
+            "question": "How quickly should I expect to notice something?",
+            "answer": "Everyone responds differently. Appetite and craving support may be noticed first, while broader results require consistent daily use over time."
           }
         },
-        "q4": {
+        "faq_4": {
           "type": "qa",
           "settings": {
-            "question": "How long until I notice a difference?",
-            "answer": "Everyone is different. Most people describe cravings quieting first, with steadier energy following as daily use continues over the first few weeks. Consistency matters more than dose."
+            "question": "Does Special Water replace Ozempic or another GLP-1 medication?",
+            "answer": "No. Special Water is a dietary supplement, not a prescription medication or replacement for medical care. Speak with your physician before making changes to any prescribed treatment."
           }
         },
-        "q5": {
+        "faq_5": {
           "type": "qa",
           "settings": {
-            "question": "Is it safe to take with my medication?",
-            "answer": "Special Water is a dietary supplement, not a medication. If you are pregnant, nursing, have a medical condition, or take prescription medication (including GLP-1s), talk with your doctor before starting any supplement."
+            "question": "Is this a stimulant fat burner?",
+            "answer": "The formula is not built around the high-stimulant approach used by many conventional fat burners. Review the complete ingredient label before use, particularly if you are sensitive to caffeine or botanical extracts."
           }
         },
-        "q6": {
+        "faq_6": {
           "type": "qa",
           "settings": {
-            "question": "What is your return policy?",
-            "answer": "If it's not for you, reach out to our support team within 30 days of delivery and we'll make it right."
+            "question": "Can I take it with medication?",
+            "answer": "Speak with your physician before using Special Water if you take prescription medication, use a GLP-1, have a medical condition, are pregnant, or are nursing."
+          }
+        },
+        "faq_7": {
+          "type": "qa",
+          "settings": {
+            "question": "What ingredients are inside?",
+            "answer": "The formula contains Cinnamomum cassia bark extract, Japanese knotweed extract, bitter melon extract, turmeric root extract, licorice root extract, and matcha."
+          }
+        },
+        "faq_8": {
+          "type": "qa",
+          "settings": {
+            "question": "What is the return policy?",
+            "answer": "You are protected by a 60-day money-back guarantee. Contact the support team within 60 days of delivery if Special Water is not right for you."
           }
         }
       },
       "block_order": [
-        "q1",
-        "q2",
-        "q3",
-        "q4",
-        "q5",
-        "q6"
+        "faq_1",
+        "faq_2",
+        "faq_3",
+        "faq_4",
+        "faq_5",
+        "faq_6",
+        "faq_7",
+        "faq_8"
       ],
       "settings": {
         "headline": "Questions, *answered.*",

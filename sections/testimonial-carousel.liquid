@@ -5,9 +5,19 @@
   ship as labeled placeholders until real UGC lands.
 {%- endcomment -%}
 
+{%- comment -%}
+  Renders nothing at all when there are no slides. Verified testimonials
+  are the only thing that belongs here: with the blocks removed the whole
+  section - heading included - disappears rather than leaving an empty
+  carousel shell on the page. Add slides back and it returns.
+{%- endcomment -%}
+{%- if section.blocks.size > 0 -%}
 <section class="section section--flush section--scheme-white" style="padding-block: var(--section-pad);">
   <div class="container section-header" data-reveal>
     <h2 class="h2">{{ section.settings.headline }}</h2>
+    {%- if section.settings.subhead != blank -%}
+      <p class="lead">{{ section.settings.subhead }}</p>
+    {%- endif -%}
   </div>
 
   {%- capture slides -%}
@@ -38,6 +48,7 @@
     pill: true
   -%}
 </section>
+{%- endif -%}
 
 {% schema %}
 {
@@ -48,6 +59,12 @@
       "id": "headline",
       "label": "Headline",
       "default": "Real routines. Real results."
+    },
+    {
+      "type": "textarea",
+      "id": "subhead",
+      "label": "Intro",
+      "info": "Optional line under the heading."
     },
     {
       "type": "checkbox",

@@ -15,15 +15,15 @@
         "b1": {
           "type": "info",
           "settings": {
-            "title": "How to use",
-            "content": "<p>Four drops onto the scalp each night. Massage in for about a minute and let it absorb while you sleep.</p>"
+            "title": "Four drops total daily",
+            "content": "<ol><li>Apply directly to thinning-looking areas.</li><li>Use on a dry or damp scalp.</li><li>Massage for approximately sixty seconds.</li><li>Leave the serum in.</li><li>Use once daily or split the four drops between morning and evening.</li></ol><p>Do not rinse.</p>"
           }
         },
         "b2": {
           "type": "info",
           "settings": {
             "title": "Shipping and returns",
-            "content": "<p>Ships in 2 to 4 days. 60-day money-back guarantee.</p>"
+            "content": "<p>Free U.S. shipping. Protected by a 60-day money-back guarantee.</p>"
           }
         }
       },
@@ -35,121 +35,67 @@
         "product": "kami-15",
         "aspect_desktop": "1 / 1",
         "aspect_mobile": "1 / 1",
-        "eyebrow": "MELT LABS",
-        "tagline": "The nightly peptide ritual for fuller-looking hair.",
+        "eyebrow": "MINOXIDIL-FREE LEAVE-IN SCALP SERUM",
+        "tagline": "Support Thinning-Looking Areas Before More Density Disappears.",
         "bundle_heading": "Choose your supply",
         "bundle_note": "Bulk savings apply automatically at checkout.",
-        "reassurance": "60-day money-back guarantee\nShips in 2 to 4 days\nThird-party tested\nFragrance-free",
-        "trust_line": "Secure checkout. Cancel anytime.",
+        "reassurance": "Four drops total daily\n60 mL bottle\nApproximately 1–1.5 months of use\nLightweight and fragrance-free\nFor men and women\nMinoxidil-free\nFree U.S. shipping\n60-day money-back guarantee",
+        "trust_line": "Third-party tested and manufactured in Texas.",
         "show_description": true,
-        "placeholder_title": "KAMI"
+        "placeholder_title": "KAMI 15",
+        "add_label": "Start my KAMI follicle ritual",
+        "under_button": "Secure checkout · Free U.S. shipping · 60-day guarantee"
       }
     },
     "guarantee": {
       "type": "icon-list",
       "blocks": {
-        "g1": {
+        "ben_1": {
+          "type": "item",
+          "settings": {
+            "icon": "sparkle",
+            "text": "Fuller-looking density — supports the scalp environment behind thicker, fuller-looking hair."
+          }
+        },
+        "ben_2": {
           "type": "item",
           "settings": {
             "icon": "shield",
-            "text": "60-day money-back guarantee"
+            "text": "Stronger-feeling strands — helps condition fragile-looking hair so it feels smoother and softer."
           }
         },
-        "g2": {
-          "type": "item",
-          "settings": {
-            "icon": "flask",
-            "text": "Third-party tested for purity"
-          }
-        },
-        "g3": {
+        "ben_3": {
           "type": "item",
           "settings": {
             "icon": "leaf",
-            "text": "Japanese botanicals, fragrance-free"
+            "text": "Healthier-looking scalp — peptides and botanicals support scalp comfort, moisture, and balance."
           }
         },
-        "g4": {
+        "ben_4": {
           "type": "item",
           "settings": {
-            "icon": "clock",
-            "text": "Ships in 2 to 4 days"
+            "icon": "check",
+            "text": "Zero-routine drama — four drops total. Rub in. Leave in. Continue your day."
           }
         }
       },
       "block_order": [
-        "g1",
-        "g2",
-        "g3",
-        "g4"
+        "ben_1",
+        "ben_2",
+        "ben_3",
+        "ben_4"
       ],
       "settings": {
-        "headline": "Every bottle, backed.",
+        "headline": "Support What Is Growing. Defend What Is Showing.",
         "scheme": "tint"
       }
     },
     "testimonial_carousel_yxrkGK": {
       "type": "testimonial-carousel",
-      "blocks": {
-        "slide_h8QxYy": {
-          "type": "slide",
-          "settings": {
-            "image": "shopify://shop_images/Make_before_after_images_2K_202607190108_2.jpg",
-            "quote": "My part line looks fuller in the mirror.",
-            "author": "Placeholder, 38"
-          }
-        },
-        "slide_VFPtgM": {
-          "type": "slide",
-          "settings": {
-            "image": "shopify://shop_images/Make_before_after_images_2K_202607190108.jpg",
-            "quote": "Less hair on my pillow within weeks.",
-            "author": "Placeholder, 45"
-          }
-        },
-        "slide_fJnRb4": {
-          "type": "slide",
-          "settings": {
-            "image": "shopify://shop_images/Make_before_after_photo_2K_202607190109.jpg",
-            "quote": "The shine is back. It feels alive again.",
-            "author": "Placeholder, 31"
-          }
-        },
-        "slide_TK43KY": {
-          "type": "slide",
-          "settings": {
-            "image": "shopify://shop_images/Woman_screenshot_before_after_2K_202607190108.jpg",
-            "quote": "Less hair on my pillow within weeks.",
-            "author": "Placeholder, 45"
-          }
-        },
-        "slide_tFye6i": {
-          "type": "slide",
-          "settings": {
-            "image": "shopify://shop_images/Make_before_after_images_2K_202607190108_1.jpg",
-            "quote": "Less hair on my pillow within weeks.",
-            "author": "Placeholder, 45"
-          }
-        },
-        "slide_dMeBJj": {
-          "type": "slide",
-          "settings": {
-            "image": "shopify://shop_images/Make_before_after_screenshot_2K_202607190108.jpg",
-            "quote": "Less hair on my pillow within weeks.",
-            "author": "Placeholder, 45"
-          }
-        }
-      },
-      "block_order": [
-        "slide_h8QxYy",
-        "slide_VFPtgM",
-        "slide_fJnRb4",
-        "slide_TK43KY",
-        "slide_tFye6i",
-        "slide_dMeBJj"
-      ],
+      "blocks": {},
+      "block_order": [],
       "settings": {
-        "headline": "Real routines. Real hair.",
+        "headline": "Real Routines. Real Hair Journeys.",
         "autoplay": true,
         "autoplay_interval": 4500
       }
@@ -157,48 +103,96 @@
     "faq": {
       "type": "faq",
       "blocks": {
-        "q1": {
+        "faq_1": {
           "type": "qa",
           "settings": {
-            "question": "How do I use KAMI?",
-            "answer": "Four drops onto the scalp each night, massaged in for about a minute. It absorbs fast and works while you sleep."
+            "question": "How do I apply KAMI 15?",
+            "answer": "Apply four drops total directly to thinning-looking areas each day. Use all four at once or divide them between morning and evening. Massage into a dry or damp scalp and leave the serum in."
           }
         },
-        "q2": {
+        "faq_2": {
           "type": "qa",
           "settings": {
-            "question": "Will it make my hair greasy?",
-            "answer": "No. The serum is featherweight and fragrance-free, designed to absorb without residue on your pillow or your morning style."
+            "question": "Do I rinse it out?",
+            "answer": "No. KAMI is a leave-in scalp serum."
           }
         },
-        "q3": {
+        "faq_3": {
           "type": "qa",
           "settings": {
-            "question": "Is it safe for color-treated hair?",
-            "answer": "Yes. KAMI is applied to the scalp, not the lengths, and plays well with color, keratin, and heat styling."
+            "question": "How long does one bottle last?",
+            "answer": "The 60 mL bottle lasts approximately one to one-and-a-half months when used as directed."
           }
         },
-        "q4": {
+        "faq_4": {
+          "type": "qa",
+          "settings": {
+            "question": "Is KAMI made with minoxidil?",
+            "answer": "No. KAMI is completely minoxidil-free."
+          }
+        },
+        "faq_5": {
           "type": "qa",
           "settings": {
             "question": "Is KAMI a treatment for hair loss?",
-            "answer": "No. KAMI is a cosmetic serum that supports a healthy-looking scalp and hair. For medical concerns about hair loss, talk with a dermatologist."
+            "answer": "No. KAMI is a cosmetic scalp and hair serum designed to support fuller-looking density and healthier-looking hair. Speak with a dermatologist about medical hair-loss concerns."
           }
         },
-        "q5": {
+        "faq_6": {
           "type": "qa",
           "settings": {
-            "question": "What is your return policy?",
-            "answer": "If it's not for you, reach out to our support team within 30 days of delivery and we'll make it right."
+            "question": "Does KAMI wake up dead follicles?",
+            "answer": "KAMI does not claim to resurrect permanently inactive follicles. It is designed to support the scalp environment around thinning-looking and miniaturized areas."
+          }
+        },
+        "faq_7": {
+          "type": "qa",
+          "settings": {
+            "question": "When should I expect visible results?",
+            "answer": "Timelines vary. Scalp comfort and strand conditioning may be noticed first. Fuller-looking density requires consistent use over a period of months because hair follows a slow cycle."
+          }
+        },
+        "faq_8": {
+          "type": "qa",
+          "settings": {
+            "question": "Can men and women use the same formula?",
+            "answer": "Yes. The same KAMI formula and application directions are designed for both men and women."
+          }
+        },
+        "faq_9": {
+          "type": "qa",
+          "settings": {
+            "question": "Can I use it on color-treated hair?",
+            "answer": "Yes. Apply KAMI to the scalp rather than saturating the lengths. Patch-test first if you have a sensitive scalp."
+          }
+        },
+        "faq_10": {
+          "type": "qa",
+          "settings": {
+            "question": "Is it greasy or strongly scented?",
+            "answer": "No. KAMI is lightweight and fragrance-free."
+          }
+        },
+        "faq_11": {
+          "type": "qa",
+          "settings": {
+            "question": "What is the return policy?",
+            "answer": "KAMI is protected by a 60-day money-back guarantee. Contact support within 60 days of delivery if it is not right for you."
           }
         }
       },
       "block_order": [
-        "q1",
-        "q2",
-        "q3",
-        "q4",
-        "q5"
+        "faq_1",
+        "faq_2",
+        "faq_3",
+        "faq_4",
+        "faq_5",
+        "faq_6",
+        "faq_7",
+        "faq_8",
+        "faq_9",
+        "faq_10",
+        "faq_11"
       ],
       "settings": {
         "headline": "Questions, *answered.*",
@@ -230,8 +224,8 @@
       ],
       "settings": {
         "headline": "Scientific references",
-        "intro": "Cosmetic ingredient research spans in vitro, animal, and small human studies, and strength varies by ingredient. Claims on this page are calibrated accordingly.",
-        "disclaimer": "In-house study statistics are based on our own study; individual results may vary. KAMI is a cosmetic product and is not intended to diagnose, treat, cure, or prevent any disease or medical condition, including hair loss."
+        "intro": "Evidence below is grouped by what it actually shows. Laboratory and preclinical work studies an ingredient in cells or animals, not this finished serum. Ingredient evidence comes from human or cosmetic studies of a single component, often at a different concentration or in a different base. Finished-product evidence would mean a study of KAMI 15 itself; where none is listed, none is claimed. KAMI 15 is a cosmetic serum, not an investigational drug, and the in-house consumer study referenced on this page is a consumer study, not a clinical trial.",
+        "disclaimer": "In-house study figures come from Melt Labs' own consumer study; individual experiences and timelines vary. KAMI 15 is a cosmetic product and is not intended to diagnose, treat, cure, or prevent any disease. These statements have not been evaluated by the Food and Drug Administration."
       }
     }
   },
