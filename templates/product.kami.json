@@ -88,11 +88,51 @@
         "scheme": "tint"
       }
     },
-    "testimonial_carousel_yxrkGK": {
+    "testimonial_carousel_kX8TeU": {
       "type": "testimonial-carousel",
+      "blocks": {
+        "slide_MzfB9D": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/Make_before_after_images_2K_202607190108_1.jpg",
+            "quote": "This stuff saved my life. never thought i would have a a full head of hair again.",
+            "author": "Ryan, 34"
+          }
+        },
+        "slide_PE3Wyt": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/Make_before_after_images_2K_202607190108.jpg",
+            "quote": "Within two months my hair was fully grown back. Just 4 drops a day and I was restored.",
+            "author": "Liz, 44"
+          }
+        },
+        "slide_MQzQaQ": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/Make_before_after_photo_2K_202607190109.jpg",
+            "quote": "The only hair restoration product that worked for me.",
+            "author": "Jack A, 33"
+          }
+        },
+        "slide_WQAyqG": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/Make_before_after_screenshot_2K_202607190108.jpg",
+            "quote": "This stuff works fast!",
+            "author": "Andy 24"
+          }
+        }
+      },
+      "block_order": [
+        "slide_MzfB9D",
+        "slide_PE3Wyt",
+        "slide_MQzQaQ",
+        "slide_WQAyqG"
+      ],
       "settings": {
         "headline": "Real Routines. Real Hair Journeys.",
-        "subhead": "",
+        "subhead": "No clinic appointments. No complicated application schedule. No completely rebuilding your morning. Just four drops worked into the areas where your hair looks thinner.",
         "autoplay": true,
         "autoplay_interval": 4500
       }
@@ -229,7 +269,7 @@
   "order": [
     "offer",
     "guarantee",
-    "testimonial_carousel_yxrkGK",
+    "testimonial_carousel_kX8TeU",
     "faq",
     "refs"
   ]
