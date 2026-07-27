@@ -1699,12 +1699,25 @@ html:not(.js) .hero__video-toggle { display: none; }
    short of the fold with a band of page showing underneath, which read
    as a section rather than as the top of the site. */
 .home-hero--fill { min-height: calc(100svh - var(--site-header-h)); }
-.home-hero--has-media { align-items: flex-end; }
+.home-hero--has-media.home-hero--pos-bottom { align-items: flex-end; }
+.home-hero--has-media.home-hero--pos-center { align-items: center; }
 .home-hero--has-media .home-hero__content {
   padding-bottom: calc(clamp(4.25rem, 9vh, 5.5rem) + env(safe-area-inset-bottom, 0px));
   padding-top: clamp(4rem, 14vh, 8rem);
 }
-.home-hero--sized.home-hero--has-media .home-hero__content { justify-content: flex-end; }
+.home-hero--sized.home-hero--has-media.home-hero--pos-bottom .home-hero__content { justify-content: flex-end; }
+.home-hero--sized.home-hero--has-media.home-hero--pos-center .home-hero__content { justify-content: center; }
+/* Left alignment has to reach the children too: the headline and subhead
+   each centre themselves with an auto inline margin, so text-align
+   alone would leave the block centred in the column. Selectors are
+   weighted to beat the .home-hero--has-media rules further down, which
+   re-assert the auto margin at three classes deep. */
+.home-hero--align-left .home-hero__content { text-align: left; }
+.home-hero--align-left.home-hero--has-media .home-hero__content .home-hero__headline,
+.home-hero--align-left.home-hero--has-media .home-hero__content .home-hero__subhead,
+.home-hero--align-left .home-hero__headline,
+.home-hero--align-left .home-hero__subhead { margin-inline: 0; }
+.home-hero--align-left .home-hero__actions { justify-content: flex-start; align-items: flex-start; }
 .home-hero__content--over-media .eyebrow { color: rgba(255,255,255,0.95); }
 .home-hero__content--over-media .home-hero__headline { color: #fff; }
 .home-hero__headline {

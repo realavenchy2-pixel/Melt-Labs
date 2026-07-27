@@ -20,6 +20,8 @@
     endif
   endif
   assign hero_mode = section.settings.hero_size | default: 'fill'
+  assign content_position = section.settings.content_position | default: 'bottom'
+  assign content_align = section.settings.content_align | default: 'center'
 
   # Matches the product hero: the control only makes sense over footage
   # that is actually running.
@@ -32,7 +34,7 @@
 -%}
 
 <section
-  class="home-hero home-hero--{{ section.settings.scheme | default: 'tint' }} home-hero--{{ hero_mode }}{% if has_media %} home-hero--has-media{% endif %}"
+  class="home-hero home-hero--{{ section.settings.scheme | default: 'tint' }} home-hero--{{ hero_mode }} home-hero--pos-{{ content_position }} home-hero--align-{{ content_align }}{% if has_media %} home-hero--has-media{% endif %}"
   style="--hero-aspect-mobile: {{ section.settings.aspect_mobile }}; --hero-aspect-desktop: {{ section.settings.aspect_desktop }}; --hero-fit: {{ section.settings.media_fit }};"
   data-hero
 >
@@ -157,6 +159,31 @@
       "label": "Show a play/pause button on the video",
       "info": "Sits in the bottom corner of the frame. Only appears when the background is a video.",
       "default": true
+    },
+    {
+      "type": "header",
+      "content": "Copy placement"
+    },
+    {
+      "type": "select",
+      "id": "content_position",
+      "label": "Where the copy sits",
+      "info": "Bottom keeps the top of the image or video clear, so the media is the subject and the button closes the frame. Only applies when a background is set.",
+      "options": [
+        { "value": "bottom", "label": "Bottom of the frame" },
+        { "value": "center", "label": "Centered" }
+      ],
+      "default": "bottom"
+    },
+    {
+      "type": "select",
+      "id": "content_align",
+      "label": "Text alignment",
+      "options": [
+        { "value": "center", "label": "Centered" },
+        { "value": "left", "label": "Left" }
+      ],
+      "default": "center"
     },
     { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "MELT LABS" },
     {
