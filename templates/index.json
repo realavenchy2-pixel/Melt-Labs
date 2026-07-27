@@ -43,7 +43,8 @@
             "tagline": "",
             "points": "Loose Weight Drinking Water\nProven Japanese Botanical Formula\nStill Taste Like Water",
             "button_label": "Shop now",
-            "link": "https://shopmeltlab.com/pages/the-special-water"
+            "link": "https://shopmeltlab.com/pages/the-special-water",
+            "tab_label": "Weight Loss"
           }
         },
         "p2": {
@@ -56,7 +57,8 @@
             "tagline": "Four drops on the scalp, every night. A one-minute ritual for fuller-looking hair.",
             "points": "Fragrance-free\nThird-party tested\nWorks with color-treated hair",
             "button_label": "Shop KAMI",
-            "link": "shopify://pages/kami"
+            "link": "shopify://pages/kami",
+            "tab_label": "Hair Restoration"
           }
         }
       },

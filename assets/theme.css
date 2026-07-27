@@ -473,7 +473,22 @@ h3, .h3 { font-size: var(--type-title); line-height: var(--lead-title); letter-s
    frame, letterboxed on the ink backdrop). Content overlays the media. */
 .hero { position: relative; }
 .hero__media { position: relative; width: 100%; overflow: hidden; background: var(--color-ink); }
-.hero--fill .hero__media { min-height: 100svh; }
+
+/* Fill mode: the section's height is whichever is taller - one full
+   viewport, or the overlaid copy. .hero__content used to be pinned
+   absolute/inset:0 over a box sized purely by the media, so a headline
+   plus subhead plus CTA plus microcopy taller than 100svh had nowhere to
+   go but off the top of the section - on a short/wide viewport, or on a
+   phone with a long headline, that clipped the first line and pushed the
+   button toward the browser chrome. Content now sits in normal flow with
+   its own min-height, so it drives the section's height when it needs
+   more room; the media becomes an absolutely-positioned backdrop that
+   stretches to match, at the cost of a slightly different crop on the
+   rare page where copy overflows. (This mirrors how .home-hero already
+   handles the same situation.) */
+.hero--fill { min-height: 100svh; }
+.hero--fill .hero__media { position: absolute; inset: 0; height: 100%; }
+
 .hero--sized .hero__media { aspect-ratio: var(--hero-aspect-mobile, 9 / 16); }
 @media (min-width: 768px) {
   .hero--sized .hero__media { aspect-ratio: var(--hero-aspect-desktop, 16 / 9); }
@@ -510,6 +525,15 @@ h3, .h3 { font-size: var(--type-title); line-height: var(--lead-title); letter-s
   padding-bottom: clamp(3rem, 9vh, 5.5rem);
   text-align: center;
   color: #fff;
+}
+/* Fill mode overrides the absolute overlay above: normal flow, content-
+   driven height (see the .hero--fill note by .hero__media). Higher
+   specificity (two classes) wins over the base rule regardless of
+   source order. */
+.hero--fill .hero__content {
+  position: relative;
+  inset: auto;
+  min-height: 100svh;
 }
 .hero__content .eyebrow { color: rgba(255,255,255,0.85); }
 .hero__headline {
@@ -1490,18 +1514,55 @@ h3, .h3 { font-size: var(--type-title); line-height: var(--lead-title); letter-s
 .featured__actions { margin-top: 1.5rem; }
 .featured__reassure { margin-top: 1.5rem; }
 
-/* ---- Product selector ---- */
+/* ---- Product selector ----
+   A segmented control (Apple's Settings-app switcher) sitting above a
+   swipeable, one-panel-per-view stage. The tray and sliding indicator are
+   built so the whole thing still works with no JS: without enhancement,
+   each tab simply carries its own solid background when .is-active,
+   exactly like a plain button group. product-selector.js adds
+   --enhanced, at which point the per-tab background hands off to a
+   single indicator pill that slides and resizes behind whichever tab is
+   current. */
 .product-selector__widget { margin-top: 0; }
 .product-selector__tabs {
-  display: flex;
+  position: relative;
+  display: inline-flex;
   flex-wrap: wrap;
   justify-content: center;
-  gap: 0.6rem;
-  margin-bottom: clamp(2rem, 5vw, 3rem);
+  gap: 0.35rem;
+  margin: 0 auto clamp(2rem, 5vw, 3rem);
+  padding: 5px;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--color-ink) 5%, transparent);
+  max-width: 100%;
 }
+.section--scheme-ink .product-selector__tabs { background: rgba(255, 255, 255, 0.08); }
+
+.product-selector__tab-indicator {
+  position: absolute;
+  top: 5px;
+  bottom: 5px;
+  left: 5px;
+  width: 0;
+  border-radius: 999px;
+  background: var(--color-ink);
+  box-shadow: 0 2px 8px color-mix(in srgb, var(--color-ink) 18%, transparent);
+  pointer-events: none;
+  z-index: 1;
+}
+.section--scheme-ink .product-selector__tab-indicator { background: var(--color-cta); }
+/* Positioned instantly on load/resize (no slide-in from zero width); a
+   settle transition is added back in only once the indicator has a real
+   position to animate from. */
+.product-selector__tabs.is-indicator-ready .product-selector__tab-indicator {
+  transition: transform 260ms var(--ease-out), width 260ms var(--ease-out);
+}
+
 .product-selector__tab {
+  position: relative;
+  z-index: 2;
   padding: 0.75rem 1.5rem;
-  border: 1.5px solid color-mix(in srgb, var(--color-ink) 14%, transparent);
+  border: 0;
   border-radius: 999px;
   background: transparent;
   font-family: var(--font-heading);
@@ -1509,25 +1570,61 @@ h3, .h3 { font-size: var(--type-title); line-height: var(--lead-title); letter-s
   font-size: 0.95rem;
   color: color-mix(in srgb, var(--color-ink) 65%, transparent);
   cursor: pointer;
-  transition: background-color 200ms var(--ease-out), border-color 200ms var(--ease-out), color 200ms var(--ease-out), transform 160ms var(--ease-out);
+  white-space: nowrap;
+  transition: color 200ms var(--ease-out), transform 100ms var(--ease-out);
 }
 .product-selector__tab:active { transform: scale(0.97); }
+.section--scheme-ink .product-selector__tab { color: rgba(255, 255, 255, 0.7); }
+
+/* No-JS fallback only: once enhanced, the indicator carries this weight
+   instead and every tab stays transparent regardless of .is-active. */
 .product-selector__tab.is-active {
   background: var(--color-ink);
-  border-color: var(--color-ink);
   color: #fff;
 }
-.section--scheme-ink .product-selector__tab { border-color: rgba(255,255,255,0.22); color: rgba(255,255,255,0.7); }
-.section--scheme-ink .product-selector__tab.is-active { background: var(--color-cta); border-color: var(--color-cta); color: var(--color-ink); }
+.section--scheme-ink .product-selector__tab.is-active { background: var(--color-cta); color: var(--color-ink); }
+.product-selector__tabs--enhanced .product-selector__tab,
+.product-selector__tabs--enhanced .product-selector__tab.is-active {
+  background: transparent;
+}
+.product-selector__tabs--enhanced .product-selector__tab.is-active { color: #fff; }
+.section--scheme-ink.product-selector__tabs--enhanced .product-selector__tab.is-active,
+.product-selector__tabs--enhanced.section--scheme-ink .product-selector__tab.is-active { color: var(--color-ink); }
+
+/* Stage: one full-width panel per swipe, snapping like every other
+   carousel on the site. Falls back to a plain stacked block with only
+   one panel shown (via [hidden], set server-side) when JS never runs. */
+.product-selector__stage {
+  display: flex;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+}
+.product-selector__stage::-webkit-scrollbar { display: none; }
+.product-selector__stage--enhanced { border-radius: var(--radius-card); }
 
 .product-selector__panel {
   display: grid;
   gap: 2.5rem;
   align-items: center;
 }
+.product-selector__stage--enhanced .product-selector__panel {
+  flex: 0 0 100%;
+  min-width: 0;
+  scroll-snap-align: start;
+  /* Driven continuously from scroll position by product-selector.js
+     (--panel-p: 1 centered, 0 a full panel away) so the dim tracks the
+     finger through a swipe rather than chasing it after the fact.
+     Opacity only, not scale - these panels hold real body copy and a CTA,
+     and scaling text during a drag reads as blurry rather than alive. */
+  opacity: calc(0.4 + var(--panel-p, 1) * 0.6);
+  transition: opacity 120ms linear;
+}
+.product-selector__stage.is-settling .product-selector__panel { transition: opacity 260ms var(--ease-out); }
 .product-selector__panel[hidden] { display: none; }
 @media (min-width: 900px) {
   .product-selector__panel { grid-template-columns: 1fr 1fr; gap: 4rem; }
+  .product-selector__stage--enhanced .product-selector__panel { padding-inline: 0.25rem; }
 }
 .product-selector__media .media-slot { border-radius: var(--radius-card); }
 .product-selector__title { font-size: var(--type-display-4); line-height: var(--lead-h2); letter-spacing: var(--track-h2); margin-top: 0.4rem; }
@@ -2189,6 +2286,11 @@ h3, .h3 { font-size: var(--type-title); line-height: var(--lead-title); letter-s
   .faq__item[open] .faq__chevron { transform: none; }
   .carousel--enhanced .carousel__slide { transform: none; opacity: 1; }
   .carousel--enhanced .carousel__slide:not(.is-active) { opacity: 0.7; }
+
+  .product-selector__tab-indicator,
+  .product-selector__tabs.is-indicator-ready .product-selector__tab-indicator { transition: none; }
+  .product-selector__stage--enhanced .product-selector__panel,
+  .product-selector__stage.is-settling .product-selector__panel { transition: none; opacity: 1; }
 }
 
 /* ---- Reduced transparency ----

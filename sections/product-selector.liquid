@@ -25,8 +25,19 @@
 
     <div class="product-selector__widget" data-product-selector data-reveal>
       <div class="product-selector__tabs" data-selector-tabs role="tablist" aria-label="Choose a product">
+        <span class="product-selector__tab-indicator" data-selector-indicator aria-hidden="true"></span>
         {%- for block in section.blocks -%}
           {%- assign product = block.settings.product -%}
+          {%- comment -%}
+            Tab text is independent of the panel heading below: a merchant
+            can label the switcher by category ("Weight Loss") while the
+            panel underneath still shows the real product name. Falls back
+            to Title, then the linked product's name, if left blank.
+          {%- endcomment -%}
+          {%- assign tab_text = block.settings.tab_label -%}
+          {%- if tab_text == blank -%}{%- assign tab_text = block.settings.title -%}{%- endif -%}
+          {%- if tab_text == blank and product != blank -%}{%- assign tab_text = product.title -%}{%- endif -%}
+          {%- if tab_text == blank -%}{%- assign tab_text = 'Product ' | append: forloop.index -%}{%- endif -%}
           <button
             type="button"
             class="product-selector__tab {% if forloop.first %}is-active{% endif %}"
@@ -37,14 +48,12 @@
             aria-selected="{% if forloop.first %}true{% else %}false{% endif %}"
             tabindex="{% if forloop.first %}0{% else %}-1{% endif %}"
           >
-            {%- if block.settings.title != blank -%}{{ block.settings.title }}
-            {%- elsif product != blank -%}{{ product.title }}
-            {%- else -%}Product {{ forloop.index }}{%- endif -%}
+            {{- tab_text -}}
           </button>
         {%- endfor -%}
       </div>
 
-      <div class="product-selector__stage" style="--selector-aspect-mobile: {{ section.settings.aspect_mobile }}; --selector-aspect-desktop: {{ section.settings.aspect_desktop }};">
+      <div class="product-selector__stage" data-selector-stage style="--selector-aspect-mobile: {{ section.settings.aspect_mobile }}; --selector-aspect-desktop: {{ section.settings.aspect_desktop }};">
         {%- for block in section.blocks -%}
           {%- assign product = block.settings.product -%}
           <div
@@ -180,6 +189,12 @@
       "settings": [
         { "type": "product", "id": "product", "label": "Product" },
         { "type": "image_picker", "id": "image", "label": "Image (overrides product photo)" },
+        {
+          "type": "text",
+          "id": "tab_label",
+          "label": "Tab label",
+          "info": "Text shown on the pill switcher above, e.g. 'Weight Loss'. Leave blank to use the Title below, or the product's name."
+        },
         { "type": "text", "id": "badge", "label": "Eyebrow / badge", "default": "MELT LABS" },
         { "type": "text", "id": "title", "label": "Title (overrides product title)" },
         { "type": "text", "id": "tagline", "label": "Tagline" },
