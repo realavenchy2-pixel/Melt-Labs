@@ -44,6 +44,14 @@
     "testimonials": {
       "type": "testimonial-carousel",
       "blocks": {
+        "slide_7AgUdN": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/05_hair_before_after_1_1x1_999d7dc3-e9eb-48d0-b0f0-d0ef9eb6e40f.png",
+            "quote": "I stopped snacking without even trying.",
+            "author": "Jeff, 39"
+          }
+        },
         "slide_LchUVW": {
           "type": "slide",
           "settings": {
@@ -78,6 +86,7 @@
         }
       },
       "block_order": [
+        "slide_7AgUdN",
         "slide_LchUVW",
         "slide_NxDcr3",
         "slide_nFyJQU",
