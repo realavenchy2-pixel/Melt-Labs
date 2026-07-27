@@ -48,6 +48,11 @@ a { color: inherit; }
   /* Chrome height, so sticky offsets and anchor targets stop guessing.
      56px subnav / 60px header + breathing room. */
   --chrome-h: 72px;
+  /* The sticky site header sits ABOVE the hero in normal flow, so a
+     hero asking for a full 100svh actually renders 100svh + this, and
+     its bottom content lands under the browser's own chrome. Full-height
+     heroes subtract it. Keep in sync with .site-header__inner min-height. */
+  --site-header-h: 60px;
   /* Semantic accents, tuned to sit beside the cyan/gold brand: a
      teal-leaning green and a warm coral red rather than default UI
      green/red, so the thumbs read on-brand. */
@@ -486,7 +491,7 @@ h3, .h3 { font-size: var(--type-title); line-height: var(--lead-title); letter-s
    stretches to match, at the cost of a slightly different crop on the
    rare page where copy overflows. (This mirrors how .home-hero already
    handles the same situation.) */
-.hero--fill { min-height: 100svh; }
+.hero--fill { min-height: calc(100svh - var(--site-header-h)); }
 .hero--fill .hero__media { position: absolute; inset: 0; height: 100%; }
 
 .hero--sized .hero__media { aspect-ratio: var(--hero-aspect-mobile, 9 / 16); }
@@ -509,10 +514,22 @@ h3, .h3 { font-size: var(--type-title); line-height: var(--lead-title); letter-s
   .hero-vid--desktop { display: block; }
   .hero-vid--mobile { display: none; }
 }
+/* Scrim. The old ramp was fully transparent for the top 28% and only
+   darkened near the bottom, so anything sitting mid-frame - the eyebrow
+   especially - washed out over a bright shot. This one carries a wash
+   across the whole frame and still weights the bottom, where the CTA
+   lives, so the merchant's darkness setting has real authority
+   everywhere. At 100 the bottom goes fully opaque. */
 .hero__scrim {
   position: absolute;
   inset: 0;
-  background: linear-gradient(180deg, rgb(22 22 22 / 0) 28%, rgb(22 22 22 / calc(var(--scrim-opacity, 60) * 1%)) 86%);
+  background: linear-gradient(
+    180deg,
+    rgb(22 22 22 / calc(var(--scrim-opacity, 60) * 0.55%)) 0%,
+    rgb(22 22 22 / calc(var(--scrim-opacity, 60) * 0.42%)) 30%,
+    rgb(22 22 22 / calc(var(--scrim-opacity, 60) * 0.72%)) 62%,
+    rgb(22 22 22 / calc(var(--scrim-opacity, 60) * 1%)) 100%
+  );
 }
 .hero__content {
   position: absolute;
@@ -522,9 +539,15 @@ h3, .h3 { font-size: var(--type-title); line-height: var(--lead-title); letter-s
   flex-direction: column;
   justify-content: flex-end;
   align-items: center;
-  padding-bottom: clamp(3rem, 9vh, 5.5rem);
+  /* env() keeps the CTA clear of the iOS home indicator / bottom URL bar. */
+  padding-bottom: calc(clamp(3rem, 9vh, 5.5rem) + env(safe-area-inset-bottom, 0px));
   text-align: center;
   color: #fff;
+  /* Vibrancy over photography: a tight contact shadow plus a wide soft
+     one lifts the type off whatever is behind it, without greying the
+     whole image the way a heavier scrim alone would. Inherited by every
+     child, so eyebrow, headline, subhead, and microcopy all benefit. */
+  text-shadow: 0 1px 2px rgb(0 0 0 / 0.3), 0 2px 14px rgb(0 0 0 / 0.36);
 }
 /* Fill mode overrides the absolute overlay above: normal flow, content-
    driven height (see the .hero--fill note by .hero__media). Higher
@@ -533,9 +556,13 @@ h3, .h3 { font-size: var(--type-title); line-height: var(--lead-title); letter-s
 .hero--fill .hero__content {
   position: relative;
   inset: auto;
-  min-height: 100svh;
+  min-height: calc(100svh - var(--site-header-h));
 }
-.hero__content .eyebrow { color: rgba(255,255,255,0.85); }
+/* Buttons opt out of the inherited shadow: they already sit on a solid
+   fill, so a shadow only softens the label. */
+.hero__content .btn,
+.home-hero__content .btn { text-shadow: none; }
+.hero__content .eyebrow { color: rgba(255,255,255,0.95); }
 .hero__headline {
   color: #fff;
   font-size: var(--type-display-1);
@@ -548,7 +575,7 @@ h3, .h3 { font-size: var(--type-title); line-height: var(--lead-title); letter-s
   margin-top: 1rem;
   font-size: 0.82rem;
   letter-spacing: 0.02em;
-  color: rgba(255, 255, 255, 0.78);
+  color: rgba(255, 255, 255, 0.9);
   text-wrap: balance;
   max-width: 34ch;
 }
@@ -556,7 +583,7 @@ h3, .h3 { font-size: var(--type-title); line-height: var(--lead-title); letter-s
   margin: 1rem auto 1.75rem;
   max-width: 32ch;
   font-size: clamp(1rem, 3vw, 1.2rem);
-  color: rgba(255,255,255,0.85);
+  color: rgba(255,255,255,0.94);
 }
 
 /* ---- Offer page ---- */
@@ -1471,13 +1498,24 @@ h3, .h3 { font-size: var(--type-title); line-height: var(--lead-title); letter-s
 .home-hero__media .media-slot__label { justify-content: flex-start; padding-top: 16svh; border: 0; }
 /* Even overlay scaled by the merchant's darkness setting: the top stays
    ~40% of the bottom value so it reads as a gentle top-down wash. */
+/* Matches the product hero's ramp so both heroes respond to their
+   darkness setting the same way. */
 .home-hero__scrim {
   position: absolute; inset: 0;
-  background: linear-gradient(180deg, rgb(22 22 22 / calc(var(--scrim-opacity, 45) * 0.4%)) 0%, rgb(22 22 22 / calc(var(--scrim-opacity, 45) * 1%)) 100%);
+  background: linear-gradient(
+    180deg,
+    rgb(22 22 22 / calc(var(--scrim-opacity, 45) * 0.55%)) 0%,
+    rgb(22 22 22 / calc(var(--scrim-opacity, 45) * 0.42%)) 30%,
+    rgb(22 22 22 / calc(var(--scrim-opacity, 45) * 0.72%)) 62%,
+    rgb(22 22 22 / calc(var(--scrim-opacity, 45) * 1%)) 100%
+  );
 }
 .home-hero__content { position: relative; width: 100%; text-align: center; padding-block: clamp(3rem, 8vw, 5rem); }
-.home-hero__content--over-media { color: #fff; }
-.home-hero__content--over-media .eyebrow { color: rgba(255,255,255,0.85); }
+.home-hero__content--over-media {
+  color: #fff;
+  text-shadow: 0 1px 2px rgb(0 0 0 / 0.3), 0 2px 14px rgb(0 0 0 / 0.36);
+}
+.home-hero__content--over-media .eyebrow { color: rgba(255,255,255,0.95); }
 .home-hero__content--over-media .home-hero__headline { color: #fff; }
 .home-hero__headline {
   font-size: var(--type-display-1);
@@ -1492,7 +1530,7 @@ h3, .h3 { font-size: var(--type-title); line-height: var(--lead-title); letter-s
   font-size: clamp(1.05rem, 3vw, 1.3rem);
   color: color-mix(in srgb, var(--color-ink) 68%, transparent);
 }
-.home-hero__content--over-media .home-hero__subhead { color: rgba(255,255,255,0.88); }
+.home-hero__content--over-media .home-hero__subhead { color: rgba(255,255,255,0.94); }
 .home-hero--ink .home-hero__subhead { color: rgba(255,255,255,0.78); }
 .home-hero__actions { display: flex; flex-wrap: wrap; gap: 0.75rem; justify-content: center; }
 
