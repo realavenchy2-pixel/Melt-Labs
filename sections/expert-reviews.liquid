@@ -42,7 +42,7 @@
             {%- elsif block.settings.image != blank -%}
               <div class="media-slot media-slot--rounded" style="--aspect-mobile: 4 / 5;">
                 <div class="media-slot__frame"></div>
-                {%- render 'responsive-image', image: block.settings.image, sizes: '(min-width: 768px) 33vw, 84vw' -%}
+                {%- render 'responsive-image', image: block.settings.image, sizes: '(min-width: 768px) 640px, 100vw' -%}
               </div>
             {%- else -%}
               {%- assign slot_label = 'expert_review_' | append: forloop.index | append: '_image_or_video' -%}

@@ -25,10 +25,15 @@
       {%- if block.type == 'active' -%}
         <div class="carousel__slide" {{ block.shopify_attributes }}>
           <figure class="ingredient-slide">
+            {%- comment -%}
+              Carousel-slide geometry: 88vw on a phone, capped at 560px
+              from 768px up, over-scaled 1.14x by the parallax.
+            {%- endcomment -%}
             {%- render 'media-placeholder',
               label: 'ingredient_photo',
               aspect_mobile: '4 / 5',
-              image: block.settings.image
+              image: block.settings.image,
+              sizes: '(min-width: 768px) 640px, 100vw'
             -%}
             <figcaption class="ingredient-slide__overlay">
               <h3 class="ingredient-slide__name">

@@ -29,7 +29,7 @@
             </video>
           </div>
         {%- else -%}
-          {%- render 'media-placeholder', image: section.settings.image, label: 'how_to_use_photo', aspect_mobile: '4 / 5', class: 'media-slot--rounded' -%}
+          {%- render 'media-placeholder', image: section.settings.image, label: 'how_to_use_photo', aspect_mobile: '4 / 5', class: 'media-slot--rounded', sizes: '(min-width: 768px) 560px, 100vw' -%}
         {%- endif -%}
       </div>
 

@@ -24,10 +24,18 @@
     {%- for block in section.blocks -%}
       <div class="carousel__slide" {{ block.shopify_attributes }}>
         <figure class="testimonial-card">
+          {%- comment -%}
+            A slide is 88vw on a phone and caps at 560px from 768px up,
+            and the carousel parallax over-scales the photo 1.14x, so the
+            image is painted about 640px wide on desktop. Stating that
+            here is what lets the browser pick a candidate that is sharp
+            on a 2x display without pulling a full-width file for a card.
+          {%- endcomment -%}
           {%- render 'media-placeholder',
             label: 'transformation_photo_before_after',
             aspect_mobile: '1 / 1',
-            image: block.settings.image
+            image: block.settings.image,
+            sizes: '(min-width: 768px) 640px, 100vw'
           -%}
           <figcaption class="testimonial-card__overlay">
             <blockquote class="testimonial-card__quote">&ldquo;{{ block.settings.quote }}&rdquo;</blockquote>

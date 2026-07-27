@@ -14,7 +14,13 @@
                scroll marathon on a phone.
 {%- endcomment -%}
 
-{%- assign layout = section.settings.layout | default: 'stacked' -%}
+{%- comment -%}
+  Falls back to carousel, matching the schema default: the theme editor
+  writes templates back without keys it does not yet know about, which
+  already silently reverted one lander to the stacked layout. Defaulting
+  the other way means a dropped key is a no-op instead of a regression.
+{%- endcomment -%}
+{%- assign layout = section.settings.layout | default: 'carousel' -%}
 
 <section class="section section--scheme-{{ section.settings.scheme | default: 'ink' }}">
   <div class="container container--narrow science__intro" data-reveal>
@@ -49,7 +55,7 @@
                   aspect_mobile: '4 / 5',
                   aspect_desktop: section.settings.chapter_aspect,
                   image: block.settings.image,
-                  sizes: '(min-width: 768px) 46vw, 88vw',
+                  sizes: '(min-width: 768px) 640px, 100vw',
                   class: 'media-slot--rounded science__media'
                 -%}
                 {%- if block.settings.eyebrow != blank or block.settings.heading != blank or block.settings.text != blank -%}
@@ -95,7 +101,7 @@
                 aspect_mobile: '4 / 5',
                 aspect_desktop: section.settings.chapter_aspect,
                 image: block.settings.image,
-                sizes: '(min-width: 800px) 46vw, 92vw',
+                sizes: '(min-width: 800px) 560px, 100vw',
                 class: 'media-slot--rounded science__media'
               -%}
             </div>
@@ -181,10 +187,10 @@
       "label": "Storyboard layout",
       "info": "Stacked runs the chapters down the page, alternating sides. Carousel turns them into swipeable cards.",
       "options": [
-        { "value": "stacked", "label": "Stacked down the page" },
-        { "value": "carousel", "label": "Swipeable carousel" }
+        { "value": "carousel", "label": "Swipeable carousel" },
+        { "value": "stacked", "label": "Stacked down the page" }
       ],
-      "default": "stacked"
+      "default": "carousel"
     },
     {
       "type": "checkbox",

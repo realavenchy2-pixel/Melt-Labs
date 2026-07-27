@@ -17,11 +17,26 @@
   endif
 -%}
 
+{%- comment -%}
+  The candidate list runs past 1600 on purpose. A desktop slot is served
+  at CSS width x device pixel ratio, so a 640px card on a 2x display
+  needs 1280 real pixels and a full-bleed image on a 2x 1440 monitor
+  needs 2880 - a 1600 ceiling meant the browser had nothing sharp enough
+  to pick and upscaled the largest candidate, which is what made desktop
+  images look soft. Shopify clamps each candidate to the source file's
+  real dimensions, so listing large widths never invents pixels or
+  serves an upscaled file; it only stops us capping below what the
+  source can actually give.
+
+  This puts the burden on `sizes` being accurate: with a wrong 100vw the
+  browser would now fetch a 3000px file for a 560px card. Every caller
+  that renders into a fixed-width slot passes its real width.
+{%- endcomment -%}
 {{
   image
-  | image_url: width: 1600
+  | image_url: width: 3000
   | image_tag:
-    widths: '360, 540, 720, 900, 1080, 1440, 1600',
+    widths: '360, 540, 720, 900, 1080, 1440, 1800, 2200, 2600, 3000',
     sizes: sizes,
     loading: loading,
     fetchpriority: fetchpriority,
