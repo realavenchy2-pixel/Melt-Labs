@@ -43,7 +43,9 @@
         "reassurance": "Tasteless in any drink\n2 oz / 60 mL bottle\nThird-party tested\n60-day money-back guarantee",
         "trust_line": "Secure checkout. Third-party tested every batch.",
         "show_description": true,
-        "placeholder_title": "The Special Water"
+        "placeholder_title": "The Special Water",
+        "add_label": "Add Special Water to my routine",
+        "under_button": "Secure checkout · Ships in 2–4 business days"
       }
     },
     "guarantee": {
