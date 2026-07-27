@@ -21,6 +21,51 @@
         "aspect_mobile": "1 / 1"
       }
     },
+    "product_selector_qyjawE": {
+      "type": "product-selector",
+      "blocks": {
+        "product_MRDdXn": {
+          "type": "product",
+          "settings": {
+            "product": "",
+            "image": "shopify://shop_images/2nd_image_2K_202607181243.jpg",
+            "tab_label": "Weight Loss",
+            "badge": "For Sustained Weight Loss",
+            "title": "The Special Water",
+            "tagline": "",
+            "points": "Loose Weight Drinking Water\nProven Japanese Botanical Formula\nStill Taste Like Water",
+            "button_label": "Shop now",
+            "link": "https://shopmeltlab.com/pages/the-special-water"
+          }
+        },
+        "product_VkUUxr": {
+          "type": "product",
+          "settings": {
+            "product": "",
+            "image": "shopify://shop_images/reformat_to_1_1_2K_202607210208.jpg",
+            "tab_label": "Hair Restoration",
+            "badge": "FOR SCALP + HAIR",
+            "title": "KAMI 15",
+            "tagline": "Four drops on the scalp, every night. A one-minute ritual for fuller-looking hair.",
+            "points": "Fragrance-free\nThird-party tested\nWorks with color-treated hair",
+            "button_label": "Shop KAMI",
+            "link": "shopify://pages/kami"
+          }
+        }
+      },
+      "block_order": [
+        "product_MRDdXn",
+        "product_VkUUxr"
+      ],
+      "settings": {
+        "scheme": "white",
+        "eyebrow": "SHOP THE LINEUP",
+        "heading": "Select Your Best",
+        "subhead": "Two botanical formulas. Same promise: fit the routine you already have.",
+        "aspect_desktop": "1 / 1",
+        "aspect_mobile": "1 / 1"
+      }
+    },
     "product_selector_67CkzJ": {
       "type": "product-selector",
       "blocks": {
@@ -29,6 +74,7 @@
           "settings": {
             "product": "",
             "image": "shopify://shop_images/2nd_image_2K_202607181243.jpg",
+            "tab_label": "",
             "badge": "For Sustained Weight Loss",
             "title": "The Special Water",
             "tagline": "",
@@ -42,6 +88,7 @@
           "settings": {
             "product": "",
             "image": "shopify://shop_images/KAMI_Official_Hero_2K_202607190024.jpg",
+            "tab_label": "",
             "badge": "FOR SCALP + HAIR",
             "title": "KAMI 15",
             "tagline": "Four drops on the scalp, every night. A one-minute ritual for fuller-looking hair.",
@@ -55,6 +102,7 @@
         "product_jpDpHJ",
         "product_TzkNr8"
       ],
+      "disabled": true,
       "settings": {
         "scheme": "white",
         "eyebrow": "SHOP THE LINEUP",
@@ -67,6 +115,7 @@
   },
   "order": [
     "main",
+    "product_selector_qyjawE",
     "product_selector_67CkzJ"
   ]
 }
