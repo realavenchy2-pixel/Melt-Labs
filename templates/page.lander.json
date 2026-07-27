@@ -270,6 +270,15 @@
     "science": {
       "type": "science-scroll",
       "blocks": {
+        "chapter_wifXHa": {
+          "type": "chapter",
+          "settings": {
+            "image": "shopify://shop_images/Five_adults_in_studio_2K_202607270422.jpg",
+            "eyebrow": "",
+            "heading": "",
+            "text": ""
+          }
+        },
         "chapter_MqJzcP": {
           "type": "chapter",
           "settings": {
@@ -279,10 +288,10 @@
             "text": ""
           }
         },
-        "chapter_wifXHa": {
+        "chapter_yUzpwt": {
           "type": "chapter",
           "settings": {
-            "image": "shopify://shop_images/Five_adults_in_studio_2K_202607270422.jpg",
+            "image": "shopify://shop_images/13_weight_before_after_4_3x4_d259eb25-69a7-40bb-9cc3-921d2ffdd9ef.png",
             "eyebrow": "",
             "heading": "",
             "text": ""
@@ -290,8 +299,9 @@
         }
       },
       "block_order": [
+        "chapter_wifXHa",
         "chapter_MqJzcP",
-        "chapter_wifXHa"
+        "chapter_yUzpwt"
       ],
       "settings": {
         "scheme": "ink",
