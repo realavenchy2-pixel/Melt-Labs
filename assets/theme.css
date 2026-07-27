@@ -665,8 +665,12 @@ h3, .h3 { font-size: var(--type-title); line-height: var(--lead-title); letter-s
   display: flex;
   flex-direction: column;
   align-items: inherit;
-  gap: 1rem;
-  margin-top: clamp(1.75rem, 4.5vh, 2.75rem);
+  gap: 0.85rem;
+  /* The gap that separates the statement from the action. Apple gives
+     the buy control real air above it - crowded against the copy it
+     reads as the last line of the sentence rather than the thing to
+     press. */
+  margin-top: clamp(2rem, 5.5vh, 3.25rem);
 }
 /* Shared by both heroes, so it takes its colour from whatever it sits
    in rather than hardcoding white - over media that is the white the
@@ -686,13 +690,21 @@ h3, .h3 { font-size: var(--type-title); line-height: var(--lead-title); letter-s
   .hero__link:hover .hero__link-chevron { transform: translateX(3px); }
 }
 .hero__link:focus-visible { outline: 2px solid currentColor; outline-offset: 4px; border-radius: 6px; }
+/* The footnote under the button. Apple sets this as genuinely small,
+   quiet type - a line you can read if you look for it, not a third
+   paragraph competing with the headline. It was near body size and
+   nearly as bright as the subhead, which is why the block below the
+   button read as heavy. */
 .hero__microcopy {
   margin: 0 auto;
-  font-size: 0.82rem;
-  letter-spacing: 0.02em;
-  color: rgba(255, 255, 255, 0.9);
+  font-size: 0.72rem;
+  line-height: 1.45;
+  letter-spacing: 0.01em;
+  color: rgba(255, 255, 255, 0.76);
   text-wrap: balance;
-  max-width: 34ch;
+  /* Wide enough that a short guarantee line sets on one line at this
+     size; the measure is what forced it to break, not the copy. */
+  max-width: 44ch;
 }
 /* The narrow measures above are a phone constraint. Held at desktop
    they break a single supporting sentence into three stacked lines,
@@ -700,7 +712,7 @@ h3, .h3 { font-size: var(--type-title); line-height: var(--lead-title); letter-s
    one line supporting it. */
 @media (min-width: 768px) {
   .hero__subhead { max-width: 46ch; }
-  .hero__microcopy { max-width: 48ch; }
+  .hero__microcopy { font-size: 0.78rem; max-width: 46ch; }
 }
 
 /* ---- Hero play/pause ----
