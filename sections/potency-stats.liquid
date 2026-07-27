@@ -1,16 +1,36 @@
 {%- comment -%}
   S9 — Potency / efficacy (reference: PDF p.19, Apple's "8 hrs / 10 hrs"
   battery stack). Big stat values with hairline dividers; copy explains
-  all-day support rather than a short-lived spike. Optional how-to-use
-  photo (4:5) sits beside the stats so the "just a couple of drops"
-  claim is shown, not just told.
+  all-day support rather than a short-lived spike. The media slot beside
+  the stats accepts an optional how-to-use photo (4:5) OR a 9:16
+  explainer video (video wins if both are set) - same tap-to-play,
+  native-controls pattern as expert-reviews.liquid, since this is a
+  watch-me explainer clip, not a muted ambient loop.
 {%- endcomment -%}
 
 <section class="section section--scheme-tint">
   <div class="container">
     <div class="featured">
       <div class="featured__media" data-reveal>
-        {%- render 'media-placeholder', image: section.settings.image, label: 'how_to_use_photo', aspect_mobile: '4 / 5', class: 'media-slot--rounded' -%}
+        {%- if section.settings.video != blank -%}
+          {%- assign video_poster = section.settings.video_poster | default: section.settings.image -%}
+          <div class="media-slot media-slot--rounded" style="--aspect-mobile: 9 / 16; --aspect-desktop: 9 / 16;">
+            <div class="media-slot__frame"></div>
+            <video
+              controls
+              playsinline
+              webkit-playsinline
+              preload="none"
+              {%- if video_poster != blank %} poster="{{ video_poster | image_url: width: 800 }}"{% endif %}
+            >
+              {%- for source in section.settings.video.sources -%}
+                <source src="{{ source.url }}" type="{{ source.mime_type }}">
+              {%- endfor -%}
+            </video>
+          </div>
+        {%- else -%}
+          {%- render 'media-placeholder', image: section.settings.image, label: 'how_to_use_photo', aspect_mobile: '4 / 5', class: 'media-slot--rounded' -%}
+        {%- endif -%}
       </div>
 
       <div class="featured__body" data-reveal style="--reveal-i: 1;">
@@ -42,6 +62,18 @@
   "name": "Potency stats",
   "settings": [
     { "type": "image_picker", "id": "image", "label": "How-to-use photo" },
+    {
+      "type": "video",
+      "id": "video",
+      "label": "How-to-use video (9:16)",
+      "info": "Optional. Swaps out the photo for a vertical explainer video with sound and tap-to-play controls. Takes priority over the photo when set."
+    },
+    {
+      "type": "image_picker",
+      "id": "video_poster",
+      "label": "Video poster frame",
+      "info": "Shown before the video is played. Falls back to the how-to-use photo above if left blank."
+    },
     {
       "type": "text",
       "id": "headline",
