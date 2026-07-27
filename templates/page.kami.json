@@ -41,6 +41,19 @@
     },
     "testimonials": {
       "type": "testimonial-carousel",
+      "blocks": {
+        "slide_nFyJQU": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/Make_before_after_photo_2K_202607190109.jpg",
+            "quote": "I stopped snacking without even trying.",
+            "author": "Placeholder, 34"
+          }
+        }
+      },
+      "block_order": [
+        "slide_nFyJQU"
+      ],
       "settings": {
         "headline": "Real Routines. Real Hair Journeys.",
         "subhead": "No clinic appointments. No complicated application schedule. No completely rebuilding your morning. Just four drops worked into the areas where your hair looks thinner.",
