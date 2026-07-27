@@ -34,9 +34,9 @@
         "headline": "Meet Your Better *Long‑Term* Weight‑Loss Partner.",
         "subhead": "Special Water is a tasteless Japanese botanical serum you add to what you already drink. Two quick squirts support quieter cravings, a steadier blood-sugar response, and daily metabolic function, without shots, pills, or rebuilding your entire routine.",
         "cta_label": "Try Special Water risk-free",
+        "microcopy": "60-day money-back guarantee · Tasteless · Third-party tested. Add it. Drink normally. Stay consistent.",
         "product": "special-water",
-        "cta_link": "shopify://products/the-special-water",
-        "microcopy": "60-day money-back guarantee · Tasteless · Third-party tested. Add it. Drink normally. Stay consistent."
+        "cta_link": "shopify://products/the-special-water"
       }
     },
     "testimonials": {
@@ -74,9 +74,9 @@
       ],
       "settings": {
         "headline": "Real Routines. Real Results.",
+        "subhead": "No complicated plan. No complete lifestyle overhaul. Just two squirts added to the drinks people were already having every day.",
         "autoplay": true,
-        "autoplay_interval": 4500,
-        "subhead": "No complicated plan. No complete lifestyle overhaul. Just two squirts added to the drinks people were already having every day."
+        "autoplay_interval": 4500
       }
     },
     "ingredients": {
@@ -494,8 +494,6 @@
     },
     "experts": {
       "type": "expert-reviews",
-      "blocks": {},
-      "block_order": [],
       "disabled": true,
       "settings": {
         "headline": "What *experts* are saying",
