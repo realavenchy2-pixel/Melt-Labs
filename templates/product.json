@@ -89,6 +89,73 @@
         "scheme": "tint"
       }
     },
+    "testimonial_carousel_8THFBB": {
+      "type": "testimonial-carousel",
+      "blocks": {
+        "slide_TKEPQV": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/gym-split.webp",
+            "quote": "I stopped snacking without even trying.",
+            "author": "Leslie, 46"
+          }
+        },
+        "slide_jwgGEF": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/split-transform.webp",
+            "quote": "I stopped snacking without even trying.",
+            "author": "Wendy, 27"
+          }
+        },
+        "slide_F3xRPL": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/split-physique.webp",
+            "quote": "To put it short. The Special Water changed my life.",
+            "author": "Tiago, 34"
+          }
+        },
+        "slide_3EkpNi": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/before-after.webp",
+            "quote": "Two drops in my coffee and the cravings are non existent for the entire day.",
+            "author": "Kati 41"
+          }
+        },
+        "slide_hNhhyW": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/split-transformation.webp",
+            "quote": "Didn't change anything else. Just added this.",
+            "author": "John, 29"
+          }
+        },
+        "slide_mEJJcY": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/split-face.webp",
+            "quote": "I stopped snacking without even trying.",
+            "author": "Jin, 36"
+          }
+        }
+      },
+      "block_order": [
+        "slide_TKEPQV",
+        "slide_jwgGEF",
+        "slide_F3xRPL",
+        "slide_3EkpNi",
+        "slide_hNhhyW",
+        "slide_mEJJcY"
+      ],
+      "settings": {
+        "headline": "Real Routines. Real Results.",
+        "subhead": "No complicated plan. No complete lifestyle overhaul. Just two squirts added to the drinks people were already having every day.",
+        "autoplay": true,
+        "autoplay_interval": 4500
+      }
+    },
     "testimonial_carousel_4xbWtw": {
       "type": "testimonial-carousel",
       "blocks": {
@@ -122,6 +189,7 @@
         "slide_PLYKcj",
         "slide_bmete7"
       ],
+      "disabled": true,
       "settings": {
         "headline": "Real Routines. Real Results.",
         "subhead": "",
@@ -237,6 +305,7 @@
   "order": [
     "offer",
     "guarantee",
+    "testimonial_carousel_8THFBB",
     "testimonial_carousel_4xbWtw",
     "faq",
     "refs"
