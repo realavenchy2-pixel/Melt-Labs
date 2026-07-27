@@ -1,16 +1,19 @@
 {%- comment -%}
-  S1 — Hero. Autoplay video OR static image, with separate mobile and
-  desktop assets, an adjustable overlay, and an adjustable frame shape
-  (fill screen, or a fixed 16:9 / 9:16 / 1:1 / 4:5 / 3:4 ratio) so any
-  video fits perfectly. The sentinel div lets scroll-fx.js show the
-  product subnav once the hero scrolls away.
+  S1 — Product hero.
 
-  Layout follows Apple's product hero: the footage is the subject, so
-  the copy collects into one tight block anchored to the bottom of the
-  frame rather than spreading over it, the buy button closes that block,
-  and the scrim is a bottom ramp that leaves the top of the video
-  untouched. A play/pause control sits in the bottom corner - autoplay
-  the shopper cannot stop is a control they do not have.
+  This renders the homepage hero's markup, class for class. It used to
+  carry its own .hero__* system, which meant every spacing or type
+  decision had to be re-made here and the two heroes drifted apart with
+  each round of tuning. Emitting .home-hero__* instead means there is
+  nothing left to keep in sync: the product hero picks up whatever the
+  homepage hero is doing, from the same rules, automatically.
+
+  It keeps the three things the homepage hero has no use for - an
+  eyebrow, a reassurance line under the button, and the sentinel that
+  reveals the sticky Buy subnav once the hero scrolls away. Every hook
+  scroll-fx.js uses is a data attribute (data-hero, data-autoplay-video,
+  data-video-toggle, data-subnav-sentinel), so none of that depends on
+  the class names.
 {%- endcomment -%}
 
 {%- liquid
@@ -25,6 +28,7 @@
       assign show_toggle = true
     endif
   endif
+
   # CTA target: explicit link wins, else a picked product's page, else the
   # on-page #offer anchor. Lets the marketing lander send the button to
   # the separate offer/product page.
@@ -35,28 +39,33 @@
     assign hero_cta = section.settings.product.url
   endif
 
-  # Space above the button, written inline rather than left to theme.css.
-  # The stylesheet is a separate cached asset, so emitting the gap with
-  # the markup means the hero matches the homepage even for a visitor
-  # holding an older theme.css. An inline style also outranks the class
-  # rule, so this value is the one that applies.
-  #
-  # The default lands on clamp(1.75rem, 4.5vh, 2.75rem) - the homepage
-  # hero's exact figure - so both heroes set the button the same distance
-  # from the copy out of the box. The floor and ceiling scale with the
-  # slider so a change keeps that proportion instead of flattening it.
-  assign gap_vh = section.settings.actions_gap | default: 4.5
-  assign gap_min = gap_vh | times: 389 | divided_by: 1000.0
-  assign gap_max = gap_vh | times: 611 | divided_by: 1000.0
-  assign actions_style = 'margin-top: clamp(' | append: gap_min | append: 'rem, ' | append: gap_vh | append: 'vh, ' | append: gap_max | append: 'rem);'
+  # Space above the button. Left empty at the default so the homepage
+  # hero's own rule is what applies - matching it by inheriting it rather
+  # than by restating a number that could drift again. Only a deliberate
+  # move off the default writes an inline override, and because that is
+  # emitted with the markup it survives a stale cached stylesheet.
+  assign actions_style = ''
+  assign gap_vh = section.settings.actions_gap
+  if gap_vh != blank and gap_vh != 4.5
+    assign gap_min = gap_vh | times: 389 | divided_by: 1000.0
+    assign gap_max = gap_vh | times: 611 | divided_by: 1000.0
+    assign actions_style = 'margin-top: clamp(' | append: gap_min | append: 'rem, ' | append: gap_vh | append: 'vh, ' | append: gap_max | append: 'rem);'
+  endif
 -%}
 
 <section
-  class="hero hero--{{ hero_mode }} hero--{{ content_position }} hero--align-{{ content_align }}"
+  {%- comment -%}
+    --tint is the scheme the homepage hero runs, and it has to match:
+    .home-hero--ink re-colours the subhead to 0.78 alpha at the same
+    specificity as the over-media rule but later in the file, so an ink
+    hero would quietly set a dimmer subhead than the homepage. The
+    scheme only paints behind the media anyway.
+  {%- endcomment -%}
+  class="home-hero home-hero--tint home-hero--{{ hero_mode }} home-hero--pos-{{ content_position }} home-hero--align-{{ content_align }} home-hero--has-media"
   style="--hero-aspect-mobile: {{ section.settings.aspect_mobile }}; --hero-aspect-desktop: {{ section.settings.aspect_desktop }}; --hero-fit: {{ section.settings.media_fit }};"
   data-hero
 >
-  <div class="hero__media">
+  <div class="home-hero__media">
     {%- render 'hero-media',
       media_type: section.settings.media_type,
       video_desktop: section.settings.video,
@@ -68,32 +77,21 @@
       aspect_desktop: '16 / 9',
       eager: true
     -%}
-    <div class="hero__scrim" aria-hidden="true" style="--scrim-opacity: {{ section.settings.overlay_darkness }};"></div>
+    <div class="home-hero__scrim" aria-hidden="true" style="--scrim-opacity: {{ section.settings.overlay_darkness }};"></div>
   </div>
 
-  <div class="container hero__content">
-    {%- comment -%}
-      Eyebrow, headline and subhead stay direct children of
-      .hero__content: the intro stagger and the LCP-safe headline rule
-      in theme.css both key off `> *`, and wrapping them - even in a
-      display:contents box - would put the headline behind an
-      opacity-0 parent and cost the mobile LCP.
-    {%- endcomment -%}
+  <div class="container home-hero__content home-hero__content--over-media">
     {%- if section.settings.eyebrow != blank -%}
       <span class="eyebrow">{{ section.settings.eyebrow }}</span>
     {%- endif -%}
 
-    <h1 class="hero__headline">{% render 'accent-text', text: section.settings.headline, color: 'gold' %}</h1>
+    <h1 class="home-hero__headline">{% render 'accent-text', text: section.settings.headline, color: 'gold' %}</h1>
 
     {%- if section.settings.subhead != blank -%}
-      <p class="hero__subhead">{{ section.settings.subhead }}</p>
+      <p class="home-hero__subhead">{{ section.settings.subhead }}</p>
     {%- endif -%}
 
-    {%- comment -%}
-      The action group is one unit so the gap above it separates the
-      statement from the button, rather than spacing out each line.
-    {%- endcomment -%}
-    <div class="hero__actions" style="{{ actions_style }}">
+    <div class="home-hero__actions"{% if actions_style != blank %} style="{{ actions_style }}"{% endif %}>
       <a class="btn btn--gold" href="{{ hero_cta }}">{{ section.settings.cta_label }}</a>
 
       {%- comment -%}
