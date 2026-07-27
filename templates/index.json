@@ -13,10 +13,13 @@
       "type": "home-hero",
       "settings": {
         "scheme": "tint",
-        "media_type": "image",
+        "media_type": "video",
+        "video": "shopify://files/videos/Website_hero_video_creation_1080p_202607270127.mp4",
+        "video_mobile": "shopify://files/videos/Website_hero_video_creation_1080p_202607270128.mp4",
         "image": "shopify://shop_images/resize_2K_202607201936.jpg",
         "image_mobile": "shopify://shop_images/Apple_tech_meets_Japanese_supple__202607201935.jpg",
         "overlay_darkness": 90,
+        "show_video_toggle": true,
         "eyebrow": "",
         "headline": "Advanced Japanese Botanicals, *made into easy to use serums.*",
         "subhead": "Japanese botanical formulas that work with your body, not against your routine.",
@@ -38,13 +41,13 @@
           "settings": {
             "product": "",
             "image": "shopify://shop_images/2nd_image_2K_202607181243.jpg",
+            "tab_label": "Weight Loss",
             "badge": "For Sustained Weight Loss",
             "title": "The Special Water",
             "tagline": "",
             "points": "Loose Weight Drinking Water\nProven Japanese Botanical Formula\nStill Taste Like Water",
             "button_label": "Shop now",
-            "link": "https://shopmeltlab.com/pages/the-special-water",
-            "tab_label": "Weight Loss"
+            "link": "https://shopmeltlab.com/pages/the-special-water"
           }
         },
         "p2": {
@@ -52,13 +55,13 @@
           "settings": {
             "product": "",
             "image": "shopify://shop_images/reformat_to_1_1_2K_202607210208.jpg",
+            "tab_label": "Hair Restoration",
             "badge": "FOR SCALP + HAIR",
             "title": "KAMI 15",
             "tagline": "Four drops on the scalp, every night. A one-minute ritual for fuller-looking hair.",
             "points": "Fragrance-free\nThird-party tested\nWorks with color-treated hair",
             "button_label": "Shop KAMI",
-            "link": "shopify://pages/kami",
-            "tab_label": "Hair Restoration"
+            "link": "shopify://pages/kami"
           }
         }
       },
