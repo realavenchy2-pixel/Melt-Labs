@@ -42,6 +42,14 @@
     "testimonials": {
       "type": "testimonial-carousel",
       "blocks": {
+        "slide_LchUVW": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/Make_before_after_images_2K_202607190108_1.jpg",
+            "quote": "I stopped snacking without even trying.",
+            "author": "Placeholder, 34"
+          }
+        },
         "slide_nFyJQU": {
           "type": "slide",
           "settings": {
@@ -49,10 +57,20 @@
             "quote": "I stopped snacking without even trying.",
             "author": "Placeholder, 34"
           }
+        },
+        "slide_MqqMm6": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/Make_before_after_screenshot_2K_202607190108.jpg",
+            "quote": "I stopped snacking without even trying.",
+            "author": "Placeholder, 34"
+          }
         }
       },
       "block_order": [
-        "slide_nFyJQU"
+        "slide_LchUVW",
+        "slide_nFyJQU",
+        "slide_MqqMm6"
       ],
       "settings": {
         "headline": "Real Routines. Real Hair Journeys.",
