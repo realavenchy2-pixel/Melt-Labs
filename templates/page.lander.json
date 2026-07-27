@@ -296,12 +296,22 @@
             "heading": "",
             "text": ""
           }
+        },
+        "chapter_8UfyKW": {
+          "type": "chapter",
+          "settings": {
+            "image": "shopify://shop_images/Japanese_man_different_outfit_2K_202607270823.jpg",
+            "eyebrow": "",
+            "heading": "",
+            "text": ""
+          }
         }
       },
       "block_order": [
         "chapter_wifXHa",
         "chapter_MqJzcP",
-        "chapter_yUzpwt"
+        "chapter_yUzpwt",
+        "chapter_8UfyKW"
       ],
       "settings": {
         "scheme": "ink",
