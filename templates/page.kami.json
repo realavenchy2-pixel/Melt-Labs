@@ -262,6 +262,15 @@
     "science": {
       "type": "science-scroll",
       "blocks": {
+        "chapter_mmrTYW": {
+          "type": "chapter",
+          "settings": {
+            "image": "shopify://shop_images/make_him_a_japanese_guy_202607270758.jpg",
+            "eyebrow": "",
+            "heading": "",
+            "text": ""
+          }
+        },
         "chapter_9k6KmA": {
           "type": "chapter",
           "settings": {
@@ -273,6 +282,7 @@
         }
       },
       "block_order": [
+        "chapter_mmrTYW",
         "chapter_9k6KmA"
       ],
       "settings": {
