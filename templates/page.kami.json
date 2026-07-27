@@ -50,6 +50,14 @@
             "author": "Placeholder, 34"
           }
         },
+        "slide_NxDcr3": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/Make_before_after_images_2K_202607190108.jpg",
+            "quote": "I stopped snacking without even trying.",
+            "author": "Placeholder, 34"
+          }
+        },
         "slide_nFyJQU": {
           "type": "slide",
           "settings": {
@@ -69,6 +77,7 @@
       },
       "block_order": [
         "slide_LchUVW",
+        "slide_NxDcr3",
         "slide_nFyJQU",
         "slide_MqqMm6"
       ],
