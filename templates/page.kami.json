@@ -297,13 +297,23 @@
             "heading": "",
             "text": ""
           }
+        },
+        "chapter_nYay6g": {
+          "type": "chapter",
+          "settings": {
+            "image": "shopify://shop_images/Woman_transformed_her_hair_2K_202607270816.jpg",
+            "eyebrow": "",
+            "heading": "",
+            "text": ""
+          }
         }
       },
       "block_order": [
         "chapter_9k6KmA",
         "chapter_mmrTYW",
         "chapter_Q8kB4d",
-        "chapter_eWnNAk"
+        "chapter_eWnNAk",
+        "chapter_nYay6g"
       ],
       "settings": {
         "scheme": "ink",
