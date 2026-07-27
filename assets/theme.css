@@ -670,8 +670,8 @@ h3, .h3 { font-size: var(--type-title); line-height: var(--lead-title); letter-s
      the buy control real air above it - crowded against the copy it
      reads as the last line of the sentence rather than the thing to
      press. On a 390px phone this was landing at 46px, which still read
-     as attached to the subhead; it now clears 85px there. */
-  margin-top: clamp(3.75rem, 10.5vh, 5.75rem);
+     as attached to the subhead; it now clears 100px there. */
+  margin-top: clamp(4.5rem, 12.5vh, 7rem);
 }
 /* Shared by both heroes, so it takes its colour from whatever it sits
    in rather than hardcoding white - over media that is the white the
