@@ -13,6 +13,7 @@
       "type": "product-subnav",
       "settings": {
         "product": "kami",
+        "logo": "shopify://shop_images/PP405_1.png",
         "logo_height": 40,
         "cta_label": "Buy",
         "cta_link": "shopify://products/kami-15"
