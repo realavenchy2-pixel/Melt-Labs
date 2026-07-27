@@ -42,8 +42,27 @@
       </nav>
     {%- endif -%}
 
-    <a class="site-header__cart" href="{{ routes.cart_url }}" aria-label="Cart ({{ cart.item_count }} items)">
+    {%- comment -%}
+      The count ships rendered by Liquid, so it is correct on first
+      paint with no request and no flash of an empty badge. The bubble
+      is aria-hidden because the link's own label already states the
+      count - a screen reader should hear it once, not twice. scroll-fx
+      refreshes both after a back-navigation, where the cached page
+      would otherwise show a stale number.
+    {%- endcomment -%}
+    <a
+      class="site-header__cart"
+      href="{{ routes.cart_url }}"
+      data-cart-link
+      aria-label="Cart, {{ cart.item_count }} {{ cart.item_count | pluralize: 'item', 'items' }}"
+    >
       {%- render 'icon', name: 'cart' -%}
+      <span
+        class="site-header__cart-count"
+        data-cart-count
+        aria-hidden="true"
+        {% if cart.item_count == 0 %}hidden{% endif %}
+      >{{ cart.item_count }}</span>
     </a>
   </div>
 

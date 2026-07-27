@@ -330,7 +330,44 @@ h3, .h3 { font-size: var(--type-title); line-height: var(--lead-title); letter-s
   font-size: 1.1rem;
   letter-spacing: -0.01em;
 }
-.site-header__cart { display: inline-flex; padding: 0.5rem; border-radius: 999px; }
+.site-header__cart { position: relative; display: inline-flex; padding: 0.5rem; border-radius: 999px; }
+.site-header__cart:focus-visible { outline: 2px solid var(--color-primary); outline-offset: 2px; }
+/* Count bubble, notched into the top-right of the icon. Sized by its
+   own content so a three-digit count widens the pill instead of
+   spilling out of a fixed circle. */
+.site-header__cart-count {
+  position: absolute;
+  top: 0.1rem;
+  right: 0.02rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 18px;
+  height: 18px;
+  padding: 0 5px;
+  border-radius: 999px;
+  background: var(--color-cta);
+  color: var(--color-ink);
+  font-family: var(--font-body);
+  font-size: 0.68rem;
+  font-weight: 500;
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+  /* Reads as sitting on top of the icon rather than merged into it. */
+  box-shadow: 0 0 0 2px var(--color-bg);
+}
+.site-header__cart-count[hidden] { display: none; }
+/* A short pop when the number changes: the badge is small and far from
+   where the tap happened, so without it a change is easy to miss. */
+.site-header__cart-count.is-bumped { animation: cartBump 320ms var(--ease-out); }
+@keyframes cartBump {
+  0% { transform: scale(1); }
+  38% { transform: scale(1.28); }
+  100% { transform: scale(1); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .site-header__cart-count.is-bumped { animation: none; }
+}
 
 /* Hamburger: three lines built from one element + pseudo-elements, and
    they morph into an X when the menu is open. Hidden at >= 900px where
@@ -514,21 +551,33 @@ h3, .h3 { font-size: var(--type-title); line-height: var(--lead-title); letter-s
   .hero-vid--desktop { display: block; }
   .hero-vid--mobile { display: none; }
 }
-/* Scrim. The old ramp was fully transparent for the top 28% and only
-   darkened near the bottom, so anything sitting mid-frame - the eyebrow
-   especially - washed out over a bright shot. This one carries a wash
-   across the whole frame and still weights the bottom, where the CTA
-   lives, so the merchant's darkness setting has real authority
-   everywhere. At 100 the bottom goes fully opaque. */
+/* Scrim. A bottom ramp, not a wash. The previous version tinted the
+   whole frame - at darkness 60 that put ~33% black over the top of the
+   video, which is the part of the shot with nothing on it. The footage
+   is the reason the section exists, so it stays clean above the fold of
+   the copy and the ramp does its work in the bottom half, where the
+   type actually needs the contrast. The merchant's darkness setting
+   keeps full authority there: at 100 the bottom still goes solid. */
 .hero__scrim {
   position: absolute;
   inset: 0;
   background: linear-gradient(
     180deg,
-    rgb(22 22 22 / calc(var(--scrim-opacity, 60) * 0.55%)) 0%,
-    rgb(22 22 22 / calc(var(--scrim-opacity, 60) * 0.42%)) 30%,
-    rgb(22 22 22 / calc(var(--scrim-opacity, 60) * 0.72%)) 62%,
+    rgb(22 22 22 / calc(var(--scrim-opacity, 60) * 0.06%)) 0%,
+    rgb(22 22 22 / calc(var(--scrim-opacity, 60) * 0.1%)) 38%,
+    rgb(22 22 22 / calc(var(--scrim-opacity, 60) * 0.44%)) 66%,
+    rgb(22 22 22 / calc(var(--scrim-opacity, 60) * 0.82%)) 86%,
     rgb(22 22 22 / calc(var(--scrim-opacity, 60) * 1%)) 100%
+  );
+}
+/* Centered copy gets a wash back, because the type then sits over the
+   middle of the shot where the bottom ramp does not reach. */
+.hero--center .hero__scrim {
+  background: linear-gradient(
+    180deg,
+    rgb(22 22 22 / calc(var(--scrim-opacity, 60) * 0.4%)) 0%,
+    rgb(22 22 22 / calc(var(--scrim-opacity, 60) * 0.62%)) 50%,
+    rgb(22 22 22 / calc(var(--scrim-opacity, 60) * 0.62%)) 100%
   );
 }
 .hero__content {
@@ -539,8 +588,9 @@ h3, .h3 { font-size: var(--type-title); line-height: var(--lead-title); letter-s
   flex-direction: column;
   justify-content: flex-end;
   align-items: center;
-  /* env() keeps the CTA clear of the iOS home indicator / bottom URL bar. */
-  padding-bottom: calc(clamp(3rem, 9vh, 5.5rem) + env(safe-area-inset-bottom, 0px));
+  /* env() keeps the CTA clear of the iOS home indicator / bottom URL
+     bar, and the base value clears the play/pause control's strip. */
+  padding-bottom: calc(clamp(4.25rem, 9vh, 5.5rem) + env(safe-area-inset-bottom, 0px));
   text-align: center;
   color: #fff;
   /* Vibrancy over photography: a tight contact shadow plus a wide soft
@@ -549,6 +599,8 @@ h3, .h3 { font-size: var(--type-title); line-height: var(--lead-title); letter-s
      child, so eyebrow, headline, subhead, and microcopy all benefit. */
   text-shadow: 0 1px 2px rgb(0 0 0 / 0.3), 0 2px 14px rgb(0 0 0 / 0.36);
 }
+.hero--center .hero__content { justify-content: center; }
+.hero--align-left .hero__content { align-items: flex-start; text-align: left; }
 /* Fill mode overrides the absolute overlay above: normal flow, content-
    driven height (see the .hero--fill note by .hero__media). Higher
    specificity (two classes) wins over the base rule regardless of
@@ -562,29 +614,129 @@ h3, .h3 { font-size: var(--type-title); line-height: var(--lead-title); letter-s
    fill, so a shadow only softens the label. */
 .hero__content .btn,
 .home-hero__content .btn { text-shadow: none; }
-.hero__content .eyebrow { color: rgba(255,255,255,0.95); }
+/* Tighter than the global eyebrow: it should hug the headline as one
+   unit rather than float as its own line. */
+.hero__content .eyebrow { color: rgba(255,255,255,0.95); margin-bottom: 0.55rem; }
+
 .hero__headline {
   color: #fff;
   font-size: var(--type-display-1);
+  /* Tracking is size-specific: display type reads too loose at these
+     sizes and needs pulling in, which is why this is not the body
+     value. Leading tightens for the same reason. */
   line-height: var(--lead-display);
   letter-spacing: var(--track-display);
-  max-width: 15ch;
+  font-optical-sizing: auto;
+  /* Short measure keeps the headline to two or three lines so it reads
+     as a statement rather than a paragraph laid over the footage. */
+  max-width: 16ch;
   margin-inline: auto;
+  text-wrap: balance;
 }
+.hero--align-left .hero__headline,
+.hero--align-left .hero__subhead,
+.hero--align-left .hero__microcopy { margin-inline: 0; }
+.hero__subhead {
+  margin: 0.9rem auto 0;
+  max-width: 34ch;
+  font-size: clamp(1rem, 3vw, 1.2rem);
+  line-height: 1.45;
+  color: rgba(255,255,255,0.94);
+  text-wrap: pretty;
+}
+/* The deliberate gap: copy above, action below. Large enough that the
+   button reads as the close of the block, not the last line of it. */
+.hero__actions {
+  display: flex;
+  flex-direction: column;
+  align-items: inherit;
+  gap: 1rem;
+  margin-top: clamp(1.75rem, 4.5vh, 2.75rem);
+}
+.hero__link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.15rem;
+  color: #fff;
+  font-size: 0.95rem;
+  text-decoration: none;
+}
+.hero__link-chevron { display: inline-flex; transition: transform 160ms var(--ease-out); }
+.hero__link-chevron svg { width: 17px; height: 17px; }
+@media (hover: hover) and (pointer: fine) {
+  .hero__link:hover { text-decoration: underline; text-underline-offset: 4px; }
+  .hero__link:hover .hero__link-chevron { transform: translateX(3px); }
+}
+.hero__link:focus-visible { outline: 2px solid #fff; outline-offset: 4px; border-radius: 6px; }
 .hero__microcopy {
-  margin-top: 1rem;
+  margin: 0 auto;
   font-size: 0.82rem;
   letter-spacing: 0.02em;
   color: rgba(255, 255, 255, 0.9);
   text-wrap: balance;
   max-width: 34ch;
 }
-.hero__subhead {
-  margin: 1rem auto 1.75rem;
-  max-width: 32ch;
-  font-size: clamp(1rem, 3vw, 1.2rem);
-  color: rgba(255,255,255,0.94);
+/* The narrow measures above are a phone constraint. Held at desktop
+   they break a single supporting sentence into three stacked lines,
+   which reads as a paragraph competing with the headline instead of
+   one line supporting it. */
+@media (min-width: 768px) {
+  .hero__subhead { max-width: 46ch; }
+  .hero__microcopy { max-width: 48ch; }
 }
+
+/* ---- Hero play/pause ----
+   A translucent chip over the footage: light material for an
+   interactive element, blurred so it stays legible over whatever frame
+   is behind it. 34px visual, expanded to a 44px touch target by the
+   ::after pad rather than by growing the circle. */
+.hero__video-toggle {
+  position: absolute;
+  z-index: 3;
+  right: max(var(--gutter, 1.25rem), env(safe-area-inset-right, 0px));
+  bottom: calc(1rem + env(safe-area-inset-bottom, 0px));
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  padding: 0;
+  border: 0;
+  border-radius: 999px;
+  color: #fff;
+  background: rgb(255 255 255 / 0.18);
+  backdrop-filter: blur(14px) saturate(160%);
+  -webkit-backdrop-filter: blur(14px) saturate(160%);
+  box-shadow: inset 0 0 0 1px rgb(255 255 255 / 0.25);
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  transition: background-color 160ms var(--ease-out), transform 100ms var(--ease-out);
+}
+.hero__video-toggle::after {
+  content: "";
+  position: absolute;
+  inset: -5px;
+  border-radius: inherit;
+}
+.hero__video-toggle svg { width: 14px; height: 14px; }
+.hero__video-toggle-icon { display: inline-flex; }
+.hero__video-toggle-icon[hidden] { display: none; }
+.hero__video-toggle:active { transform: scale(0.92); }
+@media (hover: hover) and (pointer: fine) {
+  .hero__video-toggle:hover { background: rgb(255 255 255 / 0.3); }
+}
+.hero__video-toggle:focus-visible { outline: 2px solid #fff; outline-offset: 3px; }
+/* The control is the one thing here that must not be translucent when
+   the visitor has asked for less transparency. */
+@media (prefers-reduced-transparency: reduce) {
+  .hero__video-toggle {
+    background: rgb(22 22 22 / 0.82);
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+  }
+}
+/* No JS means no handler, so the button would be decoration. */
+html:not(.js) .hero__video-toggle { display: none; }
 
 /* ---- Offer page ---- */
 .offer { padding-top: clamp(2.5rem, 6vw, 4rem); }
@@ -621,14 +773,19 @@ h3, .h3 { font-size: var(--type-title); line-height: var(--lead-title); letter-s
 .offer__carousel .carousel__controls { margin-top: 1rem; }
 .offer__title { font-size: var(--type-display-3); line-height: var(--lead-display); letter-spacing: var(--track-display); margin-top: 0.3rem; }
 .offer__tagline { margin-top: 0.75rem; }
-.offer__price {
-  display: flex; align-items: baseline; gap: 0.75rem;
-  margin-top: 1.25rem;
-  font-family: var(--font-heading);
-  font-weight: var(--weight-heading);
-  font-size: 1.65rem;
-}
-.offer__price s { font-size: 1.1rem; font-weight: 400; color: color-mix(in srgb, var(--color-ink) 45%, transparent); }
+/* ---- Purchase-panel guard ----
+   The tiered pricing widget is the single source of truth for price and
+   quantity on this page: each tier states its own total and carries its
+   own unit count. A separate unit price above it contradicts whichever
+   tier is selected, and a typeable quantity box next to it gives the
+   shopper two controls for one number.
+
+   These rules kill the theme's own versions outright. Anything injected
+   into the panel later is handled by the guard in bundle.js, which knows
+   to leave the pricing widget itself alone - CSS cannot make that
+   distinction safely, so it is deliberately not attempted here. */
+.offer__panel .offer__price,
+.offer__panel .offer__field--qty { display: none; }
 /* ---- Bundle selector (native tiered pricing) ----
    Radio "cards": the whole tier is a clickable label wrapping a
    visually-hidden radio. Selected tier gets a gold ring + check. Each
@@ -770,7 +927,6 @@ h3, .h3 { font-size: var(--type-title); line-height: var(--lead-title); letter-s
   background: var(--color-bg);
 }
 .offer__field select:focus-visible, .offer__field input:focus-visible { outline: 2px solid var(--color-primary); outline-offset: 1px; }
-.offer__field--qty { max-width: 140px; }
 .offer__actions { display: grid; gap: 0.75rem; margin-top: 0.25rem; }
 .offer__actions .shopify-payment-button__button--unbranded {
   min-height: 52px; border-radius: 999px; font-weight: 500; letter-spacing: 0.06em;

@@ -2,13 +2,29 @@
   S1 — Hero. Autoplay video OR static image, with separate mobile and
   desktop assets, an adjustable overlay, and an adjustable frame shape
   (fill screen, or a fixed 16:9 / 9:16 / 1:1 / 4:5 / 3:4 ratio) so any
-  video fits perfectly. Gold CTA anchors to the offer block below. The
-  sentinel div lets scroll-fx.js show the product subnav once the hero
-  scrolls away.
+  video fits perfectly. The sentinel div lets scroll-fx.js show the
+  product subnav once the hero scrolls away.
+
+  Layout follows Apple's product hero: the footage is the subject, so
+  the copy collects into one tight block anchored to the bottom of the
+  frame rather than spreading over it, the buy button closes that block,
+  and the scrim is a bottom ramp that leaves the top of the video
+  untouched. A play/pause control sits in the bottom corner - autoplay
+  the shopper cannot stop is a control they do not have.
 {%- endcomment -%}
 
 {%- liquid
   assign hero_mode = section.settings.hero_size | default: 'fill'
+  assign content_position = section.settings.content_position | default: 'bottom'
+  assign content_align = section.settings.content_align | default: 'center'
+
+  # The toggle only makes sense over a video that is actually playing.
+  assign show_toggle = false
+  if section.settings.media_type == 'video' and section.settings.show_video_toggle
+    if section.settings.video != blank or section.settings.video_mobile != blank
+      assign show_toggle = true
+    endif
+  endif
   # CTA target: explicit link wins, else a picked product's page, else the
   # on-page #offer anchor. Lets the marketing lander send the button to
   # the separate offer/product page.
@@ -21,8 +37,9 @@
 -%}
 
 <section
-  class="hero hero--{{ hero_mode }}"
+  class="hero hero--{{ hero_mode }} hero--{{ content_position }} hero--align-{{ content_align }}"
   style="--hero-aspect-mobile: {{ section.settings.aspect_mobile }}; --hero-aspect-desktop: {{ section.settings.aspect_desktop }}; --hero-fit: {{ section.settings.media_fit }};"
+  data-hero
 >
   <div class="hero__media">
     {%- render 'hero-media',
@@ -40,6 +57,13 @@
   </div>
 
   <div class="container hero__content">
+    {%- comment -%}
+      Eyebrow, headline and subhead stay direct children of
+      .hero__content: the intro stagger and the LCP-safe headline rule
+      in theme.css both key off `> *`, and wrapping them - even in a
+      display:contents box - would put the headline behind an
+      opacity-0 parent and cost the mobile LCP.
+    {%- endcomment -%}
     {%- if section.settings.eyebrow != blank -%}
       <span class="eyebrow">{{ section.settings.eyebrow }}</span>
     {%- endif -%}
@@ -50,11 +74,28 @@
       <p class="hero__subhead">{{ section.settings.subhead }}</p>
     {%- endif -%}
 
-    <a class="btn btn--gold" href="{{ hero_cta }}">{{ section.settings.cta_label }}</a>
+    {%- comment -%}
+      The action group is one unit so the gap above it separates the
+      statement from the button, rather than spacing out each line.
+    {%- endcomment -%}
+    <div class="hero__actions">
+      <a class="btn btn--gold" href="{{ hero_cta }}">{{ section.settings.cta_label }}</a>
 
-    {%- if section.settings.microcopy != blank -%}
-      <p class="hero__microcopy">{{ section.settings.microcopy }}</p>
-    {%- endif -%}
+      {%- comment -%}
+        Apple's second action is a plain chevron link, never a second
+        button - one primary action stays unmistakably primary.
+      {%- endcomment -%}
+      {%- if section.settings.cta2_label != blank -%}
+        <a class="hero__link" href="{{ section.settings.cta2_link | default: '#' }}">
+          {{ section.settings.cta2_label }}
+          <span class="hero__link-chevron" aria-hidden="true">{% render 'icon', name: 'chevron-right' %}</span>
+        </a>
+      {%- endif -%}
+
+      {%- if section.settings.microcopy != blank -%}
+        <p class="hero__microcopy">{{ section.settings.microcopy }}</p>
+      {%- endif -%}
+    </div>
 
     {%- comment -%}
       Sentinel sits right after the hero's own CTA. scroll-fx.js reveals
@@ -63,6 +104,25 @@
     {%- endcomment -%}
     <div data-subnav-sentinel aria-hidden="true"></div>
   </div>
+
+  {%- comment -%}
+    Play/pause. Ships labelled "Pause" because the video autoplays;
+    scroll-fx.js relabels it, and flips it to paused up front when the
+    visitor asks for reduced motion. Hidden from no-JS visitors, where
+    it would be a button that does nothing.
+  {%- endcomment -%}
+  {%- if show_toggle -%}
+    <button
+      class="hero__video-toggle"
+      type="button"
+      data-video-toggle
+      aria-pressed="false"
+      aria-label="Pause background video"
+    >
+      <span class="hero__video-toggle-icon" data-video-toggle-icon="pause">{% render 'icon', name: 'pause' %}</span>
+      <span class="hero__video-toggle-icon" data-video-toggle-icon="play" hidden>{% render 'icon', name: 'play' %}</span>
+    </button>
+  {%- endif -%}
 </section>
 
 {% schema %}
@@ -112,6 +172,38 @@
       "step": 5,
       "unit": "%",
       "default": 60
+    },
+    {
+      "type": "checkbox",
+      "id": "show_video_toggle",
+      "label": "Show a play/pause button on the video",
+      "info": "Sits in the bottom corner of the frame. Recommended: autoplay a visitor cannot stop is a control they do not have.",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "Copy placement"
+    },
+    {
+      "type": "select",
+      "id": "content_position",
+      "label": "Where the copy sits",
+      "info": "Bottom keeps the top of the video clear, so the footage is the subject and the button closes the frame.",
+      "options": [
+        { "value": "bottom", "label": "Bottom of the frame" },
+        { "value": "center", "label": "Centered" }
+      ],
+      "default": "bottom"
+    },
+    {
+      "type": "select",
+      "id": "content_align",
+      "label": "Text alignment",
+      "options": [
+        { "value": "center", "label": "Centered" },
+        { "value": "left", "label": "Left" }
+      ],
+      "default": "center"
     },
     {
       "type": "header",
@@ -191,6 +283,18 @@
       "id": "cta_label",
       "label": "Button label",
       "default": "See the protocol"
+    },
+    {
+      "type": "text",
+      "id": "cta2_label",
+      "label": "Secondary link label",
+      "info": "Optional. Renders as a plain chevron link beside the button, not a second button, e.g. \"Learn more\".",
+      "default": ""
+    },
+    {
+      "type": "url",
+      "id": "cta2_link",
+      "label": "Secondary link URL"
     },
     {
       "type": "text",

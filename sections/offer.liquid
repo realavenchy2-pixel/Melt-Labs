@@ -51,7 +51,12 @@
         {%- endif -%}
       </div>
 
-      <div class="offer__panel">
+      {%- comment -%}
+        data-offer-panel scopes the purchase-panel guard in bundle.js,
+        which strips any stray price line or visible quantity control that
+        lands in this column - the tiered pricing widget below owns both.
+      {%- endcomment -%}
+      <div class="offer__panel" data-offer-panel>
         {%- if section.settings.eyebrow != blank -%}
           <span class="eyebrow">{{ section.settings.eyebrow }}</span>
         {%- endif -%}
@@ -82,7 +87,16 @@
           {%- form 'product', product, class: 'offer__form' -%}
             {%- unless product.has_only_default_variant -%}
               {%- for option in product.options_with_values -%}
-                {%- unless option.name == 'Quantity' -%}
+                {%- comment -%}
+                  A variant option called "Quantity" (or "Qty") is how a
+                  supplier models multi-packs, but rendering it puts a
+                  second, editable quantity control right above the tiered
+                  pricing widget - two places to set the same number.
+                  Matched case-insensitively so "QUANTITY" and "quantity"
+                  are caught too; the tier the shopper picks is what ships.
+                {%- endcomment -%}
+                {%- assign option_key = option.name | downcase | strip -%}
+                {%- unless option_key == 'quantity' or option_key == 'qty' -%}
                 <div class="offer__field">
                   <label for="offer-option-{{ section.id }}-{{ forloop.index0 }}">{{ option.name }}</label>
                   <select id="offer-option-{{ section.id }}-{{ forloop.index0 }}" name="options[{{ option.name | escape }}]">

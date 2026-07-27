@@ -95,6 +95,10 @@
           /* Completion feedback before the navigation, so a slow cart
              page still reads as success rather than a stalled tap. */
           statusEl().textContent = 'Added. Taking you to your bag…';
+          /* No count in the add.js response, so this asks the header to
+             go and read the real one. Matters when the redirect below
+             is slow enough for the shopper to look back up at it. */
+          document.dispatchEvent(new CustomEvent('cart:updated'));
           if (code) {
             /* Apply the discount, then land on the cart so the shopper
                sees the agreed total and every unit before checkout. */
@@ -113,4 +117,68 @@
         });
     });
   });
+
+  /* ---- Purchase-panel guard ----
+
+     The tiered pricing widget states a total and a unit count on every
+     tier, so it is the only place either number belongs. A lone unit
+     price above it contradicts whichever tier is selected, and a
+     typeable quantity box beside it hands the shopper two controls for
+     one number - they disagree the moment either is touched.
+
+     The widget renders after this script, so a single pass on load
+     misses it; the observer below keeps watching for a short window and
+     then stops, rather than staying live for the life of the page.
+
+     KEEP is the important half. Everything the pricing widget owns -
+     its own root, its tier cards, their prices, its quantity inputs -
+     is off limits, so this only ever removes a duplicate that landed
+     OUTSIDE the widget. If a match cannot be proven to sit outside, it
+     is left alone: a stray price line is a smaller problem than a
+     blanked-out pricing widget. */
+  var panel = document.querySelector('[data-offer-panel]');
+  if (!panel) return;
+
+  var KEEP = [
+    '[class*="kaching"]', '[id*="kaching"]',
+    '[class*="bundle"]', '[id*="bundle"]', '[data-bundle]',
+    '.shopify-app-block', '.shopify-block', '.shopify-payment-button',
+    '[data-offer-keep]'
+  ].join(',');
+
+  /* Price nodes, then quantity controls. Deliberately narrow: named
+     hooks and the conventional Shopify class names, not a wildcard on
+     "price" - a wildcard also matches things like a compare-at note
+     inside copy the merchant wrote on purpose. */
+  var PRICE = '.offer__price, .price, .product-price, .product__price, [data-price], [data-product-price]';
+  var QTY = [
+    '.quantity', '.quantity-selector', '.quantity-input', '.product-form__quantity',
+    '[data-quantity-selector]', '[data-quantity-input]',
+    'input[name="quantity"]:not([type="hidden"])',
+    'select[name="quantity"]'
+  ].join(',');
+
+  function strip() {
+    panel.querySelectorAll(PRICE + ',' + QTY).forEach(function (el) {
+      if (el.closest(KEEP)) return;          /* belongs to the widget */
+      if (el.hasAttribute('data-offer-stripped')) return;
+      /* A quantity input usually sits inside a labelled wrapper; hiding
+         the input alone strips the control but leaves its "QUANTITY"
+         label floating. Take the field wrapper when there is one. */
+      var target = el.closest('.offer__field') || el;
+      if (target.closest(KEEP)) return;
+      target.setAttribute('data-offer-stripped', '');
+      target.style.display = 'none';
+    });
+  }
+
+  strip();
+
+  if (typeof MutationObserver === 'function') {
+    var observer = new MutationObserver(strip);
+    observer.observe(panel, { childList: true, subtree: true });
+    /* Long enough for a third-party widget to mount on a slow
+       connection, short enough that it is not observing forever. */
+    setTimeout(function () { observer.disconnect(); }, 10000);
+  }
 })();

@@ -101,9 +101,17 @@
     function isVisible(el) {
       return el.getClientRects().length > 0;
     }
+    /* A hero the visitor has paused. Held on the section rather than on
+       each <video> so the mobile and desktop files of one hero share a
+       single state - crossing the breakpoint must not silently restart
+       footage that was deliberately stopped. */
+    function isHeroPaused(video) {
+      var hero = video.closest('[data-hero]');
+      return !!hero && hero.getAttribute('data-video-paused') === 'true';
+    }
     function syncHeroVideos() {
       heroVideos.forEach(function (video) {
-        if (isVisible(video)) {
+        if (isVisible(video) && !isHeroPaused(video)) {
           /* Upgrade the visible one to eager buffering so it starts as
              fast as possible; the hidden breakpoint stays light. */
           if (video.preload !== 'auto') video.preload = 'auto';
@@ -114,11 +122,86 @@
         }
       });
     }
+
+    /* Play/pause control. Reduced motion starts it paused: a looping
+       full-frame video is exactly the kind of motion that setting is
+       asking us to stop, and the control is then how the visitor opts
+       back in rather than something they have to fight. */
+    document.querySelectorAll('[data-video-toggle]').forEach(function (btn) {
+      var hero = btn.closest('[data-hero]');
+      if (!hero) return;
+
+      var playIcon = btn.querySelector('[data-video-toggle-icon="play"]');
+      var pauseIcon = btn.querySelector('[data-video-toggle-icon="pause"]');
+
+      function render(paused) {
+        hero.setAttribute('data-video-paused', paused ? 'true' : 'false');
+        /* aria-pressed says whether the pause is engaged; the label
+           always names what the next press will do. */
+        btn.setAttribute('aria-pressed', paused ? 'true' : 'false');
+        btn.setAttribute('aria-label', paused ? 'Play background video' : 'Pause background video');
+        if (playIcon) playIcon.hidden = !paused;
+        if (pauseIcon) pauseIcon.hidden = paused;
+      }
+
+      render(reduceMotion);
+
+      btn.addEventListener('click', function () {
+        render(hero.getAttribute('data-video-paused') !== 'true');
+        syncHeroVideos();
+      });
+    });
+
     syncHeroVideos();
     var heroResizeTimer;
     window.addEventListener('resize', function () {
       clearTimeout(heroResizeTimer);
       heroResizeTimer = setTimeout(syncHeroVideos, 200);
+    });
+  }
+
+  /* 3b. Header cart count. Liquid renders the real number, so this only
+     has to correct it when the rendered page is out of date - which is
+     what happens on a back-navigation: the browser restores the cached
+     page with whatever count it had before the shopper added anything.
+     `pageshow` with persisted=true is that exact moment. Other scripts
+     can also announce a change with a `cart:updated` event carrying the
+     new count. */
+  var cartCountEl = document.querySelector('[data-cart-count]');
+  var cartLink = document.querySelector('[data-cart-link]');
+  if (cartCountEl) {
+    function setCartCount(count) {
+      if (typeof count !== 'number' || count < 0) return;
+      var previous = parseInt(cartCountEl.textContent, 10);
+      cartCountEl.textContent = count;
+      cartCountEl.hidden = count === 0;
+      if (cartLink) {
+        cartLink.setAttribute('aria-label', 'Cart, ' + count + (count === 1 ? ' item' : ' items'));
+      }
+      if (previous === count || count === 0) return;
+      /* Restart the animation rather than letting a repeat change be
+         swallowed by an already-applied class. */
+      cartCountEl.classList.remove('is-bumped');
+      void cartCountEl.offsetWidth;
+      cartCountEl.classList.add('is-bumped');
+    }
+
+    function refreshCartCount() {
+      fetch(window.Shopify && window.Shopify.routes ? window.Shopify.routes.root + 'cart.js' : '/cart.js', {
+        headers: { Accept: 'application/json' },
+        credentials: 'same-origin'
+      })
+        .then(function (res) { return res.ok ? res.json() : null; })
+        .then(function (cart) { if (cart) setCartCount(cart.item_count); })
+        .catch(function () { /* leave the rendered count in place */ });
+    }
+
+    window.addEventListener('pageshow', function (e) {
+      if (e.persisted) refreshCartCount();
+    });
+    document.addEventListener('cart:updated', function (e) {
+      if (e.detail && typeof e.detail.count === 'number') setCartCount(e.detail.count);
+      else refreshCartCount();
     });
   }
 
