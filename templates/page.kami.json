@@ -22,7 +22,7 @@
     "hero": {
       "type": "hero-video",
       "settings": {
-        "media_type": "image",
+        "media_type": "video",
         "video": "shopify://files/videos/Product_video_KAMI_15_bottle_202607270117.mp4",
         "video_mobile": "shopify://files/videos/Product_video_KAMI_15_bottle_202607270108.mp4",
         "image": "shopify://shop_images/Resize._2K_202607190029_87f62b15-6ac3-46ee-8a68-b38d785084a4.jpg",
