@@ -34,6 +34,18 @@
   elsif section.settings.product != blank
     assign hero_cta = section.settings.product.url
   endif
+
+  # Space above the button, written inline rather than left to theme.css.
+  # The stylesheet is a separate cached asset: four rounds of raising this
+  # value in theme.css never showed up on the live page while Liquid-side
+  # changes shipped the same hour, so the gap is emitted with the markup
+  # where nothing can serve a stale copy of it. An inline style also
+  # outranks the class rule, so whichever theme.css a visitor has cached,
+  # this value is the one that applies.
+  assign gap_vh = section.settings.actions_gap | default: 20
+  assign gap_min = gap_vh | times: 37 | divided_by: 100.0
+  assign gap_max = gap_vh | times: 56 | divided_by: 100.0
+  assign actions_style = 'margin-top: clamp(' | append: gap_min | append: 'rem, ' | append: gap_vh | append: 'vh, ' | append: gap_max | append: 'rem);'
 -%}
 
 <section
@@ -78,7 +90,7 @@
       The action group is one unit so the gap above it separates the
       statement from the button, rather than spacing out each line.
     {%- endcomment -%}
-    <div class="hero__actions">
+    <div class="hero__actions" style="{{ actions_style }}">
       <a class="btn btn--gold" href="{{ hero_cta }}">{{ section.settings.cta_label }}</a>
 
       {%- comment -%}
@@ -183,6 +195,17 @@
     {
       "type": "header",
       "content": "Copy placement"
+    },
+    {
+      "type": "range",
+      "id": "actions_gap",
+      "label": "Space above the button",
+      "info": "Separates the copy from the button so it reads as the thing to press, not the last line of the sentence. Measured against screen height, so it holds its proportion on every phone.",
+      "min": 0,
+      "max": 32,
+      "step": 1,
+      "unit": "vh",
+      "default": 20
     },
     {
       "type": "select",
