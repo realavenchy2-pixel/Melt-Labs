@@ -46,9 +46,10 @@
       "blocks": {
         "slide_7AgUdN": {
           "type": "slide",
+          "disabled": true,
           "settings": {
             "image": "shopify://shop_images/05_hair_before_after_1_1x1_999d7dc3-e9eb-48d0-b0f0-d0ef9eb6e40f.png",
-            "quote": "I stopped snacking without even trying.",
+            "quote": "Kami 15 put me back in",
             "author": "Jeff, 39"
           }
         },

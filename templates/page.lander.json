@@ -44,6 +44,14 @@
     "testimonials": {
       "type": "testimonial-carousel",
       "blocks": {
+        "slide_3qK6qw": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/gym-split.webp",
+            "quote": "I stopped snacking without even trying.",
+            "author": "Leslie, 46"
+          }
+        },
         "t1": {
           "type": "slide",
           "settings": {
@@ -70,6 +78,7 @@
         }
       },
       "block_order": [
+        "slide_3qK6qw",
         "t1",
         "t2",
         "t3"
