@@ -42,7 +42,7 @@
         "bundle_note": "Bulk savings apply automatically at checkout.",
         "reassurance": "Tasteless in any drink\n2 oz / 60 mL bottle\nThird-party tested\n60-day money-back guarantee",
         "trust_line": "Secure checkout. Third-party tested every batch.",
-        "show_description": true,
+        "show_description": false,
         "placeholder_title": "The Special Water"
       }
     },
@@ -124,6 +124,7 @@
       ],
       "settings": {
         "headline": "Real Routines. Real Results.",
+        "subhead": "",
         "autoplay": true,
         "autoplay_interval": 4500
       }
