@@ -20,11 +20,21 @@
     endif
   endif
   assign hero_mode = section.settings.hero_size | default: 'fill'
+
+  # Matches the product hero: the control only makes sense over footage
+  # that is actually running.
+  assign show_toggle = false
+  if section.settings.media_type == 'video' and section.settings.show_video_toggle
+    if section.settings.video != blank or section.settings.video_mobile != blank
+      assign show_toggle = true
+    endif
+  endif
 -%}
 
 <section
   class="home-hero home-hero--{{ section.settings.scheme | default: 'tint' }} home-hero--{{ hero_mode }}{% if has_media %} home-hero--has-media{% endif %}"
   style="--hero-aspect-mobile: {{ section.settings.aspect_mobile }}; --hero-aspect-desktop: {{ section.settings.aspect_desktop }}; --hero-fit: {{ section.settings.media_fit }};"
+  data-hero
 >
   {%- if has_media -%}
     <div class="home-hero__media">
@@ -54,12 +64,39 @@
     {%- if section.settings.cta_label != blank -%}
       <div class="home-hero__actions">
         <a class="btn btn--gold" href="{{ section.settings.cta_link | default: '#' }}">{{ section.settings.cta_label }}</a>
+        {%- comment -%}
+          Over media the second action becomes a chevron link rather than
+          a second button, matching the product hero: two buttons of
+          equal weight side by side make neither one primary. With no
+          media behind it there is nothing to keep the composition
+          quiet, so the outline button still reads correctly there.
+        {%- endcomment -%}
         {%- if section.settings.cta2_label != blank -%}
-          <a class="btn btn--outline" href="{{ section.settings.cta2_link | default: '#' }}">{{ section.settings.cta2_label }}</a>
+          {%- if has_media -%}
+            <a class="hero__link" href="{{ section.settings.cta2_link | default: '#' }}">
+              {{ section.settings.cta2_label }}
+              <span class="hero__link-chevron" aria-hidden="true">{% render 'icon', name: 'chevron-right' %}</span>
+            </a>
+          {%- else -%}
+            <a class="btn btn--outline" href="{{ section.settings.cta2_link | default: '#' }}">{{ section.settings.cta2_label }}</a>
+          {%- endif -%}
         {%- endif -%}
       </div>
     {%- endif -%}
   </div>
+
+  {%- if show_toggle -%}
+    <button
+      class="hero__video-toggle"
+      type="button"
+      data-video-toggle
+      aria-pressed="false"
+      aria-label="Pause background video"
+    >
+      <span class="hero__video-toggle-icon" data-video-toggle-icon="pause">{% render 'icon', name: 'pause' %}</span>
+      <span class="hero__video-toggle-icon" data-video-toggle-icon="play" hidden>{% render 'icon', name: 'play' %}</span>
+    </button>
+  {%- endif -%}
 </section>
 
 {% schema %}
@@ -113,6 +150,13 @@
       "step": 5,
       "unit": "%",
       "default": 45
+    },
+    {
+      "type": "checkbox",
+      "id": "show_video_toggle",
+      "label": "Show a play/pause button on the video",
+      "info": "Sits in the bottom corner of the frame. Only appears when the background is a video.",
+      "default": true
     },
     { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "MELT LABS" },
     {

@@ -620,18 +620,33 @@ h3, .h3 { font-size: var(--type-title); line-height: var(--lead-title); letter-s
 
 .hero__headline {
   color: #fff;
-  font-size: var(--type-display-1);
+  /* Not --type-display-1: that token's floor is 2.4rem, which on a
+     390px phone is taller than the viewport can spend on a headline -
+     a real one wrapped to five lines and pushed the footage off the
+     screen. This scales from a lower floor so long copy stays around
+     three lines on a phone. */
+  font-size: clamp(1.75rem, 8.2vw, 2.7rem);
   /* Tracking is size-specific: display type reads too loose at these
      sizes and needs pulling in, which is why this is not the body
      value. Leading tightens for the same reason. */
   line-height: var(--lead-display);
   letter-spacing: var(--track-display);
   font-optical-sizing: auto;
-  /* Short measure keeps the headline to two or three lines so it reads
-     as a statement rather than a paragraph laid over the footage. */
-  max-width: 16ch;
+  max-width: 18ch;
   margin-inline: auto;
   text-wrap: balance;
+}
+/* A measure tuned on a phone becomes wrong on a desktop: held at 18ch,
+   a real headline like "Meet Your Better Long-Term Weight-Loss Partner."
+   stacks into four lines of display type that fill the frame and bury
+   the footage underneath it. Widening the measure and easing the size
+   back settles the same sentence into two lines, which is the point -
+   the headline states something, the video carries the rest. */
+@media (min-width: 768px) {
+  .hero__headline {
+    max-width: 24ch;
+    font-size: clamp(2.6rem, 4.4vw, 3.5rem);
+  }
 }
 .hero--align-left .hero__headline,
 .hero--align-left .hero__subhead,
@@ -653,11 +668,14 @@ h3, .h3 { font-size: var(--type-title); line-height: var(--lead-title); letter-s
   gap: 1rem;
   margin-top: clamp(1.75rem, 4.5vh, 2.75rem);
 }
+/* Shared by both heroes, so it takes its colour from whatever it sits
+   in rather than hardcoding white - over media that is the white the
+   content block already sets, and on a flat background it is the ink. */
 .hero__link {
   display: inline-flex;
   align-items: center;
   gap: 0.15rem;
-  color: #fff;
+  color: currentColor;
   font-size: 0.95rem;
   text-decoration: none;
 }
@@ -667,7 +685,7 @@ h3, .h3 { font-size: var(--type-title); line-height: var(--lead-title); letter-s
   .hero__link:hover { text-decoration: underline; text-underline-offset: 4px; }
   .hero__link:hover .hero__link-chevron { transform: translateX(3px); }
 }
-.hero__link:focus-visible { outline: 2px solid #fff; outline-offset: 4px; border-radius: 6px; }
+.hero__link:focus-visible { outline: 2px solid currentColor; outline-offset: 4px; border-radius: 6px; }
 .hero__microcopy {
   margin: 0 auto;
   font-size: 0.82rem;
@@ -1652,17 +1670,19 @@ html:not(.js) .hero__video-toggle { display: none; }
 .home-hero__media .media-slot__frame { position: absolute; inset: 0; height: 100%; aspect-ratio: auto; }
 .home-hero__media video, .home-hero__media img, .home-hero__media picture { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: var(--hero-fit, cover); }
 .home-hero__media .media-slot__label { justify-content: flex-start; padding-top: 16svh; border: 0; }
-/* Even overlay scaled by the merchant's darkness setting: the top stays
-   ~40% of the bottom value so it reads as a gentle top-down wash. */
-/* Matches the product hero's ramp so both heroes respond to their
-   darkness setting the same way. */
+/* Bottom ramp, matching the product hero. The old full-frame wash put
+   roughly half the darkness setting over the top of the image - at the
+   90 this hero ships with, that greyed out the whole photograph so the
+   copy could sit in the middle of it. The image is the hero; the ramp
+   earns its contrast only where the copy actually lands. */
 .home-hero__scrim {
   position: absolute; inset: 0;
   background: linear-gradient(
     180deg,
-    rgb(22 22 22 / calc(var(--scrim-opacity, 45) * 0.55%)) 0%,
-    rgb(22 22 22 / calc(var(--scrim-opacity, 45) * 0.42%)) 30%,
-    rgb(22 22 22 / calc(var(--scrim-opacity, 45) * 0.72%)) 62%,
+    rgb(22 22 22 / calc(var(--scrim-opacity, 45) * 0.06%)) 0%,
+    rgb(22 22 22 / calc(var(--scrim-opacity, 45) * 0.1%)) 38%,
+    rgb(22 22 22 / calc(var(--scrim-opacity, 45) * 0.44%)) 66%,
+    rgb(22 22 22 / calc(var(--scrim-opacity, 45) * 0.82%)) 86%,
     rgb(22 22 22 / calc(var(--scrim-opacity, 45) * 1%)) 100%
   );
 }
@@ -1671,6 +1691,20 @@ html:not(.js) .hero__video-toggle { display: none; }
   color: #fff;
   text-shadow: 0 1px 2px rgb(0 0 0 / 0.3), 0 2px 14px rgb(0 0 0 / 0.36);
 }
+/* Over media the copy drops to the bottom of the frame, same as the
+   product hero: centered copy sits square over the middle of the shot,
+   which is usually the part worth seeing. With no media there is
+   nothing to clear, so the flat-colour hero stays centered. */
+/* "Fill screen" should actually fill it. At 78svh the hero stopped
+   short of the fold with a band of page showing underneath, which read
+   as a section rather than as the top of the site. */
+.home-hero--fill { min-height: calc(100svh - var(--site-header-h)); }
+.home-hero--has-media { align-items: flex-end; }
+.home-hero--has-media .home-hero__content {
+  padding-bottom: calc(clamp(4.25rem, 9vh, 5.5rem) + env(safe-area-inset-bottom, 0px));
+  padding-top: clamp(4rem, 14vh, 8rem);
+}
+.home-hero--sized.home-hero--has-media .home-hero__content { justify-content: flex-end; }
 .home-hero__content--over-media .eyebrow { color: rgba(255,255,255,0.95); }
 .home-hero__content--over-media .home-hero__headline { color: #fff; }
 .home-hero__headline {
@@ -1684,11 +1718,36 @@ html:not(.js) .hero__video-toggle { display: none; }
   margin: 1.25rem auto 2rem;
   max-width: 40ch;
   font-size: clamp(1.05rem, 3vw, 1.3rem);
+  line-height: 1.45;
   color: color-mix(in srgb, var(--color-ink) 68%, transparent);
+  text-wrap: pretty;
 }
 .home-hero__content--over-media .home-hero__subhead { color: rgba(255,255,255,0.94); }
 .home-hero--ink .home-hero__subhead { color: rgba(255,255,255,0.78); }
-.home-hero__actions { display: flex; flex-wrap: wrap; gap: 0.75rem; justify-content: center; }
+.home-hero__actions { display: flex; flex-wrap: wrap; gap: 0.75rem; justify-content: center; align-items: center; }
+/* Over media the actions stack like the product hero's, so the button
+   closes the copy block instead of sitting in a row beside a link. */
+.home-hero--has-media .home-hero__content .home-hero__headline { margin-inline: auto; }
+/* Same phone floor problem as the product hero - see the note there. */
+.home-hero--has-media .home-hero__headline { font-size: clamp(1.75rem, 8vw, 2.7rem); }
+.home-hero--has-media .home-hero__subhead { margin-bottom: 0; }
+/* Same reasoning as the product hero above: a brand statement this long
+   needs a wider measure at desktop or it stacks three deep over the
+   photograph it is supposed to sit on. */
+@media (min-width: 768px) {
+  .home-hero--has-media .home-hero__headline {
+    max-width: 26ch;
+    font-size: clamp(2.5rem, 4.2vw, 3.3rem);
+  }
+}
+.home-hero--has-media .home-hero__actions {
+  flex-direction: column;
+  gap: 1rem;
+  margin-top: clamp(1.75rem, 4.5vh, 2.75rem);
+}
+@media (min-width: 768px) {
+  .home-hero--has-media .home-hero__subhead { max-width: 46ch; }
+}
 
 /* ---- Featured product ---- */
 .featured { display: grid; gap: 2.5rem; align-items: center; }
