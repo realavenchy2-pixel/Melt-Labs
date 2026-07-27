@@ -305,13 +305,23 @@
             "heading": "",
             "text": ""
           }
+        },
+        "chapter_j4AMKU": {
+          "type": "chapter",
+          "settings": {
+            "image": "shopify://shop_images/Japanese_woman_different_outfit_2K_202607270819.jpg",
+            "eyebrow": "",
+            "heading": "",
+            "text": ""
+          }
         }
       },
       "block_order": [
         "chapter_wifXHa",
         "chapter_MqJzcP",
         "chapter_yUzpwt",
-        "chapter_8UfyKW"
+        "chapter_8UfyKW",
+        "chapter_j4AMKU"
       ],
       "settings": {
         "scheme": "ink",
