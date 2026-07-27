@@ -282,7 +282,7 @@
         "chapter_MqJzcP": {
           "type": "chapter",
           "settings": {
-            "image": "shopify://shop_images/12_weight_before_after_3_3x4_3b3ddf6d-83d1-4eb1-bf5a-edc25a6e33af.png",
+            "image": "shopify://shop_images/Make_image_ultra_photo_real_202607270757.jpg",
             "eyebrow": "",
             "heading": "",
             "text": ""
@@ -304,10 +304,12 @@
         "chapter_yUzpwt"
       ],
       "settings": {
-        "layout": "carousel",
         "scheme": "ink",
         "headline": "What Consistent Use Looked Like in Our *In-House Study*",
         "body": "Real-world results from people who made Special Water part of their daily routine.",
+        "layout": "carousel",
+        "autoplay": false,
+        "autoplay_interval": 5000,
         "chapter_aspect": "4 / 5",
         "stat_intro": "In our in-house study",
         "stat_1_value": "93%",
