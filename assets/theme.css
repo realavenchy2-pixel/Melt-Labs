@@ -1136,6 +1136,12 @@ html:not(.js) .hero__video-toggle { display: none; }
   gap: 1rem;
   margin-top: 1.5rem;
 }
+/* A one-slide carousel has nothing to navigate: carousel.js returns early
+   below two slides, so the arrows never bind and the dots are never built,
+   leaving a dead control strip. Hide it until a second slide exists - the
+   section then behaves as a plain card and becomes a real carousel the
+   moment another block is added. */
+.carousel__track:has(> .carousel__slide:only-child) + .carousel__controls { display: none; }
 /* Dots: quiet dashes that morph into a longer pill when active, Apple-
    style, rather than a stock filled-circle indicator row. */
 .carousel__dots { display: flex; align-items: center; gap: 6px; }
@@ -1450,6 +1456,20 @@ html:not(.js) .hero__video-toggle { display: none; }
 .section--scheme-ink .science-chapter .eyebrow { color: rgba(255,255,255,0.7); }
 .section--scheme-ink .science-chapter__title { color: #fff; }
 .section--scheme-ink .science-chapter__text { color: rgba(255,255,255,0.75); }
+
+/* Science storyboard, carousel layout. The section pads itself, so the
+   carousel only needs the gap between the intro copy and the first card;
+   the track supplies its own gutter. */
+.science__carousel { margin-top: clamp(2.5rem, 6vw, 4rem); }
+.science-slide { margin: 0; }
+/* Copy sits under the image rather than beside it: at a slide's width a
+   two-column chapter would leave both halves too narrow to read. */
+.science-slide__body { margin-top: 1.25rem; }
+.science-slide__body .science-chapter__title { font-size: clamp(1.25rem, 4.6vw, 1.6rem); }
+.science-slide__body .science-chapter__text { margin-top: 0.75rem; font-size: 0.95rem; }
+.section--scheme-ink .science-slide__body .eyebrow { color: rgba(255,255,255,0.7); }
+.section--scheme-ink .science-slide__body .science-chapter__title { color: #fff; }
+.section--scheme-ink .science-slide__body .science-chapter__text { color: rgba(255,255,255,0.75); }
 
 /* ---- Icon list (Who this is for) ---- */
 .icon-list {

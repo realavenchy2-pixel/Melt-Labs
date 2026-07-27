@@ -1,10 +1,20 @@
 {%- comment -%}
   S6 — "The Science" storyboard. Headline + intro, then a fully
   customizable visual storyboard: add as many "Chapter" blocks as you
-  like, each an image beside a paragraph. Chapters alternate image side
-  down the page like a scrollytelling sequence. Optional in-house study
-  stats (with count-up) close it out.
+  like, each an image beside a paragraph. Optional in-house study stats
+  (with count-up) close it out.
+
+  Two layouts, set per section:
+    stacked  — chapters run down the page, alternating image side, like a
+               scrollytelling sequence.
+    carousel — chapters become swipeable cards on the shared carousel
+               component, image above copy. Better when the chapters are
+               parallel views of one idea rather than a sequence, and it
+               keeps a long storyboard from turning the page into a
+               scroll marathon on a phone.
 {%- endcomment -%}
+
+{%- assign layout = section.settings.layout | default: 'stacked' -%}
 
 <section class="section section--scheme-{{ section.settings.scheme | default: 'ink' }}">
   <div class="container container--narrow science__intro" data-reveal>
@@ -21,38 +31,91 @@
     {%- endif -%}
   {%- endfor -%}
   {%- if chapter_count > 0 -%}
-    <div class="container science__story">
-      {%- assign chapter_i = 0 -%}
-      {%- for block in section.blocks -%}
-        {%- if block.type == 'chapter' -%}
-        {%- assign rem = chapter_i | modulo: 2 -%}
-        <div class="science-chapter{% if rem == 1 %} science-chapter--flip{% endif %}" data-reveal {{ block.shopify_attributes }}>
-          <div class="science-chapter__media">
-            {%- render 'media-placeholder',
-              label: 'science_story_image',
-              aspect_mobile: '4 / 5',
-              aspect_desktop: section.settings.chapter_aspect,
-              image: block.settings.image,
-              sizes: '(min-width: 800px) 46vw, 92vw',
-              class: 'media-slot--rounded science__media'
-            -%}
+    {%- if layout == 'carousel' -%}
+      {%- comment -%}
+        Card layout: image on top, copy beneath, so the chapter still reads
+        as one unit at a slide's width. The media keeps the same ratio
+        control as the stacked layout, and a chapter with no copy at all
+        (the common case on the landers, where the image carries it)
+        renders as a clean image card with no empty caption box.
+      {%- endcomment -%}
+      {%- capture slides -%}
+        {%- for block in section.blocks -%}
+          {%- if block.type == 'chapter' -%}
+            <div class="carousel__slide" {{ block.shopify_attributes }}>
+              <figure class="science-slide">
+                {%- render 'media-placeholder',
+                  label: 'science_story_image',
+                  aspect_mobile: '4 / 5',
+                  aspect_desktop: section.settings.chapter_aspect,
+                  image: block.settings.image,
+                  sizes: '(min-width: 768px) 46vw, 88vw',
+                  class: 'media-slot--rounded science__media'
+                -%}
+                {%- if block.settings.eyebrow != blank or block.settings.heading != blank or block.settings.text != blank -%}
+                  <figcaption class="science-slide__body">
+                    {%- if block.settings.eyebrow != blank -%}
+                      <span class="eyebrow">{{ block.settings.eyebrow }}</span>
+                    {%- endif -%}
+                    {%- if block.settings.heading != blank -%}
+                      <h3 class="science-chapter__title">{{ block.settings.heading }}</h3>
+                    {%- endif -%}
+                    {%- if block.settings.text != blank -%}
+                      <p class="science-chapter__text">{{ block.settings.text }}</p>
+                    {%- endif -%}
+                  </figcaption>
+                {%- endif -%}
+              </figure>
+            </div>
+          {%- endif -%}
+        {%- endfor -%}
+      {%- endcapture -%}
+
+      <div class="science__carousel" data-reveal>
+        {%-
+          render 'carousel',
+          slides: slides,
+          id: section.id,
+          label: section.settings.headline,
+          autoplay: section.settings.autoplay,
+          interval: section.settings.autoplay_interval,
+          pill: true
+        -%}
+      </div>
+    {%- else -%}
+      <div class="container science__story">
+        {%- assign chapter_i = 0 -%}
+        {%- for block in section.blocks -%}
+          {%- if block.type == 'chapter' -%}
+          {%- assign rem = chapter_i | modulo: 2 -%}
+          <div class="science-chapter{% if rem == 1 %} science-chapter--flip{% endif %}" data-reveal {{ block.shopify_attributes }}>
+            <div class="science-chapter__media">
+              {%- render 'media-placeholder',
+                label: 'science_story_image',
+                aspect_mobile: '4 / 5',
+                aspect_desktop: section.settings.chapter_aspect,
+                image: block.settings.image,
+                sizes: '(min-width: 800px) 46vw, 92vw',
+                class: 'media-slot--rounded science__media'
+              -%}
+            </div>
+            <div class="science-chapter__body">
+              {%- if block.settings.eyebrow != blank -%}
+                <span class="eyebrow">{{ block.settings.eyebrow }}</span>
+              {%- endif -%}
+              {%- if block.settings.heading != blank -%}
+                <h3 class="science-chapter__title">{{ block.settings.heading }}</h3>
+              {%- endif -%}
+              {%- if block.settings.text != blank -%}
+                <p class="science-chapter__text">{{ block.settings.text }}</p>
+              {%- endif -%}
+            </div>
           </div>
-          <div class="science-chapter__body">
-            {%- if block.settings.eyebrow != blank -%}
-              <span class="eyebrow">{{ block.settings.eyebrow }}</span>
-            {%- endif -%}
-            {%- if block.settings.heading != blank -%}
-              <h3 class="science-chapter__title">{{ block.settings.heading }}</h3>
-            {%- endif -%}
-            {%- if block.settings.text != blank -%}
-              <p class="science-chapter__text">{{ block.settings.text }}</p>
-            {%- endif -%}
-          </div>
-        </div>
-        {%- assign chapter_i = chapter_i | plus: 1 -%}
-        {%- endif -%}
-      {%- endfor -%}
-    </div>
+          {%- assign chapter_i = chapter_i | plus: 1 -%}
+          {%- endif -%}
+        {%- endfor -%}
+      </div>
+    {%- endif -%}
   {%- endif -%}
 
   {%- if section.settings.stat_1_value != blank or section.settings.stat_2_value != blank or section.settings.stat_3_value != blank -%}
@@ -111,6 +174,34 @@
       "id": "body",
       "label": "Intro",
       "default": "Special Water was built around one mechanism: stabilizing blood sugar to shut off the cravings that sabotage weight loss."
+    },
+    {
+      "type": "select",
+      "id": "layout",
+      "label": "Storyboard layout",
+      "info": "Stacked runs the chapters down the page, alternating sides. Carousel turns them into swipeable cards.",
+      "options": [
+        { "value": "stacked", "label": "Stacked down the page" },
+        { "value": "carousel", "label": "Swipeable carousel" }
+      ],
+      "default": "stacked"
+    },
+    {
+      "type": "checkbox",
+      "id": "autoplay",
+      "label": "Autoplay the carousel",
+      "info": "Carousel layout only. Advances on its own while in view; shoppers can pause with the play/pause button. Never runs if the visitor has reduced motion turned on.",
+      "default": false
+    },
+    {
+      "type": "range",
+      "id": "autoplay_interval",
+      "label": "Autoplay speed",
+      "min": 3000,
+      "max": 8000,
+      "step": 500,
+      "unit": "ms",
+      "default": 5000
     },
     {
       "type": "select",
