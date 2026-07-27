@@ -33,7 +33,7 @@
         "aspect_mobile": "9 / 16",
         "media_fit": "cover",
         "eyebrow": "MINOXIDIL-FREE SCALP SERUM",
-        "headline": "Not Dead. *Just Miniaturized.*",
+        "headline": "Your Follicles Are Not Dead. *Just Miniaturized.*",
         "subhead": "Four drops a day for thinning-looking areas.",
         "cta_label": "Start the ritual",
         "microcopy": "Free U.S. shipping · 60-day money-back guarantee",
@@ -276,10 +276,12 @@
         "chapter_9k6KmA"
       ],
       "settings": {
-        "layout": "carousel",
         "scheme": "ink",
         "headline": "The Research Changed the *Conversation.*",
         "body": "Emerging follicle research has challenged the old assumption that every weakened follicle is simply gone forever. Researchers now understand pattern thinning as a progressive process involving shorter visible growth, finer strands, reduced follicle activity, and progressive miniaturization. KAMI 15 is not an investigational drug and does not claim to be one. It is the currently available, minoxidil-free cosmetic ritual for people who want to support thinning-looking areas now, without waiting for the next experimental treatment to reach the market.",
+        "layout": "carousel",
+        "autoplay": false,
+        "autoplay_interval": 5000,
         "chapter_aspect": "4 / 5",
         "stat_intro": "In our in-house consumer study",
         "stat_1_value": "92%",
