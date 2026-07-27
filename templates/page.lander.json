@@ -52,6 +52,14 @@
             "author": "Leslie, 46"
           }
         },
+        "slide_ytDfkM": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/split-transform.webp",
+            "quote": "I stopped snacking without even trying.",
+            "author": "Placeholder, 34"
+          }
+        },
         "t1": {
           "type": "slide",
           "settings": {
@@ -75,13 +83,23 @@
             "quote": "Didn't change anything else. Just added this.",
             "author": "John, 29"
           }
+        },
+        "slide_BbEieJ": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/split-face.webp",
+            "quote": "I stopped snacking without even trying.",
+            "author": "Placeholder, 34"
+          }
         }
       },
       "block_order": [
         "slide_3qK6qw",
+        "slide_ytDfkM",
         "t1",
         "t2",
-        "t3"
+        "t3",
+        "slide_BbEieJ"
       ],
       "settings": {
         "headline": "Real Routines. Real Results.",
