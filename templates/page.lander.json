@@ -25,6 +25,8 @@
         "media_type": "video",
         "video": "shopify://files/videos/Product_video_creation_instructions_1080p_202607270117.mp4",
         "video_mobile": "shopify://files/videos/Product_video_creation_instructions_1080p_202607270100_56638bc5-3ec6-4278-9b3a-fa6acd044e97.mp4",
+        "image": "shopify://shop_images/Resize._2K_202607190026.jpg",
+        "image_mobile": "shopify://shop_images/Special_Water_hero_2K_202607190025.jpg",
         "overlay_darkness": 90,
         "hero_size": "fill",
         "aspect_desktop": "16 / 9",
