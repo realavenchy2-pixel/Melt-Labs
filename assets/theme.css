@@ -591,6 +591,9 @@ h3, .h3 { font-size: var(--type-title); line-height: var(--lead-title); letter-s
   /* env() keeps the CTA clear of the iOS home indicator / bottom URL
      bar, and the base value clears the play/pause control's strip. */
   padding-bottom: calc(clamp(4.25rem, 9vh, 5.5rem) + env(safe-area-inset-bottom, 0px));
+  /* Same top padding as the homepage hero, so a short headline sits at
+     the same height in the frame on both. */
+  padding-top: clamp(4rem, 14vh, 8rem);
   text-align: center;
   color: #fff;
   /* Vibrancy over photography: a tight contact shadow plus a wide soft
@@ -625,14 +628,14 @@ h3, .h3 { font-size: var(--type-title); line-height: var(--lead-title); letter-s
      a real one wrapped to five lines and pushed the footage off the
      screen. This scales from a lower floor so long copy stays around
      three lines on a phone. */
-  font-size: clamp(1.75rem, 8.2vw, 2.7rem);
+  font-size: clamp(1.75rem, 8vw, 2.7rem);
   /* Tracking is size-specific: display type reads too loose at these
      sizes and needs pulling in, which is why this is not the body
      value. Leading tightens for the same reason. */
   line-height: var(--lead-display);
   letter-spacing: var(--track-display);
   font-optical-sizing: auto;
-  max-width: 18ch;
+  max-width: 16ch;
   margin-inline: auto;
   text-wrap: balance;
 }
@@ -644,17 +647,17 @@ h3, .h3 { font-size: var(--type-title); line-height: var(--lead-title); letter-s
    the headline states something, the video carries the rest. */
 @media (min-width: 768px) {
   .hero__headline {
-    max-width: 24ch;
-    font-size: clamp(2.6rem, 4.4vw, 3.5rem);
+    max-width: 26ch;
+    font-size: clamp(2.5rem, 4.2vw, 3.3rem);
   }
 }
 .hero--align-left .hero__headline,
 .hero--align-left .hero__subhead,
 .hero--align-left .hero__microcopy { margin-inline: 0; }
 .hero__subhead {
-  margin: 0.9rem auto 0;
-  max-width: 34ch;
-  font-size: clamp(1rem, 3vw, 1.2rem);
+  margin: 1.25rem auto 0;
+  max-width: 40ch;
+  font-size: clamp(1.05rem, 3vw, 1.3rem);
   line-height: 1.45;
   color: rgba(255,255,255,0.94);
   text-wrap: pretty;
@@ -666,12 +669,12 @@ h3, .h3 { font-size: var(--type-title); line-height: var(--lead-title); letter-s
   flex-direction: column;
   align-items: inherit;
   gap: 1rem;
-  /* The gap that separates the statement from the action. Apple gives
-     the buy control real air above it - crowded against the copy it
-     reads as the last line of the sentence rather than the thing to
-     press. Measured in Chromium against this stylesheet: ~172px on a
-     390x844 phone, 187px on a Pro Max, 143px at 375x667. */
-  margin-top: clamp(7.5rem, 20.5vh, 11.5rem);
+  /* Matches .home-hero--has-media .home-hero__actions exactly, so the
+     product hero and the homepage hero set their button at the same
+     distance from the copy. The section also writes this inline from
+     the "Space above the button" setting, which is what actually
+     applies on the page; this stays the fallback and the reference. */
+  margin-top: clamp(1.75rem, 4.5vh, 2.75rem);
 }
 /* Shared by both heroes, so it takes its colour from whatever it sits
    in rather than hardcoding white - over media that is the white the
