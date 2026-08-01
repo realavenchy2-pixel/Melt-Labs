@@ -112,6 +112,15 @@
             "role": "A signal peptide used in cosmetic scalp formulas to support a healthy-looking environment around the follicle."
           }
         },
+        "active_epNLT8": {
+          "type": "active",
+          "settings": {
+            "image": "shopify://shop_images/Molecule_Pyrilutamide_2K_202608011243.jpg",
+            "name": "Pyrilutamide",
+            "source": "",
+            "role": "A newly discovered Molecule that Blocks DHT."
+          }
+        },
         "i2": {
           "type": "active",
           "settings": {
@@ -184,6 +193,7 @@
       },
       "block_order": [
         "i1",
+        "active_epNLT8",
         "i2",
         "i3",
         "i4",
