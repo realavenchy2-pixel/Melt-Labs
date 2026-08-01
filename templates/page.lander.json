@@ -337,7 +337,7 @@
         "chapter_MqJzcP": {
           "type": "chapter",
           "settings": {
-            "image": "shopify://shop_images/Make_image_ultra_photo_real_202607270757.jpg",
+            "image": "shopify://shop_images/before_after_03_1x1_5a35bbf2-cbef-4b59-883f-e183bad8261d.jpg",
             "eyebrow": "",
             "heading": "",
             "text": ""
@@ -346,7 +346,7 @@
         "chapter_j4AMKU": {
           "type": "chapter",
           "settings": {
-            "image": "shopify://shop_images/Japanese_woman_different_outfit_2K_202607270819.jpg",
+            "image": "shopify://shop_images/before_after_06_1x1_30805adb-b43c-4b91-8e15-cab31b5e3b58.jpg",
             "eyebrow": "",
             "heading": "",
             "text": ""
@@ -355,7 +355,7 @@
         "chapter_yUzpwt": {
           "type": "chapter",
           "settings": {
-            "image": "shopify://shop_images/Make_image_ultra_photo_real_202607270758.jpg",
+            "image": "shopify://shop_images/before_after_05_1x1_e1693f33-7f01-4992-8e7c-69376c3c22e7.jpg",
             "eyebrow": "",
             "heading": "",
             "text": ""
@@ -369,6 +369,24 @@
             "heading": "",
             "text": ""
           }
+        },
+        "chapter_9xDnQh": {
+          "type": "chapter",
+          "settings": {
+            "image": "shopify://shop_images/before_after_04_1x1_2ee2ddf9-daf6-4033-b906-84f28d4e7e81.jpg",
+            "eyebrow": "",
+            "heading": "",
+            "text": ""
+          }
+        },
+        "chapter_FDMYK3": {
+          "type": "chapter",
+          "settings": {
+            "image": "shopify://shop_images/before_after_01_1x1_c0fdec74-5f3b-4b5e-a84c-54c2a09e046d.jpg",
+            "eyebrow": "",
+            "heading": "",
+            "text": ""
+          }
         }
       },
       "block_order": [
@@ -376,7 +394,9 @@
         "chapter_MqJzcP",
         "chapter_j4AMKU",
         "chapter_yUzpwt",
-        "chapter_8UfyKW"
+        "chapter_8UfyKW",
+        "chapter_9xDnQh",
+        "chapter_FDMYK3"
       ],
       "settings": {
         "scheme": "ink",
