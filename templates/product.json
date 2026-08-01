@@ -89,6 +89,61 @@
         "scheme": "tint"
       }
     },
+    "ingredients_list_pLiBFF": {
+      "type": "ingredients-list",
+      "blocks": {
+        "active_dR4WHJ": {
+          "type": "active",
+          "settings": {
+            "image": "shopify://shop_images/01_add_it_clean_1x1_d52a03fc-9990-43b9-85d5-d9600bfa4ffb.png",
+            "name": "01 · ADD IT",
+            "source": "",
+            "role": "01 · ADD IT\n\nTwo Squirts. Any Drink.\n\nCoffee, water, tea. Nothing to mix, no taste at all."
+          }
+        },
+        "active_HP8UFV": {
+          "type": "active",
+          "settings": {
+            "image": "shopify://shop_images/02_drink_it_clean_1x1_7f369f55-5b05-4352-bf14-5be68c71be89.png",
+            "name": "02 · DRINK IT",
+            "source": "",
+            "role": "Hunger Goes Quiet. The edge comes off in minutes. Six Japanese botanicals get to work."
+          }
+        },
+        "active_BKPbjW": {
+          "type": "active",
+          "settings": {
+            "image": "shopify://shop_images/03_repeat_it_clean_1x1_90fcf903-07a7-46a1-a26c-f33de060e9db.png",
+            "name": "03 · REPEAT IT",
+            "source": "",
+            "role": "Covered All Day. One or two squirts, used as directed. No afternoon crash."
+          }
+        },
+        "active_EgehMB": {
+          "type": "active",
+          "settings": {
+            "image": "shopify://shop_images/04_live_it_clean_1x1_0ad8904f-e818-4717-838b-2b2bb64f7f8a.png",
+            "name": "04 · LIVE IT",
+            "source": "",
+            "role": "No Food Noise. All Day. Your Way. Cravings stay quiet throughout the day. When you choose to eat, enjoy it—without overdoing it."
+          }
+        }
+      },
+      "block_order": [
+        "active_dR4WHJ",
+        "active_HP8UFV",
+        "active_BKPbjW",
+        "active_EgehMB"
+      ],
+      "name": "Ingredients carousel",
+      "settings": {
+        "scheme": "ink",
+        "headline": "One Simple Ritual. All-Day Control. Long Term Results.",
+        "subhead": "Add two squirts to any drink and build a simple daily routine designed to support quieter cravings and more control around food.",
+        "format_note": "",
+        "base_title": "Base ingredients"
+      }
+    },
     "testimonial_carousel_8THFBB": {
       "type": "testimonial-carousel",
       "blocks": {
@@ -305,6 +360,7 @@
   "order": [
     "offer",
     "guarantee",
+    "ingredients_list_pLiBFF",
     "testimonial_carousel_8THFBB",
     "testimonial_carousel_4xbWtw",
     "faq",
