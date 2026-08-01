@@ -41,6 +41,77 @@
         "cta_link": "shopify://products/the-special-water"
       }
     },
+    "ingredients_list_pj6aKB": {
+      "type": "ingredients-list",
+      "blocks": {
+        "active_VnPdjH": {
+          "type": "active",
+          "settings": {
+            "image": "shopify://shop_images/special_water_01_add_it_3x4_eebad85f-040d-44dd-9a13-2a891ccf2f07.png",
+            "name": "Step 1",
+            "source": "",
+            "role": ""
+          }
+        },
+        "active_KqC3Ez": {
+          "type": "active",
+          "settings": {
+            "image": "shopify://shop_images/special_water_02_drink_it_3x4_2c7e9250-10f4-4120-8a19-7f2f0100e8d0.png",
+            "name": "Step 2",
+            "source": "",
+            "role": ""
+          }
+        },
+        "active_zqcHgb": {
+          "type": "active",
+          "settings": {
+            "name": "Bitter Melon Extract",
+            "source": "Momordica charantia Linn., fruit, 4:1",
+            "role": "Traditionally used across Asia for metabolic support. Supports healthy blood sugar metabolism and glucose utilization."
+          }
+        },
+        "active_PPfRRE": {
+          "type": "active",
+          "settings": {
+            "name": "Extract of Turmeric Root",
+            "source": "Curcuma longa",
+            "role": "Antioxidant support and healthy inflammatory response, which plays a role in overall metabolic function."
+          }
+        },
+        "active_jwYCFJ": {
+          "type": "active",
+          "settings": {
+            "name": "Extract of Licorice Root",
+            "source": "",
+            "role": "Traditionally used to support digestive health and adrenal function; may support healthy cortisol levels and metabolic balance."
+          }
+        },
+        "active_FYtmJr": {
+          "type": "active",
+          "settings": {
+            "name": "Matcha",
+            "source": "",
+            "role": "Natural antioxidants (EGCG catechins) that support gentle thermogenesis and a metabolic boost without stimulant jitters."
+          }
+        }
+      },
+      "block_order": [
+        "active_VnPdjH",
+        "active_KqC3Ez",
+        "active_zqcHgb",
+        "active_PPfRRE",
+        "active_jwYCFJ",
+        "active_FYtmJr"
+      ],
+      "name": "Ingredients carousel",
+      "settings": {
+        "scheme": "white",
+        "headline": "What's inside. And what each drop does.",
+        "subhead": "Six botanicals, each chosen for one job: keeping blood sugar steady and cravings quiet.",
+        "format_note": "2 oz / 60 mL clear glass dropper bottle.",
+        "base_title": "Base ingredients"
+      }
+    },
     "testimonials": {
       "type": "testimonial-carousel",
       "blocks": {
@@ -716,6 +787,7 @@
   "order": [
     "subnav",
     "hero",
+    "ingredients_list_pj6aKB",
     "testimonials",
     "ingredients",
     "benefit",
