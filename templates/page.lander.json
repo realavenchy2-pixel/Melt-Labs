@@ -65,6 +65,7 @@
         "active_zqcHgb": {
           "type": "active",
           "settings": {
+            "image": "shopify://shop_images/special_water_card_03_true_3x4_65c0ee48-ec23-4bec-8b0d-d44db3ac2d7d.png",
             "name": "Bitter Melon Extract",
             "source": "Momordica charantia Linn., fruit, 4:1",
             "role": "Traditionally used across Asia for metabolic support. Supports healthy blood sugar metabolism and glucose utilization."
@@ -73,13 +74,15 @@
         "active_PPfRRE": {
           "type": "active",
           "settings": {
-            "name": "Extract of Turmeric Root",
-            "source": "Curcuma longa",
-            "role": "Antioxidant support and healthy inflammatory response, which plays a role in overall metabolic function."
+            "image": "shopify://shop_images/special_water_card_04_true_3x4_00781c18-0387-4aa2-9f59-19e33019c15d.png",
+            "name": "",
+            "source": "",
+            "role": ""
           }
         },
         "active_jwYCFJ": {
           "type": "active",
+          "disabled": true,
           "settings": {
             "name": "Extract of Licorice Root",
             "source": "",
@@ -88,6 +91,7 @@
         },
         "active_FYtmJr": {
           "type": "active",
+          "disabled": true,
           "settings": {
             "name": "Matcha",
             "source": "",
