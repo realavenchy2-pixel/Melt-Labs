@@ -38,20 +38,6 @@
     "featured": {
       "type": "product-selector",
       "blocks": {
-        "product_KgJiz7": {
-          "type": "product",
-          "settings": {
-            "product": "",
-            "image": "shopify://shop_images/2nd_image_2K_202607181243.jpg",
-            "tab_label": "Weight Loss",
-            "badge": "For Sustained Weight Loss",
-            "title": "The Special Water",
-            "tagline": "",
-            "points": "Loose Weight Drinking Water\nProven Japanese Botanical Formula\nStill Taste Like Water",
-            "button_label": "Shop now",
-            "link": "https://shopmeltlab.com/pages/the-special-water"
-          }
-        },
         "p2": {
           "type": "product",
           "settings": {
@@ -65,11 +51,25 @@
             "button_label": "Shop KAMI",
             "link": "shopify://pages/kami"
           }
+        },
+        "product_KgJiz7": {
+          "type": "product",
+          "settings": {
+            "product": "",
+            "image": "shopify://shop_images/2nd_image_2K_202607181243.jpg",
+            "tab_label": "Weight Loss",
+            "badge": "For Sustained Weight Loss",
+            "title": "The Special Water",
+            "tagline": "",
+            "points": "Loose Weight Drinking Water\nProven Japanese Botanical Formula\nStill Taste Like Water",
+            "button_label": "Shop now",
+            "link": "https://shopmeltlab.com/pages/the-special-water"
+          }
         }
       },
       "block_order": [
-        "product_KgJiz7",
-        "p2"
+        "p2",
+        "product_KgJiz7"
       ],
       "settings": {
         "scheme": "white",
