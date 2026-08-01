@@ -47,7 +47,7 @@
         "active_VnPdjH": {
           "type": "active",
           "settings": {
-            "image": "shopify://shop_images/special_water_01_add_it_3x4_eebad85f-040d-44dd-9a13-2a891ccf2f07.png",
+            "image": "shopify://shop_images/special_water_01_add_it_1x1_8366d539-6af3-4971-b890-78aa7df1dc2f.png",
             "name": "Step 1",
             "source": "",
             "role": ""
@@ -56,7 +56,7 @@
         "active_KqC3Ez": {
           "type": "active",
           "settings": {
-            "image": "shopify://shop_images/special_water_02_drink_it_3x4_2c7e9250-10f4-4120-8a19-7f2f0100e8d0.png",
+            "image": "shopify://shop_images/special_water_02_drink_it_1x1_a04a0d30-bd62-491d-aacc-2660161973cd.png",
             "name": "Step 2",
             "source": "",
             "role": ""
@@ -65,7 +65,7 @@
         "active_zqcHgb": {
           "type": "active",
           "settings": {
-            "image": "shopify://shop_images/special_water_card_03_true_3x4_65c0ee48-ec23-4bec-8b0d-d44db3ac2d7d.png",
+            "image": "shopify://shop_images/special_water_03_repeat_it_1x1_fffc225a-ef92-42aa-9f21-7e4fbc811a7d.png",
             "name": "Step 3",
             "source": "",
             "role": ""
@@ -74,7 +74,7 @@
         "active_PPfRRE": {
           "type": "active",
           "settings": {
-            "image": "shopify://shop_images/special_water_card_04_true_3x4_00781c18-0387-4aa2-9f59-19e33019c15d.png",
+            "image": "shopify://shop_images/special_water_04_live_it_1x1_83e97d52-ce17-4eac-951b-8a558898c164.png",
             "name": "Step 4",
             "source": "",
             "role": ""
