@@ -381,6 +381,7 @@
         },
         "chapter_FDMYK3": {
           "type": "chapter",
+          "disabled": true,
           "settings": {
             "image": "shopify://shop_images/before_after_01_1x1_c0fdec74-5f3b-4b5e-a84c-54c2a09e046d.jpg",
             "eyebrow": "",
