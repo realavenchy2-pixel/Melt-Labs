@@ -363,6 +363,7 @@
         },
         "chapter_8UfyKW": {
           "type": "chapter",
+          "disabled": true,
           "settings": {
             "image": "shopify://shop_images/Japanese_man_different_outfit_2K_202607270823.jpg",
             "eyebrow": "",
