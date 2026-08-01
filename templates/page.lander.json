@@ -74,28 +74,10 @@
         "active_PPfRRE": {
           "type": "active",
           "settings": {
-            "image": "shopify://shop_images/special_water_04_live_it_1x1_83e97d52-ce17-4eac-951b-8a558898c164.png",
-            "name": "Step 4",
+            "image": "shopify://shop_images/04_live_it_clean_1x1_0ad8904f-e818-4717-838b-2b2bb64f7f8a.png",
+            "name": "04 · LIVE IT",
             "source": "",
-            "role": ""
-          }
-        },
-        "active_jwYCFJ": {
-          "type": "active",
-          "disabled": true,
-          "settings": {
-            "name": "Extract of Licorice Root",
-            "source": "",
-            "role": "Traditionally used to support digestive health and adrenal function; may support healthy cortisol levels and metabolic balance."
-          }
-        },
-        "active_FYtmJr": {
-          "type": "active",
-          "disabled": true,
-          "settings": {
-            "name": "Matcha",
-            "source": "",
-            "role": "Natural antioxidants (EGCG catechins) that support gentle thermogenesis and a metabolic boost without stimulant jitters."
+            "role": "No Food Noise. All Day. Your Way. Cravings stay quiet throughout the day. When you choose to eat, enjoy it—without overdoing it."
           }
         }
       },
@@ -103,9 +85,7 @@
         "active_VnPdjH",
         "active_KqC3Ez",
         "active_zqcHgb",
-        "active_PPfRRE",
-        "active_jwYCFJ",
-        "active_FYtmJr"
+        "active_PPfRRE"
       ],
       "name": "Ingredients carousel",
       "settings": {
