@@ -103,15 +103,6 @@
     "ingredients": {
       "type": "ingredients-list",
       "blocks": {
-        "i1": {
-          "type": "active",
-          "settings": {
-            "image": "shopify://shop_images/hair_I_card_2K_202607181451.jpg",
-            "name": "Copper Tripeptide-1",
-            "source": "GHK-Cu",
-            "role": "A signal peptide used in cosmetic scalp formulas to support a healthy-looking environment around the follicle."
-          }
-        },
         "active_epNLT8": {
           "type": "active",
           "settings": {
@@ -119,6 +110,15 @@
             "name": "Pyrilutamide",
             "source": "",
             "role": "A newly discovered Molecule that Blocks DHT."
+          }
+        },
+        "i1": {
+          "type": "active",
+          "settings": {
+            "image": "shopify://shop_images/hair_I_card_2K_202607181451.jpg",
+            "name": "Copper Tripeptide-1",
+            "source": "GHK-Cu",
+            "role": "A signal peptide used in cosmetic scalp formulas to support a healthy-looking environment around the follicle."
           }
         },
         "i2": {
@@ -192,8 +192,8 @@
         }
       },
       "block_order": [
-        "i1",
         "active_epNLT8",
+        "i1",
         "i2",
         "i3",
         "i4",
