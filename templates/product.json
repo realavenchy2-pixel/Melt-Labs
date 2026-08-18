@@ -384,6 +384,74 @@
         "body": "Add two squirts to whatever you are already drinking, once or twice daily as directed on the label. No taste. No mixing ritual. No shots. No complicated schedule. Consistency matters more than perfection."
       }
     },
+    "comparison_eJFKPE": {
+      "type": "comparison",
+      "blocks": {
+        "row_XHnwgc": {
+          "type": "row",
+          "settings": {
+            "label": "Routine",
+            "value_a": "Two squirts in something you already drink",
+            "value_b": "Prescription injections or medication",
+            "value_c": ""
+          }
+        },
+        "row_zymTY6": {
+          "type": "row",
+          "settings": {
+            "label": "Approach",
+            "value_a": "Supports appetite, blood sugar, and metabolism",
+            "value_b": "Medication-driven appetite regulation",
+            "value_c": ""
+          }
+        },
+        "row_nD3Abn": {
+          "type": "row",
+          "settings": {
+            "label": "Experience",
+            "value_a": "Tasteless and easy to repeat daily",
+            "value_b": "Requires a medical treatment plan",
+            "value_c": ""
+          }
+        },
+        "row_p7hpJ4": {
+          "type": "row",
+          "settings": {
+            "label": "Designed for",
+            "value_a": "Long-term consistency and weight control",
+            "value_b": "Clinically supervised weight management",
+            "value_c": ""
+          }
+        },
+        "row_XPEdGx": {
+          "type": "row",
+          "settings": {
+            "label": "Medical visits",
+            "value_a": "Not required to purchase a dietary supplement",
+            "value_b": "Requires consultation and continued medical guidance",
+            "value_c": ""
+          }
+        }
+      },
+      "block_order": [
+        "row_XHnwgc",
+        "row_zymTY6",
+        "row_nD3Abn",
+        "row_p7hpJ4",
+        "row_XPEdGx"
+      ],
+      "settings": {
+        "headline": "A Different Kind of *Weight-Loss Relationship.*",
+        "subhead": "Special Water is not a prescription medication and does not pretend to be one. It is a simple, non-injection daily protocol for people who want weight-management support that fits naturally into real life.",
+        "col_a_title": "Special Water",
+        "col_a_sub": "A daily botanical protocol",
+        "col_b_title": "GLP-1 medication",
+        "col_b_sub": "Prescription treatment",
+        "col_c_title": "",
+        "col_c_sub": "",
+        "note": "Special Water is a dietary supplement, not a medication or substitute for medical care. Speak with your physician before changing or discontinuing any prescribed treatment."
+      }
+    },
     "faq": {
       "type": "faq",
       "blocks": {
@@ -497,6 +565,7 @@
     "ingredients_list_BffJHq",
     "testimonial_carousel_4xbWtw",
     "potency_stats_rfxyUc",
+    "comparison_eJFKPE",
     "faq",
     "refs"
   ]
