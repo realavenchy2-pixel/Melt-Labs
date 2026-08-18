@@ -211,6 +211,107 @@
         "autoplay_interval": 4500
       }
     },
+    "ingredients_list_BffJHq": {
+      "type": "ingredients-list",
+      "blocks": {
+        "active_eGEGP6": {
+          "type": "active",
+          "settings": {
+            "image": "shopify://shop_images/Cinnamon_quills_in_cluster_2K_202607171211.jpg",
+            "name": "Cinnamomum cassia (bark) Extract",
+            "source": "",
+            "role": "Supports healthy glucose metabolism, insulin sensitivity, and a more balanced post-meal blood-sugar response."
+          }
+        },
+        "active_afBKBC": {
+          "type": "active",
+          "settings": {
+            "image": "shopify://shop_images/Japanese_knotweed_stalks_and_root_202607171208.jpg",
+            "name": "Japanese Knotweed Extract",
+            "source": "Polygonum cuspidatum, root",
+            "role": "A botanical source of trans-resveratrol that supports metabolic health, antioxidant activity, and a healthy inflammatory response."
+          }
+        },
+        "active_VWFqdn": {
+          "type": "active",
+          "settings": {
+            "image": "shopify://shop_images/Green_bitter_melon_with_slice_202607171213.jpg",
+            "name": "Bitter Melon Extract",
+            "source": "Momordica charantia Linn., fruit, 4:1",
+            "role": "Traditionally used throughout Asia to support healthy glucose utilization and blood-sugar metabolism."
+          }
+        },
+        "active_YqAWnW": {
+          "type": "active",
+          "settings": {
+            "image": "shopify://shop_images/Fresh_turmeric_rhizomes_and_powder_202607171214.jpg",
+            "name": "Extract of Turmeric Root",
+            "source": "Curcuma longa",
+            "role": "Supports antioxidant defenses, a healthy inflammatory response, and overall metabolic function."
+          }
+        },
+        "active_mYE8Mg": {
+          "type": "active",
+          "settings": {
+            "image": "shopify://shop_images/Licorice_root_sticks_bundle_2K_202607171215.jpg",
+            "name": "Extract of Licorice Root",
+            "source": "",
+            "role": "Traditionally used to support digestive health, adrenal function, and healthy metabolic balance."
+          }
+        },
+        "active_w4V3c6": {
+          "type": "active",
+          "settings": {
+            "image": "shopify://shop_images/Matcha_powder_with_bamboo_whisk_202607171214.jpg",
+            "name": "Matcha",
+            "source": "",
+            "role": "Provides natural catechins that support gentle thermogenesis, energy expenditure, and metabolic activity."
+          }
+        },
+        "base_NYktDJ": {
+          "type": "base",
+          "disabled": true,
+          "settings": {
+            "name": "Water",
+            "role": "Base and solvent"
+          }
+        },
+        "base_YnX97N": {
+          "type": "base",
+          "disabled": true,
+          "settings": {
+            "name": "Glycerin",
+            "role": "Natural carrier for botanical extracts, adds slight sweetness"
+          }
+        },
+        "base_B3b8iR": {
+          "type": "base",
+          "disabled": true,
+          "settings": {
+            "name": "Potassium Sorbate",
+            "role": "Natural preservative for shelf stability"
+          }
+        }
+      },
+      "block_order": [
+        "active_eGEGP6",
+        "active_afBKBC",
+        "active_VWFqdn",
+        "active_YqAWnW",
+        "active_mYE8Mg",
+        "active_w4V3c6",
+        "base_NYktDJ",
+        "base_YnX97N",
+        "base_B3b8iR"
+      ],
+      "settings": {
+        "scheme": "white",
+        "headline": "Six Botanicals. One Long-Term Strategy.",
+        "subhead": "Every ingredient was selected to support a different part of healthy weight management.",
+        "format_note": "",
+        "base_title": "Base ingredients"
+      }
+    },
     "testimonial_carousel_4xbWtw": {
       "type": "testimonial-carousel",
       "blocks": {
@@ -362,6 +463,7 @@
     "guarantee",
     "ingredients_list_pLiBFF",
     "testimonial_carousel_8THFBB",
+    "ingredients_list_BffJHq",
     "testimonial_carousel_4xbWtw",
     "faq",
     "refs"
