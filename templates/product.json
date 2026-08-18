@@ -46,49 +46,6 @@
         "placeholder_title": "The Special Water"
       }
     },
-    "guarantee": {
-      "type": "icon-list",
-      "blocks": {
-        "ben_1": {
-          "type": "item",
-          "settings": {
-            "icon": "sparkle",
-            "text": "Quieter cravings — supports appetite control so staying consistent does not feel like a constant fight."
-          }
-        },
-        "ben_2": {
-          "type": "item",
-          "settings": {
-            "icon": "droplet",
-            "text": "Steadier blood-sugar response — supports healthy glucose metabolism and insulin sensitivity."
-          }
-        },
-        "ben_3": {
-          "type": "item",
-          "settings": {
-            "icon": "leaf",
-            "text": "Daily metabolic support — Japanese botanicals support thermogenesis, antioxidant activity, and metabolic function."
-          }
-        },
-        "ben_4": {
-          "type": "item",
-          "settings": {
-            "icon": "shield",
-            "text": "Backed for 60 days — third-party tested, with a 60-day money-back guarantee."
-          }
-        }
-      },
-      "block_order": [
-        "ben_1",
-        "ben_2",
-        "ben_3",
-        "ben_4"
-      ],
-      "settings": {
-        "headline": "One Simple Routine. Three Forms of Daily Support.",
-        "scheme": "tint"
-      }
-    },
     "ingredients_list_pLiBFF": {
       "type": "ingredients-list",
       "blocks": {
@@ -142,6 +99,49 @@
         "subhead": "Add two squirts to any drink and build a simple daily routine designed to support quieter cravings and more control around food.",
         "format_note": "",
         "base_title": "Base ingredients"
+      }
+    },
+    "guarantee": {
+      "type": "icon-list",
+      "blocks": {
+        "ben_1": {
+          "type": "item",
+          "settings": {
+            "icon": "sparkle",
+            "text": "Quieter cravings — supports appetite control so staying consistent does not feel like a constant fight."
+          }
+        },
+        "ben_2": {
+          "type": "item",
+          "settings": {
+            "icon": "droplet",
+            "text": "Steadier blood-sugar response — supports healthy glucose metabolism and insulin sensitivity."
+          }
+        },
+        "ben_3": {
+          "type": "item",
+          "settings": {
+            "icon": "leaf",
+            "text": "Daily metabolic support — Japanese botanicals support thermogenesis, antioxidant activity, and metabolic function."
+          }
+        },
+        "ben_4": {
+          "type": "item",
+          "settings": {
+            "icon": "shield",
+            "text": "Backed for 60 days — third-party tested, with a 60-day money-back guarantee."
+          }
+        }
+      },
+      "block_order": [
+        "ben_1",
+        "ben_2",
+        "ben_3",
+        "ben_4"
+      ],
+      "settings": {
+        "headline": "One Simple Routine. Three Forms of Daily Support.",
+        "scheme": "tint"
       }
     },
     "testimonial_carousel_8THFBB": {
@@ -460,8 +460,8 @@
   },
   "order": [
     "offer",
-    "guarantee",
     "ingredients_list_pLiBFF",
+    "guarantee",
     "testimonial_carousel_8THFBB",
     "ingredients_list_BffJHq",
     "testimonial_carousel_4xbWtw",
