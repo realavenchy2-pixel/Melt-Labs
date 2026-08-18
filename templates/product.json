@@ -46,6 +46,37 @@
         "placeholder_title": "The Special Water"
       }
     },
+    "potency_stats_rfxyUc": {
+      "type": "potency-stats",
+      "blocks": {
+        "stat_9Bzkie": {
+          "type": "stat",
+          "settings": {
+            "intro": "Just",
+            "value": "2 squirts",
+            "caption": "in whatever you're already drinking"
+          }
+        },
+        "stat_eYQt7g": {
+          "type": "stat",
+          "settings": {
+            "intro": "Support that lasts",
+            "value": "All day",
+            "caption": "steady appetite and blood sugar support, morning to night"
+          }
+        }
+      },
+      "block_order": [
+        "stat_9Bzkie",
+        "stat_eYQt7g"
+      ],
+      "settings": {
+        "video": "shopify://files/videos/Captions_B43FF0.mp4",
+        "video_poster": "shopify://shop_images/resize_to_9_16_2K_202607270436.jpg",
+        "headline": "Two Squirts. That Is the Entire Routine.",
+        "body": "Add two squirts to whatever you are already drinking, once or twice daily as directed on the label. No taste. No mixing ritual. No shots. No complicated schedule. Consistency matters more than perfection."
+      }
+    },
     "ingredients_list_pLiBFF": {
       "type": "ingredients-list",
       "blocks": {
@@ -92,6 +123,7 @@
         "active_BKPbjW",
         "active_EgehMB"
       ],
+      "disabled": true,
       "name": "Ingredients carousel",
       "settings": {
         "scheme": "white",
@@ -353,37 +385,6 @@
         "autoplay_interval": 4500
       }
     },
-    "potency_stats_rfxyUc": {
-      "type": "potency-stats",
-      "blocks": {
-        "stat_9Bzkie": {
-          "type": "stat",
-          "settings": {
-            "intro": "Just",
-            "value": "2 squirts",
-            "caption": "in whatever you're already drinking"
-          }
-        },
-        "stat_eYQt7g": {
-          "type": "stat",
-          "settings": {
-            "intro": "Support that lasts",
-            "value": "All day",
-            "caption": "steady appetite and blood sugar support, morning to night"
-          }
-        }
-      },
-      "block_order": [
-        "stat_9Bzkie",
-        "stat_eYQt7g"
-      ],
-      "settings": {
-        "video": "shopify://files/videos/Captions_B43FF0.mp4",
-        "video_poster": "shopify://shop_images/resize_to_9_16_2K_202607270436.jpg",
-        "headline": "Two Squirts. That Is the Entire Routine.",
-        "body": "Add two squirts to whatever you are already drinking, once or twice daily as directed on the label. No taste. No mixing ritual. No shots. No complicated schedule. Consistency matters more than perfection."
-      }
-    },
     "comparison_eJFKPE": {
       "type": "comparison",
       "blocks": {
@@ -559,12 +560,12 @@
   },
   "order": [
     "offer",
+    "potency_stats_rfxyUc",
     "ingredients_list_pLiBFF",
     "guarantee",
     "testimonial_carousel_8THFBB",
     "ingredients_list_BffJHq",
     "testimonial_carousel_4xbWtw",
-    "potency_stats_rfxyUc",
     "comparison_eJFKPE",
     "faq",
     "refs"
