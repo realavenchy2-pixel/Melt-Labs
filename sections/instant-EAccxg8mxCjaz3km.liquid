@@ -151,6 +151,11 @@
       ></div
     >
     {%- liquid
+      assign url_qk1fqj9VaAw93zWF_handle = 'the-special-water'
+      assign url_qk1fqj9VaAw93zWF = all_products[url_qk1fqj9VaAw93zWF_handle].url
+    -%}
+    <!--  -->
+    {%- liquid
       assign product_qk1fqj9VaAw93zWF_handle = 'the-special-water'
       assign product_qk1fqj9VaAw93zWF = section.settings.product_qk1fqj9VaAw93zWF | default: all_products[product_qk1fqj9VaAw93zWF_handle]
       assign product_qk1fqj9VaAw93zWF_variant = product_qk1fqj9VaAw93zWF.selected_or_first_available_variant
@@ -161,7 +166,7 @@
 
       assign product_qk1fqj9VaAw93zWF_image = product_qk1fqj9VaAw93zWF_variant.featured_image | default: product_qk1fqj9VaAw93zWF.featured_image
     -%}
-    <form class="iqk1fqj9VaAw93zWF" data-instant-type="container" id="iqk1fqj9VaAw93zWF" data-instant-form-product-url="{{ product_qk1fqj9VaAw93zWF.url }}" data-instant-form-variant-id="{{ product_qk1fqj9VaAw93zWF_variant.id }}" data-instant-form-product-id="{{ product_qk1fqj9VaAw93zWF.id }}"
+    <form class="iqk1fqj9VaAw93zWF" data-instant-type="container" id="iqk1fqj9VaAw93zWF" data-instant-form-product-url="{{ product_qk1fqj9VaAw93zWF.url }}" data-instant-form-variant-id="{{ product_qk1fqj9VaAw93zWF_variant.id }}" data-instant-form-product-id="{{ product_qk1fqj9VaAw93zWF.id }}" rel="noopener noreferrer" data-instant-href="{{ url_qk1fqj9VaAw93zWF }}"
       ><div class="ihWuUReZOLnqQNf54" data-instant-type="container"
         ><div data-instant-type="text" class="instant-rich-text ikgbfyMH9UcRbThL7"><p>TRY THE ROUTINE I USE</p></div
         ><div data-instant-type="text" class="instant-rich-text i8j1kWy4uuOJMLUk0"><h2>I Used It During My Own 100+ Pound Transformation.</h2></div
