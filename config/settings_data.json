@@ -55,6 +55,11 @@
         "type": "shopify://apps/tixel-multi-pixels/blocks/app-embed/b273c4b8-95ba-409d-a87c-c46907e02629",
         "disabled": false,
         "settings": {}
+      },
+      "1656560654682496077": {
+        "type": "shopify://apps/instant-ai-page-builder/blocks/instant_core/927e19d9-4e68-41db-99c7-d8debdc1f80d",
+        "disabled": false,
+        "settings": {}
       }
     }
   }
